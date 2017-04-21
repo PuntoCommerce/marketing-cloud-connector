@@ -1,0 +1,45 @@
+{
+  "hooks": [
+    {
+      "name": "app.communication.handler.registerHandler",
+      "script": "./communication/handler"
+    },
+    {
+      "name": "app.communication.handler.handle",
+      "script": "./communication/handler"
+    },
+    {
+      "name": "app.communication.account.created",
+      "script": "./communication/account"
+    },
+    {
+      "name": "app.communication.account.updated",
+      "script": "./communication/account"
+    },
+    {
+      "name": "app.communication.account.passwordChanged",
+      "script": "./communication/account"
+    },
+    {
+      "name": "app.communication.account.passwordReset",
+      "script": "./communication/account"
+    },
+    {
+      "name": "app.communication.account.lockedOut",
+      "script": "./communication/account"
+    },
+    {
+      "name": "app.communication.customerService.contactUs",
+      "script": "./communication/customerService"
+    },
+    {
+      "name": "app.communication.giftCertificate.sendCertificate",
+      "script": "./communication/giftCertificate"
+    },
+    {
+      "name": "app.communication.order.confirmation",
+      "script": "./communication/order"
+    }
+
+  ]
+}

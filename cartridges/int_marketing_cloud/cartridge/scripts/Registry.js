@@ -21,6 +21,15 @@ var	Registry = {
     message : function(sendID, customerKey) {
         var messageModel = require(path +'models/message');
         return new messageModel(sendID, customerKey);
+    },
+    trigger : function(hookID) {
+        var customObjectName = 'MarketingCloudTriggers';
+        var com = require('dw/object/CustomObjectMgr'),
+            trigger = com.getCustomObject(customObjectName, hookID);
+        if (empty(trigger)) {
+            throw new Error('Requested trigger definition for '+ hookID +' not found.');
+        }
+        return trigger.getCustom();
     }
 };
 
