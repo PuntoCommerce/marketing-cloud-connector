@@ -7,7 +7,17 @@ var sendTrigger = require('./util/trigger').sendTrigger;
  * @param {CustomerNotification} data
  * @returns {{status: string}}
  */
-exports.confirmation = function(data) {
+function confirmation(data) {
     var msg = require('int_marketing_cloud').message();
     return sendTrigger(data);
-};
+}
+
+module.exports = require('dw/system/HookMgr').callHook(
+    'app.communication.handler.initialize',
+    'initialize',
+    require('./handler').handlerID,
+    'app.communication.order',
+    {
+        confirmation: confirmation
+    }
+);

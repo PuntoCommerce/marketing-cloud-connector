@@ -7,6 +7,16 @@ var sendTrigger = require('./util/trigger').sendTrigger;
  * @param {CustomerNotification} data
  * @returns {{status: string}}
  */
-exports.contactUs = function(data) {
+function contactUs(data) {
     return sendTrigger(data);
-};
+}
+
+module.exports = require('dw/system/HookMgr').callHook(
+    'app.communication.handler.initialize',
+    'initialize',
+    require('./handler').handlerID,
+    'app.communication.customerService',
+    {
+        contactUs: contactUs
+    }
+);

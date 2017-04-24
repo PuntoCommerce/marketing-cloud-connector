@@ -8,48 +8,61 @@ var hookPath = 'app.communication.account.';
  * @param {CustomerNotification} data
  * @returns {{status: string}}
  */
-exports.created = function(data) {
-    dw.system.Logger.error(module.cartridge);
+function created(data) {
     var hookID = hookPath+ 'created';
-//    return sendTrigger(data);
-};
+/    return sendTrigger(data);
+}
 
 /**
  * Trigger account updated notification
  * @param {CustomerNotification} data
  * @returns {{status: string}}
  */
-exports.updated = function(data) {
+function updated(data) {
     var hookID = hookPath+ 'updated';
     return sendTrigger(data);
-};
+}
 
 /**
  * Trigger password changed notification
  * @param {CustomerNotification} data
  * @returns {{status: string}}
  */
-exports.passwordChanged = function(data) {
+function passwordChanged(data) {
     var hookID = hookPath+ 'passwordChanged';
     return sendTrigger(data);
-};
+}
 
 /**
  * Trigger password reset notification
  * @param {CustomerNotification} data
  * @returns {{status: string}}
  */
-exports.passwordReset = function(data) {
+function passwordReset(data) {
     var hookID = hookPath+ 'passwordReset';
     return sendTrigger(data);
-};
+}
 
 /**
  * Trigger account locked out notification
  * @param {CustomerNotification} data
  * @returns {{status: string}}
  */
-exports.lockedOut = function(data) {
+function lockedOut(data) {
     var hookID = hookPath+ 'lockedOut';
     return sendTrigger(data);
-};
+}
+
+module.exports = require('dw/system/HookMgr').callHook(
+    'app.communication.handler.initialize',
+    'initialize',
+    require('./handler').handlerID,
+    'app.communication.account',
+    {
+        created: created,
+        updated: updated,
+        passwordChanged: passwordChanged,
+        passwordReset: passwordReset,
+        lockedOut: lockedOut
+    }
+);
