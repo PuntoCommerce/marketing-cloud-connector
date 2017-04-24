@@ -5,10 +5,6 @@
       "script": "./communication/handler"
     },
     {
-      "name": "app.communication.handler.handle",
-      "script": "./communication/handler"
-    },
-    {
       "name": "app.communication.account.created",
       "script": "./communication/account"
     },

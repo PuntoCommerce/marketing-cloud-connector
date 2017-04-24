@@ -10,7 +10,7 @@ var hookPath = 'app.communication.account.';
  */
 function created(data) {
     var hookID = hookPath+ 'created';
-/    return sendTrigger(data);
+    return sendTrigger(data);
 }
 
 /**
