@@ -1,6 +1,7 @@
 'use strict';
 
 var sendTrigger = require('./util/trigger').sendTrigger;
+var hookPath = 'app.communication.customerService.';
 
 /**
  * Trigger a customer service notification
@@ -8,7 +9,28 @@ var sendTrigger = require('./util/trigger').sendTrigger;
  * @returns {{status: string}}
  */
 function contactUs(data) {
-    return sendTrigger(data);
+    return sendTrigger(hookPath + 'contactUs', data);
+}
+
+/**
+ * Declares attributes available for data mapping configuration
+ * @returns {Object} Map of hook function to an array of strings
+ */
+function triggerDefinitions() {
+    return {
+        contactUs: {
+            description: 'Contact Us trigger',
+            attributes: [
+                'CurrentForms.contactus.myquestion',
+                'CurrentForms.contactus.firstname',
+                'CurrentForms.contactus.lastname',
+                'CurrentForms.contactus.email',
+                'CurrentForms.contactus.phone',
+                'CurrentForms.contactus.ordernumber',
+                'CurrentForms.contactus.comment'
+            ]
+        }
+    };
 }
 
 module.exports = require('dw/system/HookMgr').callHook(
@@ -20,3 +42,6 @@ module.exports = require('dw/system/HookMgr').callHook(
         contactUs: contactUs
     }
 );
+
+// non-hook exports
+module.exports.triggerDefinitions = triggerDefinitions;

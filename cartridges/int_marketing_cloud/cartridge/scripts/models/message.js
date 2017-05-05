@@ -1,26 +1,26 @@
 'use strict';
+var helpers = require('./util/helpers');
 
 function messageToJson(obj) {
     var newObject = {};
-    var ucfirst = function(string){ return string.charAt(0).toUpperCase() + string.slice(1); };
     var ucprop;
     for (var prop in obj) {
         if (obj.hasOwnProperty(prop)) {
-            switch(prop) {
+            switch (prop) {
                 case '_private':
                     continue;
                 case 'options':
                     ucprop = 'OPTIONS';
                     break;
                 default:
-                    ucprop = ucfirst(prop);
+                    ucprop = helpers.ucfirst(prop);
                     break;
             }
 
-            if (obj[prop] && typeof obj[prop] === 'object' && prop !== 'subscriberAttributes') {
-                newObject[ ucprop ] = messageToJson(obj[prop]);
+            if (obj[prop] && helpers.isObject(obj[prop]) && prop !== 'subscriberAttributes') {
+                newObject[ucprop] = messageToJson(obj[prop]);
             } else {
-                newObject[ ucprop ] = obj[prop];
+                newObject[ucprop] = obj[prop];
             }
         }
     }
@@ -29,18 +29,18 @@ function messageToJson(obj) {
 
 /**
  * Message class
- * @param {string} sendID ID of the entry event send definition. Either this or the customer key is required.
  * @param {string} customerKey CustomerKey of the entry event send definition. Either this or the SendID is required.
+ * @param {string} [sendID] ID of the entry event send definition. Either this or the customer key is required.
  * @constructor
  */
-function Message(sendID, customerKey) {
+function Message(customerKey, sendID) {
     if (empty(sendID) && empty(customerKey)) {
         throw new Error('sendID or customerKey is required to create a new message.');
     }
 
     this._private = {
-        sendID: sendID,
-        sendKey: customerKey
+        sendKey: customerKey,
+        sendID: sendID
     };
     this.from = {
         address: '',
@@ -75,7 +75,7 @@ Message.prototype = {
     /**
      * Set FROM details
      * @param {string} address Sender email address
-     * @param {string} name Sender name
+     * @param {string} [name] Sender name
      * @returns {Message}
      */
     setFrom: function(address, name) {

@@ -1,6 +1,7 @@
 'use strict';
 
 var sendTrigger = require('./util/trigger').sendTrigger;
+var hookPath = 'app.communication.giftCertificate.';
 
 /**
  * Trigger a gift certificate notification
@@ -8,7 +9,36 @@ var sendTrigger = require('./util/trigger').sendTrigger;
  * @returns {{status: string}}
  */
 function sendGiftCertificate(data) {
-    return sendTrigger(data);
+    return sendTrigger(hookPath + 'sendGiftCertificate', data);
+}
+
+/**
+ * Declares attributes available for data mapping configuration
+ * @returns {Object} Map of hook function to an array of strings
+ */
+function triggerDefinitions() {
+    return {
+        sendGiftCertificate: {
+            description: 'Send Gift Certificate trigger, used for newly purchased gift certificates',
+            attributes: [
+                'GiftCertificate.amount.value',
+                'GiftCertificate.amount.currencyCode',
+                'GiftCertificate.amount.decimalValue',
+                'GiftCertificate.balance.value',
+                'GiftCertificate.balance.currencyCode',
+                'GiftCertificate.balance.decimalValue',
+                'GiftCertificate.description',
+                'GiftCertificate.giftCertificateCode',
+                'GiftCertificate.recipientName',
+                'GiftCertificate.recipientEmail',
+                'GiftCertificate.senderName',
+                'GiftCertificate.message',
+                'GiftCertificate.maskedGiftCertificateCode',
+                'GiftCertificate.merchantID',
+                'GiftCertificate.orderNo'
+            ]
+        }
+    };
 }
 
 module.exports = require('dw/system/HookMgr').callHook(
@@ -20,3 +50,6 @@ module.exports = require('dw/system/HookMgr').callHook(
         sendGiftCertificate: sendGiftCertificate
     }
 );
+
+// non-hook exports
+module.exports.triggerDefinitions = triggerDefinitions;

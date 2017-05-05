@@ -49,7 +49,8 @@ function isValidAuth() {
         this.token = JSON.parse(cachedToken.token);
     }
 
-    return this.token && this.token.accessToken && this.token.expires > now.valueOf(); // check if expires is in the future
+    // check if expires is in the future
+    return this.token && this.token.accessToken && this.token.expires > now.valueOf();
 }
 
 /**
@@ -59,7 +60,7 @@ function isValidAuth() {
 function getValidToken() {
     if(!this.isValidAuth()){
         var result = require('dw/svc/ServiceRegistry').get('marketingcloud.rest.auth').call();
-        if (result.status == 'OK' && result.object) {
+        if (result.status === 'OK' && result.object) {
             this.token = updateCachedTokenObject(result.object);
         }
     }

@@ -24,12 +24,12 @@ function setAuthHeader(svc) {
     var authToken = require('int_marketing_cloud').authToken();
     var token = authToken.getValidToken();
 
-    if (empty(token) || !token.access_token) {
+    if (empty(token) || !token.accessToken) {
         throw new Error('No auth token available!');
     }
 
     svc.setAuthentication('NONE');
-    svc.addHeader('Authorization', 'Bearer ' + token.access_token);
+    svc.addHeader('Authorization', 'Bearer ' + token.accessToken);
 }
 
 /**

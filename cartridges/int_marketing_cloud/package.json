@@ -1,5 +1,6 @@
 {
   "init":[
+    "./cartridge/scripts/init/bootstrap.js",
     "./cartridge/scripts/init/rest.js"
   ],
   "main": "./cartridge/scripts/Registry.js",

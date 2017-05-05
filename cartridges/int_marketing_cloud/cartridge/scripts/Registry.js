@@ -9,27 +9,26 @@ var	Registry = {
     /**
      * @returns {authToken} Instance of authToken
      */
-    authToken : function() {
+    authToken : function () {
         var authTokenModel = require(path +'models/authToken');
         return new authTokenModel();
     },
     /**
-     * @param {string} sendID ID of the entry event send definition. Either this or the customer key is required.
      * @param {string} customerKey CustomerKey of the entry event send definition. Either this or the SendID is required.
+     * @param {string} sendID ID of the entry event send definition. Either this or the customer key is required.
      * @returns {Message} Instance of Message
      */
-    message : function(sendID, customerKey) {
+    message : function (customerKey, sendID) {
         var messageModel = require(path +'models/message');
-        return new messageModel(sendID, customerKey);
+        return new messageModel(customerKey, sendID);
     },
-    trigger : function(hookID) {
-        var customObjectName = 'MarketingCloudTriggers';
-        var com = require('dw/object/CustomObjectMgr'),
-            trigger = com.getCustomObject(customObjectName, hookID);
-        if (empty(trigger)) {
-            throw new Error('Requested trigger definition for '+ hookID +' not found.');
-        }
-        return trigger.getCustom();
+    /**
+     * @param {string} hookID The trigger hook ID
+     * @returns {Trigger}
+     */
+    trigger : function (hookID) {
+        var triggerModel = require(path +'models/trigger');
+        return new triggerModel(hookID);
     }
 };
 
