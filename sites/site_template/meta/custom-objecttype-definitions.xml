@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <custom-type type-id="CommunicationHandlers">
+        <display-name xml:lang="x-default">Communication Handlers</display-name>
+        <description xml:lang="x-default">Configuration for Communication Handlers</description>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>organization</storage-scope>
+        <key-definition attribute-id="instanceType">
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="configJson">
+                <display-name xml:lang="x-default">Handler Configuration JSON</display-name>
+                <description xml:lang="x-default">Configuration JSON object for Communication Handlers</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="default">
+                <display-name xml:lang="x-default">Default</display-name>
+                <attribute attribute-id="instanceType"/>
+                <attribute attribute-id="configJson"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
     <custom-type type-id="MarketingCloudAuthToken">
         <display-name xml:lang="x-default">Marketing Cloud Auth Token</display-name>
         <description xml:lang="x-default">Marketing Cloud OAuth Token</description>
@@ -32,7 +60,7 @@
     <custom-type type-id="MarketingCloudTriggers">
         <display-name xml:lang="x-default">Marketing Cloud Triggers</display-name>
         <description xml:lang="x-default">Triggers defined for use with int_marketing_cloud cartridge.</description>
-        <staging-mode>source-to-target</staging-mode>
+        <staging-mode>no-staging</staging-mode>
         <storage-scope>organization</storage-scope>
         <key-definition attribute-id="hookID">
             <type>string</type>
@@ -40,8 +68,8 @@
         </key-definition>
         <attribute-definitions>
             <attribute-definition attribute-id="customerKey">
-                <display-name xml:lang="x-default">Trigger Customer Key</display-name>
-                <description xml:lang="x-default">CustomerKey of the entry event send definition. Either this or the SendID is required.</description>
+                <display-name xml:lang="x-default">Trigger External Key</display-name>
+                <description xml:lang="x-default">External Key of the entry event send definition.</description>
                 <type>string</type>
                 <localizable-flag>false</localizable-flag>
                 <mandatory-flag>false</mandatory-flag>
@@ -63,24 +91,23 @@
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
-            <attribute-definition attribute-id="sendID">
-                <display-name xml:lang="x-default">Trigger Send ID</display-name>
-                <description xml:lang="x-default">ID of the entry event send definition. Either this or the customer key is required.</description>
-                <type>string</type>
+            <attribute-definition attribute-id="subscriberAttributes">
+                <display-name xml:lang="x-default">Subscriber Attributes</display-name>
+                <description xml:lang="x-default">Subscriber profile fields, data extension attributes, etc, should all be defined and mapped here.</description>
+                <type>text</type>
                 <localizable-flag>false</localizable-flag>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
-                <min-length>0</min-length>
             </attribute-definition>
         </attribute-definitions>
         <group-definitions>
             <attribute-group group-id="default">
                 <display-name xml:lang="x-default">Default</display-name>
                 <attribute attribute-id="hookID"/>
-                <attribute attribute-id="sendID"/>
                 <attribute attribute-id="customerKey"/>
                 <attribute attribute-id="description"/>
                 <attribute attribute-id="enabled"/>
+                <attribute attribute-id="subscriberAttributes"/>
                 <attribute attribute-id="creationDate" system="true"/>
                 <attribute attribute-id="lastModified" system="true"/>
             </attribute-group>

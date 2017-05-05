@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
+    <custom-object type-id="CommunicationHandlers" object-id="development">
+        <object-attribute attribute-id="configJson">{
+    "sitegenesis_email": {
+        "name": "Site Genesis email",
+        "cartridge": "app_storefront_controllers",
+        "id": "sitegenesis_email",
+        "hooks": [
+            {
+                "name": "app.communication.account.created",
+                "script": "./communication/account",
+                "enabled": true
+            },
+            {
+                "name": "app.communication.account.updated",
+                "script": "./communication/account",
+                "enabled": true
+            },
+            {
+                "name": "app.communication.account.passwordChanged",
+                "script": "./communication/account",
+                "enabled": true
+            },
+            {
+                "name": "app.communication.account.passwordReset",
+                "script": "./communication/account",
+                "enabled": true
+            },
+            {
+                "name": "app.communication.account.lockedOut",
+                "script": "./communication/account",
+                "enabled": true
+            },
+            {
+                "name": "app.communication.customerService.contactUs",
+                "script": "./communication/customerService",
+                "enabled": true
+            },
+            {
+                "name": "app.communication.giftCertificate.sendCertificate",
+                "script": "./communication/giftCertificate",
+                "enabled": true
+            },
+            {
+                "name": "app.communication.order.confirmation",
+                "script": "./communication/order",
+                "enabled": true
+            }
+        ],
+        "enabled": true
+    },
+    "int_marketing_cloud": {
+        "name": "Marketing Cloud Connector",
+        "id": "int_marketing_cloud",
+        "cartridge": "int_marketing_cloud",
+        "hooks": [
+            {
+                "name": "app.communication.account.created",
+                "script": "./communication/account",
+                "enabled": true
+            },
+            {
+                "name": "app.communication.account.updated",
+                "script": "./communication/account",
+                "enabled": true
+            },
+            {
+                "name": "app.communication.account.passwordChanged",
+                "script": "./communication/account",
+                "enabled": true
+            },
+            {
+                "name": "app.communication.account.passwordReset",
+                "script": "./communication/account",
+                "enabled": true
+            },
+            {
+                "name": "app.communication.account.lockedOut",
+                "script": "./communication/account",
+                "enabled": true
+            },
+            {
+                "name": "app.communication.customerService.contactUs",
+                "script": "./communication/customerService",
+                "enabled": true
+            },
+            {
+                "name": "app.communication.giftCertificate.sendCertificate",
+                "script": "./communication/giftCertificate",
+                "enabled": true
+            },
+            {
+                "name": "app.communication.order.confirmation",
+                "script": "./communication/order",
+                "enabled": true
+            }
+        ],
+        "enabled": false
+    }
+}</object-attribute>
+    </custom-object>
+
+</custom-objects>
