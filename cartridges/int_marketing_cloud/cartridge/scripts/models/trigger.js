@@ -15,8 +15,7 @@ var helpers = require('./util/helpers');
 /**
  * Fetches trigger definition from Custom Object
  * @param {string} hookID
- * @returns {module:dw/object/CustomAttributes}
- * @see [dw/object/CustomAttributes]{@link https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_object_CustomAttributes.html}
+ * @returns {external:dw/object/CustomAttributes}
  */
 function getTriggerDefinitionObject(hookID) {
     var com = require('dw/object/CustomObjectMgr'),
@@ -46,9 +45,8 @@ function mergeAttributes(newAttributes, oldAttributes) {
 
 /**
  * Expands Subscriber Attributes from JSON definition
- * @param {module:dw/object/CustomAttributes} definition
+ * @param {external:dw/object/CustomAttributes} definition
  * @returns {Object}
- * @see [dw/object/CustomAttributes]{@link https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_object_CustomAttributes.html}
  */
 function expandAttributes(definition) {
     var attributes = definition.subscriberAttributes;
@@ -184,9 +182,8 @@ function newMessage(data){
 
 /**
  * Sends a trigger message
- * @returns {module:dw/svc/Result}
+ * @returns {external:dw/svc/Result}
  * @alias module:models/trigger.Trigger#send
- * @see [dw/svc/Result]{@link https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_svc_Result.html}
  */
 function sendMessage() {
     if (!this.isEnabled()) {
@@ -216,7 +213,7 @@ function Trigger(hookID) {
     this.hookID = hookID;
     /**
      * Definition object
-     * @type {module:dw/object/CustomAttributes}
+     * @type {external:dw/object/CustomAttributes}
      */
     this.definition = getTriggerDefinitionObject(hookID);
     /**
@@ -252,3 +249,12 @@ function Trigger(hookID) {
 }
 
 module.exports = Trigger;
+
+/**
+ * @external dw/object/CustomAttributes
+ * @see https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_object_CustomAttributes.html
+ */
+/**
+ * @external dw/svc/Result
+ * @see https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_svc_Result.html
+ */

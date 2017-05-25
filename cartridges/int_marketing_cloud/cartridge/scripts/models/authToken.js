@@ -14,8 +14,7 @@ var customObjectName = 'MarketingCloudAuthToken';
 /**
  * Retrieves cached token from custom object storage
  * If no existing token object, an empty one is created
- * @returns {module:dw/object/CustomAttributes} Returns token custom attributes
- * @see [dw/object/CustomAttributes]{@link https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_object_CustomAttributes.html}
+ * @returns {external:dw/object/CustomAttributes} Returns token custom attributes
  */
 function getCachedTokenObject() {
     var com = require('dw/object/CustomObjectMgr'),
@@ -104,3 +103,8 @@ function AuthToken() {
 }
 
 module.exports = AuthToken;
+
+/**
+ * @external dw/object/CustomAttributes
+ * @see https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_object_CustomAttributes.html
+ */

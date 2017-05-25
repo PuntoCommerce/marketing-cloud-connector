@@ -22,7 +22,7 @@ var Logger = require('dw/system/Logger');
 
 /**
  * Inserts auth token into request header
- * @param {module:dw/svc/HTTPService} svc
+ * @param {external:dw/svc/HTTPService} svc
  * @throws {Error} Throws error when no valid auth token is available (i.e.- service error, service down)
  */
 function setAuthHeader(svc) {
@@ -39,7 +39,7 @@ function setAuthHeader(svc) {
 
 /**
  * Check if 401 due to expired token
- * @param {module:dw/net/HTTPClient} client
+ * @param {external:dw/net/HTTPClient} client
  * @returns {boolean} true if expired auth token
  */
 function isValid401(client) {
@@ -56,7 +56,7 @@ function isValid401(client) {
 
 /**
  * Check if response type is JSON
- * @param {module:dw/net/HTTPClient} client
+ * @param {external:dw/net/HTTPClient} client
  * @returns {boolean}
  */
 function isResponseJSON(client) {
@@ -66,8 +66,8 @@ function isResponseJSON(client) {
 
 /**
  * Parses response JSON and wraps with an object containing additional helper properties
- * @param {module:dw/svc/HTTPService} svc
- * @param {module:dw/net/HTTPClient} client
+ * @param {external:dw/svc/HTTPService} svc
+ * @param {external:dw/net/HTTPClient} client
  * @returns {{responseObj, isAuthError: boolean, isValidJSON: boolean}}
  */
 function parseResponse(svc, client) {
@@ -103,7 +103,7 @@ function parseResponse(svc, client) {
 ServiceRegistry.configure('marketingcloud.rest.auth', {
     /**
      * Create request for service authentication
-     * @param {module:dw/svc/HTTPService} svc
+     * @param {external:dw/svc/HTTPService} svc
      * @throws {Error} Throws error when service credentials are missing
      */
     createRequest: function(svc /*, params*/) {
@@ -282,7 +282,7 @@ ServiceRegistry.configure('marketingcloud.rest.platform.tokenContext', {
 ServiceRegistry.configure('marketingcloud.rest.messaging.send', {
     /**
      * Create request for sending an email
-     * @param {module:dw/svc/HTTPService} svc
+     * @param {external:dw/svc/HTTPService} svc
      * @param {module:models/message~Message} message A message model instance to be sent to Marketing Cloud
      * @returns {string} Request body
      */
@@ -383,3 +383,12 @@ ServiceRegistry.configure('marketingcloud.rest.messaging.deliveryRecords', {
         };
     }
 });
+
+/**
+ * @external dw/svc/HTTPService
+ * @see https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_svc_HTTPService.html
+ */
+/**
+ * @external dw/net/HTTPClient
+ * @see https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_net_HTTPClient.html
+ */

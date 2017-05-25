@@ -13,9 +13,9 @@ var Mail = require('dw/net/Mail');
  * @property {string} subject The communication subject
  * @property {string} messageBody The body of the communication to send
  * @property {Object} params Object containing additional parameters for usage by the hook
- * @property {module:dw/web/Forms} params.CurrentForms The forms available in current session
- * @property {module:dw/web/HTTPParameterMap} params.CurrentHttpParameterMap The parameters in current request
- * @property {module:dw/customer/Customer} params.CurrentCustomer The current customer
+ * @property {external:dw/web/Forms} params.CurrentForms The forms available in current session
+ * @property {external:dw/web/HTTPParameterMap} params.CurrentHttpParameterMap The parameters in current request
+ * @property {external:dw/customer/Customer} params.CurrentCustomer The current customer
  */
 
 /**
@@ -36,3 +36,16 @@ function sendTrigger(hookID, data){
 }
 
 exports.sendTrigger = sendTrigger;
+
+/**
+ * @external dw/web/Forms
+ * @see https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_web_Forms.html
+ */
+/**
+ * @external dw/web/HTTPParameterMap
+ * @see https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_web_HTTPParameterMap.html
+ */
+/**
+ * @external dw/customer/Customer
+ * @see https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_customer_Customer.html
+ */

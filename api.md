@@ -176,9 +176,9 @@ Trigger a customer notification
 | subject | string | The communication subject |
 | messageBody | string | The body of the communication to send |
 | params | Object | Object containing additional parameters for usage by the hook |
-| params.CurrentForms | module:dw/web/Forms | The forms available in current session |
-| params.CurrentHttpParameterMap | module:dw/web/HTTPParameterMap | The parameters in current request |
-| params.CurrentCustomer | module:dw/customer/Customer | The current customer |
+| params.CurrentForms | dw/web/Forms | The forms available in current session |
+| params.CurrentHttpParameterMap | dw/web/HTTPParameterMap | The parameters in current request |
+| params.CurrentCustomer | dw/customer/Customer | The current customer |
 
 ## feeds/catalog
 ## feeds/content
@@ -241,7 +241,7 @@ Inserts auth token into request header
 
 | Param | Type |
 | --- | --- |
-| svc | module:dw/svc/HTTPService | 
+| svc | dw/svc/HTTPService | 
 
 ### init/rest~isValid401(client) ⇒ boolean
 Check if 401 due to expired token
@@ -251,7 +251,7 @@ Check if 401 due to expired token
 
 | Param | Type |
 | --- | --- |
-| client | module:dw/net/HTTPClient | 
+| client | dw/net/HTTPClient | 
 
 ### init/rest~isResponseJSON(client) ⇒ boolean
 Check if response type is JSON
@@ -260,7 +260,7 @@ Check if response type is JSON
 
 | Param | Type |
 | --- | --- |
-| client | module:dw/net/HTTPClient | 
+| client | dw/net/HTTPClient | 
 
 ### init/rest~parseResponse(svc, client) ⇒ Object
 Parses response JSON and wraps with an object containing additional helper properties
@@ -269,8 +269,8 @@ Parses response JSON and wraps with an object containing additional helper prope
 
 | Param | Type |
 | --- | --- |
-| svc | module:dw/svc/HTTPService | 
-| client | module:dw/net/HTTPClient | 
+| svc | dw/svc/HTTPService | 
+| client | dw/net/HTTPClient | 
 
 ### init/rest~createRequest(svc)
 Create request for service authentication
@@ -283,7 +283,7 @@ Create request for service authentication
 
 | Param | Type |
 | --- | --- |
-| svc | module:dw/svc/HTTPService | 
+| svc | dw/svc/HTTPService | 
 
 #### createRequest~svcCredential
 TODO: Convert to custom preference or custom object? less secure storage for password...
@@ -297,7 +297,7 @@ Create request for sending an email
 
 | Param | Type | Description |
 | --- | --- | --- |
-| svc | module:dw/svc/HTTPService |  |
+| svc | dw/svc/HTTPService |  |
 | message | Message | A message model instance to be sent to Marketing Cloud |
 
 #### createRequest~svcCredential
@@ -328,7 +328,7 @@ TODO: Convert to custom preference or custom object? less secure storage for pas
         * [.token](#markdown-header-authtokentoken-object) : Object
         * [.isValidAuth()](#markdown-header-authtokenisvalidauth-boolean) ⇒ boolean
         * [.getValidToken()](#markdown-header-authtokengetvalidtoken-booleanobject) ⇒ boolean ⎮ Object
-    * [~getCachedTokenObject()](#markdown-header-modelsauthtokengetcachedtokenobject-moduledwobjectcustomattributes) ⇒ module:dw/object/CustomAttributes
+    * [~getCachedTokenObject()](#markdown-header-modelsauthtokengetcachedtokenobject-externaldwobjectcustomattributes) ⇒ dw/object/CustomAttributes
     * [~updateCachedTokenObject(obj)](#markdown-header-modelsauthtokenupdatecachedtokenobjectobj-object) ⇒ Object
 
 ### models/authToken~AuthToken
@@ -366,13 +366,12 @@ Gets a valid token from storage or from a new auth request
 
 **Kind**: instance method of [AuthToken](#markdown-header-new-authtoken)  
 **Returns**: boolean ⎮ Object - False or plain JS object containing the token response  
-### models/authToken~getCachedTokenObject() ⇒ module:dw/object/CustomAttributes
+### models/authToken~getCachedTokenObject() ⇒ dw/object/CustomAttributes
 Retrieves cached token from custom object storage
 If no existing token object, an empty one is created
 
 **Kind**: inner method of [models/authToken](#markdown-header-modelsauthtoken)  
-**Returns**: module:dw/object/CustomAttributes - Returns token custom attributes  
-**See**: [[dw/object/CustomAttributes]{@link https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_object_CustomAttributes.html}]([dw/object/CustomAttributes]{@link https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_object_CustomAttributes.html})
+**Returns**: dw/object/CustomAttributes - Returns token custom attributes  
 ### models/authToken~updateCachedTokenObject(obj) ⇒ Object
 Puts token into custom object storage
 
@@ -513,11 +512,11 @@ Used to ensure exported JSON is webservice compatible
     * [~Trigger](#markdown-header-modelstriggertrigger)
         * [new Trigger(hookID)](#markdown-header-new-triggerhookid)
         * [.hookID](#markdown-header-triggerhookid-string) : string
-        * [.definition](#markdown-header-triggerdefinition-moduledwobjectcustomattributes) : module:dw/object/CustomAttributes
+        * [.definition](#markdown-header-triggerdefinition-externaldwobjectcustomattributes) : dw/object/CustomAttributes
         * [.attributes](#markdown-header-triggerattributes-object) : Object
         * [.message](#markdown-header-triggermessage-modulemodelsmessagemessage) : Message
         * [.isEnabled()](#markdown-header-triggerisenabled-boolean) ⇒ boolean
-    * [~getTriggerDefinitionObject(hookID)](#markdown-header-modelstriggergettriggerdefinitionobjecthookid-moduledwobjectcustomattributes) ⇒ module:dw/object/CustomAttributes
+    * [~getTriggerDefinitionObject(hookID)](#markdown-header-modelstriggergettriggerdefinitionobjecthookid-externaldwobjectcustomattributes) ⇒ dw/object/CustomAttributes
     * [~mergeAttributes(newAttributes, oldAttributes)](#markdown-header-modelstriggermergeattributesnewattributes-oldattributes)
     * [~expandAttributes(definition)](#markdown-header-modelstriggerexpandattributesdefinition-object) ⇒ Object
     * [~getTriggerDefinition(hookID, attributes)](#markdown-header-modelstriggergettriggerdefinitionhookid-attributes-object) ⇒ Object
@@ -529,7 +528,7 @@ Used to ensure exported JSON is webservice compatible
 * [~Trigger](#markdown-header-modelstriggertrigger)
     * [new Trigger(hookID)](#markdown-header-new-triggerhookid)
     * [.hookID](#markdown-header-triggerhookid-string) : string
-    * [.definition](#markdown-header-triggerdefinition-moduledwobjectcustomattributes) : module:dw/object/CustomAttributes
+    * [.definition](#markdown-header-triggerdefinition-externaldwobjectcustomattributes) : dw/object/CustomAttributes
     * [.attributes](#markdown-header-triggerattributes-object) : Object
     * [.message](#markdown-header-triggermessage-modulemodelsmessagemessage) : Message
     * [.isEnabled()](#markdown-header-triggerisenabled-boolean) ⇒ boolean
@@ -546,7 +545,7 @@ Trigger constructor
 The instance hook ID
 
 **Kind**: instance property of [Trigger](#markdown-header-new-triggerhookid)  
-#### trigger.definition : module:dw/object/CustomAttributes
+#### trigger.definition : dw/object/CustomAttributes
 Definition object
 
 **Kind**: instance property of [Trigger](#markdown-header-new-triggerhookid)  
@@ -562,11 +561,10 @@ The current Message instance
 Returns whether this trigger is enabled
 
 **Kind**: instance method of [Trigger](#markdown-header-new-triggerhookid)  
-### models/trigger~getTriggerDefinitionObject(hookID) ⇒ module:dw/object/CustomAttributes
+### models/trigger~getTriggerDefinitionObject(hookID) ⇒ dw/object/CustomAttributes
 Fetches trigger definition from Custom Object
 
 **Kind**: inner method of [models/trigger](#markdown-header-modelstrigger)  
-**See**: [[dw/object/CustomAttributes]{@link https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_object_CustomAttributes.html}]([dw/object/CustomAttributes]{@link https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_object_CustomAttributes.html})
 
 | Param | Type |
 | --- | --- |
@@ -586,11 +584,10 @@ Merges attribute JS objects in place, preserving old values
 Expands Subscriber Attributes from JSON definition
 
 **Kind**: inner method of [models/trigger](#markdown-header-modelstrigger)  
-**See**: [[dw/object/CustomAttributes]{@link https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_object_CustomAttributes.html}]([dw/object/CustomAttributes]{@link https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_object_CustomAttributes.html})
 
 | Param | Type |
 | --- | --- |
-| definition | module:dw/object/CustomAttributes | 
+| definition | dw/object/CustomAttributes | 
 
 ### models/trigger~getTriggerDefinition(hookID, attributes) ⇒ Object
 Returns trigger definition for a hook
