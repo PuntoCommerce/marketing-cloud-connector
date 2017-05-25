@@ -9,11 +9,11 @@ var hookPath = 'app.communication.customerService.';
 
 /**
  * Trigger a customer service notification
+ * @todo Perform some logic to override sender & recipient email values
  * @param {module:communication/util/trigger~CustomerNotification} data
  * @returns {{status: string}}
  */
 function contactUs(data) {
-    // TODO: Perform some logic to override sender & recipient email values
     return sendTrigger(hookPath + 'contactUs', data);
 }
 

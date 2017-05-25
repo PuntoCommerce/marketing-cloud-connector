@@ -2,9 +2,8 @@
 
 /**
  * @module init/bootstrap
+ * @todo Consider moving away from INIT approach, and using on-hook-demand or job-based init
  */
-
-// @TODO: Consider moving away from INIT approach, and using on-hook-demand or job-based init
 
 /**
  * Use with array filter, to filter hooks not matching the communication handler pattern

@@ -88,6 +88,10 @@ Declares attributes available for data mapping configuration
 Trigger a customer service notification
 
 **Kind**: inner method of [communication/customerService](#markdown-header-communicationcustomerservice)  
+**Todo**
+
+- [ ] Perform some logic to override sender & recipient email values
+
 
 | Param | Type |
 | --- | --- |
@@ -183,6 +187,10 @@ Trigger a customer notification
 ## feeds/catalog
 ## feeds/content
 ## init/bootstrap
+**Todo**
+
+- [ ] Consider moving away from INIT approach, and using on-hook-demand or job-based init
+
 
 * [init/bootstrap](#markdown-header-initbootstrap)
     * [~hookFilter(hook)](#markdown-header-initbootstraphookfilterhook-boolean) ⇒ boolean
@@ -211,11 +219,8 @@ Initializes trigger configurations
     * [~isResponseJSON(client)](#markdown-header-initrestisresponsejsonclient-boolean) ⇒ boolean
     * [~parseResponse(svc, client)](#markdown-header-initrestparseresponsesvc-client-object) ⇒ Object
     * [~createRequest(svc)](#markdown-header-initrestcreaterequestsvc)
-        * [~svcCredential](#markdown-header-createrequestsvccredential)
     * [~createRequest(svc, message)](#markdown-header-initrestcreaterequestsvc-message-string) ⇒ string
-        * [~svcCredential](#markdown-header-createrequestsvccredential)
     * [~createRequest(svc, sendID, customerKey, recipientSendID)](#markdown-header-initrestcreaterequestsvc-sendid-customerkey-recipientsendid)
-        * [~svcCredential](#markdown-header-createrequestsvccredential)
 
 ### init/rest~ServiceRegistry
 Marketing Cloud Connector
@@ -280,15 +285,15 @@ Create request for service authentication
 
 - Error Throws error when service credentials are missing
 
+**Todo**
+
+- [ ] Switch credentials based on site suffix, fall back on a default
+
 
 | Param | Type |
 | --- | --- |
 | svc | dw/svc/HTTPService | 
 
-#### createRequest~svcCredential
-TODO: Convert to custom preference or custom object? less secure storage for password...
-
-**Kind**: inner property of createRequest  
 ### init/rest~createRequest(svc, message) ⇒ string
 Create request for sending an email
 
@@ -300,10 +305,6 @@ Create request for sending an email
 | svc | dw/svc/HTTPService |  |
 | message | Message | A message model instance to be sent to Marketing Cloud |
 
-#### createRequest~svcCredential
-TODO: Convert to custom preference or custom object? less secure storage for password...
-
-**Kind**: inner property of createRequest  
 ### init/rest~createRequest(svc, sendID, customerKey, recipientSendID)
 Create request for viewing delivery records
 
@@ -316,10 +317,6 @@ Create request for viewing delivery records
 | customerKey | 
 | recipientSendID | 
 
-#### createRequest~svcCredential
-TODO: Convert to custom preference or custom object? less secure storage for password...
-
-**Kind**: inner property of createRequest  
 ## models/authToken
 
 * [models/authToken](#markdown-header-modelsauthtoken)

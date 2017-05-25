@@ -105,9 +105,9 @@ ServiceRegistry.configure('marketingcloud.rest.auth', {
      * Create request for service authentication
      * @param {external:dw/svc/HTTPService} svc
      * @throws {Error} Throws error when service credentials are missing
+     * @todo Switch credentials based on site suffix, fall back on a default
      */
     createRequest: function(svc /*, params*/) {
-        /** TODO: Convert to custom preference or custom object? less secure storage for password... */
         var svcCredential = svc.getConfiguration().credential;
         if (empty(svcCredential.user) || empty(svcCredential.password)) {
             throw new Error('Service configuration requires valid client ID (user) and secret (password)');
