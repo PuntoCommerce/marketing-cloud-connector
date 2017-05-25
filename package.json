@@ -1,4 +1,11 @@
 {
-  "name": "Marketing Cloud Connector",
-  "version": "0.0.1"
+  "name": "marketing-cloud-connector",
+  "version": "0.0.1",
+  "devDependencies": {
+    "dmd-bitbucket": "^0.1.10",
+    "jsdoc-to-markdown": "^3.0.0"
+  },
+  "scripts": {
+    "docs": "jsdoc2md --plugin dmd-bitbucket --files cartridges/int_marketing_cloud/**/*.js > api.md"
+  }
 }

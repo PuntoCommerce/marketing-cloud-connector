@@ -1,11 +1,15 @@
 'use strict';
 
+/**
+ * @module communication/order
+ */
+
 var sendTrigger = require('./util/trigger').sendTrigger;
 var hookPath = 'app.communication.order.';
 
 /**
  * Trigger an order confirmation notification
- * @param {CustomerNotification} data
+ * @param {module:communication/util/trigger~CustomerNotification} data
  * @returns {{status: string}}
  */
 function confirmation(data) {

@@ -1,6 +1,10 @@
 'use strict';
 
 /**
+ * @module init/rest
+ */
+
+/**
  * Marketing Cloud Connector
  * REST API webservice
  * Documentation:
@@ -14,10 +18,11 @@
  */
 
 var ServiceRegistry = require('dw/svc/ServiceRegistry');
+var Logger = require('dw/system/Logger');
 
 /**
  * Inserts auth token into request header
- * @param {dw/svc/HTTPService} svc
+ * @param {module:dw/svc/HTTPService} svc
  * @throws {Error} Throws error when no valid auth token is available (i.e.- service error, service down)
  */
 function setAuthHeader(svc) {
@@ -34,7 +39,7 @@ function setAuthHeader(svc) {
 
 /**
  * Check if 401 due to expired token
- * @param {dw/net/HTTPClient} client
+ * @param {module:dw/net/HTTPClient} client
  * @returns {boolean} true if expired auth token
  */
 function isValid401(client) {
@@ -51,7 +56,7 @@ function isValid401(client) {
 
 /**
  * Check if response type is JSON
- * @param {dw/net/HTTPClient} client
+ * @param {module:dw/net/HTTPClient} client
  * @returns {boolean}
  */
 function isResponseJSON(client) {
@@ -61,8 +66,8 @@ function isResponseJSON(client) {
 
 /**
  * Parses response JSON and wraps with an object containing additional helper properties
- * @param {dw/svc/HTTPService} svc
- * @param {dw/net/HTTPClient} client
+ * @param {module:dw/svc/HTTPService} svc
+ * @param {module:dw/net/HTTPClient} client
  * @returns {{responseObj, isAuthError: boolean, isValidJSON: boolean}}
  */
 function parseResponse(svc, client) {
@@ -98,7 +103,7 @@ function parseResponse(svc, client) {
 ServiceRegistry.configure('marketingcloud.rest.auth', {
     /**
      * Create request for service authentication
-     * @param {dw/svc/HTTPService} svc
+     * @param {module:dw/svc/HTTPService} svc
      * @throws {Error} Throws error when service credentials are missing
      */
     createRequest: function(svc /*, params*/) {
@@ -132,6 +137,7 @@ ServiceRegistry.configure('marketingcloud.rest.auth', {
             }
         } catch(e) {
             responseObj = client.text;
+            Logger.error('Unable to Authenticate: {0}', responseObj);
         }
 
         return responseObj;
@@ -276,8 +282,8 @@ ServiceRegistry.configure('marketingcloud.rest.platform.tokenContext', {
 ServiceRegistry.configure('marketingcloud.rest.messaging.send', {
     /**
      * Create request for sending an email
-     * @param {dw/svc/HTTPService} svc
-     * @param {Message} message A message model instance to be sent to Marketing Cloud
+     * @param {module:dw/svc/HTTPService} svc
+     * @param {module:models/message~Message} message A message model instance to be sent to Marketing Cloud
      * @returns {string} Request body
      */
     createRequest: function(svc, message) {

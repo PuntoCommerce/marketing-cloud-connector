@@ -1,14 +1,19 @@
 'use strict';
 
+/**
+ * @module communication/customerService
+ */
+
 var sendTrigger = require('./util/trigger').sendTrigger;
 var hookPath = 'app.communication.customerService.';
 
 /**
  * Trigger a customer service notification
- * @param {CustomerNotification} data
+ * @param {module:communication/util/trigger~CustomerNotification} data
  * @returns {{status: string}}
  */
 function contactUs(data) {
+    // TODO: Perform some logic to override sender & recipient email values
     return sendTrigger(hookPath + 'contactUs', data);
 }
 

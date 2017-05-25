@@ -1,11 +1,15 @@
 'use strict';
 
+/**
+ * @module communication/account
+ */
+
 var sendTrigger = require('./util/trigger').sendTrigger;
 var hookPath = 'app.communication.account.';
 
 /**
  * Trigger account created notification
- * @param {CustomerNotification} data
+ * @param {module:communication/util/trigger~CustomerNotification} data
  * @returns {{status: string}}
  */
 function created(data) {
@@ -14,7 +18,7 @@ function created(data) {
 
 /**
  * Trigger account updated notification
- * @param {CustomerNotification} data
+ * @param {module:communication/util/trigger~CustomerNotification} data
  * @returns {{status: string}}
  */
 function updated(data) {
@@ -23,7 +27,7 @@ function updated(data) {
 
 /**
  * Trigger password changed notification
- * @param {CustomerNotification} data
+ * @param {module:communication/util/trigger~CustomerNotification} data
  * @returns {{status: string}}
  */
 function passwordChanged(data) {
@@ -32,7 +36,7 @@ function passwordChanged(data) {
 
 /**
  * Trigger password reset notification
- * @param {CustomerNotification} data
+ * @param {module:communication/util/trigger~CustomerNotification} data
  * @returns {{status: string}}
  */
 function passwordReset(data) {
@@ -41,10 +45,11 @@ function passwordReset(data) {
 
 /**
  * Trigger account locked out notification
- * @param {CustomerNotification} data
+ * @param {module:communication/util/trigger~CustomerNotification} data
  * @returns {{status: string}}
  */
 function lockedOut(data) {
+    data.params.Customer = data.params.TempCustomer;
     return sendTrigger(hookPath + 'lockedOut', data);
 }
 
@@ -114,7 +119,7 @@ function triggerDefinitions() {
         },
         lockedOut: {
             description: 'Account Locked trigger',
-            attributes: mergeCustomer([], 'TempCustomer')
+            attributes: mergeCustomer([], 'Customer')
         }
     };
 }

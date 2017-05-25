@@ -1,15 +1,19 @@
 'use strict';
 
+/**
+ * @module communication/giftCertificate
+ */
+
 var sendTrigger = require('./util/trigger').sendTrigger;
 var hookPath = 'app.communication.giftCertificate.';
 
 /**
  * Trigger a gift certificate notification
- * @param {CustomerNotification} data
+ * @param {module:communication/util/trigger~CustomerNotification} data
  * @returns {{status: string}}
  */
-function sendGiftCertificate(data) {
-    return sendTrigger(hookPath + 'sendGiftCertificate', data);
+function sendCertificate(data) {
+    return sendTrigger(hookPath + 'sendCertificate', data);
 }
 
 /**
@@ -18,7 +22,7 @@ function sendGiftCertificate(data) {
  */
 function triggerDefinitions() {
     return {
-        sendGiftCertificate: {
+        sendCertificate: {
             description: 'Send Gift Certificate trigger, used for newly purchased gift certificates',
             attributes: [
                 'GiftCertificate.amount.value',
@@ -47,7 +51,7 @@ module.exports = require('dw/system/HookMgr').callHook(
     require('./handler').handlerID,
     'app.communication.giftCertificate',
     {
-        sendGiftCertificate: sendGiftCertificate
+        sendCertificate: sendCertificate
     }
 );
 

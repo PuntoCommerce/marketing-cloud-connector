@@ -1,11 +1,15 @@
 'use strict';
 
+/**
+ * @module communication/handler
+ */
+
 // handlerID can be any unique identifier
 exports.handlerID = module.cartridge;
 
 /**
  * Register communication handler
- * @param {object} registerHandler
+ * @param {Object} registerHandler
  */
 exports.registerHandler = function(registerHandler) {
     registerHandler[this.handlerID] = {

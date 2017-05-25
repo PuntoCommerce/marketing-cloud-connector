@@ -1,13 +1,35 @@
 'use strict';
 
+/**
+ * @module models/util/helpers
+ */
+
+/**
+ * Checks if submitted value type is an Object (and not an Array)
+ * @param {*} obj Object to be checked
+ * @returns {boolean}
+ * @static
+ */
 function isObject(obj) {
     return typeof obj === 'object' && !Array.isArray(obj);
 }
 
-function ucfirst(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+/**
+ * Uppercases first char of string
+ * @param {string} str String to uppercased
+ * @returns {string}
+ * @static
+ */
+function ucfirst(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+/**
+ * Returns an object's preferred value, based on what DW object type it represents
+ * @param {*} obj Object to use for value return
+ * @returns {*}
+ * @static
+ */
 function dwValue(obj) {
     if (empty(obj) || !isObject(obj)) {
         return obj;

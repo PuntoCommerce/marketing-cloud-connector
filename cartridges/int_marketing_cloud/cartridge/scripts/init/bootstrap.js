@@ -1,7 +1,16 @@
 'use strict';
 
+/**
+ * @module init/bootstrap
+ */
+
 // @TODO: Consider moving away from INIT approach, and using on-hook-demand or job-based init
 
+/**
+ * Use with array filter, to filter hooks not matching the communication handler pattern
+ * @param {string} hook The hook path/ID
+ * @returns {boolean} Whether hook is comm handler
+ */
 function hookFilter(hook) {
     var match = 'app.communication.';
     var exclude = match +'handler.';
@@ -9,6 +18,9 @@ function hookFilter(hook) {
         hook.name.slice(0, exclude.length) !== exclude;
 }
 
+/**
+ * Initializes trigger configurations
+ */
 function initTriggers() {
     var triggerModel = require(module.cartridge).trigger;
     var hooks = require('~/cartridge/scripts/hooks.json').hooks.filter(hookFilter);

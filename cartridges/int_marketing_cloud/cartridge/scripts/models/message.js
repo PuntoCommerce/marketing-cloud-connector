@@ -1,6 +1,17 @@
 'use strict';
+
+/**
+ * @module models/message
+ */
+
 var helpers = require('./util/helpers');
 
+/**
+ * Recursive method to handle Message during JSON.stringify().
+ * Used to ensure exported JSON is webservice compatible
+ * @param {module:models/message~Message|Object} obj
+ * @returns {Object}
+ */
 function messageToJson(obj) {
     var newObject = {};
     var ucprop;
@@ -38,14 +49,35 @@ function Message(customerKey, sendID) {
         throw new Error('sendID or customerKey is required to create a new message.');
     }
 
+    /**
+     * Private instance properties
+     * @type {{sendKey: string, sendID: string}}
+     * @property {string} sendKey The key provided to the instance
+     * @property {string} sendID The ID provided to the instance
+     * @private
+     */
     this._private = {
         sendKey: customerKey,
         sendID: sendID
     };
+    /**
+     * From object
+     * @type {{address: string, name: string}}
+     * @property {string} address The sender's email address
+     * @property {string} name The sender's name
+     */
     this.from = {
         address: '',
         name: ''
     };
+    /**
+     * To object
+     * @type {{address: string, subscriberKey: string, contactAttributes: {subscriberAttributes: {}}}}
+     * @property {string} address The recipient's email address
+     * @property {string} subscriberKey The recipient's unique subscriber key (typically email)
+     * @property {Object} contactAttributes Contact attributes
+     * @property {Object} contactAttributes.subscriberAttributes Subscriber attributes
+     */
     this.to = {
         address: '',
         subscriberKey: '',
@@ -54,6 +86,11 @@ function Message(customerKey, sendID) {
             }
         }
     };
+    /**
+     * Available options
+     * @type {{requestType: string}}
+     * @property {string} requestType The request type. Value can be SYNC or ASYNC (default)
+     */
     this.options = {
         requestType: 'ASYNC'
         /* There are multiple possible options available, but not exposing until we have use cases
@@ -76,7 +113,7 @@ Message.prototype = {
      * Set FROM details
      * @param {string} address Sender email address
      * @param {string} [name] Sender name
-     * @returns {Message}
+     * @returns {module:models/message~Message}
      */
     setFrom: function(address, name) {
         this.from.address = address;
@@ -86,7 +123,7 @@ Message.prototype = {
     /**
      * Set TO details
      * @param {string} address Recipient email address
-     * @returns {Message}
+     * @returns {module:models/message~Message}
      */
     setTo: function(address) {
         this.to.address = address;
@@ -96,7 +133,7 @@ Message.prototype = {
     /**
      * Set ASYNC on/off
      * @param {boolean} isAsync Set true if message should send async
-     * @returns {Message}
+     * @returns {module:models/message~Message}
      */
     setAsync: function(isAsync) {
         this.options.requestType = (isAsync ? 'A' : '') + 'SYNC';
@@ -106,7 +143,7 @@ Message.prototype = {
      * Set a custom subscriber attribute
      * @param {string} key
      * @param {*} value
-     * @returns {Message}
+     * @returns {module:models/message~Message}
      */
     setSubscriberAttribute: function(key, value) {
         this.to.contactAttributes.subscriberAttributes[key] = value;
@@ -114,7 +151,7 @@ Message.prototype = {
     },
     /**
      * Builds up a formatted object for JSON.stringify()
-     * @returns {object}
+     * @returns {Object}
      */
     toJSON: function() {
         return messageToJson(this);
