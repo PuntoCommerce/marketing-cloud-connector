@@ -1,5 +1,5 @@
 %%[
-var @fn, @ln, @phn, @odn, @myq, @com
+var @fn, @ln, @phn, @odn, @myq, @com, @email
 
 SET @fn = AttributeValue("FirstName")
 SET @ln = AttributeValue("LastName")
@@ -7,6 +7,7 @@ SET @phn = AttributeValue("Phone")
 SET @odn = AttributeValue("OrderNumber")
 SET @myq = AttributeValue("MyQuestion")
 SET @com = AttributeValue("Comment")
+SET @email = AttributeValue("CustomerEmailAddress")
 ]%%
 
 <table width="100%" cellpadding="0" cellspacing="0">
@@ -25,7 +26,7 @@ SET @com = AttributeValue("Comment")
                             </p>
 
                             <p>Email:
-                                %%=v(@fn)=%%
+                                %%=v(@email)=%%
                             </p>
 
                             <p>Phone:

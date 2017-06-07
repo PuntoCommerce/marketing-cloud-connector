@@ -32,7 +32,7 @@ function sendTrigger(hookID, promise, data, cb){
     if (promise.isPending()) {
         // Ensure SiteID is provided
         data.SiteID = require('dw/system/Site').current.ID;
-        data.StoreHomeLink = require('dw/web/URLUtils').httpHome();
+        data.StoreHomeLink = require('dw/web/URLUtils').httpHome().toString();
 
         Logger.debug('MC hook {0} executed', hookID);
         var trigger = require(module.cartridge).trigger(hookID);

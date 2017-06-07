@@ -24,7 +24,6 @@ function contactUs(promise, data) {
  */
 function customFromTo(trigger, data) {
     trigger.message.from.name = data.params.CurrentForms.contactus.firstname.value +' '+ data.params.CurrentForms.contactus.lastname.value;
-    trigger.message.to.subscriberKey = trigger.message.from.address;
 }
 
 /**
