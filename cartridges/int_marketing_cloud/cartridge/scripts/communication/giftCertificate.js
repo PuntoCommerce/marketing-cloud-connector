@@ -9,11 +9,12 @@ var hookPath = 'app.communication.giftCertificate.';
 
 /**
  * Trigger a gift certificate notification
+ * @param {SynchronousPromise} promise
  * @param {module:communication/util/trigger~CustomerNotification} data
- * @returns {{status: string}}
+ * @returns {SynchronousPromise}
  */
-function sendCertificate(data) {
-    return sendTrigger(hookPath + 'sendCertificate', data);
+function sendCertificate(promise, data) {
+    return sendTrigger(hookPath + 'sendCertificate', promise, data);
 }
 
 /**
@@ -25,10 +26,10 @@ function triggerDefinitions() {
         sendCertificate: {
             description: 'Send Gift Certificate trigger, used for newly purchased gift certificates',
             attributes: [
-                'GiftCertificate.amount.value',
+                'GiftCertificate.amount',
                 'GiftCertificate.amount.currencyCode',
                 'GiftCertificate.amount.decimalValue',
-                'GiftCertificate.balance.value',
+                'GiftCertificate.balance',
                 'GiftCertificate.balance.currencyCode',
                 'GiftCertificate.balance.decimalValue',
                 'GiftCertificate.description',

@@ -79,6 +79,10 @@ function getTriggerDefinition(hookID, attributes) {
         }
         // build object from array
         if (triggerDefinitions[hookFunction].hasOwnProperty('attributes')) {
+            // force SiteID into all defined attributes
+            triggerDefinitions[hookFunction]['attributes'].unshift('SiteID');
+            triggerDefinitions[hookFunction]['attributes'].unshift('StoreHomeLink');
+
             triggerDefinitions[hookFunction]['attributes'].forEach(function (k) {
                 hookAttributes[k] = '';
             });
@@ -100,32 +104,32 @@ function getTriggerDefinition(hookID, attributes) {
  */
 function getParamValue(attr, data) {
     var value;
-    if (attr.lastIndexOf('.') === -1 && data.hasOwnProperty(attr)) {
-        value = data[attr];
-    } else {
-        var attrs = attr.split('.');
-        var obj = data;
-        attrs.forEach(function(k, i, arr){
-            if (empty(obj) || !helpers.isObject(obj)) {
-                value = obj;
-                return;
-            }
+    var attrs = attr.split('.');
+    var obj = data;
+    attrs.forEach(function(k, i, arr){
+        if (empty(obj) || !helpers.isObject(obj)) {
+            value = obj;
+            return;
+        }
 
-            if (i === 0) {
-                if (k !== 'params' && obj.hasOwnProperty(k)) {
-                    obj = obj[k];
-                } else if (obj.params.hasOwnProperty(k)) {
-                    obj = obj.params[k];
-                }
-            } else {
-                if (k in obj) {
-                    obj = obj[k];
-                }
+        if (i === 0) {
+            if (k !== 'params' && obj.hasOwnProperty(k)) {
+                obj = obj[k];
+            } else if (obj.params.hasOwnProperty(k)) {
+                obj = obj.params[k];
             }
-            if (i === arr.length-1) {
-                value = helpers.dwValue(obj);
+        } else {
+            if (k in obj) {
+                obj = obj[k];
             }
-        });
+        }
+        if (i === arr.length-1) {
+            value = helpers.dwValue(obj);
+        }
+    });
+    if (typeof(value) === 'boolean') {
+        // convert to 0/1
+        value = value ? 1 : 0;
     }
     return value;
 }

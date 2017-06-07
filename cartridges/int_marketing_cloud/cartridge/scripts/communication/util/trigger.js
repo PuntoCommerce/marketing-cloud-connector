@@ -5,6 +5,7 @@
  */
 
 var Mail = require('dw/net/Mail');
+var Logger = require('dw/system/Logger');
 
 /**
  * @typedef {Object} CustomerNotification
@@ -20,19 +21,35 @@ var Mail = require('dw/net/Mail');
 
 /**
  * Trigger a customer notification
+ * Resolves promise with a {{status: string}} Response object. At a minimum it should contain a status string: OK= indicates success, ERROR= indicates failure, anything else also indicates failure
  * @param {string} hookID
+ * @param {SynchronousPromise} promise
  * @param {module:communication/util/trigger~CustomerNotification} data
- * @returns {{status: string}} Response object. At a minimum it should contain a status string: OK= indicates success, ERROR= indicates failure, anything else also indicates failure
+ * @param {Function} [cb] Optional callback, is called with the created trigger instance and the data object
+ * @returns {SynchronousPromise}
  */
-function sendTrigger(hookID, data){
-    var trigger = require(module.cartridge).trigger(hookID);
-    trigger.newMessage(data);
+function sendTrigger(hookID, promise, data, cb){
+    if (promise.isPending()) {
+        // Ensure SiteID is provided
+        data.SiteID = require('dw/system/Site').current.ID;
+        data.StoreHomeLink = require('dw/web/URLUtils').httpHome();
 
-    var result = trigger.send();
+        Logger.debug('MC hook {0} executed', hookID);
+        var trigger = require(module.cartridge).trigger(hookID);
+        trigger.newMessage(data);
 
-    return {
-        status: result.ok ? 'OK' : 'ERROR'
-    };
+        if (cb && typeof(cb) === 'function') {
+            cb(trigger, data);
+        }
+
+        var result = trigger.send();
+
+        var obj = {
+            status: result.ok ? 'OK' : 'ERROR'
+        };
+        promise.resolve(obj);
+    }
+    return promise;
 }
 
 exports.sendTrigger = sendTrigger;

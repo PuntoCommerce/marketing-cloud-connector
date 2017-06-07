@@ -304,7 +304,14 @@ ServiceRegistry.configure('marketingcloud.rest.messaging.send', {
 
         return JSON.stringify(message);
     },
-    parseResponse : parseResponse,
+    parseResponse : function(svc, client){
+        var obj = parseResponse(svc, client);
+        // Location value is used for deliveryRecord check
+        obj.location = client.getResponseHeader('Location');
+        obj.requestId = client.getResponseHeader('X-Mashery-Message-ID');
+        Logger.debug('Message response: {0}', JSON.stringify(obj));
+        return obj;
+    },
     mockCall: function (/*svc, client*/) {
         var obj = {
             "requestId": "f04952b5-49ae-4d66-90a4-c65be553db1f",
@@ -379,6 +386,53 @@ ServiceRegistry.configure('marketingcloud.rest.messaging.deliveryRecords', {
         return {
             statusCode: 200,
             statusMessage: 'Success',
+            text: JSON.stringify(obj)
+        };
+    }
+});
+
+/**
+ * Section: Interaction
+ * Name: Post Event
+ * Documentation: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-apis.meta/mc-apis/postEvent.htm
+ * Endpoint: /interaction/v1/events
+ * Method: POST
+ * Content Type: JSON
+ * Request Headers: Authorization
+ * Request Args: -
+ */
+ServiceRegistry.configure('marketingcloud.rest.interaction.events', {
+    /**
+     * Create request for posting an event
+     * @param {external:dw/svc/HTTPService} svc
+     * @param {module:models/event~Event} event An event model instance to be sent to Marketing Cloud
+     * @returns {string} Request body
+     */
+    createRequest: function(svc, event) {
+        var svcURL = svc.getConfiguration().credential.URL,
+            svcPath = '/interaction/v1/events';
+
+        setAuthHeader(svc);
+
+        svc.addHeader('Accept', 'application/json');
+
+        svc.setURL(svcURL + svcPath);
+
+        return JSON.stringify(message);
+    },
+    parseResponse : parseResponse,
+    mockCall: function (/*svc, client*/) {
+        var obj = {
+            "requestId": "f04952b5-49ae-4d66-90a4-c65be553db1f",
+            "responses": [
+                {
+                    "eventInstanceId": "f04952b5-49ae-4d66-90a4-c65be553db1f"
+                }
+            ]
+        };
+        return {
+            statusCode: 202,
+            statusMessage: 'Accepted',
             text: JSON.stringify(obj)
         };
     }

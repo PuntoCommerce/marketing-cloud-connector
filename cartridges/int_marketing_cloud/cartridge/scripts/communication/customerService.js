@@ -9,12 +9,22 @@ var hookPath = 'app.communication.customerService.';
 
 /**
  * Trigger a customer service notification
- * @todo Perform some logic to override sender & recipient email values
+ * @param {SynchronousPromise} promise
  * @param {module:communication/util/trigger~CustomerNotification} data
- * @returns {{status: string}}
+ * @returns {SynchronousPromise}
  */
-function contactUs(data) {
-    return sendTrigger(hookPath + 'contactUs', data);
+function contactUs(promise, data) {
+    return sendTrigger(hookPath + 'contactUs', promise, data, customFromTo);
+}
+
+/**
+ * Override the trigger message from/to values
+ * @param {module:models/trigger~Trigger} trigger
+ * @param {module:communication/util/trigger~CustomerNotification} data
+ */
+function customFromTo(trigger, data) {
+    trigger.message.from.name = data.params.CurrentForms.contactus.firstname.value +' '+ data.params.CurrentForms.contactus.lastname.value;
+    trigger.message.to.subscriberKey = trigger.message.from.address;
 }
 
 /**

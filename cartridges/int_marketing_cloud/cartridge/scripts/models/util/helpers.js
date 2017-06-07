@@ -40,7 +40,7 @@ function dwValue(obj) {
     } else if (obj instanceof (require('dw/value/EnumValue'))) {
         return obj.displayValue;
     } else if (obj instanceof (require('dw/value/Money'))) {
-        return obj.valueOrNull;
+        return require('dw/util/StringUtils').formatMoney(obj);
     } else if (obj instanceof (require('dw/util/Decimal'))) {
         return obj.valueOf();
     } else if (obj instanceof (require('dw/util/Calendar'))) {
