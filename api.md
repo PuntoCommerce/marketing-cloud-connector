@@ -12,6 +12,7 @@ Module | Description
 [init/bootstrap](#markdown-header-initbootstrap) | 
 [init/rest](#markdown-header-initrest) | 
 [models/authToken](#markdown-header-modelsauthtoken) | 
+[models/event](#markdown-header-modelsevent) | 
 [models/message](#markdown-header-modelsmessage) | 
 [models/trigger](#markdown-header-modelstrigger) | 
 [models/util/helpers](#markdown-header-modelsutilhelpers) | 
@@ -21,56 +22,73 @@ Module | Description
 ## communication/account
 
 * [communication/account](#markdown-header-communicationaccount)
-    * [~created(data)](#markdown-header-communicationaccountcreateddata-object) ⇒ Object
-    * [~updated(data)](#markdown-header-communicationaccountupdateddata-object) ⇒ Object
-    * [~passwordChanged(data)](#markdown-header-communicationaccountpasswordchangeddata-object) ⇒ Object
-    * [~passwordReset(data)](#markdown-header-communicationaccountpasswordresetdata-object) ⇒ Object
-    * [~lockedOut(data)](#markdown-header-communicationaccountlockedoutdata-object) ⇒ Object
+    * [~sendTrigger(hookID, promise, data)](#markdown-header-communicationaccountsendtriggerhookid-promise-data-synchronouspromise) ⇒ SynchronousPromise
+    * [~created(promise, data)](#markdown-header-communicationaccountcreatedpromise-data-synchronouspromise) ⇒ SynchronousPromise
+    * [~updated(promise, data)](#markdown-header-communicationaccountupdatedpromise-data-synchronouspromise) ⇒ SynchronousPromise
+    * [~passwordChanged(promise, data)](#markdown-header-communicationaccountpasswordchangedpromise-data-synchronouspromise) ⇒ SynchronousPromise
+    * [~passwordReset(promise, data)](#markdown-header-communicationaccountpasswordresetpromise-data-synchronouspromise) ⇒ SynchronousPromise
+    * [~lockedOut(promise, data)](#markdown-header-communicationaccountlockedoutpromise-data-synchronouspromise) ⇒ SynchronousPromise
     * [~triggerDefinitions()](#markdown-header-communicationaccounttriggerdefinitions-object) ⇒ Object
 
-### communication/account~created(data) ⇒ Object
+### communication/account~sendTrigger(hookID, promise, data) ⇒ SynchronousPromise
+Wrapper to trigger.sendTrigger() to allow common variable injection for all hooks in the file
+
+**Kind**: inner method of [communication/account](#markdown-header-communicationaccount)  
+
+| Param |
+| --- |
+| hookID | 
+| promise | 
+| data | 
+
+### communication/account~created(promise, data) ⇒ SynchronousPromise
 Trigger account created notification
 
 **Kind**: inner method of [communication/account](#markdown-header-communicationaccount)  
 
 | Param | Type |
 | --- | --- |
+| promise | SynchronousPromise | 
 | data | CustomerNotification | 
 
-### communication/account~updated(data) ⇒ Object
+### communication/account~updated(promise, data) ⇒ SynchronousPromise
 Trigger account updated notification
 
 **Kind**: inner method of [communication/account](#markdown-header-communicationaccount)  
 
 | Param | Type |
 | --- | --- |
+| promise | SynchronousPromise | 
 | data | CustomerNotification | 
 
-### communication/account~passwordChanged(data) ⇒ Object
+### communication/account~passwordChanged(promise, data) ⇒ SynchronousPromise
 Trigger password changed notification
 
 **Kind**: inner method of [communication/account](#markdown-header-communicationaccount)  
 
 | Param | Type |
 | --- | --- |
+| promise | SynchronousPromise | 
 | data | CustomerNotification | 
 
-### communication/account~passwordReset(data) ⇒ Object
+### communication/account~passwordReset(promise, data) ⇒ SynchronousPromise
 Trigger password reset notification
 
 **Kind**: inner method of [communication/account](#markdown-header-communicationaccount)  
 
 | Param | Type |
 | --- | --- |
+| promise | SynchronousPromise | 
 | data | CustomerNotification | 
 
-### communication/account~lockedOut(data) ⇒ Object
+### communication/account~lockedOut(promise, data) ⇒ SynchronousPromise
 Trigger account locked out notification
 
 **Kind**: inner method of [communication/account](#markdown-header-communicationaccount)  
 
 | Param | Type |
 | --- | --- |
+| promise | SynchronousPromise | 
 | data | CustomerNotification | 
 
 ### communication/account~triggerDefinitions() ⇒ Object
@@ -81,20 +99,28 @@ Declares attributes available for data mapping configuration
 ## communication/customerService
 
 * [communication/customerService](#markdown-header-communicationcustomerservice)
-    * [~contactUs(data)](#markdown-header-communicationcustomerservicecontactusdata-object) ⇒ Object
+    * [~contactUs(promise, data)](#markdown-header-communicationcustomerservicecontactuspromise-data-synchronouspromise) ⇒ SynchronousPromise
+    * [~customFromTo(trigger, data)](#markdown-header-communicationcustomerservicecustomfromtotrigger-data)
     * [~triggerDefinitions()](#markdown-header-communicationcustomerservicetriggerdefinitions-object) ⇒ Object
 
-### communication/customerService~contactUs(data) ⇒ Object
+### communication/customerService~contactUs(promise, data) ⇒ SynchronousPromise
 Trigger a customer service notification
 
 **Kind**: inner method of [communication/customerService](#markdown-header-communicationcustomerservice)  
-**Todo**
-
-- [ ] Perform some logic to override sender & recipient email values
-
 
 | Param | Type |
 | --- | --- |
+| promise | SynchronousPromise | 
+| data | CustomerNotification | 
+
+### communication/customerService~customFromTo(trigger, data)
+Override the trigger message from/to values
+
+**Kind**: inner method of [communication/customerService](#markdown-header-communicationcustomerservice)  
+
+| Param | Type |
+| --- | --- |
+| trigger | Trigger | 
 | data | CustomerNotification | 
 
 ### communication/customerService~triggerDefinitions() ⇒ Object
@@ -105,16 +131,17 @@ Declares attributes available for data mapping configuration
 ## communication/giftCertificate
 
 * [communication/giftCertificate](#markdown-header-communicationgiftcertificate)
-    * [~sendCertificate(data)](#markdown-header-communicationgiftcertificatesendcertificatedata-object) ⇒ Object
+    * [~sendCertificate(promise, data)](#markdown-header-communicationgiftcertificatesendcertificatepromise-data-synchronouspromise) ⇒ SynchronousPromise
     * [~triggerDefinitions()](#markdown-header-communicationgiftcertificatetriggerdefinitions-object) ⇒ Object
 
-### communication/giftCertificate~sendCertificate(data) ⇒ Object
+### communication/giftCertificate~sendCertificate(promise, data) ⇒ SynchronousPromise
 Trigger a gift certificate notification
 
 **Kind**: inner method of [communication/giftCertificate](#markdown-header-communicationgiftcertificate)  
 
 | Param | Type |
 | --- | --- |
+| promise | SynchronousPromise | 
 | data | CustomerNotification | 
 
 ### communication/giftCertificate~triggerDefinitions() ⇒ Object
@@ -135,16 +162,17 @@ Register communication handler
 ## communication/order
 
 * [communication/order](#markdown-header-communicationorder)
-    * [~confirmation(data)](#markdown-header-communicationorderconfirmationdata-object) ⇒ Object
+    * [~confirmation(promise, data)](#markdown-header-communicationorderconfirmationpromise-data-synchronouspromise) ⇒ SynchronousPromise
     * [~triggerDefinitions()](#markdown-header-communicationordertriggerdefinitions-object) ⇒ Object
 
-### communication/order~confirmation(data) ⇒ Object
+### communication/order~confirmation(promise, data) ⇒ SynchronousPromise
 Trigger an order confirmation notification
 
 **Kind**: inner method of [communication/order](#markdown-header-communicationorder)  
 
 | Param | Type |
 | --- | --- |
+| promise | SynchronousPromise | 
 | data | CustomerNotification | 
 
 ### communication/order~triggerDefinitions() ⇒ Object
@@ -155,19 +183,21 @@ Declares attributes available for data mapping configuration
 ## communication/util/trigger
 
 * [communication/util/trigger](#markdown-header-communicationutiltrigger)
-    * [~sendTrigger(hookID, data)](#markdown-header-communicationutiltriggersendtriggerhookid-data-object) ⇒ Object
+    * [~sendTrigger(hookID, promise, data, [cb])](#markdown-header-communicationutiltriggersendtriggerhookid-promise-data-cb-synchronouspromise) ⇒ SynchronousPromise
     * [~CustomerNotification](#markdown-header-communicationutiltriggercustomernotification-object) : Object
 
-### communication/util/trigger~sendTrigger(hookID, data) ⇒ Object
+### communication/util/trigger~sendTrigger(hookID, promise, data, [cb]) ⇒ SynchronousPromise
 Trigger a customer notification
+Resolves promise with a {{status: string}} Response object. At a minimum it should contain a status string: OK= indicates success, ERROR= indicates failure, anything else also indicates failure
 
 **Kind**: inner method of [communication/util/trigger](#markdown-header-communicationutiltrigger)  
-**Returns**: Object - Response object. At a minimum it should contain a status string: OK= indicates success, ERROR= indicates failure, anything else also indicates failure  
 
-| Param | Type |
-| --- | --- |
-| hookID | string | 
-| data | CustomerNotification | 
+| Param | Type | Description |
+| --- | --- | --- |
+| hookID | string |  |
+| promise | SynchronousPromise |  |
+| data | CustomerNotification |  |
+| [cb] | function | Optional callback, is called with the created trigger instance and the data object |
 
 ### communication/util/trigger~CustomerNotification : Object
 **Kind**: inner typedef of [communication/util/trigger](#markdown-header-communicationutiltrigger)  
@@ -221,6 +251,7 @@ Initializes trigger configurations
     * [~createRequest(svc)](#markdown-header-initrestcreaterequestsvc)
     * [~createRequest(svc, message)](#markdown-header-initrestcreaterequestsvc-message-string) ⇒ string
     * [~createRequest(svc, sendID, customerKey, recipientSendID)](#markdown-header-initrestcreaterequestsvc-sendid-customerkey-recipientsendid)
+    * [~createRequest(svc, event)](#markdown-header-initrestcreaterequestsvc-event-string) ⇒ string
 
 ### init/rest~ServiceRegistry
 Marketing Cloud Connector
@@ -317,6 +348,17 @@ Create request for viewing delivery records
 | customerKey | 
 | recipientSendID | 
 
+### init/rest~createRequest(svc, event) ⇒ string
+Create request for posting an event
+
+**Kind**: inner method of [init/rest](#markdown-header-initrest)  
+**Returns**: string - Request body  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| svc | dw/svc/HTTPService |  |
+| event | Event | An event model instance to be sent to Marketing Cloud |
+
 ## models/authToken
 
 * [models/authToken](#markdown-header-modelsauthtoken)
@@ -378,6 +420,93 @@ Puts token into custom object storage
 | Param | Type | Description |
 | --- | --- | --- |
 | obj | Object | A plain JS object with the token |
+
+## models/event
+
+* [models/event](#markdown-header-modelsevent)
+    * [~Event](#markdown-header-modelseventevent)
+        * [new Event(contactKey, eventKey)](#markdown-header-new-eventcontactkey-eventkey)
+        * [.contactKey](#markdown-header-contactkey) : [string](#markdown-header-string)
+        * [.eventDefinitionKey](#markdown-header-eventdefinitionkey) : [string](#markdown-header-string)
+        * [.establishContactKey](#markdown-header-establishcontactkey) : [boolean](#markdown-header-boolean)
+        * [.data](#markdown-header-data) : [Object](#markdown-header-object)
+        * [.setEstablishContactKey(enabled)](#markdown-header-setestablishcontactkey) ⇒ [Event](#markdown-header-event)
+        * [.setDataAttribute(key, value)](#markdown-header-setdataattribute) ⇒ [Event](#markdown-header-event)
+        * [.toJSON()](#markdown-header-tojson) ⇒ [Object](#markdown-header-object)
+    * [~messageToJson(obj)](#markdown-header-modelseventmessagetojsonobj-object) ⇒ Object
+
+### models/event~Event
+**Kind**: inner class of [models/event](#markdown-header-modelsevent)  
+
+* [~Event](#markdown-header-modelseventevent)
+    * [new Event(contactKey, eventKey)](#markdown-header-new-eventcontactkey-eventkey)
+    * [.contactKey](#markdown-header-contactkey) : [string](#markdown-header-string)
+    * [.eventDefinitionKey](#markdown-header-eventdefinitionkey) : [string](#markdown-header-string)
+    * [.establishContactKey](#markdown-header-establishcontactkey) : [boolean](#markdown-header-boolean)
+    * [.data](#markdown-header-data) : [Object](#markdown-header-object)
+    * [.setEstablishContactKey(enabled)](#markdown-header-setestablishcontactkey) ⇒ [Event](#markdown-header-event)
+    * [.setDataAttribute(key, value)](#markdown-header-setdataattribute) ⇒ [Event](#markdown-header-event)
+    * [.toJSON()](#markdown-header-tojson) ⇒ [Object](#markdown-header-object)
+
+#### new Event(contactKey, eventKey)
+Event class
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| contactKey | string | The ID that uniquely identifies a subscriber/contact |
+| eventKey | string | The EventDefinitionKey in Event Administration after the event is created and saved |
+
+#### event.contactKey : [string](#markdown-header-string)
+Contact key
+
+**Kind**: instance property of [Event](#markdown-header-new-eventcontactkey-eventkey)  
+#### event.eventDefinitionKey : [string](#markdown-header-string)
+Event definition key
+
+**Kind**: instance property of [Event](#markdown-header-new-eventcontactkey-eventkey)  
+#### event.establishContactKey : [boolean](#markdown-header-boolean)
+Whether to add contact key to contact model
+
+**Kind**: instance property of [Event](#markdown-header-new-eventcontactkey-eventkey)  
+#### event.data : [Object](#markdown-header-object)
+Data object
+Properties of the event. Only required if defined in a custom event or by the event.
+
+**Kind**: instance property of [Event](#markdown-header-new-eventcontactkey-eventkey)  
+#### event.setEstablishContactKey(enabled) ⇒ [Event](#markdown-header-event)
+If true, the contact key is automatically added to the contact model if it isn't already included, making
+it available to be injected into the journey. Default is true.
+
+**Kind**: instance method of [Event](#markdown-header-new-eventcontactkey-eventkey)  
+
+| Param | Type |
+| --- | --- |
+| enabled | boolean | 
+
+#### event.setDataAttribute(key, value) ⇒ [Event](#markdown-header-event)
+Set a data attribute
+
+**Kind**: instance method of [Event](#markdown-header-new-eventcontactkey-eventkey)  
+
+| Param | Type |
+| --- | --- |
+| key | string | 
+| value | * | 
+
+#### event.toJSON() ⇒ [Object](#markdown-header-object)
+Builds up a formatted object for JSON.stringify()
+
+**Kind**: instance method of [Event](#markdown-header-new-eventcontactkey-eventkey)  
+### models/event~messageToJson(obj) ⇒ Object
+Recursive method to handle Event during JSON.stringify().
+Used to ensure exported JSON is webservice compatible
+
+**Kind**: inner method of [models/event](#markdown-header-modelsevent)  
+
+| Param | Type |
+| --- | --- |
+| obj | [Event](#markdown-header-new-eventcontactkey-eventkey) ⎮ Object | 
 
 ## models/message
 
@@ -646,12 +775,22 @@ Registry object
 
 * [int_marketing_cloud](#markdown-header-int_marketing_cloud-object) : Object
     * [.authToken()](#markdown-header-int_marketing_cloudauthtoken-modulemodelsauthtokenauthtoken) ⇒ AuthToken
+    * [.event(contactKey, eventKey)](#markdown-header-int_marketing_cloudeventcontactkey-eventkey-modulemodelseventevent) ⇒ Event
     * [.message(customerKey, sendID)](#markdown-header-int_marketing_cloudmessagecustomerkey-sendid-modulemodelsmessagemessage) ⇒ Message
     * [.trigger(hookID)](#markdown-header-int_marketing_cloudtriggerhookid-modulemodelstriggertrigger) ⇒ Trigger
 
 ### int_marketing_cloud.authToken() ⇒ AuthToken
 **Kind**: static method of [int_marketing_cloud](#markdown-header-int_marketing_cloud-object)  
 **Returns**: [AuthToken](#markdown-header-new-authtoken) - Instance of AuthToken  
+### int_marketing_cloud.event(contactKey, eventKey) ⇒ Event
+**Kind**: static method of [int_marketing_cloud](#markdown-header-int_marketing_cloud-object)  
+**Returns**: [Event](#markdown-header-new-eventcontactkey-eventkey) - Instance of Event  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| contactKey | string | The ID that uniquely identifies a subscriber/contact |
+| eventKey | string | The EventDefinitionKey in Event Administration after the event is created and saved |
+
 ### int_marketing_cloud.message(customerKey, sendID) ⇒ Message
 **Kind**: static method of [int_marketing_cloud](#markdown-header-int_marketing_cloud-object)  
 **Returns**: [Message](#markdown-header-new-messagecustomerkey-sendid) - Instance of Message  
