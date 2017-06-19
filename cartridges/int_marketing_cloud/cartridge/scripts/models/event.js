@@ -40,6 +40,7 @@ function messageToJson(obj) {
  * @param {string} contactKey The ID that uniquely identifies a subscriber/contact
  * @param {string} eventKey The EventDefinitionKey in Event Administration after the event is created and saved
  * @constructor
+ * @alias module:models/event~Event
  */
 function Event(contactKey, eventKey) {
     if (empty(contactKey) || empty(eventKey)) {

@@ -21,6 +21,9 @@ var	Registry = {
      * @returns {module:models/authToken~AuthToken} Instance of AuthToken
      */
     authToken : function () {
+        /**
+         * @type {module:models/authToken~AuthToken}
+         */
         var model = require(path +'models/authToken');
         return new model();
     },
@@ -30,8 +33,22 @@ var	Registry = {
      * @returns {module:models/event~Event} Instance of Event
      */
     event : function (contactKey, eventKey) {
+        /**
+         * @type {module:models/event~Event}
+         */
         var model = require(path +'models/event');
         return new model(contactKey, eventKey);
+    },
+    /**
+     * @param {string} exportID The data export ID
+     * @returns {module:models/dataExport~DataExport} Instance of DataExport
+     */
+    dataExport : function (exportID) {
+        /**
+         * @type {module:models/dataExport~DataExport}
+         */
+        var model = require(path +'models/dataExport');
+        return new model(exportID);
     },
     /**
      * @param {string} customerKey CustomerKey of the entry event send definition. Either this or the SendID is required.
@@ -39,14 +56,20 @@ var	Registry = {
      * @returns {module:models/message~Message} Instance of Message
      */
     message : function (customerKey, sendID) {
+        /**
+         * @type {module:models/message~Message}
+         */
         var model = require(path +'models/message');
         return new model(customerKey, sendID);
     },
     /**
      * @param {string} hookID The trigger hook ID
-     * @returns {module:models/trigger~Trigger}
+     * @returns {module:models/trigger~Trigger} Instance of Trigger
      */
     trigger : function (hookID) {
+        /**
+         * @type {module:models/trigger~Trigger}
+         */
         var model = require(path +'models/trigger');
         return new model(hookID);
     }

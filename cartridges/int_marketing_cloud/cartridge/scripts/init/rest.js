@@ -22,10 +22,13 @@ var Logger = require('dw/system/Logger');
 
 /**
  * Inserts auth token into request header
- * @param {external:dw/svc/HTTPService} svc
+ * @param {dw/svc/HTTPService|dw.svc.HTTPService} svc
  * @throws {Error} Throws error when no valid auth token is available (i.e.- service error, service down)
  */
 function setAuthHeader(svc) {
+    /**
+     * @type {module:models/authToken~AuthToken}
+     */
     var authToken = require('int_marketing_cloud').authToken();
     var token = authToken.getValidToken();
 
@@ -39,7 +42,7 @@ function setAuthHeader(svc) {
 
 /**
  * Check if 401 due to expired token
- * @param {external:dw/net/HTTPClient} client
+ * @param {dw/svc/HTTPService|dw.svc.HTTPService} client
  * @returns {boolean} true if expired auth token
  */
 function isValid401(client) {
@@ -56,7 +59,7 @@ function isValid401(client) {
 
 /**
  * Check if response type is JSON
- * @param {external:dw/net/HTTPClient} client
+ * @param {dw/svc/HTTPService|dw.svc.HTTPService} client
  * @returns {boolean}
  */
 function isResponseJSON(client) {
@@ -66,8 +69,8 @@ function isResponseJSON(client) {
 
 /**
  * Parses response JSON and wraps with an object containing additional helper properties
- * @param {external:dw/svc/HTTPService} svc
- * @param {external:dw/net/HTTPClient} client
+ * @param {dw/svc/HTTPService|dw.svc.HTTPService} svc
+ * @param {dw/svc/HTTPService|dw.svc.HTTPService} client
  * @returns {{responseObj, isAuthError: boolean, isValidJSON: boolean}}
  */
 function parseResponse(svc, client) {
@@ -103,7 +106,7 @@ function parseResponse(svc, client) {
 ServiceRegistry.configure('marketingcloud.rest.auth', {
     /**
      * Create request for service authentication
-     * @param {external:dw/svc/HTTPService} svc
+     * @param {dw/svc/HTTPService|dw.svc.HTTPService} svc
      * @throws {Error} Throws error when service credentials are missing
      * @todo Switch credentials based on site suffix, fall back on a default
      */
@@ -282,7 +285,7 @@ ServiceRegistry.configure('marketingcloud.rest.platform.tokenContext', {
 ServiceRegistry.configure('marketingcloud.rest.messaging.send', {
     /**
      * Create request for sending an email
-     * @param {external:dw/svc/HTTPService} svc
+     * @param {dw/svc/HTTPService|dw.svc.HTTPService} svc
      * @param {module:models/message~Message} message A message model instance to be sent to Marketing Cloud
      * @returns {string} Request body
      */
@@ -404,7 +407,7 @@ ServiceRegistry.configure('marketingcloud.rest.messaging.deliveryRecords', {
 ServiceRegistry.configure('marketingcloud.rest.interaction.events', {
     /**
      * Create request for posting an event
-     * @param {external:dw/svc/HTTPService} svc
+     * @param {dw/svc/HTTPService|dw.svc.HTTPService} svc
      * @param {module:models/event~Event} event An event model instance to be sent to Marketing Cloud
      * @returns {string} Request body
      */
@@ -437,12 +440,3 @@ ServiceRegistry.configure('marketingcloud.rest.interaction.events', {
         };
     }
 });
-
-/**
- * @external dw/svc/HTTPService
- * @see https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_svc_HTTPService.html
- */
-/**
- * @external dw/net/HTTPClient
- * @see https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_net_HTTPClient.html
- */

@@ -28,10 +28,40 @@ function messageToJson(obj) {
                     break;
             }
 
-            if (obj[prop] && helpers.isObject(obj[prop]) && prop !== 'subscriberAttributes') {
-                newObject[ucprop] = messageToJson(obj[prop]);
+            if (obj[prop] && helpers.isObject(obj[prop])) {
+                if (prop === 'subscriberAttributes') {
+                    newObject[ucprop] = convertValues(obj[prop]);
+                } else {
+                    newObject[ucprop] = messageToJson(obj[prop]);
+                }
             } else {
                 newObject[ucprop] = obj[prop];
+            }
+        }
+    }
+    return newObject;
+}
+
+/**
+ * Handle value type conversion for Message
+ * @param {Object} obj
+ * @returns {Object}
+ */
+function convertValues(obj) {
+    var newObject = {};
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+            switch(typeof(obj[prop])) {
+                case 'boolean':
+                    newObject[prop] = obj[prop] ? 1 : 0;
+                    break;
+                default:
+                    if (obj[prop] && helpers.isObject(obj[prop])) {
+                        newObject[prop] = convertValues(obj[prop]);
+                    } else {
+                        newObject[prop] = obj[prop];
+                    }
+                    break;
             }
         }
     }
@@ -43,6 +73,7 @@ function messageToJson(obj) {
  * @param {string} customerKey CustomerKey of the entry event send definition. Either this or the SendID is required.
  * @param {string} [sendID] ID of the entry event send definition. Either this or the customer key is required.
  * @constructor
+ * @alias module:models/message~Message
  */
 function Message(customerKey, sendID) {
     if (empty(sendID) && empty(customerKey)) {

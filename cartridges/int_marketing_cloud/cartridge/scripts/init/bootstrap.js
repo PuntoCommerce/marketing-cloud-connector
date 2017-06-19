@@ -2,7 +2,6 @@
 
 /**
  * @module init/bootstrap
- * @todo Consider moving away from INIT approach, and using on-hook-demand or job-based init
  */
 
 /**
@@ -29,4 +28,4 @@ function initTriggers() {
     });
 }
 
-initTriggers();
+exports.initTriggers = initTriggers;

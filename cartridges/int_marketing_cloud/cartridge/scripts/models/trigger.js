@@ -13,53 +13,6 @@ var customObjectName = 'MarketingCloudTriggers';
 var helpers = require('./util/helpers');
 
 /**
- * Fetches trigger definition from Custom Object
- * @param {string} hookID
- * @returns {external:dw/object/CustomAttributes}
- */
-function getTriggerDefinitionObject(hookID) {
-    var com = require('dw/object/CustomObjectMgr'),
-        triggerDef = com.getCustomObject(customObjectName, hookID);
-    if (empty(triggerDef)) {
-        require('dw/system/Transaction').wrap(function(){
-            triggerDef = com.createCustomObject(customObjectName, hookID);
-        });
-    }
-    return triggerDef.getCustom();
-}
-
-/**
- * Merges attribute JS objects in place, preserving old values
- * @param {Object} newAttributes
- * @param {Object} oldAttributes
- */
-function mergeAttributes(newAttributes, oldAttributes) {
-    if (oldAttributes) {
-        for (var attribute in oldAttributes) {
-            if (oldAttributes.hasOwnProperty(attribute)) {
-                newAttributes[attribute] = oldAttributes[attribute];
-            }
-        }
-    }
-}
-
-/**
- * Expands Subscriber Attributes from JSON definition
- * @param {external:dw/object/CustomAttributes} definition
- * @returns {Object}
- */
-function expandAttributes(definition) {
-    var attributes = definition.subscriberAttributes;
-    try {
-        attributes = attributes ? JSON.parse(attributes) : {};
-    } catch(e) {
-        // Catch exception from invalid JSON
-        attributes = {};
-    }
-    return attributes;
-}
-
-/**
  * Returns trigger definition for a hook
  * @param {string} hookID
  * @param {Object} attributes
@@ -72,6 +25,7 @@ function getTriggerDefinition(hookID, attributes) {
 
     var description = '';
     var hookAttributes = {};
+    dw.system.Logger.debug('hookFile: {0}', hookFile);
     var triggerDefinitions = require('../communication/'+ hookFile).triggerDefinitions();
     if (triggerDefinitions && triggerDefinitions.hasOwnProperty(hookFunction)) {
         if (triggerDefinitions[hookFunction].hasOwnProperty('description')) {
@@ -88,7 +42,7 @@ function getTriggerDefinition(hookID, attributes) {
             });
         }
     }
-    mergeAttributes(hookAttributes, attributes);
+    helpers.mergeAttributes(hookAttributes, attributes);
 
     return {
         description: description,
@@ -97,46 +51,8 @@ function getTriggerDefinition(hookID, attributes) {
 }
 
 /**
- * Returns parameter value from data (uses recursion)
- * @param {string} attr Period-delimited path to a parameter
- * @param {Object} data
- * @returns {*}
- */
-function getParamValue(attr, data) {
-    var value;
-    var attrs = attr.split('.');
-    var obj = data;
-    attrs.forEach(function(k, i, arr){
-        if (empty(obj) || !helpers.isObject(obj)) {
-            value = obj;
-            return;
-        }
-
-        if (i === 0) {
-            if (k !== 'params' && obj.hasOwnProperty(k)) {
-                obj = obj[k];
-            } else if (obj.params.hasOwnProperty(k)) {
-                obj = obj.params[k];
-            }
-        } else {
-            if (k in obj) {
-                obj = obj[k];
-            }
-        }
-        if (i === arr.length-1) {
-            value = helpers.dwValue(obj);
-        }
-    });
-    if (typeof(value) === 'boolean') {
-        // convert to 0/1
-        value = value ? 1 : 0;
-    }
-    return value;
-}
-
-/**
  * Rebuilds trigger definition in Custom Object
- * @alias module:models/trigger.Trigger#rebuild
+ * @alias module:models/trigger~Trigger#rebuild
  */
 function rebuildTriggerDefinition() {
     var tx = require('dw/system/Transaction');
@@ -159,7 +75,7 @@ function rebuildTriggerDefinition() {
  * Returns a new Message instance
  * @param {module:communication/util/trigger~CustomerNotification} data Data to populate the Message with.
  * @returns {module:models/message~Message}
- * @alias module:models/trigger.Trigger#newMessage
+ * @alias module:models/trigger~Trigger#newMessage
  */
 function newMessage(data){
     var messageModel = require('./message');
@@ -168,17 +84,7 @@ function newMessage(data){
     var toEmail = Array.isArray(data.toEmail) ? data.toEmail[0] : data.toEmail;
     msg.setFrom(data.fromEmail).setTo(toEmail);
 
-    for (var attr in this.attributes) {
-        if (this.attributes.hasOwnProperty(attr) && !empty(this.attributes[attr])) {
-            if (Array.isArray(this.attributes[attr])) {
-                this.attributes[attr].forEach(function(a){
-                    msg.setSubscriberAttribute(a, getParamValue(attr, data));
-                });
-            } else {
-                msg.setSubscriberAttribute(this.attributes[attr], getParamValue(attr, data));
-            }
-        }
-    }
+    helpers.mapValues(this.attributes, data, msg.setSubscriberAttribute);
     this.message = msg;
 
     return this.message;
@@ -186,8 +92,8 @@ function newMessage(data){
 
 /**
  * Sends a trigger message
- * @returns {external:dw/svc/Result}
- * @alias module:models/trigger.Trigger#send
+ * @returns {dw/svc/Result|dw.svc.Result}
+ * @alias module:models/trigger~Trigger#send
  */
 function sendMessage() {
     if (!this.isEnabled()) {
@@ -200,6 +106,9 @@ function sendMessage() {
         throw new Error('A new message needs to be created first, using newMessage()');
     }
 
+    /**
+     * @type {dw/svc/Service|dw.svc.Service}
+     */
     var msgSvc = require('dw/svc/ServiceRegistry').get('marketingcloud.rest.messaging.send');
     return msgSvc.call(this.message);
 }
@@ -208,6 +117,7 @@ function sendMessage() {
  * Trigger constructor
  * @param {string} hookID
  * @constructor
+ * @alias module:models/trigger~Trigger
  */
 function Trigger(hookID) {
     /**
@@ -217,48 +127,41 @@ function Trigger(hookID) {
     this.hookID = hookID;
     /**
      * Definition object
-     * @type {external:dw/object/CustomAttributes}
+     * @type {dw/object/CustomAttributes|dw.object.CustomAttributes}
      */
-    this.definition = getTriggerDefinitionObject(hookID);
+    this.definition = helpers.getCustomObject(customObjectName, hookID);
     /**
      * Expanded attributes from trigger definition
      * @type {Object}
      */
-    this.attributes = expandAttributes(this.definition);
+    this.attributes = helpers.expandAttributes(this.definition.subscriberAttributes);
     /**
      * The current Message instance
      * @type {module:models/message~Message}
      */
     this.message = null;
+}
 
+Trigger.prototype = {
     /**
      * Returns whether this trigger is enabled
      * @returns {boolean}
      */
-    this.isEnabled = function(){
+    isEnabled: function isEnabled(){
         return this.definition.enabled === true;
-    };
+    },
 
-    this.rebuild = function(){
+    rebuild: function rebuild(){
         return rebuildTriggerDefinition.apply(this, arguments);
-    };
+    },
 
-    this.newMessage = function(data){
+    newMessage: function newMsg(data){
         return newMessage.apply(this, arguments);
-    };
+    },
 
-    this.send = function(){
+    send: function send(){
         return sendMessage.apply(this, arguments);
-    };
-}
+    }
+};
 
 module.exports = Trigger;
-
-/**
- * @external dw/object/CustomAttributes
- * @see https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_object_CustomAttributes.html
- */
-/**
- * @external dw/svc/Result
- * @see https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_svc_Result.html
- */

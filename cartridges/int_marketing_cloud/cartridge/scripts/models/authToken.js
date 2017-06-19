@@ -10,22 +10,16 @@
  * @private
  */
 var customObjectName = 'MarketingCloudAuthToken';
+var helpers = require('./util/helpers');
 
 /**
  * Retrieves cached token from custom object storage
  * If no existing token object, an empty one is created
- * @returns {external:dw/object/CustomAttributes} Returns token custom attributes
+ * @returns {dw/object/CustomAttributes|dw.object.CustomAttributes} Returns token custom attributes
  */
-function getCachedTokenObject() {
-    var com = require('dw/object/CustomObjectMgr'),
-        siteID = require('dw/system/Site').current.ID,
-        curToken = com.getCustomObject(customObjectName, siteID);
-    if (empty(curToken)) {
-        require('dw/system/Transaction').wrap(function(){
-            curToken = com.createCustomObject(customObjectName, siteID);
-        });
-    }
-    return curToken.getCustom();
+function getObject() {
+    var siteID = require('dw/system/Site').current.ID;
+    return helpers.getCustomObject(customObjectName, siteID);
 }
 
 /**
@@ -34,7 +28,7 @@ function getCachedTokenObject() {
  * @returns {Object} Returns the same plain JS object
  */
 function updateCachedTokenObject(obj) {
-    var custObj = getCachedTokenObject();
+    var custObj = getObject();
 
     require('dw/system/Transaction').wrap(function(){
         custObj.token = JSON.stringify(obj);
@@ -52,7 +46,7 @@ function isValidAuth() {
     var now = new Date();
 
     if(!this.token || !this.token.accessToken){
-        var cachedToken = getCachedTokenObject();
+        var cachedToken = getObject();
         if (!cachedToken || !cachedToken.token) {
             return false;
         }
@@ -82,6 +76,7 @@ function getValidToken() {
 /**
  * Token class for checking auth and retrieving valid token
  * @constructor
+ * @alias module:models/authToken~AuthToken
  */
 function AuthToken() {
     /**
@@ -93,18 +88,16 @@ function AuthToken() {
      * @property {Date} expires Date expires
      */
     this.token = null;
-
-    this.isValidAuth = function(){
-        return isValidAuth.apply(this);
-    };
-    this.getValidToken = function(){
-        return getValidToken.apply(this);
-    };
 }
 
-module.exports = AuthToken;
+AuthToken.prototype = {
+    isValidAuth: function isValid(){
+        return isValidAuth.apply(this);
+    },
 
-/**
- * @external dw/object/CustomAttributes
- * @see https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPI%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_object_CustomAttributes.html
- */
+    getValidToken: function getValid(){
+        return getValidToken.apply(this);
+    }
+};
+
+module.exports = AuthToken;
