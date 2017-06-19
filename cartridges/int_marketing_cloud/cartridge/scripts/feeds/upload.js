@@ -28,7 +28,7 @@ function sftpUpload(params, stepExecution) {
 
     var returnStatus;
     try {
-        var uploadStatus = sftpService.call({exportFile: exportFile, filename: params.ExportFileName});
+        var uploadStatus = sftpService.call({exportFile: exportFile, filename: siteID +'_'+ params.ExportFileName});
         if (uploadStatus.ok) {
             returnStatus = new Status(Status.OK);
         } else {
