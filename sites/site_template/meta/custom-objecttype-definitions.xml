@@ -57,6 +57,76 @@
         </group-definitions>
     </custom-type>
 
+    <custom-type type-id="MarketingCloudDataExport">
+        <display-name xml:lang="x-default">Marketing Cloud Data Export</display-name>
+        <description xml:lang="x-default">Marketing Cloud Data Export definitions</description>
+        <staging-mode>source-to-target</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="exportID">
+            <display-name xml:lang="x-default">Export ID</display-name>
+            <description xml:lang="x-default">Export ID mapped from job in Business Manager</description>
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="description">
+                <display-name xml:lang="x-default">Description</display-name>
+                <description xml:lang="x-default">Export description</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="exportAttributes">
+                <display-name xml:lang="x-default">Export Attributes</display-name>
+                <description xml:lang="x-default">Export fields, data attributes, etc, should all be defined and mapped here.</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="default">
+                <display-name xml:lang="x-default">Default</display-name>
+                <attribute attribute-id="exportID"/>
+                <attribute attribute-id="description"/>
+                <attribute attribute-id="exportAttributes"/>
+                <attribute attribute-id="creationDate" system="true"/>
+                <attribute attribute-id="lastModified" system="true"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="MarketingCloudDataExportStatus">
+        <display-name xml:lang="x-default">Marketing Cloud Data Export Status</display-name>
+        <description xml:lang="x-default">Tracks the last export for each feed to Marketing Cloud</description>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="siteID_exportID">
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="lastExportRun">
+                <display-name xml:lang="x-default">Last Export Run</display-name>
+                <type>datetime</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="default">
+                <display-name xml:lang="x-default">Default</display-name>
+                <attribute attribute-id="siteID_exportID"/>
+                <attribute attribute-id="lastExportRun"/>
+                <attribute attribute-id="creationDate" system="true"/>
+                <attribute attribute-id="lastModified" system="true"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
     <custom-type type-id="MarketingCloudTriggers">
         <display-name xml:lang="x-default">Marketing Cloud Triggers</display-name>
         <description xml:lang="x-default">Triggers defined for use with int_marketing_cloud cartridge.</description>
