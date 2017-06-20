@@ -35,6 +35,12 @@ function dwValue(obj) {
         return obj;
     }
 
+    if (obj instanceof Date) {
+        // convert Date to Calendar in current instance timezone
+        obj = new (require('dw/util/Calendar'))(obj);
+        obj.setTimeZone(require('dw/system/Site').getCurrent().getTimezone());
+    }
+
     if (obj instanceof (require('dw/web/FormField'))) {
         return obj.value;
     } else if (obj instanceof (require('dw/value/EnumValue'))) {
@@ -44,11 +50,13 @@ function dwValue(obj) {
     } else if (obj instanceof (require('dw/util/Decimal'))) {
         return obj.valueOf();
     } else if (obj instanceof (require('dw/util/Calendar'))) {
-        return require('dw/util/StringUtils').formatCalendar(obj);
+        return require('dw/util/StringUtils').formatCalendar(obj, 'MM/dd/y hh:mm:ss a');
     } else if (obj instanceof (require('dw/util/Collection'))) {
         return obj.toArray();
     } else if (obj instanceof (require('dw/content/MarkupText'))) {
         return obj.markup;
+    } else if (obj instanceof (require('dw/web/URL'))) {
+        return obj.toString();
     }
 
     return obj;
