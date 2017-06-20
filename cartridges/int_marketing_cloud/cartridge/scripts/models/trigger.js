@@ -84,7 +84,9 @@ function newMessage(data){
     var toEmail = Array.isArray(data.toEmail) ? data.toEmail[0] : data.toEmail;
     msg.setFrom(data.fromEmail).setTo(toEmail);
 
-    helpers.mapValues(this.attributes, data, msg.setSubscriberAttribute);
+    helpers.mapValues(this.attributes, data, function(key, val){
+        msg.setSubscriberAttribute(key, val);
+    });
     this.message = msg;
 
     return this.message;
