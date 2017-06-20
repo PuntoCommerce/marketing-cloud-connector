@@ -4,7 +4,7 @@
  * @module communication/order
  */
 
-var sendTrigger = require('./util/trigger').sendTrigger;
+var sendTrigger = require('./util/send').sendTrigger;
 var hookPath = 'app.communication.order.';
 
 /**

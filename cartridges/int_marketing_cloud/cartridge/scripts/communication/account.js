@@ -17,7 +17,7 @@ var hookPath = 'app.communication.account.';
  */
 function sendTrigger(hookID, promise, data){
     data.AccountHomeLink = URLUtils.https('Account-Show');
-    return require('./util/trigger').sendTrigger(hookID, promise, data);
+    return require('./util/send').sendTrigger(hookID, promise, data);
 }
 
 /**
