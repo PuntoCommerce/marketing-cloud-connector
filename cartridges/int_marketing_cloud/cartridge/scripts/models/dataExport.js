@@ -26,7 +26,7 @@ function DataExport(exportID) {
     this.exportID = exportID;
     /**
      * Definition object
-     * @type {dw/object/CustomAttributes|dw.object.CustomAttributes}
+     * @type {dw.object.CustomAttributes}
      */
     this.definition = helpers.getCustomObject(customObjectName, exportID);
     /**
@@ -49,6 +49,9 @@ function DataExport(exportID) {
     this._buildHeader();
 }
 
+/**
+ * @alias module:models/dataExport~DataExport#prototype
+ */
 DataExport.prototype = {
     _buildHeader: function _buildHeader() {
         var objToStr = function (obj) {

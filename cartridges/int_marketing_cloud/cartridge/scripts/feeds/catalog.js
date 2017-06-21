@@ -5,11 +5,11 @@
  */
 
 /**
- * @type {dw/catalog/ProductSearchModel|dw.catalog.ProductSearchModel}
+ * @type {dw.catalog.ProductSearchModel}
  */
 const ProductSearchModel = require('dw/catalog/ProductSearchModel');
 /**
- * @type {dw/catalog/CatalogMgr|dw.catalog.CatalogMgr}
+ * @type {dw.catalog.CatalogMgr}
  */
 const CatalogMgr = require('dw/catalog/CatalogMgr');
 
@@ -25,7 +25,7 @@ const Export = require('../models/export');
 var exportModel;
 
 /**
- * @type {dw/catalog/ProductSearchModel|dw.catalog.ProductSearchModel}
+ * @type {dw.catalog.ProductSearchModel}
  */
 var PSM;
 
@@ -52,7 +52,7 @@ function read(parameters, stepExecution) {
  * Returns https image link, as long as image type is defined in the property configuration
  * @param cfg
  * @param data
- * @returns {dw/web/URL|dw.web.URL}
+ * @returns {dw.web.URL}
  */
 function imageLink(cfg, data) {
     if (cfg.hasOwnProperty('imageType')) {
@@ -84,7 +84,7 @@ function images(cfg, data) {
  * Returns the base price for a product (using pricebook inheritance to determine price ancestor)
  * @param cfg
  * @param data
- * @returns {dw/util/Decimal|dw.util.Decimal|void}
+ * @returns {dw.util.Decimal|void}
  */
 function standardPrice(cfg, data) {
     var stdPrice;
@@ -95,8 +95,8 @@ function standardPrice(cfg, data) {
     } else {
         if (!data.Product.isMaster() && data.Product.getMasterProduct() && !empty(data.Product.masterProduct.getPriceModel())) {
             priceModel = data.Product.masterProduct.getPriceModel();
-        } else if (data.product.isMaster() || data.product.isVariationGroup()) {
-            priceModel = data.product.getVariationModel().getDefaultVariant().getPriceModel();
+        } else if (data.Product.isMaster() || data.Product.isVariationGroup()) {
+            priceModel = data.Product.getVariationModel().getDefaultVariant().getPriceModel();
         }
     }
 
@@ -113,7 +113,7 @@ function standardPrice(cfg, data) {
 }
 
 /**
- * @param {dw/catalog/Product|dw.catalog.Product} product
+ * @param {dw.catalog.Product} product
  * @param parameters
  * @param stepExecution
  * @returns {void|Function}
@@ -140,7 +140,7 @@ function process(product, parameters, stepExecution) {
 /**
  * This method will write out any products in the search index, that are allowed by job preferences.
  *
- * @param {dw/catalog/Product|dw.catalog.Product} product
+ * @param {dw.catalog.Product} product
  * @param parameters
  * @param {Function} writeNextCB
  */
@@ -176,8 +176,8 @@ function writeProduct(product, parameters, writeNextCB){
 }
 
 /**
- * @param {dw/util/Collection|dw.util.Collection} childProducts
- * @param {dw/catalog/Product|dw.catalog.Product} parentProduct
+ * @param {dw.util.Collection} childProducts
+ * @param {dw.catalog.Product} parentProduct
  * @param {Function} writeNextCB
  */
 function writeChildProducts(childProducts, parentProduct, writeNextCB) {
@@ -197,8 +197,8 @@ function writeChildProducts(childProducts, parentProduct, writeNextCB) {
 }
 
 /**
- * @param {dw/catalog/Product|dw.catalog.Product|dw/catalog/Variant|dw.catalog.Variant} product
- * @param {dw/catalog/Product|dw.catalog.Product} defaultProduct Product to use as fallback, such as for pricing
+ * @param {dw.catalog.Product|dw.catalog.Variant} product
+ * @param {dw.catalog.Product} defaultProduct Product to use as fallback, such as for pricing
  * @returns {Array<String>}
  */
 function buildProductData(product, defaultProduct) {

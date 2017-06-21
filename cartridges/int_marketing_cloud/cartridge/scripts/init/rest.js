@@ -22,7 +22,7 @@ const Logger = require('dw/system/Logger');
 
 /**
  * Inserts auth token into request header
- * @param {dw/svc/HTTPService|dw.svc.HTTPService} svc
+ * @param {dw.svc.HTTPService} svc
  * @throws {Error} Throws error when no valid auth token is available (i.e.- service error, service down)
  */
 function setAuthHeader(svc) {
@@ -42,11 +42,11 @@ function setAuthHeader(svc) {
 
 /**
  * Check if 401 due to expired token
- * @param {dw/svc/HTTPService|dw.svc.HTTPService} client
+ * @param {dw.net.HTTPClient} client
  * @returns {boolean} true if expired auth token
  */
 function isValid401(client) {
-    var is401 = (client.statusCode === '401');
+    var is401 = (client.statusCode === 401);
     var isFailureFromBadToken = false;
     var authResHeader = client.getResponseHeader('WWW-Authenticate');
 
@@ -59,7 +59,7 @@ function isValid401(client) {
 
 /**
  * Check if response type is JSON
- * @param {dw/svc/HTTPService|dw.svc.HTTPService} client
+ * @param {dw.net.HTTPClient} client
  * @returns {boolean}
  */
 function isResponseJSON(client) {
@@ -69,9 +69,9 @@ function isResponseJSON(client) {
 
 /**
  * Parses response JSON and wraps with an object containing additional helper properties
- * @param {dw/svc/HTTPService|dw.svc.HTTPService} svc
- * @param {dw/svc/HTTPService|dw.svc.HTTPService} client
- * @returns {{responseObj, isAuthError: boolean, isValidJSON: boolean}}
+ * @param {dw.svc.HTTPService} svc
+ * @param {dw.net.HTTPClient} client
+ * @returns {{responseObj: Object, isError: boolean, isAuthError: boolean, isValidJSON: boolean, errorText: string}}
  */
 function parseResponse(svc, client) {
     var isJSON = isResponseJSON(client);
@@ -89,8 +89,10 @@ function parseResponse(svc, client) {
 
     return {
         isValidJSON: isJSON,
+        isError: client.statusCode >= 400,
         isAuthError: isValid401(client),
-        responseObj: parsedBody
+        responseObj: parsedBody,
+        errorText: client.errorText
     };
 }
 
@@ -106,11 +108,11 @@ function parseResponse(svc, client) {
 ServiceRegistry.configure('marketingcloud.rest.auth', {
     /**
      * Create request for service authentication
-     * @param {dw/svc/HTTPService|dw.svc.HTTPService} svc
+     * @param {dw.svc.HTTPService} svc
      * @throws {Error} Throws error when service credentials are missing
      */
     createRequest: function(svc /*, params*/) {
-        var origCredentialID = svc.getCredentialID() || 'marketingcloud.rest.auth',
+        var origCredentialID = svc.getCredentialID() || svc.getConfiguration().getID(),
             credArr = origCredentialID.split('-'),
             credArrSiteID = credArr[credArr.length-1],
             siteID = require('dw/system/Site').current.ID;
@@ -140,6 +142,11 @@ ServiceRegistry.configure('marketingcloud.rest.auth', {
 
         return JSON.stringify(requestBody);
     },
+    /**
+     * @param {dw.svc.HTTPService} svc
+     * @param {dw.net.HTTPClient} client
+     * @returns {Object}
+     */
     parseResponse : function(svc, client) {
         var responseObj;
 
@@ -150,7 +157,7 @@ ServiceRegistry.configure('marketingcloud.rest.auth', {
 
                 // Set the millisecond timestamp values
                 responseObj.issued = responseDate.valueOf();
-                responseObj.expires = (responseDate.valueOf() + (responseObj.expiresIn * 1000)).valueOf();
+                responseObj.expires = responseDate.valueOf() + (responseObj.expiresIn * 1000);
             }
         } catch(e) {
             responseObj = client.text;
@@ -159,7 +166,7 @@ ServiceRegistry.configure('marketingcloud.rest.auth', {
 
         return responseObj;
     },
-    mockCall: function (/*svc, client*/) {
+    mockCall: function (/*svc, requestBody*/) {
         var obj = {
             "accessToken": "7Gcb2QiDuMUhuTpZ5kv88o4W",
             "expiresIn": 3479
@@ -195,7 +202,7 @@ ServiceRegistry.configure('marketingcloud.rest.platform.endpoints', {
         svc.setURL(svcURL + svcPath);
     },
     parseResponse : parseResponse,
-    mockCall: function (/*svc, client*/) {
+    mockCall: function (/*svc*/) {
         var obj = {
             "count": 8,
             "page": 1,
@@ -255,7 +262,7 @@ ServiceRegistry.configure('marketingcloud.rest.platform.endpoints', {
  */
 ServiceRegistry.configure('marketingcloud.rest.platform.tokenContext', {
     /**
-     * @param {dw/svc/HTTPService|dw.svc.HTTPService} svc
+     * @param {dw.svc.HTTPService} svc
      */
     createRequest: function(svc /*, params*/) {
         var svcURL = svc.configuration.credential.URL,
@@ -269,7 +276,7 @@ ServiceRegistry.configure('marketingcloud.rest.platform.tokenContext', {
         svc.setURL(svcURL + svcPath);
     },
     parseResponse : parseResponse,
-    mockCall: function (/*svc, client*/) {
+    mockCall: function (/*svc*/) {
         var obj = {
             "enterprise": {
                 "id": 1081365
@@ -302,7 +309,7 @@ ServiceRegistry.configure('marketingcloud.rest.platform.tokenContext', {
 ServiceRegistry.configure('marketingcloud.rest.messaging.send', {
     /**
      * Create request for sending an email
-     * @param {dw/svc/HTTPService|dw.svc.HTTPService} svc
+     * @param {dw.svc.HTTPService} svc
      * @param {module:models/message~Message} message A message model instance to be sent to Marketing Cloud
      * @returns {string} Request body
      */
@@ -324,6 +331,11 @@ ServiceRegistry.configure('marketingcloud.rest.messaging.send', {
 
         return JSON.stringify(message);
     },
+    /**
+     * @param {dw.svc.HTTPService} svc
+     * @param {dw.net.HTTPClient} client
+     * @returns {{responseObj, isAuthError: boolean, isValidJSON: boolean}}
+     */
     parseResponse : function(svc, client){
         var obj = parseResponse(svc, client);
         // Location value is used for deliveryRecord check
@@ -332,7 +344,7 @@ ServiceRegistry.configure('marketingcloud.rest.messaging.send', {
         Logger.debug('Message response: {0}', JSON.stringify(obj));
         return obj;
     },
-    mockCall: function (/*svc, client*/) {
+    mockCall: function (/*svc, requestBody*/) {
         var obj = {
             "requestId": "f04952b5-49ae-4d66-90a4-c65be553db1f",
             "responses": [
@@ -366,10 +378,10 @@ ServiceRegistry.configure('marketingcloud.rest.messaging.send', {
 ServiceRegistry.configure('marketingcloud.rest.messaging.deliveryRecords', {
     /**
      * Create request for viewing delivery records
-     * @param svc
-     * @param sendID
-     * @param customerKey
-     * @param recipientSendID
+     * @param {dw.svc.HTTPService} svc
+     * @param {string} sendID
+     * @param {string} customerKey
+     * @param {string} recipientSendID
      */
     createRequest: function(svc, sendID, customerKey, recipientSendID) {
         var svcURL = svc.getConfiguration().credential.URL,
@@ -391,7 +403,7 @@ ServiceRegistry.configure('marketingcloud.rest.messaging.deliveryRecords', {
         svc.setURL(svcURL + svcPath);
     },
     parseResponse : parseResponse,
-    mockCall: function (/*svc, client*/) {
+    mockCall: function (/*svc*/) {
         var obj = {
             "deliveryTime": "2014-09-18T07:38:34.943",
             "id": "bd52a488-2f5c-de11-92ee-001cc494ae9e",
@@ -424,7 +436,7 @@ ServiceRegistry.configure('marketingcloud.rest.messaging.deliveryRecords', {
 ServiceRegistry.configure('marketingcloud.rest.interaction.events', {
     /**
      * Create request for posting an event
-     * @param {dw/svc/HTTPService|dw.svc.HTTPService} svc
+     * @param {dw.svc.HTTPService} svc
      * @param {module:models/event~Event} event An event model instance to be sent to Marketing Cloud
      * @returns {string} Request body
      */
@@ -438,10 +450,10 @@ ServiceRegistry.configure('marketingcloud.rest.interaction.events', {
 
         svc.setURL(svcURL + svcPath);
 
-        return JSON.stringify(message);
+        return JSON.stringify(event);
     },
     parseResponse : parseResponse,
-    mockCall: function (/*svc, client*/) {
+    mockCall: function (/*svc, requestBody*/) {
         var obj = {
             "requestId": "f04952b5-49ae-4d66-90a4-c65be553db1f",
             "responses": [

@@ -137,7 +137,7 @@
         </triggers>
     </job>
 
-    <job job-id="MCC-Init" priority="0">
+    <job job-id="MCC-InitTriggers" priority="0">
         <description>For developer use, used to recreate trigger configurations</description>
         <parameters/>
         <split sequential="false">
@@ -146,7 +146,7 @@
                 <template-ref template-id="template_72"/>
             </flow>
             <flow-template template-id="template_72">
-                <step step-id="mcc-init" type="custom.MCC-Init" enforce-restart="false">
+                <step step-id="mcc-init-triggers" type="custom.MCC-InitTriggers" enforce-restart="false">
                     <description/>
                     <parameters/>
                 </step>

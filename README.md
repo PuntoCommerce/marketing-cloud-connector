@@ -81,6 +81,22 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
 
 ### Features ###
 
+#### Analytics ####
+Analytic tracking, using MC's `collect.js`, is enabled via configuration.
+The following events are tracked by default:
+
+- Page view
+- Search request (search page)
+- Product view (PDP)
+- Category view (PLP)
+- Cart (add/modify/remove)
+- Order placement
+
+The above tracked information then prepares you for MC's Abandonment functionality (which requires a services engagement with MC team).
+MC's Abandonment functionality includes abandoned cart, abandoned browse, abandoned search.
+
+In addition to tracking page analytics, you can also opt to enable Streaming Updates, which updates your product catalog and content assets in MC's database as they are viewed.
+
 #### Transactional emails ####
 The following OOB SiteGenesis emails are replaced with MC email triggers: 
 

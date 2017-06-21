@@ -15,11 +15,11 @@ const helpers = require('../util/helpers');
 /**
  * Retrieves cached token from custom object storage
  * If no existing token object, an empty one is created
- * @returns {dw/object/CustomAttributes|dw.object.CustomAttributes} Returns token custom attributes
+ * @returns {dw.object.CustomAttributes} Returns token custom attributes
  */
 function getObject() {
     var siteID = require('dw/system/Site').current.ID;
-    return helpers.getCustomObject(customObjectName, siteID);
+    return helpers.getCustomObject(customObjectName, siteID, true);
 }
 
 /**
@@ -43,8 +43,6 @@ function updateCachedTokenObject(obj) {
  * @alias module:models/authToken~AuthToken#isValidAuth
  */
 function isValidAuth() {
-    var now = new Date();
-
     if(!this.token || !this.token.accessToken){
         var cachedToken = getObject();
         if (!cachedToken || !cachedToken.token) {
@@ -54,7 +52,7 @@ function isValidAuth() {
     }
 
     // check if expires is in the future
-    return this.token && this.token.accessToken && this.token.expires > now.valueOf();
+    return this.token && this.token.accessToken && this.token.expires > Date.now();
 }
 
 /**
@@ -84,12 +82,15 @@ function AuthToken() {
      * @type {Object}
      * @property {string} accessToken The token auth string
      * @property {number} expiresIn Expiration in seconds, relative to when requested
-     * @property {Date} issued Date issued
-     * @property {Date} expires Date expires
+     * @property {number} issued Date issued in milliseconds
+     * @property {number} expires Date expires in milliseconds
      */
     this.token = null;
 }
 
+/**
+ * @alias module:models/authToken~AuthToken#prototype
+ */
 AuthToken.prototype = {
     isValidAuth: function isValid(){
         return isValidAuth.apply(this);
