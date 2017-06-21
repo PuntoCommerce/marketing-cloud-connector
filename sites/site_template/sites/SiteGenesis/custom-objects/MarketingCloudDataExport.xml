@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
+    <custom-object type-id="MarketingCloudDataExport" object-id="customersFeed">
+        <object-attribute attribute-id="description">Marketing Cloud Customers Feed Configuration</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="MarketingCloudDataExport" object-id="ordersFeed">
+        <object-attribute attribute-id="description">Marketing Cloud Orders Feed Configuration</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="MarketingCloudDataExport" object-id="catalogFeed">
+        <object-attribute attribute-id="description">Marketing Cloud Catalog Feed Configuration</object-attribute>
+        <object-attribute attribute-id="exportAttributes">{&#13;
+    "product.ID": ["ProductID", {"label":"ProductCode", "required":true}],&#13;
+    "product.name": {"label":"ProductName", "required":true},&#13;
+    "product.primaryCategory.ID": {"label":"ProductType", "required":true},&#13;
+    "productLink": {"label":"ProductLink", "required":true},&#13;
+    "product.onlineFlag": {"label":"OnlineAvailability", "required":true, "type":"bool"},&#13;
+    "product.manufacturerSKU": "SkuID",&#13;
+    "imageLink": {"label":"ImageLink", "imageType":"large"},&#13;
+    "standardPrice": "RegularPrice",&#13;
+    "product.priceModel.price.decimalValue": "SalePrice",&#13;
+    "product.shortDescription": "Description"&#13;
+}</object-attribute>
+    </custom-object>
+
+</custom-objects>
