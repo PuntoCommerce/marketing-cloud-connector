@@ -2,25 +2,62 @@
 <custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
     <custom-object type-id="MarketingCloudDataExport" object-id="customersFeed">
         <object-attribute attribute-id="description">Marketing Cloud Customers Feed Configuration</object-attribute>
+        <object-attribute attribute-id="exportAttributes">{&#13;
+    "SiteID": "SiteID",&#13;
+    "Profile.customerNo": "CustomerID",&#13;
+    "Profile.customer.note": "Note",&#13;
+    "Profile.email": "EmailAddress",&#13;
+    "Profile.salutation": "Salutation",&#13;
+    "Profile.title": "Title",&#13;
+    "Profile.firstName": "FirstName",&#13;
+    "Profile.secondName": "SecondName",&#13;
+    "Profile.lastName": "LastName",&#13;
+    "Profile.suffix": "Suffix",&#13;
+    "Profile.phoneBusiness": "PhoneBusiness",&#13;
+    "Profile.phoneHome": "PhoneHome",&#13;
+    "Profile.phoneMobile": "PhoneMobile",&#13;
+    "Profile.preferredLocale": "PreferredLocale",&#13;
+    "Profile.previousLoginTime": "PreviousLogin",&#13;
+    "Profile.previousVisitTime": "PreviousVisit",&#13;
+    "Profile.lastLoginTime": "LastLogin",&#13;
+    "Profile.lastVisitTime": "LastVisit"&#13;
+}</object-attribute>
     </custom-object>
 
     <custom-object type-id="MarketingCloudDataExport" object-id="ordersFeed">
         <object-attribute attribute-id="description">Marketing Cloud Orders Feed Configuration</object-attribute>
+        <object-attribute attribute-id="exportAttributes">{&#13;
+    "SiteID": "SiteID",&#13;
+    "Order.orderNo": "OrderNumber",&#13;
+    "orderAsXML": "OrderAsXML"&#13;
+}</object-attribute>
     </custom-object>
 
     <custom-object type-id="MarketingCloudDataExport" object-id="catalogFeed">
         <object-attribute attribute-id="description">Marketing Cloud Catalog Feed Configuration</object-attribute>
         <object-attribute attribute-id="exportAttributes">{&#13;
-    "product.ID": ["ProductID", {"label":"ProductCode", "required":true}],&#13;
-    "product.name": {"label":"ProductName", "required":true},&#13;
-    "product.primaryCategory.ID": {"label":"ProductType", "required":true},&#13;
-    "productLink": {"label":"ProductLink", "required":true},&#13;
-    "product.onlineFlag": {"label":"OnlineAvailability", "required":true, "type":"bool"},&#13;
-    "product.manufacturerSKU": "SkuID",&#13;
-    "imageLink": {"label":"ImageLink", "imageType":"large"},&#13;
-    "standardPrice": "RegularPrice",&#13;
-    "product.priceModel.price.decimalValue": "SalePrice",&#13;
-    "product.shortDescription": "Description"&#13;
+    "SiteID": "SiteID",&#13;
+    "Product.ID": ["ProductID", {"label":"ProductCode", "required":true}],&#13;
+    "Product.name": {"label":"ProductName", "required":true},&#13;
+    "Product.primaryCategory.ID": {"label":"ProductType", "required":true},&#13;
+    "ProductLink": {"label":"ProductLink", "required":true},&#13;
+    "Product.onlineFlag": {"label":"OnlineAvailability", "required":true, "type":"bool"},&#13;
+    "Product.manufacturerSKU": "SkuID",&#13;
+    "ImageLink": {"label":"ImageLink", "imageType":"large"},&#13;
+    "StandardPrice": "RegularPrice",&#13;
+    "Product.priceModel.price.decimalValue": "SalePrice",&#13;
+    "Product.shortDescription": "Description"&#13;
+}</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="MarketingCloudDataExport" object-id="contentFeed">
+        <object-attribute attribute-id="description">Marketing Cloud Content Feed Configuration</object-attribute>
+        <object-attribute attribute-id="exportAttributes">{&#13;
+    "SiteID": "SiteID",&#13;
+    "Content.ID": {"label":"ContentID", "required":true},&#13;
+    "ContentLink": {"label":"Link", "required":true},&#13;
+    "Content.name": "Title",&#13;
+    "Content.description": "Description"&#13;
 }</object-attribute>
     </custom-object>
 

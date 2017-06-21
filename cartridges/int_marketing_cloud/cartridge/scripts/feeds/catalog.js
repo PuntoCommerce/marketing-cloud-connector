@@ -28,18 +28,16 @@ function beforeStep(parameters, stepExecution) {
 }
 
 function getTotalCount(parameters, stepExecution) {
-    return exportModel.seekableIterator.getCount();
+    return exportModel.dataIterator.getCount();
 }
 
 function read(parameters, stepExecution) {
-    if (exportModel.seekableIterator.hasNext()) {
-        return exportModel.seekableIterator.next();
-    }
+    return exportModel.readNext();
 }
 
 function imageLink(cfg, data) {
     if (cfg.hasOwnProperty('imageType')) {
-        var img = data.product.getImage(cfg.imageType);
+        var img = data.Product.getImage(cfg.imageType);
         if (img) {
             return img.absURL.https();
         }
@@ -50,17 +48,17 @@ function standardPrice(cfg, data) {
     var Money = require('dw/value/Money');
     var stdPrice = Money.NOT_AVAILABLE;
 
-    if (!empty(data.product.priceModel)) {
-        if (!data.product.priceModel.price.available) {
+    if (!empty(data.Product.priceModel)) {
+        if (!data.Product.priceModel.price.available) {
             stdPrice = Money.NOT_AVAILABLE;
         } else {
-            var priceBook = data.product.priceModel.priceInfo.priceBook;
+            var priceBook = data.Product.priceModel.priceInfo.priceBook;
 
             while (priceBook.parentPriceBook) {
                 priceBook = priceBook.parentPriceBook ? priceBook.parentPriceBook : priceBook;
             }
 
-            stdPrice = data.product.priceModel.getPriceBookPrice(priceBook.ID);
+            stdPrice = data.Product.priceModel.getPriceBookPrice(priceBook.ID);
         }
     }
 
@@ -85,10 +83,10 @@ function process(product, parameters, stepExecution) {
     }
     if (!skip) {
         var data = {
-            product: product,
-            productLink: require('dw/web/URLUtils').abs('Product-Show', 'pid', product.ID).https(),
-            imageLink: imageLink,
-            standardPrice: standardPrice
+            Product: product,
+            ProductLink: require('dw/web/URLUtils').abs('Product-Show', 'pid', product.ID).https(),
+            ImageLink: imageLink,
+            StandardPrice: standardPrice
         };
         return exportModel.buildRow(data);
     }

@@ -16,6 +16,7 @@ var hookPath = 'app.communication.account.';
  * @returns {SynchronousPromise}
  */
 function sendTrigger(hookID, promise, data){
+    data.Profile = data.params.Customer.profile;
     data.AccountHomeLink = URLUtils.https('Account-Show');
     return require('./util/send').sendTrigger(hookID, promise, data);
 }
@@ -77,69 +78,72 @@ function lockedOut(promise, data) {
  * @returns {Object} Map of hook function to an array of strings
  */
 function triggerDefinitions() {
-    var mergeCustomer = function (arr, k) {
-        if (empty(k)) {
-            k = 'Customer';
+    var mergeCustomer = function (arr, customerPrefix, profilePrefix) {
+        if (empty(customerPrefix)) {
+            customerPrefix = 'Customer';
+        }
+        if (empty(profilePrefix)) {
+            profilePrefix = 'Profile';
         }
         return [].concat(arr, [
             'AccountHomeLink',
-            k + '.anonymous',
-            k + '.ID',
-            k + '.note',
-            k + '.registered',
-            k + '.profile.birthday',
-            k + '.profile.companyName',
-            k + '.profile.customerNo',
-            k + '.profile.email',
-            k + '.profile.fax',
-            k + '.profile.female',
-            k + '.profile.firstName',
-            k + '.profile.gender.displayValue',
-            k + '.profile.gender.value',
-            k + '.profile.jobTitle',
-            k + '.profile.lastLoginTime',
-            k + '.profile.lastName',
-            k + '.profile.lastVisitTime',
-            k + '.profile.male',
-            k + '.profile.nextBirthday',
-            k + '.profile.phoneBusiness',
-            k + '.profile.phoneHome',
-            k + '.profile.phoneMobile',
-            k + '.profile.preferredLocale',
-            k + '.profile.previousLoginTime',
-            k + '.profile.previousVisitTime',
-            k + '.profile.salutation',
-            k + '.profile.secondName',
-            k + '.profile.suffix',
-            k + '.profile.taxIDMasked',
-            k + '.profile.taxIDType.displayValue',
-            k + '.profile.taxIDType.value',
-            k + '.profile.title'
+            customerPrefix + '.anonymous',
+            customerPrefix + '.ID',
+            customerPrefix + '.note',
+            customerPrefix + '.registered',
+            profilePrefix + '.birthday',
+            profilePrefix + '.companyName',
+            profilePrefix + '.customerNo',
+            profilePrefix + '.email',
+            profilePrefix + '.fax',
+            profilePrefix + '.female',
+            profilePrefix + '.firstName',
+            profilePrefix + '.gender.displayValue',
+            profilePrefix + '.gender.value',
+            profilePrefix + '.jobTitle',
+            profilePrefix + '.lastLoginTime',
+            profilePrefix + '.lastName',
+            profilePrefix + '.lastVisitTime',
+            profilePrefix + '.male',
+            profilePrefix + '.nextBirthday',
+            profilePrefix + '.phoneBusiness',
+            profilePrefix + '.phoneHome',
+            profilePrefix + '.phoneMobile',
+            profilePrefix + '.preferredLocale',
+            profilePrefix + '.previousLoginTime',
+            profilePrefix + '.previousVisitTime',
+            profilePrefix + '.salutation',
+            profilePrefix + '.secondName',
+            profilePrefix + '.suffix',
+            profilePrefix + '.taxIDMasked',
+            profilePrefix + '.taxIDType.displayValue',
+            profilePrefix + '.taxIDType.value',
+            profilePrefix + '.title'
         ]);
     };
     return {
         created: {
             description: 'Account Created trigger',
-            attributes: mergeCustomer([], 'Customer')
+            attributes: mergeCustomer([])
         },
         updated: {
             description: 'Account Updated trigger',
-            attributes: mergeCustomer([], 'Customer')
+            attributes: mergeCustomer([])
         },
         passwordChanged: {
             description: 'Password Changed trigger',
-            attributes: mergeCustomer([], 'Customer')
+            attributes: mergeCustomer([])
         },
         passwordReset: {
             description: 'Password Reset trigger',
             attributes: mergeCustomer([
                 'ResetPasswordToken',
                 'ResetPasswordLink'
-            ], 'Customer')
+            ])
         },
         lockedOut: {
             description: 'Account Locked trigger',
-            attributes: mergeCustomer([], 'Customer')
+            attributes: mergeCustomer([])
         }
     };
 }

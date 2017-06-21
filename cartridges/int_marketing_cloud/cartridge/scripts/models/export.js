@@ -20,10 +20,15 @@ const CSVStreamWriter = require('dw/io/CSVStreamWriter');
 /**
  * @constructor
  * @param {object} params
- * @param {Function} seekableCallback
+ * @param {Function} iteratorCallback
  * @alias module:models/export~Export
  */
-function Export(params, seekableCallback) {
+function Export(params, iteratorCallback) {
+    var siteID = require('dw/system/Site').current.ID;
+    var dirName = File.IMPEX + File.SEPARATOR + 'mccfeeds' + File.SEPARATOR + siteID;
+    // ensure dirpath exists
+    (new File(dirName)).mkdirs();
+
     /**
      * @type {module:models/dataExport~DataExport}
      * @private
@@ -33,10 +38,6 @@ function Export(params, seekableCallback) {
      * @type {dw/io/File|dw.io.File}
      * @private
      */
-    var siteID = require('dw/system/Site').current.ID;
-    var dirName = File.IMPEX + File.SEPARATOR + 'mccfeeds' + File.SEPARATOR + siteID;
-    // ensure dirpath exists
-    (new File(dirName)).mkdirs();
     this._file = new File(dirName + File.SEPARATOR + params.ExportFileName);
     /**
      * @type {dw/io/FileWriter|dw.io.FileWriter}
@@ -61,14 +62,32 @@ function Export(params, seekableCallback) {
      */
     this.header = this._model.header;
     /**
-     * @type {dw/util/SeekableIterator|dw.util.SeekableIterator}
+     * @type {dw/util/Iterator|dw.util.Iterator|Iterator}
      */
-    this.seekableIterator = seekableCallback(this);
+    this.dataIterator = iteratorCallback(this);
 }
 
 Export.prototype = {
     writeHeader: function writeHeader() {
         this._csvWriter.writeNext(this.header);
+    },
+
+    /**
+     * Reads next record, void return when reading is complete
+     * @returns {void|*}
+     */
+    readNext: function readNext() {
+        if (this.dataIterator instanceof require('dw/util/Iterator')) {
+            if (this.dataIterator.hasNext()) {
+                return this.dataIterator.next();
+            }
+        } else {
+            try {
+                return this.dataIterator.next();
+            } catch(e if e instanceof StopIteration) {
+                // end of iteration, do nothing
+            }
+        }
     },
 
     /**
@@ -92,7 +111,7 @@ Export.prototype = {
     close: function close() {
         this._csvWriter.close();
         this._fileWriter.close();
-        this.seekableIterator.close();
+        this.dataIterator.close();
         this._model.markExported();
     }
 };

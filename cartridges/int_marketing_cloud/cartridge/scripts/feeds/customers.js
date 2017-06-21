@@ -16,7 +16,6 @@ const Export = require('../models/export');
 
 /**
  * @type {module:models/export~Export}
- * @see https://help.marketingcloud.com/en/documentation/personalization_builder/personalization_builder_prerequisites/catalog/add_attributes/
  */
 var exportModel;
 
@@ -36,13 +35,11 @@ function beforeStep(parameters, stepExecution) {
 }
 
 function getTotalCount(parameters, stepExecution) {
-    return exportModel.seekableIterator.getCount();
+    return exportModel.dataIterator.getCount();
 }
 
 function read(parameters, stepExecution) {
-    if (exportModel.seekableIterator.hasNext()) {
-        return exportModel.seekableIterator.next();
-    }
+    return exportModel.readNext();
 }
 
 /**
@@ -60,7 +57,8 @@ function process(profile, parameters, stepExecution) {
     }
     if (!skip) {
         var data = {
-            profile: profile
+            Customer: profile.getCustomer(),
+            Profile: profile
         };
         return exportModel.buildRow(data);
     }

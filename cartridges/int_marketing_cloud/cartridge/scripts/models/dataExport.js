@@ -75,6 +75,7 @@ DataExport.prototype = {
     buildRow: function buildRow(data) {
         var missingRequired = false;
         var rowVal = [];
+        data.SiteID = require('dw/system/Site').current.ID;
         helpers.mapValues(this.attributes, data, function(key, val){
             if (typeof(val) === 'function') {
                 val = val(key, data);
