@@ -21,7 +21,7 @@ function hookFilter(hook) {
  */
 function initTriggers() {
     var triggerModel = require(module.cartridge).trigger;
-    var hooks = require('~/cartridge/scripts/hooks.json').hooks.filter(hookFilter);
+    var hooks = require('~/hooks.json').hooks.filter(hookFilter);
     hooks.forEach(function(hook){
         var trigger = triggerModel(hook.name);
         trigger.rebuild();

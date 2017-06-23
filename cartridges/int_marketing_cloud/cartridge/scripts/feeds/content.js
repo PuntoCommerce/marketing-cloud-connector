@@ -37,8 +37,13 @@ function folderIterator(folder) {
             while(innerIter !== null) {
                 try {
                     yield innerIter.next();
-                } catch(e if e instanceof StopIteration) {
-                    innerIter = null;
+                } catch(e) {
+                    if (e instanceof StopIteration) {
+                        innerIter = null;
+                    } else {
+                        // re-throw
+                        throw e;
+                    }
                 }
             }
         }

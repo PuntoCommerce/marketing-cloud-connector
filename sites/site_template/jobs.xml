@@ -38,10 +38,6 @@
                 <context site-id="SiteGenesis"/>
                 <template-ref template-id="template_77"/>
             </flow>
-            <flow>
-                <context site-id="cloudpoc"/>
-                <template-ref template-id="template_77"/>
-            </flow>
             <flow-template template-id="template_77">
                 <step step-id="mcc-feed-exportcustomers" type="custom.MCC-Feed-ExportCustomers" enforce-restart="false">
                     <description/>
@@ -75,10 +71,6 @@
         <split sequential="false">
             <flow>
                 <context site-id="SiteGenesis"/>
-                <template-ref template-id="template_59"/>
-            </flow>
-            <flow>
-                <context site-id="cloudpoc"/>
                 <template-ref template-id="template_59"/>
             </flow>
             <flow-template template-id="template_59">
@@ -116,10 +108,6 @@
                 <context site-id="SiteGenesis"/>
                 <template-ref template-id="template_72"/>
             </flow>
-            <flow>
-                <context site-id="cloudpoc"/>
-                <template-ref template-id="template_72"/>
-            </flow>
             <flow-template template-id="template_72">
                 <step step-id="mcc-init" type="custom.MCC-Init" enforce-restart="false">
                     <description/>
@@ -141,14 +129,6 @@
         <split sequential="false">
             <flow>
                 <context site-id="SiteGenesis"/>
-                <template-ref template-id="template_139"/>
-            </flow>
-            <flow>
-                <context site-id="SiteGenesisGlobal"/>
-                <template-ref template-id="template_139"/>
-            </flow>
-            <flow>
-                <context site-id="cloudpoc"/>
                 <template-ref template-id="template_139"/>
             </flow>
             <flow-template template-id="template_139">

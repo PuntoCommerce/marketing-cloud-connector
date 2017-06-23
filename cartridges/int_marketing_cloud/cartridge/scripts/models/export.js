@@ -84,8 +84,13 @@ Export.prototype = {
         } else {
             try {
                 return this.dataIterator.next();
-            } catch(e if e instanceof StopIteration) {
-                // end of iteration, do nothing
+            } catch(e) {
+                if (e instanceof StopIteration) {
+                    // end of iteration, do nothing
+                } else {
+                    // re-throw
+                    throw e;
+                }
             }
         }
     },

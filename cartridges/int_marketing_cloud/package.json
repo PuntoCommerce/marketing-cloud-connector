@@ -3,5 +3,5 @@
     "./cartridge/scripts/init/rest.js"
   ],
   "main": "./cartridge/scripts/Registry.js",
-  "hooks": "./cartridge/scripts/hooks.json"
+  "hooks": "./hooks.json"
 }

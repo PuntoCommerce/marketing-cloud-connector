@@ -23,7 +23,6 @@ Module | Description
 [models/trigger](#markdown-header-modelstrigger) | 
 [models/util/helpers](#markdown-header-modelsutilhelpers) | 
 [int_marketing_cloud](#markdown-header-int_marketing_cloud-object) : Object | Registry object
-[template/footer](#markdown-header-templatefooter) | 
 
 ## communication/account
 
@@ -245,6 +244,39 @@ Resolves promise with a {{status: string}} Response object. At a minimum it shou
 | stepExecution |  | 
 
 ## feeds/content
+
+* [feeds/content](#markdown-header-feedscontent)
+    * [~exportModel](#markdown-header-feedscontentexportmodel-modulemodelsexportexport) : Export
+    * [~ContentMgr](#markdown-header-feedscontentcontentmgr-dwcontentcontentmgrdwcontentcontentmgr) : dw/content/ContentMgr ⎮ dw.content.ContentMgr
+    * [~Export](#markdown-header-feedscontentexport-modulemodelsexportexport) : [Export](#markdown-header-feedscontentexport-modulemodelsexportexport)
+    * [~folderIterator(folder)](#markdown-header-feedscontentfolderiteratorfolder)
+    * [~process(content, parameters, stepExecution)](#markdown-header-feedscontentprocesscontent-parameters-stepexecution-voidarray) ⇒ void ⎮ Array
+
+### feeds/content~exportModel : [Export](#markdown-header-feedscontentexport-modulemodelsexportexport)
+**Kind**: inner property of [feeds/content](#markdown-header-feedscontent)  
+### feeds/content~ContentMgr : dw/content/ContentMgr ⎮ dw.content.ContentMgr
+**Kind**: inner constant of [feeds/content](#markdown-header-feedscontent)  
+### feeds/content~Export : [Export](#markdown-header-feedscontentexport-modulemodelsexportexport)
+**Kind**: inner constant of [feeds/content](#markdown-header-feedscontent)  
+### feeds/content~folderIterator(folder)
+Recursive folder iterator
+Yields instances of Content
+
+**Kind**: inner method of [feeds/content](#markdown-header-feedscontent)  
+
+| Param | Type |
+| --- | --- |
+| folder | dw/content/Folder ⎮ dw.content.Folder | 
+
+### feeds/content~process(content, parameters, stepExecution) ⇒ void ⎮ Array
+**Kind**: inner method of [feeds/content](#markdown-header-feedscontent)  
+
+| Param | Type |
+| --- | --- |
+| content | dw/content/Content ⎮ dw.content.Content | 
+| parameters |  | 
+| stepExecution |  | 
+
 ## feeds/customers
 
 * [feeds/customers](#markdown-header-feedscustomers)
@@ -255,7 +287,6 @@ Resolves promise with a {{status: string}} Response object. At a minimum it shou
 
 ### feeds/customers~exportModel : [Export](#markdown-header-feedscustomersexport-modulemodelsexportexport)
 **Kind**: inner property of [feeds/customers](#markdown-header-feedscustomers)  
-**See**: [https://help.marketingcloud.com/en/documentation/personalization_builder/personalization_builder_prerequisites/catalog/add_attributes/](https://help.marketingcloud.com/en/documentation/personalization_builder/personalization_builder_prerequisites/catalog/add_attributes/)
 ### feeds/customers~CustomerMgr : dw/customer/CustomerMgr ⎮ dw.customer.CustomerMgr
 **Kind**: inner constant of [feeds/customers](#markdown-header-feedscustomers)  
 ### feeds/customers~Export : [Export](#markdown-header-feedscustomersexport-modulemodelsexportexport)
@@ -279,7 +310,6 @@ Resolves promise with a {{status: string}} Response object. At a minimum it shou
 
 ### feeds/orders~exportModel : [Export](#markdown-header-feedsordersexport-modulemodelsexportexport)
 **Kind**: inner property of [feeds/orders](#markdown-header-feedsorders)  
-**See**: [https://help.marketingcloud.com/en/documentation/personalization_builder/personalization_builder_prerequisites/catalog/add_attributes/](https://help.marketingcloud.com/en/documentation/personalization_builder/personalization_builder_prerequisites/catalog/add_attributes/)
 ### feeds/orders~OrderMgr : dw/order/OrderMgr ⎮ dw.order.OrderMgr
 **Kind**: inner constant of [feeds/orders](#markdown-header-feedsorders)  
 ### feeds/orders~Export : [Export](#markdown-header-feedsordersexport-modulemodelsexportexport)
@@ -695,11 +725,12 @@ Used to ensure exported JSON is webservice compatible
 
 * [models/export](#markdown-header-modelsexport)
     * [~Export](#markdown-header-modelsexportexport)
-        * [new Export(params, seekableCallback)](#markdown-header-new-exportparams-seekablecallback)
+        * [new Export(params, iteratorCallback)](#markdown-header-new-exportparams-iteratorcallback)
         * [.isIncremental](#markdown-header-exportisincremental-boolean) : boolean
         * [.lastExported](#markdown-header-exportlastexported-date) : Date
         * [.header](#markdown-header-exportheader-array) : Array
-        * [.seekableIterator](#markdown-header-exportseekableiterator-dwutilseekableiteratordwutilseekableiterator) : dw/util/SeekableIterator ⎮ dw.util.SeekableIterator
+        * [.dataIterator](#markdown-header-exportdataiterator-dwutiliteratordwutiliteratoriterator) : dw/util/Iterator ⎮ dw.util.Iterator ⎮ Iterator
+        * [.readNext()](#markdown-header-exportreadnext-void) ⇒ void ⎮ *
         * [.buildRow(data)](#markdown-header-exportbuildrowdata-arraystring) ⇒ Array.<String>
         * [.writeRow(data)](#markdown-header-exportwriterowdata)
     * [~File](#markdown-header-modelsexportfile-dwiofiledwiofile) : dw/io/File ⎮ dw.io.File
@@ -710,33 +741,38 @@ Used to ensure exported JSON is webservice compatible
 **Kind**: inner class of [models/export](#markdown-header-modelsexport)  
 
 * [~Export](#markdown-header-modelsexportexport)
-    * [new Export(params, seekableCallback)](#markdown-header-new-exportparams-seekablecallback)
+    * [new Export(params, iteratorCallback)](#markdown-header-new-exportparams-iteratorcallback)
     * [.isIncremental](#markdown-header-exportisincremental-boolean) : boolean
     * [.lastExported](#markdown-header-exportlastexported-date) : Date
     * [.header](#markdown-header-exportheader-array) : Array
-    * [.seekableIterator](#markdown-header-exportseekableiterator-dwutilseekableiteratordwutilseekableiterator) : dw/util/SeekableIterator ⎮ dw.util.SeekableIterator
+    * [.dataIterator](#markdown-header-exportdataiterator-dwutiliteratordwutiliteratoriterator) : dw/util/Iterator ⎮ dw.util.Iterator ⎮ Iterator
+    * [.readNext()](#markdown-header-exportreadnext-void) ⇒ void ⎮ *
     * [.buildRow(data)](#markdown-header-exportbuildrowdata-arraystring) ⇒ Array.<String>
     * [.writeRow(data)](#markdown-header-exportwriterowdata)
 
-#### new Export(params, seekableCallback)
+#### new Export(params, iteratorCallback)
 
 | Param | Type |
 | --- | --- |
 | params | object | 
-| seekableCallback | function | 
+| iteratorCallback | function | 
 
 #### export.isIncremental : boolean
-**Kind**: instance property of [Export](#markdown-header-new-exportparams-seekablecallback)  
+**Kind**: instance property of [Export](#markdown-header-new-exportparams-iteratorcallback)  
 #### export.lastExported : Date
-**Kind**: instance property of [Export](#markdown-header-new-exportparams-seekablecallback)  
+**Kind**: instance property of [Export](#markdown-header-new-exportparams-iteratorcallback)  
 #### export.header : Array
-**Kind**: instance property of [Export](#markdown-header-new-exportparams-seekablecallback)  
-#### export.seekableIterator : dw/util/SeekableIterator ⎮ dw.util.SeekableIterator
-**Kind**: instance property of [Export](#markdown-header-new-exportparams-seekablecallback)  
+**Kind**: instance property of [Export](#markdown-header-new-exportparams-iteratorcallback)  
+#### export.dataIterator : dw/util/Iterator ⎮ dw.util.Iterator ⎮ Iterator
+**Kind**: instance property of [Export](#markdown-header-new-exportparams-iteratorcallback)  
+#### export.readNext() ⇒ void ⎮ *
+Reads next record, void return when reading is complete
+
+**Kind**: instance method of [Export](#markdown-header-new-exportparams-iteratorcallback)  
 #### export.buildRow(data) ⇒ Array.<String>
 Translates object into an array of mapped values
 
-**Kind**: instance method of [Export](#markdown-header-new-exportparams-seekablecallback)  
+**Kind**: instance method of [Export](#markdown-header-new-exportparams-iteratorcallback)  
 
 | Param | Type |
 | --- | --- |
@@ -745,7 +781,7 @@ Translates object into an array of mapped values
 #### export.writeRow(data)
 Writes array of data to file
 
-**Kind**: instance method of [Export](#markdown-header-new-exportparams-seekablecallback)  
+**Kind**: instance method of [Export](#markdown-header-new-exportparams-iteratorcallback)  
 
 | Param | Type |
 | --- | --- |
@@ -1151,30 +1187,3 @@ Registry object
 
 #### trigger~model : Trigger
 **Kind**: inner property of trigger  
-## template/footer
-
-* [template/footer](#markdown-header-templatefooter)
-    * [~stringifyError(key, value)](#markdown-header-templatefooterstringifyerrorkey-value-) ⇒ *
-    * [~afterFooter(params)](#markdown-header-templatefooterafterfooterparams)
-
-### template/footer~stringifyError(key, value) ⇒ *
-Helper method to stringify an Error instance
-
-**Kind**: inner method of [template/footer](#markdown-header-templatefooter)  
-
-| Param | Type |
-| --- | --- |
-| key | string | 
-| value | * | 
-
-### template/footer~afterFooter(params)
-Template-based hook function
-Used here to insert Marketing Cloud tracking analytics into each page
-Doesn't return any value, so other hooks can also execute
-
-**Kind**: inner method of [template/footer](#markdown-header-templatefooter)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| params | Object | Parameters from the template, includes requesting page's pdict as `pageParams` property |
-

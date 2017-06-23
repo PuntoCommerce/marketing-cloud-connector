@@ -2,39 +2,39 @@
   "hooks": [
     {
       "name": "app.communication.handler.registerHandler",
-      "script": "./communication/handler"
+      "script": "~/cartridge/scripts/communication/handler"
     },
     {
       "name": "app.communication.account.created",
-      "script": "./communication/account"
+      "script": "~/cartridge/scripts/communication/account"
     },
     {
       "name": "app.communication.account.updated",
-      "script": "./communication/account"
+      "script": "~/cartridge/scripts/communication/account"
     },
     {
       "name": "app.communication.account.passwordChanged",
-      "script": "./communication/account"
+      "script": "~/cartridge/scripts/communication/account"
     },
     {
       "name": "app.communication.account.passwordReset",
-      "script": "./communication/account"
+      "script": "~/cartridge/scripts/communication/account"
     },
     {
       "name": "app.communication.account.lockedOut",
-      "script": "./communication/account"
+      "script": "~/cartridge/scripts/communication/account"
     },
     {
       "name": "app.communication.customerService.contactUs",
-      "script": "./communication/customerService"
+      "script": "~/cartridge/scripts/communication/customerService"
     },
     {
       "name": "app.communication.giftCertificate.sendCertificate",
-      "script": "./communication/giftCertificate"
+      "script": "~/cartridge/scripts/communication/giftCertificate"
     },
     {
       "name": "app.communication.order.confirmation",
-      "script": "./communication/order"
+      "script": "~/cartridge/scripts/communication/order"
     }
 
   ]
