@@ -10,24 +10,24 @@ It connects Commerce Cloud to Marketing Cloud "above the API", which means that 
 #### Transactional emails ####
 The following OOB SiteGenesis emails are replaced with MC email triggers: 
 
-    * Account - Created
-    * Account - Updated
-    * Account - Password Changed
-    * Account - Password Reset
-    * Account - Locked Out
-    * Customer Service - Contact Us
-    * Gift Certificate - Send Certificate
-    * Order - Confirmation 
+* Account - Created
+* Account - Updated
+* Account - Password Changed
+* Account - Password Reset
+* Account - Locked Out
+* Customer Service - Contact Us
+* Gift Certificate - Send Certificate
+* Order - Confirmation 
 
 Transactional emails are  built using SFCC platform hooks, leveraging "triggered email" functionality in Marketing Cloud, to send emails. Configurable trigger definitions, stored in Custom Objects, are used to support custom trigger keys as well as support mapping of data for each trigger, from predefined attribute values to data extension attributes that you define. Configuration can be used to achieve a mix and match of SiteGenesis emails with Marketing Cloud emails.
 
 #### Data sync ####
 Data sync to Marketing Cloud via jobs:
 
-	* Product Catalog
-	* Content Catalog
-	* Customers
-	* Orders
+* Product Catalog
+* Content Catalog
+* Customers
+* Orders
 
 ### Dependencies ###
 
