@@ -1,0 +1,12 @@
+{
+  "name": "marketing-cloud-connector",
+  "version": "0.0.1",
+  "devDependencies": {
+    "dmd-bitbucket": "^0.1.10",
+    "jsdoc-to-markdown": "^3.0.0"
+  },
+  "scripts": {
+    "docs": "jsdoc2md --plugin dmd-bitbucket --files cartridges/int_marketing_cloud/**/*.js > api.md",
+    "treegen": "find . -exec git ls-files -z -o -k -d --directory {} + | tr '\\000' '|' | sed -e 's/|$/.*/g;s!/|!|!g;s/\\./\\\\./g;s/^/.*/g;s/|/.*|.*/g' | awk '{print $1\"|.*\\\\.git.*\"}' | xargs -J % find -E . ! -regex '%' | sed -e 's;[^/]*\\/;|__;g;s;__|; |;g'"
+  }
+}
