@@ -108,9 +108,23 @@ ServiceRegistry.configure('marketingcloud.rest.auth', {
      * Create request for service authentication
      * @param {dw/svc/HTTPService|dw.svc.HTTPService} svc
      * @throws {Error} Throws error when service credentials are missing
-     * @todo Switch credentials based on site suffix, fall back on a default
      */
     createRequest: function(svc /*, params*/) {
+        var origCredentialID = svc.getCredentialID() || 'marketingcloud.rest.auth',
+            credArr = origCredentialID.split('-'),
+            credArrSiteID = credArr[credArr.length-1],
+            siteID = require('dw/system/Site').current.ID;
+        if (credArrSiteID !== siteID) {
+            // Attempt to set to site-specific credential
+            try {
+                svc.setCredentialID(origCredentialID + '-' + siteID);
+            } catch(e) {
+                // site-specific credential doesn't exist, reset
+                svc.setCredentialID(origCredentialID);
+            }
+        }
+        Logger.debug('MC Connector credential ID: {0}', svc.getCredentialID());
+
         var svcCredential = svc.getConfiguration().credential;
         if (empty(svcCredential.user) || empty(svcCredential.password)) {
             throw new Error('Service configuration requires valid client ID (user) and secret (password)');
@@ -240,8 +254,11 @@ ServiceRegistry.configure('marketingcloud.rest.platform.endpoints', {
  * Request Args: -
  */
 ServiceRegistry.configure('marketingcloud.rest.platform.tokenContext', {
+    /**
+     * @param {dw/svc/HTTPService|dw.svc.HTTPService} svc
+     */
     createRequest: function(svc /*, params*/) {
-        var svcURL = svc.getConfiguration().credential.URL,
+        var svcURL = svc.configuration.credential.URL,
             svcPath = '/platform/v1/tokenContext';
 
         setAuthHeader(svc);
