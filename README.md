@@ -15,8 +15,8 @@ Licensed under the current NDA and licensing agreement in place with your organi
 
 #### [unreleased] ####
 
-##### Fixed #####
-NONE
+##### Changed #####
+ - Updated data feeds to accept directory path for upload target server.
 
 #### [[1.0.0-rc.2]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.0-rc.2) - 2017-06-27 ####
  

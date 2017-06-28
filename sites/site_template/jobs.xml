@@ -19,6 +19,38 @@
                 <parameters>
                     <parameter name="SFTPServiceID">marketingcloud.sftp</parameter>
                     <parameter name="ExportFileName">catalogFeed.psv</parameter>
+                    <parameter name="TargetPath">/Import/</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <triggers>
+            <run-once enabled="false">
+                <date>2017-05-30Z</date>
+                <time>20:17:25.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+
+    <job job-id="MCC-Feed-Content" priority="0">
+        <description/>
+        <parameters/>
+        <flow>
+            <context site-id="SiteGenesis"/>
+            <step step-id="mcc-feed-exportContent" type="custom.MCC-Feed-ExportContent" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="ExportID">contentFeed</parameter>
+                    <parameter name="ExportFileName">contentFeed.psv</parameter>
+                    <parameter name="Delimiter">|</parameter>
+                    <parameter name="IncrementalExport">true</parameter>
+                </parameters>
+            </step>
+            <step step-id="mcc-feed-uploadcontent" type="custom.MCC-Feed-UploadContent" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="SFTPServiceID">marketingcloud.sftp</parameter>
+                    <parameter name="ExportFileName">contentFeed.psv</parameter>
+                    <parameter name="TargetPath">/Import/</parameter>
                 </parameters>
             </step>
         </flow>
@@ -53,6 +85,7 @@
                     <parameters>
                         <parameter name="SFTPServiceID">marketingcloud.sftp</parameter>
                         <parameter name="ExportFileName">customersFeed.psv</parameter>
+                        <parameter name="TargetPath">/Import/</parameter>
                     </parameters>
                 </step>
             </flow-template>
@@ -88,6 +121,7 @@
                     <parameters>
                         <parameter name="SFTPServiceID">marketingcloud.sftp</parameter>
                         <parameter name="ExportFileName">ordersFeed.psv</parameter>
+                        <parameter name="TargetPath">/Import/</parameter>
                     </parameters>
                 </step>
             </flow-template>

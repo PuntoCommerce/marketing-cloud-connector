@@ -58,6 +58,14 @@
               "@trim": "true",
               "description": "Filename for the exported feed.",
               "default-value": "catalogFeed.psv"
+            },
+            {
+              "@name": "TargetPath",
+              "@type": "string",
+              "@required": "false",
+              "@trim": "true",
+              "description": "Directory path the file should be stored into on the destination server.",
+              "default-value": "/Import/"
             }
           ]
         },
@@ -104,6 +112,14 @@
               "@trim": "true",
               "description": "Filename for the exported feed.",
               "default-value": "contentFeed.psv"
+            },
+            {
+              "@name": "TargetPath",
+              "@type": "string",
+              "@required": "false",
+              "@trim": "true",
+              "description": "Directory path the file should be stored into on the destination server.",
+              "default-value": "/Import/"
             }
           ]
         },
@@ -150,6 +166,14 @@
               "@trim": "true",
               "description": "Filename for the exported feed.",
               "default-value": "ordersFeed.psv"
+            },
+            {
+              "@name": "TargetPath",
+              "@type": "string",
+              "@required": "false",
+              "@trim": "true",
+              "description": "Directory path the file should be stored into on the destination server.",
+              "default-value": "/Import/"
             }
           ]
         },
@@ -196,6 +220,14 @@
               "@trim": "true",
               "description": "Filename for the exported feed.",
               "default-value": "customersFeed.psv"
+            },
+            {
+              "@name": "TargetPath",
+              "@type": "string",
+              "@required": "false",
+              "@trim": "true",
+              "description": "Directory path the file should be stored into on the destination server.",
+              "default-value": "/Import/"
             }
           ]
         },
