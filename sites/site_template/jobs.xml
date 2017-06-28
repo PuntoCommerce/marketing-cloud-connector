@@ -54,6 +54,7 @@
                 </parameters>
             </step>
         </flow>
+        <rules/>
         <triggers>
             <run-once enabled="false">
                 <date>2017-05-30Z</date>
@@ -90,6 +91,7 @@
                 </step>
             </flow-template>
         </split>
+        <rules/>
         <triggers>
             <run-once enabled="false">
                 <date>2017-06-19Z</date>
@@ -126,6 +128,7 @@
                 </step>
             </flow-template>
         </split>
+        <rules/>
         <triggers>
             <run-once enabled="false">
                 <date>2017-06-19Z</date>
@@ -149,6 +152,7 @@
                 </step>
             </flow-template>
         </split>
+        <rules/>
         <triggers>
             <run-once enabled="false">
                 <date>2017-06-19Z</date>
@@ -172,6 +176,7 @@
                 </step>
             </flow-template>
         </split>
+        <rules/>
         <triggers>
             <run-once enabled="false">
                 <date>2017-06-19Z</date>
