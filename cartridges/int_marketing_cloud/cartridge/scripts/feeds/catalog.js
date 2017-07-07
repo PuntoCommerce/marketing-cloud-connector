@@ -5,9 +5,13 @@
  */
 
 /**
- * @type {dw/catalog/ProductMgr|dw.catalog.ProductMgr}
+ * @type {dw/catalog/ProductSearchModel|dw.catalog.ProductSearchModel}
  */
-const ProductMgr = require('dw/catalog/ProductMgr');
+const ProductSearchModel = require('dw/catalog/ProductSearchModel');
+/**
+ * @type {dw/catalog/CatalogMgr|dw.catalog.CatalogMgr}
+ */
+const CatalogMgr = require('dw/catalog/CatalogMgr');
 
 /**
  * @type {module:models/export~Export}
@@ -20,15 +24,24 @@ const Export = require('../models/export');
  */
 var exportModel;
 
+/**
+ * @type {dw/catalog/ProductSearchModel|dw.catalog.ProductSearchModel}
+ */
+var PSM;
+
 function beforeStep(parameters, stepExecution) {
     exportModel = new Export(parameters, function(em){
-        return ProductMgr.queryAllSiteProducts();
+        PSM = new ProductSearchModel();
+        PSM.setCategoryID(CatalogMgr.siteCatalog.root.ID);
+        PSM.setRecursiveCategorySearch(true);
+        PSM.search();
+        return PSM.getProducts();
     });
     exportModel.writeHeader();
 }
 
 function getTotalCount(parameters, stepExecution) {
-    return exportModel.dataIterator.getCount();
+    return PSM.getCount();
 }
 
 function read(parameters, stepExecution) {
@@ -78,23 +91,70 @@ function process(product, parameters, stepExecution) {
             skip = true;
         }
     }
-    if (!product.isOnline()) {
+    // we're only interested in regular-ish products
+    if (!product.isOnline() || product.isProductSet() || product.isBundle() || product.isVariant()) {
         skip = true;
     }
     if (!skip) {
-        var data = {
-            Product: product,
-            ProductLink: require('dw/web/URLUtils').abs('Product-Show', 'pid', product.ID).https(),
-            ImageLink: imageLink,
-            StandardPrice: standardPrice
+        return function buildVariants(writeNextCB){
+            var data;
+
+            // output product
+            data = buildProductData(product);
+            writeNextCB(data);
+
+            if (product.isMaster()) {
+                // output variants
+                var variants = product.getVariants();
+                var variant;
+                for (var indexPosition = 0, varLen = variants.length; indexPosition < varLen; indexPosition++) {
+                    variant = variants[indexPosition];
+                    if (exportModel.isIncremental) {
+                        if (variant.lastModified < exportModel.lastExported) {
+                            continue;
+                        }
+                    }
+                    if (!variant.isOnline())
+                        continue;
+                    data = buildProductData(variant, product);
+                    writeNextCB(data);
+                }
+            }
         };
-        return exportModel.buildRow(data);
     }
 }
 
+/**
+ * @param {dw/catalog/Product|dw.catalog.Product|dw/catalog/Variant|dw.catalog.Variant} product
+ * @param {dw/catalog/Product|dw.catalog.Product} masterProduct
+ * @returns {Array<String>}
+ */
+function buildProductData(product, masterProduct) {
+    var data = {
+        Product: product,
+        ProductLink: require('dw/web/URLUtils').abs('Product-Show', 'pid', product.ID).https(),
+        ImageLink: imageLink,
+        StandardPrice: standardPrice
+    };
+    if (!empty(masterProduct)) {
+        data._aliases = { // fallback mappings for when the default doesn't return a valid value
+            Product: masterProduct
+        };
+    }
+    return exportModel.buildRow();
+}
+
 function write(lines, parameters, stepExecution) {
-    for (var i = 0; i < lines.size(); i++) {
-        exportModel.writeRow(lines.get(i));
+    var row;
+    for (var i = 0; i < lines.length; i++) {
+        row = lines.get(i);
+        if (typeof(row) === 'function') {
+            row(function writeRow(data){
+                exportModel.writeRow(data);
+            });
+        } else {
+            exportModel.writeRow(row);
+        }
     }
 }
 

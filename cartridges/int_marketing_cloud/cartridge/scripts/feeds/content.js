@@ -5,6 +5,10 @@
  */
 
 /**
+ * @type {dw/content/ContentSearchModel|dw.content.ContentSearchModel}
+ */
+const ContentSearchModel = require('dw/content/ContentSearchModel');
+/**
  * @type {dw/content/ContentMgr|dw.content.ContentMgr}
  */
 const ContentMgr = require('dw/content/ContentMgr');
@@ -20,47 +24,24 @@ const Export = require('../models/export');
 var exportModel;
 
 /**
- * Recursive folder iterator
- * Yields instances of Content
- * @param {dw/content/Folder|dw.content.Folder} folder
+ * @type {dw/content/ContentSearchModel|dw.content.ContentSearchModel}
  */
-function folderIterator(folder) {
-    if (folder.isOnline()) {
-        var outerIter = folder.getOnlineContent().iterator();
-        while (outerIter.hasNext()) {
-            yield outerIter.next();
-        }
-        outerIter = folder.getOnlineSubFolders().iterator();
-        var innerIter;
-        while (outerIter.hasNext()) {
-            innerIter = folderIterator(outerIter.next());
-            while(innerIter !== null) {
-                try {
-                    yield innerIter.next();
-                } catch(e) {
-                    if (e instanceof StopIteration) {
-                        innerIter = null;
-                    } else {
-                        // re-throw
-                        throw e;
-                    }
-                }
-            }
-        }
-    }
-}
+var CSM;
 
 function beforeStep(parameters, stepExecution) {
     exportModel = new Export(parameters, function(em){
-        return folderIterator(ContentMgr.siteLibrary.root);
+        CSM = new ContentSearchModel();
+        CSM.setFolderID(ContentMgr.siteLibrary.root.ID);
+        CSM.setRecursiveFolderSearch(true);
+        CSM.search();
+        return CSM.getContent();
     });
     exportModel.writeHeader();
 }
 
-// no count available
-/*function getTotalCount(parameters, stepExecution) {
-    return exportModel.dataIterator.getCount();
-}*/
+function getTotalCount(parameters, stepExecution) {
+    return CSM.getCount();
+}
 
 function read(parameters, stepExecution) {
     return exportModel.readNext();
@@ -100,7 +81,7 @@ function afterStep(success, parameters, stepExecution) {
 
 module.exports = {
     beforeStep: beforeStep,
-    //getTotalCount: getTotalCount,
+    getTotalCount: getTotalCount,
     read: read,
     process: process,
     write: write,

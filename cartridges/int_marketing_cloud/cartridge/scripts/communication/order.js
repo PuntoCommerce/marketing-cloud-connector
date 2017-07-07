@@ -4,8 +4,9 @@
  * @module communication/order
  */
 
-var sendTrigger = require('./util/send').sendTrigger;
-var hookPath = 'app.communication.order.';
+const sendTrigger = require('./util/send').sendTrigger;
+const hookPath = 'app.communication.order.';
+const helpers = require('../util/helpers');
 
 /**
  * Trigger an order confirmation notification
@@ -14,7 +15,7 @@ var hookPath = 'app.communication.order.';
  * @returns {SynchronousPromise}
  */
 function confirmation(promise, data) {
-    data.orderAsXML = data.params.Order.getOrderExportXML(null, null, false);
+    data.orderAsXML = helpers.stripXmlNS( data.params.Order.getOrderExportXML(null, null, false) );
     return sendTrigger(hookPath + 'confirmation', promise, data);
 }
 

@@ -17,6 +17,15 @@ Licensed under the current NDA and licensing agreement in place with your organi
 
 ##### Changed #####
  - Updated data feeds to accept directory path for upload target server.
+ - Changed product catalog export to use ProductSearchModel, and ensure we output variants
+ - Changed content catalog export to use ContentSearchModel
+ - Moved util directory out of models directory
+ - Added fallback logic for data mappings (to support a fallback object, so if a value isn't found in variant, for example, we then search master)
+ - Updated orderAsXML to strip namespace from XML sent to MC.
+ - Added support for a "format" option for value mappings into MC. The format option is passed to dw.util.StringUtils along with the found value.
+ - Ensuring empty string on export for empty values, fixes some values that were returning "undefined".
+ - Exported fields are now trimmed to remove leading/trailing spaces.
+ - Updated api doc
 
 #### [[1.0.0-rc.2]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.0-rc.2) - 2017-06-27 ####
  

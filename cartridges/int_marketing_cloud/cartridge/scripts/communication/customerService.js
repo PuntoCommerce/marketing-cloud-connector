@@ -4,8 +4,8 @@
  * @module communication/customerService
  */
 
-var sendTrigger = require('./util/send').sendTrigger;
-var hookPath = 'app.communication.customerService.';
+const sendTrigger = require('./util/send').sendTrigger;
+const hookPath = 'app.communication.customerService.';
 
 /**
  * Trigger a customer service notification

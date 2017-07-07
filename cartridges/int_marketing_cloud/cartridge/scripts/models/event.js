@@ -4,7 +4,7 @@
  * @module models/event
  */
 
-var helpers = require('./util/helpers');
+const helpers = require('../util/helpers');
 
 /**
  * Recursive method to handle Event during JSON.stringify().

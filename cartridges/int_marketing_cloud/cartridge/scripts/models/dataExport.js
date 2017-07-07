@@ -9,8 +9,10 @@
  * @const {string}
  * @private
  */
-var customObjectName = 'MarketingCloudDataExport';
-var helpers = require('./util/helpers');
+const customObjectName = 'MarketingCloudDataExport';
+const helpers = require('../util/helpers');
+
+const format = require('dw/util/StringUtils').format;
 
 /**
  * DataExport constructor
@@ -77,10 +79,17 @@ DataExport.prototype = {
         var rowVal = [];
         data.SiteID = require('dw/system/Site').current.ID;
         helpers.mapValues(this.attributes, data, function(key, val){
+            // The mapped value may be a function defined by trigger or feed
+            // Function should have signature of `function(key, data){}`
             if (typeof(val) === 'function') {
                 val = val(key, data);
             }
             if (helpers.isObject(key)) {
+                if ('format' in key) {
+                    val = format(key.format, val);
+                } else {
+                    val = helpers.dwValue(val);
+                }
                 if ('required' in key && key.required && empty(val)) {
                     missingRequired = true;
                     return;
@@ -95,13 +104,20 @@ DataExport.prototype = {
                             break;
                     }
                 }
+            } else {
+                val = helpers.dwValue(val);
             }
             if (typeof(val) === 'string') {
                 // remove line breaks, otherwise MC complains, despite correct quoting.
                 val = val.replace(/(\r\n|\n|\r)/gm,' ');
             }
+            if (empty(val)) {
+                // ensure empty string, rather than empty array, undefined, null, etc
+                val = '';
+            }
             rowVal.push(val);
         });
+        // Row is not returned if any single required field was missing
         if (!missingRequired) {
             return rowVal;
         }

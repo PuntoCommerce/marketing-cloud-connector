@@ -106,17 +106,37 @@ Export.prototype = {
 
     /**
      * Writes array of data to file
-     * @param {dw/util/ArrayList|dw.util.ArrayList} data
+     * @param {dw/util/Collection|dw.util.Collection|Array} data
      */
     writeRow: function writeRow(data) {
-        // interestingly, DW logic apparently converts native array to ArrayList...
-        this._csvWriter.writeNext(data.toArray());
+        if (!empty(data)) {
+            /**
+             * @type {Array}
+             */
+            var rowArr;
+            var trim = require('dw/util/StringUtils').trim;
+            // interestingly, DW logic apparently converts native array to a Collection/List/ArrayList...
+            if (data instanceof require('dw/util/Collection')) {
+                rowArr = data.toArray();
+            } else {
+                rowArr = data;
+            }
+            rowArr = rowArr.map(function(val){
+                if (val && typeof(val) === 'string') {
+                    val = trim(val);
+                }
+                return val;
+            });
+            this._csvWriter.writeNext(rowArr);
+        }
     },
 
     close: function close() {
         this._csvWriter.close();
         this._fileWriter.close();
-        this.dataIterator.close();
+        if ('close' in this.dataIterator) {
+            this.dataIterator.close();
+        }
         this._model.markExported();
     }
 };

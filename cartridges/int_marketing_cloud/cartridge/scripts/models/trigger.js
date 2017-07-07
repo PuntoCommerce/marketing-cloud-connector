@@ -9,8 +9,8 @@
  * @const {string}
  * @private
  */
-var customObjectName = 'MarketingCloudTriggers';
-var helpers = require('./util/helpers');
+const customObjectName = 'MarketingCloudTriggers';
+const helpers = require('../util/helpers');
 
 /**
  * Returns trigger definition for a hook
@@ -85,6 +85,15 @@ function newMessage(data){
     msg.setFrom(data.fromEmail).setTo(toEmail);
 
     helpers.mapValues(this.attributes, data, function(key, val){
+        if (helpers.isObject(key)) {
+            if ('format' in key) {
+                val = format(key.format, val);
+            } else {
+                val = helpers.dwValue(val);
+            }
+        } else {
+            val = helpers.dwValue(val);
+        }
         msg.setSubscriberAttribute(key, val);
     });
     this.message = msg;

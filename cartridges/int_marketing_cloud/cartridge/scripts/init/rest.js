@@ -17,8 +17,8 @@
  * Production API: https://www.exacttargetapis.com
  */
 
-var ServiceRegistry = require('dw/svc/ServiceRegistry');
-var Logger = require('dw/system/Logger');
+const ServiceRegistry = require('dw/svc/ServiceRegistry');
+const Logger = require('dw/system/Logger');
 
 /**
  * Inserts auth token into request header
