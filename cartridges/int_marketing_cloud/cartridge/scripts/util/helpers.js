@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @module models/util/helpers
+ * @module util/helpers
  */
 
 /**
@@ -121,7 +121,7 @@ function getParamValue(attr, data) {
     var value;
     var attrs = attr.split('.');
     var obj = data;
-    attrs.forEach(function(k, i, arr){
+    attrs.forEach(function objectMapper(k, i, arr){
         if (empty(obj) || !isObject(obj)) {
             value = obj;
             return;
@@ -139,16 +139,22 @@ function getParamValue(attr, data) {
             }
         }
         if (i === arr.length-1) {
-            value = dwValue(obj);
+            value = obj;
         }
     });
+
+    // fall back to object mapping in data._aliases, if no value was found
+    if (empty(value) && '_aliases' in data && attrs[0] in data) {
+        value = getParamValue(attr, data._aliases);
+    }
+
     return value;
 }
 
 /**
  * Handles object key/value mapping, writes to callback that accepts key and value as params
  * @param {Object} obj Keys serve as the value path, Values serve as the key to be written to
- * @param {Object} data Source of data that should fulfill provide values to be mapped
+ * @param {Object} data Source of data that should provide values to be mapped
  * @param {Function} outputCallback
  */
 function mapValues(obj, data, outputCallback) {
@@ -188,6 +194,15 @@ function isNonEmptyString(str) {
     return typeof(str) === 'string' && str !== '';
 }
 
+/**
+ * Strip XML namespace (interferes with MC xml parser otherwise)
+ * @param xmlStr
+ * @returns {string}
+ */
+function stripXmlNS(xmlStr) {
+    return xmlStr.replace(/\s+xmlns="[^"]+"/g, '');
+}
+
 exports.isObject = isObject;
 exports.ucfirst = ucfirst;
 exports.dwValue = dwValue;
@@ -198,3 +213,4 @@ exports.getParamValue = getParamValue;
 exports.mapValues = mapValues;
 exports.objValues = objValues;
 exports.isNonEmptyString = isNonEmptyString;
+exports.stripXmlNS = stripXmlNS;

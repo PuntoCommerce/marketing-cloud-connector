@@ -38,6 +38,9 @@
         <object-attribute attribute-id="exportAttributes">{
     "SiteID": "SiteID",
     "Product.ID": ["ProductID", {"label":"ProductCode", "required":true}],
+    "Product.masterProduct.ID": "MasterID",
+    "Product.master": {"label":"IsMaster", "required":true, "type":"bool"},
+    "Product.variant": {"label":"IsVariant", "required":true, "type":"bool"},
     "Product.name": {"label":"ProductName", "required":true},
     "Product.primaryCategory.ID": {"label":"ProductType", "required":true},
     "ProductLink": {"label":"ProductLink", "required":true},

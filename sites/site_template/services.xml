@@ -12,7 +12,7 @@
         <password masked="true">********</password>
     </service-credential>
 
-    <service-credential service-credential-id="marketingcloud.rest.auth-SITEID">
+    <service-credential service-credential-id="marketingcloud.rest.auth">
         <url>https://auth.exacttargetapis.com/v1/requestToken</url>
         <user-id>API User ID</user-id>
         <password masked="true">********</password>
@@ -45,7 +45,7 @@
         <comm-log-enabled>true</comm-log-enabled>
         <mock-mode-enabled>false</mock-mode-enabled>
         <profile-id>marketingcloud.rest</profile-id>
-        <credential-id>marketingcloud.rest.auth-SITEID</credential-id>
+        <credential-id>marketingcloud.rest.auth</credential-id>
     </service>
 
     <service service-id="marketingcloud.rest.messaging.send">

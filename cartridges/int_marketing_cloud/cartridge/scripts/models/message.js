@@ -4,7 +4,7 @@
  * @module models/message
  */
 
-var helpers = require('./util/helpers');
+const helpers = require('../util/helpers');
 
 /**
  * Recursive method to handle Message during JSON.stringify().

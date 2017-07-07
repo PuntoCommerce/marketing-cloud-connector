@@ -9,8 +9,8 @@
  * @const {string}
  * @private
  */
-var customObjectName = 'MarketingCloudDataExportStatus';
-var helpers = require('./util/helpers');
+const customObjectName = 'MarketingCloudDataExportStatus';
+const helpers = require('../util/helpers');
 
 /**
  * DataExportStatus constructor
