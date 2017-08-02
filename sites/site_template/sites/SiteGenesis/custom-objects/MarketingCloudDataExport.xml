@@ -20,7 +20,8 @@
     "Profile.previousLoginTime": "PreviousLogin",
     "Profile.previousVisitTime": "PreviousVisit",
     "Profile.lastLoginTime": "LastLogin",
-    "Profile.lastVisitTime": "LastVisit"
+    "Profile.lastVisitTime": "LastVisit",
+    "Customer.customerGroups": {"label":"CustomerGroups", "type":"array", "mappedValue": "ID", "concat": true}
 }</object-attribute>
     </custom-object>
 
@@ -47,6 +48,7 @@
     "Product.onlineFlag": {"label":"OnlineAvailability", "required":true, "type":"bool"},
     "Product.manufacturerSKU": "SkuID",
     "ImageLink": {"label":"ImageLink", "imageType":"large"},
+    "Images": {"label":"LargeImages", "imageType":"large"},
     "StandardPrice": "RegularPrice",
     "Product.priceModel.price.decimalValue": "SalePrice",
     "Product.shortDescription": "Description"

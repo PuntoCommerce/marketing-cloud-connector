@@ -34,13 +34,18 @@ function DataExportStatus(exportID) {
      * @type {Date}
      */
     this.lastExported = this._definition.lastExportRun;
+    /**
+     * Current export date
+     * @type {Date}
+     */
+    this.currentExport = new Date();
 }
 
 DataExportStatus.prototype = {
     markExported: function markExported() {
         var that = this;
         require('dw/system/Transaction').wrap(function() {
-            that.lastExported = new Date();
+            that.lastExported = that.currentExport;
             that._definition.lastExportRun = that.lastExported;
         });
     }

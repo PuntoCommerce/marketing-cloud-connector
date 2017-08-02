@@ -114,38 +114,48 @@ function mergeAttributes(newAttributes, oldAttributes) {
 /**
  * Returns parameter value from data (uses recursion)
  * @param {string} attr Period-delimited path to a parameter
- * @param {Object} data
+ * @param {Array|Object} data
  * @returns {*}
  */
 function getParamValue(attr, data) {
     var value;
     var attrs = attr.split('.');
-    var obj = data;
-    attrs.forEach(function objectMapper(k, i, arr){
-        if (empty(obj) || !isObject(obj)) {
-            value = obj;
-            return;
+    var obj;
+    if (!Array.isArray(data)) {
+        data = [data];
+    }
+    for (var di=0; di<data.length; di++) {
+        obj = data[di];
+        attrs.forEach(function objectMapper(k, i, arr){
+            if (empty(obj) || !isObject(obj)) {
+                value = obj;
+                return;
+            }
+
+            if (i === 0) {
+                if (k !== 'params' && k in obj) {
+                    obj = obj[k];
+                } else if ('params' in obj && obj.params.hasOwnProperty(k)) {
+                    obj = obj.params[k];
+                }
+            } else {
+                if (k in obj) {
+                    obj = obj[k];
+                }
+            }
+            if (i === arr.length-1) {
+                value = obj;
+            }
+        });
+
+        // fall back to object mapping in data._aliases, if no value was found
+        if (empty(value) && '_aliases' in data && attrs[0] in data._aliases) {
+            value = getParamValue(attr, data._aliases);
         }
 
-        if (i === 0) {
-            if (k !== 'params' && k in obj) {
-                obj = obj[k];
-            } else if ('params' in obj && obj.params.hasOwnProperty(k)) {
-                obj = obj.params[k];
-            }
-        } else {
-            if (k in obj) {
-                obj = obj[k];
-            }
+        if (!empty(value)) {
+            break;
         }
-        if (i === arr.length-1) {
-            value = obj;
-        }
-    });
-
-    // fall back to object mapping in data._aliases, if no value was found
-    if (empty(value) && '_aliases' in data && attrs[0] in data) {
-        value = getParamValue(attr, data._aliases);
     }
 
     return value;
@@ -154,8 +164,8 @@ function getParamValue(attr, data) {
 /**
  * Handles object key/value mapping, writes to callback that accepts key and value as params
  * @param {Object} obj Keys serve as the value path, Values serve as the key to be written to
- * @param {Object} data Source of data that should provide values to be mapped
- * @param {Function} outputCallback
+ * @param {Array|Object} data Source of data that should provide values to be mapped. Should be an object, or an array of objects
+ * @param {Function} outputCallback Callback that is executed with resulting key and value. Signature: function(key, value)
  */
 function mapValues(obj, data, outputCallback) {
     for (var attr in obj) {
@@ -187,6 +197,107 @@ function objValues(obj) {
 }
 
 /**
+ * Build a simple array of values from a collection
+ * @param {string} valueKey The key to be fetched from each item in collection
+ * @param {Array|dw/util/List|dw.util.List} iterable Array or List to iterate
+ * @param {Object} fallbackData Fallback data object
+ * @returns {Array}
+ */
+function buildSimpleArrayFromIterable(valueKey, iterable, fallbackData) {
+    var arrOut = [];
+    var val;
+    for (var i = 0; i < iterable.length; i++) {
+        val = mappingFilter(valueKey, getParamValue(valueKey, fallbackData ? [iterable[i], fallbackData] : iterable[i]), iterable[i]);
+        arrOut.push(val);
+    }
+    return arrOut;
+}
+
+/**
+ * Build an array of objects from a collection
+ * @param {Object} objMap Keys serve as the value path, Values serve as the key to be written to
+ * @param {Array|dw/util/List|dw.util.List} iterable Array or List to iterate
+ * @param {Object} fallbackData Fallback data object
+ * @returns {Array}
+ */
+function buildMappedArrayFromIterable(objMap, iterable, fallbackData) {
+    var arrOut = [];
+    var val;
+    for (var i = 0; i < iterable.length; i++) {
+        val = {};
+        mapValues(objMap, fallbackData ? [iterable[i], fallbackData] : iterable[i], function mapObj(k, v){
+            val[k] = mappingFilter(k, v, iterable[i]);
+        });
+        arrOut.push(val);
+    }
+    return arrOut;
+}
+
+/**
+ * Mapping callback, called by helpers.mapValues()
+ * @param {string|Object} key The data map definition. Object = complex definition
+ * @param {*} val The value mapped by helpers.getParamValue()
+ * @param {Object} data Source of data, used when mapped value is a callback itself
+ * @throws {RequiredAttributeException}
+ */
+function mappingFilter(key, val, data) {
+    // The mapped value may be a function defined by trigger or feed
+    // Function should have signature of `function(key, data){}`
+    if (typeof(val) === 'function') {
+        val = val(key, data);
+    }
+    if (isObject(key)) {
+        if ('format' in key) {
+            val = require('dw/util/StringUtils').format(key.format, val);
+        } else {
+            val = dwValue(val);
+        }
+        if ('required' in key && key.required && empty(val)) {
+            throw new RequiredAttributeException(key.label);
+        }
+        if ('type' in key) {
+            switch (key.type) {
+                case 'bool':
+                    val = val ? 'Y' : 'N';
+                    break;
+                case 'array':
+                    // mappedValue can be a string or an object
+                    // if an object, it's similar to the standard attribute mapping definition
+                    var mapDef = key.mappedValue;
+                    var concat = 'concat' in key && key.concat;
+                    if (typeof(mapDef) === 'string') {
+                        val = buildSimpleArrayFromIterable(mapDef, val, data);
+                    } else {
+                        val = buildMappedArrayFromIterable(mapDef, val, data);
+                    }
+                    if (concat === true && !empty(val)) {
+                        val = val.join(',');
+                    }
+                    break;
+                default:
+                    // no change
+                    break;
+            }
+        }
+    } else {
+        val = dwValue(val);
+    }
+
+    if (typeof(val) === 'string') {
+        // remove line breaks, otherwise MC complains, despite correct quoting.
+        val = val.replace(/(\r\n|\n|\r)/gm, ' ');
+    } else if (Array.isArray(val)) {
+        val = JSON.stringify(val);
+    }
+
+    if (empty(val)) {
+        // ensure empty string, rather than empty array, undefined, null, etc
+        val = '';
+    }
+    return val;
+}
+
+/**
  * @param {*} str
  * @returns {boolean}
  */
@@ -203,6 +314,21 @@ function stripXmlNS(xmlStr) {
     return xmlStr.replace(/\s+xmlns="[^"]+"/g, '');
 }
 
+/**
+ * Custom error, thrown when required attribute is missing.
+ * @param {string} attribute Attribute that is missing
+ * @param {string} [message] Optional custom message
+ * @constructor
+ */
+function RequiredAttributeException(attribute, message) {
+    this.name = 'RequiredAttributeException';
+    this.attribute = attribute;
+    this.message = message || 'Required attribute "'+ attribute +'" is missing.';
+    this.stack = (new Error()).stack;
+}
+RequiredAttributeException.prototype = Object.create(Error.prototype);
+RequiredAttributeException.prototype.constructor = RequiredAttributeException;
+
 exports.isObject = isObject;
 exports.ucfirst = ucfirst;
 exports.dwValue = dwValue;
@@ -212,5 +338,9 @@ exports.mergeAttributes = mergeAttributes;
 exports.getParamValue = getParamValue;
 exports.mapValues = mapValues;
 exports.objValues = objValues;
+exports.buildSimpleArrayFromIterable = buildSimpleArrayFromIterable;
+exports.buildMappedArrayFromIterable = buildMappedArrayFromIterable;
+exports.mappingFilter = mappingFilter;
 exports.isNonEmptyString = isNonEmptyString;
 exports.stripXmlNS = stripXmlNS;
+exports.RequiredAttributeException = RequiredAttributeException;
