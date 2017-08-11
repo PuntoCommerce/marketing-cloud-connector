@@ -227,8 +227,13 @@ Resolves promise with a {{status: string}} Response object. At a minimum it shou
     * [~ProductSearchModel](#markdown-header-feedscatalogproductsearchmodel-dwcatalogproductsearchmodeldwcatalogproductsearchmodel) : dw/catalog/ProductSearchModel ⎮ dw.catalog.ProductSearchModel
     * [~CatalogMgr](#markdown-header-feedscatalogcatalogmgr-dwcatalogcatalogmgrdwcatalogcatalogmgr) : dw/catalog/CatalogMgr ⎮ dw.catalog.CatalogMgr
     * [~Export](#markdown-header-feedscatalogexport-modulemodelsexportexport) : [Export](#markdown-header-feedscatalogexport-modulemodelsexportexport)
-    * [~process(product, parameters, stepExecution)](#markdown-header-feedscatalogprocessproduct-parameters-stepexecution-voidarray) ⇒ void ⎮ Array
-    * [~buildProductData(product, masterProduct)](#markdown-header-feedscatalogbuildproductdataproduct-masterproduct-arraystring) ⇒ Array.<String>
+    * [~imageLink(cfg, data)](#markdown-header-feedscatalogimagelinkcfg-data-dwweburldwweburl) ⇒ dw/web/URL ⎮ dw.web.URL
+    * [~images(cfg, data)](#markdown-header-feedscatalogimagescfg-data-array) ⇒ Array
+    * [~standardPrice(cfg, data)](#markdown-header-feedscatalogstandardpricecfg-data-dwutildecimaldwutildecimalvoid) ⇒ dw/util/Decimal ⎮ dw.util.Decimal ⎮ void
+    * [~process(product, parameters, stepExecution)](#markdown-header-feedscatalogprocessproduct-parameters-stepexecution-voidfunction) ⇒ void ⎮ function
+    * [~writeProduct(product, parameters, writeNextCB)](#markdown-header-feedscatalogwriteproductproduct-parameters-writenextcb)
+    * [~writeChildProducts(childProducts, parentProduct, writeNextCB)](#markdown-header-feedscatalogwritechildproductschildproducts-parentproduct-writenextcb)
+    * [~buildProductData(product, defaultProduct)](#markdown-header-feedscatalogbuildproductdataproduct-defaultproduct-arraystring) ⇒ Array.<String>
 
 ### feeds/catalog~exportModel : [Export](#markdown-header-feedscatalogexport-modulemodelsexportexport)
 **Kind**: inner property of [feeds/catalog](#markdown-header-feedscatalog)  
@@ -241,7 +246,37 @@ Resolves promise with a {{status: string}} Response object. At a minimum it shou
 **Kind**: inner constant of [feeds/catalog](#markdown-header-feedscatalog)  
 ### feeds/catalog~Export : [Export](#markdown-header-feedscatalogexport-modulemodelsexportexport)
 **Kind**: inner constant of [feeds/catalog](#markdown-header-feedscatalog)  
-### feeds/catalog~process(product, parameters, stepExecution) ⇒ void ⎮ Array
+### feeds/catalog~imageLink(cfg, data) ⇒ dw/web/URL ⎮ dw.web.URL
+Returns https image link, as long as image type is defined in the property configuration
+
+**Kind**: inner method of [feeds/catalog](#markdown-header-feedscatalog)  
+
+| Param |
+| --- |
+| cfg | 
+| data | 
+
+### feeds/catalog~images(cfg, data) ⇒ Array
+Returns an array of image links
+
+**Kind**: inner method of [feeds/catalog](#markdown-header-feedscatalog)  
+
+| Param |
+| --- |
+| cfg | 
+| data | 
+
+### feeds/catalog~standardPrice(cfg, data) ⇒ dw/util/Decimal ⎮ dw.util.Decimal ⎮ void
+Returns the base price for a product (using pricebook inheritance to determine price ancestor)
+
+**Kind**: inner method of [feeds/catalog](#markdown-header-feedscatalog)  
+
+| Param |
+| --- |
+| cfg | 
+| data | 
+
+### feeds/catalog~process(product, parameters, stepExecution) ⇒ void ⎮ function
 **Kind**: inner method of [feeds/catalog](#markdown-header-feedscatalog)  
 
 | Param | Type |
@@ -250,13 +285,33 @@ Resolves promise with a {{status: string}} Response object. At a minimum it shou
 | parameters |  | 
 | stepExecution |  | 
 
-### feeds/catalog~buildProductData(product, masterProduct) ⇒ Array.<String>
+### feeds/catalog~writeProduct(product, parameters, writeNextCB)
+This method will write out any products in the search index, that are allowed by job preferences.
+
 **Kind**: inner method of [feeds/catalog](#markdown-header-feedscatalog)  
 
 | Param | Type |
 | --- | --- |
-| product | dw/catalog/Product ⎮ dw.catalog.Product ⎮ dw/catalog/Variant ⎮ dw.catalog.Variant | 
-| masterProduct | dw/catalog/Product ⎮ dw.catalog.Product | 
+| product | dw/catalog/Product ⎮ dw.catalog.Product | 
+| parameters |  | 
+| writeNextCB | function | 
+
+### feeds/catalog~writeChildProducts(childProducts, parentProduct, writeNextCB)
+**Kind**: inner method of [feeds/catalog](#markdown-header-feedscatalog)  
+
+| Param | Type |
+| --- | --- |
+| childProducts | dw/util/Collection ⎮ dw.util.Collection | 
+| parentProduct | dw/catalog/Product ⎮ dw.catalog.Product | 
+| writeNextCB | function | 
+
+### feeds/catalog~buildProductData(product, defaultProduct) ⇒ Array.<String>
+**Kind**: inner method of [feeds/catalog](#markdown-header-feedscatalog)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| product | dw/catalog/Product ⎮ dw.catalog.Product ⎮ dw/catalog/Variant ⎮ dw.catalog.Variant |  |
+| defaultProduct | dw/catalog/Product ⎮ dw.catalog.Product | Product to use as fallback, such as for pricing |
 
 ## feeds/content
 
@@ -627,6 +682,7 @@ Array header (attributes object values)
         * [.siteID_exportID](#markdown-header-dataexportstatussiteid_exportid-string) : string
         * [._definition](#markdown-header-dataexportstatus_definition-dwobjectcustomattributesdwobjectcustomattributes) : dw/object/CustomAttributes ⎮ dw.object.CustomAttributes
         * [.lastExported](#markdown-header-dataexportstatuslastexported-date) : Date
+        * [.currentExport](#markdown-header-dataexportstatuscurrentexport-date) : Date
 
 ### models/dataExportStatus~DataExportStatus
 **Kind**: inner class of [models/dataExportStatus](#markdown-header-modelsdataexportstatus)  
@@ -636,6 +692,7 @@ Array header (attributes object values)
     * [.siteID_exportID](#markdown-header-dataexportstatussiteid_exportid-string) : string
     * [._definition](#markdown-header-dataexportstatus_definition-dwobjectcustomattributesdwobjectcustomattributes) : dw/object/CustomAttributes ⎮ dw.object.CustomAttributes
     * [.lastExported](#markdown-header-dataexportstatuslastexported-date) : Date
+    * [.currentExport](#markdown-header-dataexportstatuscurrentexport-date) : Date
 
 #### new DataExportStatus(exportID)
 DataExportStatus constructor
@@ -655,6 +712,10 @@ Definition object
 **Kind**: instance property of [DataExportStatus](#markdown-header-new-dataexportstatusexportid)  
 #### dataExportStatus.lastExported : Date
 Date last exported
+
+**Kind**: instance property of [DataExportStatus](#markdown-header-new-dataexportstatusexportid)  
+#### dataExportStatus.currentExport : Date
+Current export date
 
 **Kind**: instance property of [DataExportStatus](#markdown-header-new-dataexportstatusexportid)  
 ## models/event
@@ -1113,12 +1174,17 @@ Registry object
         * [.ucfirst(str)](#markdown-header-utilhelpersucfirststr-string) ⇒ string
         * [.dwValue(obj)](#markdown-header-utilhelpersdwvalueobj-) ⇒ *
     * _inner_
+        * [~RequiredAttributeException](#markdown-header-utilhelpersrequiredattributeexception)
+            * [new RequiredAttributeException(attribute, [message])](#markdown-header-new-requiredattributeexceptionattribute-message)
         * [~expandAttributes(attrJSON)](#markdown-header-utilhelpersexpandattributesattrjson-object) ⇒ Object
         * [~getCustomObject(customObjectName, objectID)](#markdown-header-utilhelpersgetcustomobjectcustomobjectname-objectid-dwobjectcustomattributesdwobjectcustomattributes) ⇒ dw/object/CustomAttributes ⎮ dw.object.CustomAttributes
         * [~mergeAttributes(newAttributes, oldAttributes)](#markdown-header-utilhelpersmergeattributesnewattributes-oldattributes)
         * [~getParamValue(attr, data)](#markdown-header-utilhelpersgetparamvalueattr-data-) ⇒ *
         * [~mapValues(obj, data, outputCallback)](#markdown-header-utilhelpersmapvaluesobj-data-outputcallback)
         * [~objValues(obj)](#markdown-header-utilhelpersobjvaluesobj-array) ⇒ Array
+        * [~buildSimpleArrayFromIterable(valueKey, iterable, fallbackData)](#markdown-header-utilhelpersbuildsimplearrayfromiterablevaluekey-iterable-fallbackdata-array) ⇒ Array
+        * [~buildMappedArrayFromIterable(objMap, iterable, fallbackData)](#markdown-header-utilhelpersbuildmappedarrayfromiterableobjmap-iterable-fallbackdata-array) ⇒ Array
+        * [~mappingFilter(key, val, data)](#markdown-header-utilhelpersmappingfilterkey-val-data)
         * [~isNonEmptyString(str)](#markdown-header-utilhelpersisnonemptystringstr-boolean) ⇒ boolean
         * [~stripXmlNS(xmlStr)](#markdown-header-utilhelpersstripxmlnsxmlstr-string) ⇒ string
 
@@ -1148,6 +1214,17 @@ Returns an object's preferred value, based on what DW object type it represents
 | Param | Type | Description |
 | --- | --- | --- |
 | obj | * | Object to use for value return |
+
+### util/helpers~RequiredAttributeException
+**Kind**: inner class of [util/helpers](#markdown-header-utilhelpers)  
+#### new RequiredAttributeException(attribute, [message])
+Custom error, thrown when required attribute is missing.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| attribute | string | Attribute that is missing |
+| [message] | string | Optional custom message |
 
 ### util/helpers~expandAttributes(attrJSON) ⇒ Object
 Expands JSON attributes
@@ -1186,7 +1263,7 @@ Returns parameter value from data (uses recursion)
 | Param | Type | Description |
 | --- | --- | --- |
 | attr | string | Period-delimited path to a parameter |
-| data | Object |  |
+| data | Array ⎮ Object |  |
 
 ### util/helpers~mapValues(obj, data, outputCallback)
 Handles object key/value mapping, writes to callback that accepts key and value as params
@@ -1196,8 +1273,8 @@ Handles object key/value mapping, writes to callback that accepts key and value 
 | Param | Type | Description |
 | --- | --- | --- |
 | obj | Object | Keys serve as the value path, Values serve as the key to be written to |
-| data | Object | Source of data that should provide values to be mapped |
-| outputCallback | function |  |
+| data | Array ⎮ Object | Source of data that should provide values to be mapped. Should be an object, or an array of objects |
+| outputCallback | function | Callback that is executed with resulting key and value. Signature: function(key, value) |
 
 ### util/helpers~objValues(obj) ⇒ Array
 Return object values as an array
@@ -1207,6 +1284,43 @@ Return object values as an array
 | Param | Type |
 | --- | --- |
 | obj | Object | 
+
+### util/helpers~buildSimpleArrayFromIterable(valueKey, iterable, fallbackData) ⇒ Array
+Build a simple array of values from a collection
+
+**Kind**: inner method of [util/helpers](#markdown-header-utilhelpers)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| valueKey | string | The key to be fetched from each item in collection |
+| iterable | Array ⎮ dw/util/List ⎮ dw.util.List | Array or List to iterate |
+| fallbackData | Object | Fallback data object |
+
+### util/helpers~buildMappedArrayFromIterable(objMap, iterable, fallbackData) ⇒ Array
+Build an array of objects from a collection
+
+**Kind**: inner method of [util/helpers](#markdown-header-utilhelpers)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| objMap | Object | Keys serve as the value path, Values serve as the key to be written to |
+| iterable | Array ⎮ dw/util/List ⎮ dw.util.List | Array or List to iterate |
+| fallbackData | Object | Fallback data object |
+
+### util/helpers~mappingFilter(key, val, data)
+Mapping callback, called by helpers.mapValues()
+
+**Kind**: inner method of [util/helpers](#markdown-header-utilhelpers)  
+**Throws**:
+
+- [RequiredAttributeException](#markdown-header-new-requiredattributeexceptionattribute-message) 
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| key | string ⎮ Object | The data map definition. Object = complex definition |
+| val | * | The value mapped by helpers.getParamValue() |
+| data | Object | Source of data, used when mapped value is a callback itself |
 
 ### util/helpers~isNonEmptyString(str) ⇒ boolean
 **Kind**: inner method of [util/helpers](#markdown-header-utilhelpers)  
