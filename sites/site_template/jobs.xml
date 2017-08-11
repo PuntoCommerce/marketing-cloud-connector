@@ -11,7 +11,7 @@
                     <parameter name="ExportID">catalogFeed</parameter>
                     <parameter name="ExportFileName">catalogFeed.psv</parameter>
                     <parameter name="Delimiter">|</parameter>
-                    <parameter name="IncrementalExport">true</parameter>
+                    <parameter name="IncrementalExport">false</parameter>
                 </parameters>
             </step>
             <step step-id="mcc-feed-uploadcatalog" type="custom.MCC-Feed-UploadCatalog" enforce-restart="false">
@@ -42,7 +42,7 @@
                     <parameter name="ExportID">contentFeed</parameter>
                     <parameter name="ExportFileName">contentFeed.psv</parameter>
                     <parameter name="Delimiter">|</parameter>
-                    <parameter name="IncrementalExport">true</parameter>
+                    <parameter name="IncrementalExport">false</parameter>
                 </parameters>
             </step>
             <step step-id="mcc-feed-uploadcontent" type="custom.MCC-Feed-UploadContent" enforce-restart="false">
@@ -78,7 +78,7 @@
                         <parameter name="ExportID">customersFeed</parameter>
                         <parameter name="ExportFileName">customersFeed.psv</parameter>
                         <parameter name="Delimiter">|</parameter>
-                        <parameter name="IncrementalExport">true</parameter>
+                        <parameter name="IncrementalExport">false</parameter>
                     </parameters>
                 </step>
                 <step step-id="mcc-feed-uploadcustomers" type="custom.MCC-Feed-UploadCustomers" enforce-restart="false">
@@ -115,7 +115,7 @@
                         <parameter name="ExportID">ordersFeed</parameter>
                         <parameter name="ExportFileName">ordersFeed.psv</parameter>
                         <parameter name="Delimiter">|</parameter>
-                        <parameter name="IncrementalExport">true</parameter>
+                        <parameter name="IncrementalExport">false</parameter>
                     </parameters>
                 </step>
                 <step step-id="mcc-feed-uploadorders" type="custom.MCC-Feed-UploadOrders" enforce-restart="false">

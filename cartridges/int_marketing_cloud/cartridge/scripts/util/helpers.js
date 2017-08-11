@@ -148,11 +148,6 @@ function getParamValue(attr, data) {
             }
         });
 
-        // fall back to object mapping in data._aliases, if no value was found
-        if (empty(value) && '_aliases' in data && attrs[0] in data._aliases) {
-            value = getParamValue(attr, data._aliases);
-        }
-
         if (!empty(value)) {
             break;
         }
@@ -247,6 +242,13 @@ function mappingFilter(key, val, data) {
         val = val(key, data);
     }
     if (isObject(key)) {
+        if ('fallback' in key && empty(val)) {
+            //require('dw/system/Logger').debug('Querying fallback value from "{0}"', key.fallback);
+            val = getParamValue(key.fallback, data);
+            if (typeof(val) === 'function') {
+                val = val(key, data);
+            }
+        }
         if ('format' in key) {
             val = require('dw/util/StringUtils').format(key.format, val);
         } else {
@@ -265,12 +267,14 @@ function mappingFilter(key, val, data) {
                     // if an object, it's similar to the standard attribute mapping definition
                     var mapDef = key.mappedValue;
                     var concat = 'concat' in key && key.concat;
-                    if (typeof(mapDef) === 'string') {
-                        val = buildSimpleArrayFromIterable(mapDef, val, data);
-                    } else {
-                        val = buildMappedArrayFromIterable(mapDef, val, data);
+                    if (!empty(mapDef)) {
+                        if (typeof(mapDef) === 'string') {
+                            val = buildSimpleArrayFromIterable(mapDef, val, data);
+                        } else {
+                            val = buildMappedArrayFromIterable(mapDef, val, data);
+                        }
                     }
-                    if (concat === true && !empty(val)) {
+                    if (concat === true && !empty(val) && Array.isArray(val)) {
                         val = val.join(',');
                     }
                     break;

@@ -43,14 +43,14 @@
     "Product.master": {"label":"IsMaster", "required":true, "type":"bool"},
     "Product.variant": {"label":"IsVariant", "required":true, "type":"bool"},
     "Product.name": {"label":"ProductName", "required":true},
-    "Product.primaryCategory.ID": {"label":"ProductType", "required":true},
+    "Product.primaryCategory.ID": {"label":"ProductType", "required":true, "fallback": "DefaultProduct.primaryCategory.ID"},
     "ProductLink": {"label":"ProductLink", "required":true},
     "Product.onlineFlag": {"label":"OnlineAvailability", "required":true, "type":"bool"},
     "Product.manufacturerSKU": "SkuID",
     "ImageLink": {"label":"ImageLink", "imageType":"large"},
-    "Images": {"label":"LargeImages", "imageType":"large"},
-    "StandardPrice": "RegularPrice",
-    "Product.priceModel.price.decimalValue": "SalePrice",
+    "Images": {"label":"LargeImages", "imageType":"large", "type": "array", "concat": true},
+    "StandardPrice": {"label":"RegularPrice", "fallback": "Product.priceModel.price.decimalValue"},
+    "Product.priceModel.price.decimalValue": {"label":"SalePrice", "fallback": "DefaultProduct.priceModel.price.decimalValue"},
     "Product.shortDescription": "Description"
 }</object-attribute>
     </custom-object>

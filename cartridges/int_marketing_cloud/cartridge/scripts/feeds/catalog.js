@@ -58,7 +58,7 @@ function imageLink(cfg, data) {
     if (cfg.hasOwnProperty('imageType')) {
         var img = data.Product.getImage(cfg.imageType);
         if (img) {
-            return img.absURL.https();
+            return img.absURL.https().toString();
         }
     }
 }
@@ -74,7 +74,7 @@ function images(cfg, data) {
         var images = data.Product.getImages(cfg.imageType);
         if (!empty(images)) {
             return images.toArray().map(function(imgFile){
-                return imgFile.absURL.https();
+                return imgFile.absURL.https().toString();
             });
         }
     }
@@ -84,34 +84,32 @@ function images(cfg, data) {
  * Returns the base price for a product (using pricebook inheritance to determine price ancestor)
  * @param cfg
  * @param data
- * @returns {dw/util/Decimal|dw.util.Decimal}
+ * @returns {dw/util/Decimal|dw.util.Decimal|void}
  */
 function standardPrice(cfg, data) {
-    var Money = require('dw/value/Money');
-    var stdPrice = Money.NOT_AVAILABLE;
+    var stdPrice;
     var priceModel;
 
-    if (!empty(data.Product.priceModel)) {
-        priceModel = data.Product.priceModel;
-    } else if (!empty(data.Product.masterProduct.priceModel)) {
-        priceModel = data.Product.masterProduct.priceModel;
-    }
-
-    if (!empty(priceModel)) {
-        if (!priceModel.price.available) {
-            stdPrice = Money.NOT_AVAILABLE;
-        } else {
-            var priceBook = priceModel.priceInfo.priceBook;
-
-            while (priceBook.parentPriceBook) {
-                priceBook = priceBook.parentPriceBook ? priceBook.parentPriceBook : priceBook;
-            }
-
-            stdPrice = priceModel.getPriceBookPrice(priceBook.ID);
+    if (!empty(data.Product.getPriceModel())) {
+        priceModel = data.Product.getPriceModel();
+    } else {
+        if (!data.Product.isMaster() && data.Product.getMasterProduct() && !empty(data.Product.masterProduct.getPriceModel())) {
+            priceModel = data.Product.masterProduct.getPriceModel();
+        } else if (data.product.isMaster() || data.product.isVariationGroup()) {
+            priceModel = data.product.getVariationModel().getDefaultVariant().getPriceModel();
         }
     }
 
-    return stdPrice.decimalValue;
+    if (!empty(priceModel) && priceModel.price.available) {
+        var priceBook = priceModel.priceInfo.priceBook;
+
+        while (priceBook.parentPriceBook) {
+            priceBook = priceBook.parentPriceBook ? priceBook.parentPriceBook : priceBook;
+        }
+
+        stdPrice = priceModel.getPriceBookPrice(priceBook.ID);
+        return stdPrice.decimalValue;
+    }
 }
 
 /**
@@ -158,18 +156,22 @@ function writeProduct(product, parameters, writeNextCB){
             !product.isVariant() && parameters.IncludeSimpleProduct === true
         )
     ) {
-        data = buildProductData(product);
+        var defVariant;
+        if (product.isMaster() || product.isVariationGroup()) {
+            defVariant = product.getVariationModel().getDefaultVariant();
+        }
+        data = buildProductData(product, defVariant);
         writeNextCB(data);
     }
 
     // output child variation groups
     if (product.isMaster() && parameters.IncludeVariationGroupProduct === true) {
-        writeChildProducts(product.getVariationGroups(), product, writeNextCB);
+        writeChildProducts(product.getVariationModel().getVariationGroups(), product, writeNextCB);
     }
 
     // output child variants
     if ((product.isMaster() || product.isVariationGroup()) && parameters.IncludeVariantProduct === true) {
-        writeChildProducts(product.getVariants(), product, writeNextCB);
+        writeChildProducts(product.getVariationModel().getVariants(), product, writeNextCB);
     }
 }
 
@@ -196,22 +198,18 @@ function writeChildProducts(childProducts, parentProduct, writeNextCB) {
 
 /**
  * @param {dw/catalog/Product|dw.catalog.Product|dw/catalog/Variant|dw.catalog.Variant} product
- * @param {dw/catalog/Product|dw.catalog.Product} parentProduct
+ * @param {dw/catalog/Product|dw.catalog.Product} defaultProduct Product to use as fallback, such as for pricing
  * @returns {Array<String>}
  */
-function buildProductData(product, parentProduct) {
+function buildProductData(product, defaultProduct) {
     var data = {
         Product: product,
+        DefaultProduct: defaultProduct, // master, variation group, or default variant
         ProductLink: require('dw/web/URLUtils').abs('Product-Show', 'pid', product.ID).https(),
         ImageLink: imageLink,
         Images: images,
         StandardPrice: standardPrice
     };
-    if (!empty(parentProduct)) {
-        data._aliases = { // fallback mappings for when the default doesn't return a valid value
-            Product: parentProduct
-        };
-    }
     return exportModel.buildRow(data);
 }
 

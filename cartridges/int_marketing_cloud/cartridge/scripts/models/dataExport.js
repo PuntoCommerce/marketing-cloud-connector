@@ -89,6 +89,7 @@ DataExport.prototype = {
                 } catch(e) {
                     if (e instanceof helpers.RequiredAttributeException) {
                         missingRequired = true;
+                        require('dw/system/Logger').debug(e.message);
                     } else {
                         // unhandled exception
                         throw e;
