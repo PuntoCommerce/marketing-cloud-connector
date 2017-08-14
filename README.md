@@ -11,6 +11,10 @@ It connects Commerce Cloud to Marketing Cloud "above the API", which means that 
 
 Licensed under the current NDA and licensing agreement in place with your organization. (This is explicitly not open source licensing.)
 
+### Installation ###
+
+Installation and usage can be found in the [Wiki](https://bitbucket.org/demandware/marketing-cloud-connector/wiki/Home)
+
 ### Changelog ###
 
 #### [unreleased] ####
