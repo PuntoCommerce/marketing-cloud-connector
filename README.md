@@ -15,6 +15,8 @@ Licensed under the current NDA and licensing agreement in place with your organi
 
 #### [unreleased] ####
 
+#### [[1.0.0-rc.3]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.0-rc.3) - 2017-08-14 ####
+
 #### Fixed ####
  - Fixed bug where data object wasn't being passed to catalog feed.
  - Fixed issue where feed was being marked as exported when execution completed, rather than using job start timestamp.
