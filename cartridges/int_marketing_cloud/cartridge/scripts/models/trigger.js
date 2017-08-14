@@ -87,9 +87,26 @@ function newMessage(data){
     helpers.mapValues(this.attributes, data, function(key, val){
         if (helpers.isObject(key)) {
             if ('format' in key) {
-                val = format(key.format, val);
+                val = require('dw/util/StringUtils').format(key.format, val);
             } else {
                 val = helpers.dwValue(val);
+            }
+            if ('type' in key) {
+                switch (key.type) {
+                    case 'array':
+                        // mappedValue can be a string or an object
+                        // if an object, it's similar to the standard attribute mapping definition
+                        var mapDef = key.mappedValue;
+                        if (typeof(mapDef) === 'string') {
+                            val = helpers.buildSimpleArrayFromIterable(mapDef, val, data);
+                        } else {
+                            val = helpers.buildMappedArrayFromIterable(mapDef, val, data);
+                        }
+                        break;
+                    default:
+                        // no change
+                        break;
+                }
             }
         } else {
             val = helpers.dwValue(val);
