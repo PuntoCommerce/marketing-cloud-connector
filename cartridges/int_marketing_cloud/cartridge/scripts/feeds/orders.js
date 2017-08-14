@@ -13,6 +13,7 @@ const OrderMgr = require('dw/order/OrderMgr');
  * @type {module:models/export~Export}
  */
 const Export = require('../models/export');
+const helpers = require('../util/helpers');
 
 /**
  * @type {module:models/export~Export}
@@ -58,7 +59,7 @@ function process(order, parameters, stepExecution) {
     if (!skip) {
         var data = {
             Order: order,
-            orderAsXML: order.getOrderExportXML(null, null, false)
+            orderAsXML: helpers.stripXmlNS( order.getOrderExportXML(null, null, false) )
         };
         return exportModel.buildRow(data);
     }

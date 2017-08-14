@@ -21,8 +21,8 @@ Module | Description
 [models/export](#markdown-header-modelsexport) | 
 [models/message](#markdown-header-modelsmessage) | 
 [models/trigger](#markdown-header-modelstrigger) | 
-[models/util/helpers](#markdown-header-modelsutilhelpers) | 
 [int_marketing_cloud](#markdown-header-int_marketing_cloud-object) : Object | Registry object
+[util/helpers](#markdown-header-utilhelpers) | 
 
 ## communication/account
 
@@ -223,18 +223,60 @@ Resolves promise with a {{status: string}} Response object. At a minimum it shou
 
 * [feeds/catalog](#markdown-header-feedscatalog)
     * [~exportModel](#markdown-header-feedscatalogexportmodel-modulemodelsexportexport) : Export
-    * [~ProductMgr](#markdown-header-feedscatalogproductmgr-dwcatalogproductmgrdwcatalogproductmgr) : dw/catalog/ProductMgr ⎮ dw.catalog.ProductMgr
+    * [~PSM](#markdown-header-feedscatalogpsm-dwcatalogproductsearchmodeldwcatalogproductsearchmodel) : dw/catalog/ProductSearchModel ⎮ dw.catalog.ProductSearchModel
+    * [~ProductSearchModel](#markdown-header-feedscatalogproductsearchmodel-dwcatalogproductsearchmodeldwcatalogproductsearchmodel) : dw/catalog/ProductSearchModel ⎮ dw.catalog.ProductSearchModel
+    * [~CatalogMgr](#markdown-header-feedscatalogcatalogmgr-dwcatalogcatalogmgrdwcatalogcatalogmgr) : dw/catalog/CatalogMgr ⎮ dw.catalog.CatalogMgr
     * [~Export](#markdown-header-feedscatalogexport-modulemodelsexportexport) : [Export](#markdown-header-feedscatalogexport-modulemodelsexportexport)
-    * [~process(product, parameters, stepExecution)](#markdown-header-feedscatalogprocessproduct-parameters-stepexecution-voidarray) ⇒ void ⎮ Array
+    * [~imageLink(cfg, data)](#markdown-header-feedscatalogimagelinkcfg-data-dwweburldwweburl) ⇒ dw/web/URL ⎮ dw.web.URL
+    * [~images(cfg, data)](#markdown-header-feedscatalogimagescfg-data-array) ⇒ Array
+    * [~standardPrice(cfg, data)](#markdown-header-feedscatalogstandardpricecfg-data-dwutildecimaldwutildecimalvoid) ⇒ dw/util/Decimal ⎮ dw.util.Decimal ⎮ void
+    * [~process(product, parameters, stepExecution)](#markdown-header-feedscatalogprocessproduct-parameters-stepexecution-voidfunction) ⇒ void ⎮ function
+    * [~writeProduct(product, parameters, writeNextCB)](#markdown-header-feedscatalogwriteproductproduct-parameters-writenextcb)
+    * [~writeChildProducts(childProducts, parentProduct, writeNextCB)](#markdown-header-feedscatalogwritechildproductschildproducts-parentproduct-writenextcb)
+    * [~buildProductData(product, defaultProduct)](#markdown-header-feedscatalogbuildproductdataproduct-defaultproduct-arraystring) ⇒ Array.<String>
 
 ### feeds/catalog~exportModel : [Export](#markdown-header-feedscatalogexport-modulemodelsexportexport)
 **Kind**: inner property of [feeds/catalog](#markdown-header-feedscatalog)  
 **See**: [https://help.marketingcloud.com/en/documentation/personalization_builder/personalization_builder_prerequisites/catalog/add_attributes/](https://help.marketingcloud.com/en/documentation/personalization_builder/personalization_builder_prerequisites/catalog/add_attributes/)
-### feeds/catalog~ProductMgr : dw/catalog/ProductMgr ⎮ dw.catalog.ProductMgr
+### feeds/catalog~PSM : dw/catalog/ProductSearchModel ⎮ dw.catalog.ProductSearchModel
+**Kind**: inner property of [feeds/catalog](#markdown-header-feedscatalog)  
+### feeds/catalog~ProductSearchModel : dw/catalog/ProductSearchModel ⎮ dw.catalog.ProductSearchModel
+**Kind**: inner constant of [feeds/catalog](#markdown-header-feedscatalog)  
+### feeds/catalog~CatalogMgr : dw/catalog/CatalogMgr ⎮ dw.catalog.CatalogMgr
 **Kind**: inner constant of [feeds/catalog](#markdown-header-feedscatalog)  
 ### feeds/catalog~Export : [Export](#markdown-header-feedscatalogexport-modulemodelsexportexport)
 **Kind**: inner constant of [feeds/catalog](#markdown-header-feedscatalog)  
-### feeds/catalog~process(product, parameters, stepExecution) ⇒ void ⎮ Array
+### feeds/catalog~imageLink(cfg, data) ⇒ dw/web/URL ⎮ dw.web.URL
+Returns https image link, as long as image type is defined in the property configuration
+
+**Kind**: inner method of [feeds/catalog](#markdown-header-feedscatalog)  
+
+| Param |
+| --- |
+| cfg | 
+| data | 
+
+### feeds/catalog~images(cfg, data) ⇒ Array
+Returns an array of image links
+
+**Kind**: inner method of [feeds/catalog](#markdown-header-feedscatalog)  
+
+| Param |
+| --- |
+| cfg | 
+| data | 
+
+### feeds/catalog~standardPrice(cfg, data) ⇒ dw/util/Decimal ⎮ dw.util.Decimal ⎮ void
+Returns the base price for a product (using pricebook inheritance to determine price ancestor)
+
+**Kind**: inner method of [feeds/catalog](#markdown-header-feedscatalog)  
+
+| Param |
+| --- |
+| cfg | 
+| data | 
+
+### feeds/catalog~process(product, parameters, stepExecution) ⇒ void ⎮ function
 **Kind**: inner method of [feeds/catalog](#markdown-header-feedscatalog)  
 
 | Param | Type |
@@ -243,31 +285,54 @@ Resolves promise with a {{status: string}} Response object. At a minimum it shou
 | parameters |  | 
 | stepExecution |  | 
 
+### feeds/catalog~writeProduct(product, parameters, writeNextCB)
+This method will write out any products in the search index, that are allowed by job preferences.
+
+**Kind**: inner method of [feeds/catalog](#markdown-header-feedscatalog)  
+
+| Param | Type |
+| --- | --- |
+| product | dw/catalog/Product ⎮ dw.catalog.Product | 
+| parameters |  | 
+| writeNextCB | function | 
+
+### feeds/catalog~writeChildProducts(childProducts, parentProduct, writeNextCB)
+**Kind**: inner method of [feeds/catalog](#markdown-header-feedscatalog)  
+
+| Param | Type |
+| --- | --- |
+| childProducts | dw/util/Collection ⎮ dw.util.Collection | 
+| parentProduct | dw/catalog/Product ⎮ dw.catalog.Product | 
+| writeNextCB | function | 
+
+### feeds/catalog~buildProductData(product, defaultProduct) ⇒ Array.<String>
+**Kind**: inner method of [feeds/catalog](#markdown-header-feedscatalog)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| product | dw/catalog/Product ⎮ dw.catalog.Product ⎮ dw/catalog/Variant ⎮ dw.catalog.Variant |  |
+| defaultProduct | dw/catalog/Product ⎮ dw.catalog.Product | Product to use as fallback, such as for pricing |
+
 ## feeds/content
 
 * [feeds/content](#markdown-header-feedscontent)
     * [~exportModel](#markdown-header-feedscontentexportmodel-modulemodelsexportexport) : Export
+    * [~CSM](#markdown-header-feedscontentcsm-dwcontentcontentsearchmodeldwcontentcontentsearchmodel) : dw/content/ContentSearchModel ⎮ dw.content.ContentSearchModel
+    * [~ContentSearchModel](#markdown-header-feedscontentcontentsearchmodel-dwcontentcontentsearchmodeldwcontentcontentsearchmodel) : dw/content/ContentSearchModel ⎮ dw.content.ContentSearchModel
     * [~ContentMgr](#markdown-header-feedscontentcontentmgr-dwcontentcontentmgrdwcontentcontentmgr) : dw/content/ContentMgr ⎮ dw.content.ContentMgr
     * [~Export](#markdown-header-feedscontentexport-modulemodelsexportexport) : [Export](#markdown-header-feedscontentexport-modulemodelsexportexport)
-    * [~folderIterator(folder)](#markdown-header-feedscontentfolderiteratorfolder)
     * [~process(content, parameters, stepExecution)](#markdown-header-feedscontentprocesscontent-parameters-stepexecution-voidarray) ⇒ void ⎮ Array
 
 ### feeds/content~exportModel : [Export](#markdown-header-feedscontentexport-modulemodelsexportexport)
 **Kind**: inner property of [feeds/content](#markdown-header-feedscontent)  
+### feeds/content~CSM : dw/content/ContentSearchModel ⎮ dw.content.ContentSearchModel
+**Kind**: inner property of [feeds/content](#markdown-header-feedscontent)  
+### feeds/content~ContentSearchModel : dw/content/ContentSearchModel ⎮ dw.content.ContentSearchModel
+**Kind**: inner constant of [feeds/content](#markdown-header-feedscontent)  
 ### feeds/content~ContentMgr : dw/content/ContentMgr ⎮ dw.content.ContentMgr
 **Kind**: inner constant of [feeds/content](#markdown-header-feedscontent)  
 ### feeds/content~Export : [Export](#markdown-header-feedscontentexport-modulemodelsexportexport)
 **Kind**: inner constant of [feeds/content](#markdown-header-feedscontent)  
-### feeds/content~folderIterator(folder)
-Recursive folder iterator
-Yields instances of Content
-
-**Kind**: inner method of [feeds/content](#markdown-header-feedscontent)  
-
-| Param | Type |
-| --- | --- |
-| folder | dw/content/Folder ⎮ dw.content.Folder | 
-
 ### feeds/content~process(content, parameters, stepExecution) ⇒ void ⎮ Array
 **Kind**: inner method of [feeds/content](#markdown-header-feedscontent)  
 
@@ -329,7 +394,8 @@ Yields instances of Content
     * [~File](#markdown-header-feedsuploadfile-dwiofiledwiofile) : dw/io/File ⎮ dw.io.File
     * [~ServiceRegistry](#markdown-header-feedsuploadserviceregistry-dwsvcserviceregistrydwsvcserviceregistry) : dw/svc/ServiceRegistry ⎮ dw.svc.ServiceRegistry
     * [~Status](#markdown-header-feedsuploadstatus-dwsystemstatusdwsystemstatus) : dw/system/Status ⎮ dw.system.Status
-    * [~registerSFTP(serviceID)](#markdown-header-feedsuploadregistersftpserviceid-dwsvcftpservicedwioftpservice) ⇒ dw/svc/FTPService ⎮ dw.io.FTPService
+    * [~registerSFTP(serviceID)](#markdown-header-feedsuploadregistersftpserviceid-dwsvcftpservicedwsvcftpservice) ⇒ dw/svc/FTPService ⎮ dw.svc.FTPService
+    * [~createRequest(svc, params)](#markdown-header-feedsuploadcreaterequestsvc-params)
 
 ### feeds/upload~File : dw/io/File ⎮ dw.io.File
 **Kind**: inner constant of [feeds/upload](#markdown-header-feedsupload)  
@@ -337,12 +403,20 @@ Yields instances of Content
 **Kind**: inner constant of [feeds/upload](#markdown-header-feedsupload)  
 ### feeds/upload~Status : dw/system/Status ⎮ dw.system.Status
 **Kind**: inner constant of [feeds/upload](#markdown-header-feedsupload)  
-### feeds/upload~registerSFTP(serviceID) ⇒ dw/svc/FTPService ⎮ dw.io.FTPService
+### feeds/upload~registerSFTP(serviceID) ⇒ dw/svc/FTPService ⎮ dw.svc.FTPService
 **Kind**: inner method of [feeds/upload](#markdown-header-feedsupload)  
 
 | Param | Type |
 | --- | --- |
 | serviceID | string | 
+
+### feeds/upload~createRequest(svc, params)
+**Kind**: inner method of [feeds/upload](#markdown-header-feedsupload)  
+
+| Param | Type |
+| --- | --- |
+| svc | dw/svc/FTPService ⎮ dw.svc.FTPService | 
+| params | Object | 
 
 ## init/bootstrap
 
@@ -374,6 +448,7 @@ Initializes trigger configurations
     * [~isResponseJSON(client)](#markdown-header-initrestisresponsejsonclient-boolean) ⇒ boolean
     * [~parseResponse(svc, client)](#markdown-header-initrestparseresponsesvc-client-object) ⇒ Object
     * [~createRequest(svc)](#markdown-header-initrestcreaterequestsvc)
+    * [~createRequest(svc)](#markdown-header-initrestcreaterequestsvc)
     * [~createRequest(svc, message)](#markdown-header-initrestcreaterequestsvc-message-string) ⇒ string
     * [~createRequest(svc, sendID, customerKey, recipientSendID)](#markdown-header-initrestcreaterequestsvc-sendid-customerkey-recipientsendid)
     * [~createRequest(svc, event)](#markdown-header-initrestcreaterequestsvc-event-string) ⇒ string
@@ -390,7 +465,7 @@ Sandbox Env: https://mc.test.exacttarget.com
 
 Production API: https://www.exacttargetapis.com
 
-**Kind**: inner property of [init/rest](#markdown-header-initrest)  
+**Kind**: inner constant of [init/rest](#markdown-header-initrest)  
 ### init/rest~setAuthHeader(svc)
 Inserts auth token into request header
 
@@ -443,10 +518,13 @@ Create request for service authentication
 
 - Error Throws error when service credentials are missing
 
-**Todo**
 
-- [ ] Switch credentials based on site suffix, fall back on a default
+| Param | Type |
+| --- | --- |
+| svc | dw/svc/HTTPService ⎮ dw.svc.HTTPService | 
 
+### init/rest~createRequest(svc)
+**Kind**: inner method of [init/rest](#markdown-header-initrest)  
 
 | Param | Type |
 | --- | --- |
@@ -604,6 +682,7 @@ Array header (attributes object values)
         * [.siteID_exportID](#markdown-header-dataexportstatussiteid_exportid-string) : string
         * [._definition](#markdown-header-dataexportstatus_definition-dwobjectcustomattributesdwobjectcustomattributes) : dw/object/CustomAttributes ⎮ dw.object.CustomAttributes
         * [.lastExported](#markdown-header-dataexportstatuslastexported-date) : Date
+        * [.currentExport](#markdown-header-dataexportstatuscurrentexport-date) : Date
 
 ### models/dataExportStatus~DataExportStatus
 **Kind**: inner class of [models/dataExportStatus](#markdown-header-modelsdataexportstatus)  
@@ -613,6 +692,7 @@ Array header (attributes object values)
     * [.siteID_exportID](#markdown-header-dataexportstatussiteid_exportid-string) : string
     * [._definition](#markdown-header-dataexportstatus_definition-dwobjectcustomattributesdwobjectcustomattributes) : dw/object/CustomAttributes ⎮ dw.object.CustomAttributes
     * [.lastExported](#markdown-header-dataexportstatuslastexported-date) : Date
+    * [.currentExport](#markdown-header-dataexportstatuscurrentexport-date) : Date
 
 #### new DataExportStatus(exportID)
 DataExportStatus constructor
@@ -632,6 +712,10 @@ Definition object
 **Kind**: instance property of [DataExportStatus](#markdown-header-new-dataexportstatusexportid)  
 #### dataExportStatus.lastExported : Date
 Date last exported
+
+**Kind**: instance property of [DataExportStatus](#markdown-header-new-dataexportstatusexportid)  
+#### dataExportStatus.currentExport : Date
+Current export date
 
 **Kind**: instance property of [DataExportStatus](#markdown-header-new-dataexportstatusexportid)  
 ## models/event
@@ -733,6 +817,7 @@ Used to ensure exported JSON is webservice compatible
         * [.readNext()](#markdown-header-exportreadnext-void) ⇒ void ⎮ *
         * [.buildRow(data)](#markdown-header-exportbuildrowdata-arraystring) ⇒ Array.<String>
         * [.writeRow(data)](#markdown-header-exportwriterowdata)
+            * [~rowArr](#markdown-header-writerowrowarr-array) : Array
     * [~File](#markdown-header-modelsexportfile-dwiofiledwiofile) : dw/io/File ⎮ dw.io.File
     * [~FileWriter](#markdown-header-modelsexportfilewriter-dwiofilewriterdwiofilewriter) : dw/io/FileWriter ⎮ dw.io.FileWriter
     * [~CSVStreamWriter](#markdown-header-modelsexportcsvstreamwriter-dwiocsvstreamwriterdwiocsvstreamwriter) : dw/io/CSVStreamWriter ⎮ dw.io.CSVStreamWriter
@@ -749,6 +834,7 @@ Used to ensure exported JSON is webservice compatible
     * [.readNext()](#markdown-header-exportreadnext-void) ⇒ void ⎮ *
     * [.buildRow(data)](#markdown-header-exportbuildrowdata-arraystring) ⇒ Array.<String>
     * [.writeRow(data)](#markdown-header-exportwriterowdata)
+        * [~rowArr](#markdown-header-writerowrowarr-array) : Array
 
 #### new Export(params, iteratorCallback)
 
@@ -785,8 +871,10 @@ Writes array of data to file
 
 | Param | Type |
 | --- | --- |
-| data | dw/util/ArrayList ⎮ dw.util.ArrayList | 
+| data | dw/util/Collection ⎮ dw.util.Collection ⎮ Array | 
 
+##### writeRow~rowArr : Array
+**Kind**: inner property of writeRow  
 ### models/export~File : dw/io/File ⎮ dw.io.File
 **Kind**: inner constant of [models/export](#markdown-header-modelsexport)  
 ### models/export~FileWriter : dw/io/FileWriter ⎮ dw.io.FileWriter
@@ -1015,115 +1103,6 @@ Returns trigger definition for a hook
 | hookID | string | 
 | attributes | Object | 
 
-## models/util/helpers
-
-* [models/util/helpers](#markdown-header-modelsutilhelpers)
-    * _static_
-        * [.isObject(obj)](#markdown-header-modelsutilhelpersisobjectobj-boolean) ⇒ boolean
-        * [.ucfirst(str)](#markdown-header-modelsutilhelpersucfirststr-string) ⇒ string
-        * [.dwValue(obj)](#markdown-header-modelsutilhelpersdwvalueobj-) ⇒ *
-    * _inner_
-        * [~expandAttributes(attrJSON)](#markdown-header-modelsutilhelpersexpandattributesattrjson-object) ⇒ Object
-        * [~getCustomObject(customObjectName, objectID)](#markdown-header-modelsutilhelpersgetcustomobjectcustomobjectname-objectid-dwobjectcustomattributesdwobjectcustomattributes) ⇒ dw/object/CustomAttributes ⎮ dw.object.CustomAttributes
-        * [~mergeAttributes(newAttributes, oldAttributes)](#markdown-header-modelsutilhelpersmergeattributesnewattributes-oldattributes)
-        * [~getParamValue(attr, data)](#markdown-header-modelsutilhelpersgetparamvalueattr-data-) ⇒ *
-        * [~mapValues(obj, data, outputCallback)](#markdown-header-modelsutilhelpersmapvaluesobj-data-outputcallback)
-        * [~objValues(obj)](#markdown-header-modelsutilhelpersobjvaluesobj-array) ⇒ Array
-        * [~isNonEmptyString(str)](#markdown-header-modelsutilhelpersisnonemptystringstr-boolean) ⇒ boolean
-
-### models/util/helpers.isObject(obj) ⇒ boolean
-Checks if submitted value type is an Object (and not an Array)
-
-**Kind**: static method of [models/util/helpers](#markdown-header-modelsutilhelpers)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| obj | * | Object to be checked |
-
-### models/util/helpers.ucfirst(str) ⇒ string
-Uppercases first char of string
-
-**Kind**: static method of [models/util/helpers](#markdown-header-modelsutilhelpers)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| str | string | String to uppercase |
-
-### models/util/helpers.dwValue(obj) ⇒ *
-Returns an object's preferred value, based on what DW object type it represents
-
-**Kind**: static method of [models/util/helpers](#markdown-header-modelsutilhelpers)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| obj | * | Object to use for value return |
-
-### models/util/helpers~expandAttributes(attrJSON) ⇒ Object
-Expands JSON attributes
-
-**Kind**: inner method of [models/util/helpers](#markdown-header-modelsutilhelpers)  
-
-| Param | Type |
-| --- | --- |
-| attrJSON | string | 
-
-### models/util/helpers~getCustomObject(customObjectName, objectID) ⇒ dw/object/CustomAttributes ⎮ dw.object.CustomAttributes
-Fetches object definition from Custom Object, creating it if not exists
-
-**Kind**: inner method of [models/util/helpers](#markdown-header-modelsutilhelpers)  
-
-| Param | Type |
-| --- | --- |
-| customObjectName | string | 
-| objectID | string | 
-
-### models/util/helpers~mergeAttributes(newAttributes, oldAttributes)
-Merges attribute JS objects in place, preserving old values
-
-**Kind**: inner method of [models/util/helpers](#markdown-header-modelsutilhelpers)  
-
-| Param | Type |
-| --- | --- |
-| newAttributes | Object | 
-| oldAttributes | Object | 
-
-### models/util/helpers~getParamValue(attr, data) ⇒ *
-Returns parameter value from data (uses recursion)
-
-**Kind**: inner method of [models/util/helpers](#markdown-header-modelsutilhelpers)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| attr | string | Period-delimited path to a parameter |
-| data | Object |  |
-
-### models/util/helpers~mapValues(obj, data, outputCallback)
-Handles object key/value mapping, writes to callback that accepts key and value as params
-
-**Kind**: inner method of [models/util/helpers](#markdown-header-modelsutilhelpers)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| obj | Object | Keys serve as the value path, Values serve as the key to be written to |
-| data | Object | Source of data that should fulfill provide values to be mapped |
-| outputCallback | function |  |
-
-### models/util/helpers~objValues(obj) ⇒ Array
-Return object values as an array
-
-**Kind**: inner method of [models/util/helpers](#markdown-header-modelsutilhelpers)  
-
-| Param | Type |
-| --- | --- |
-| obj | Object | 
-
-### models/util/helpers~isNonEmptyString(str) ⇒ boolean
-**Kind**: inner method of [models/util/helpers](#markdown-header-modelsutilhelpers)  
-
-| Param | Type |
-| --- | --- |
-| str | * | 
-
 ## int_marketing_cloud : Object
 Registry object
 
@@ -1187,3 +1166,175 @@ Registry object
 
 #### trigger~model : Trigger
 **Kind**: inner property of trigger  
+## util/helpers
+
+* [util/helpers](#markdown-header-utilhelpers)
+    * _static_
+        * [.isObject(obj)](#markdown-header-utilhelpersisobjectobj-boolean) ⇒ boolean
+        * [.ucfirst(str)](#markdown-header-utilhelpersucfirststr-string) ⇒ string
+        * [.dwValue(obj)](#markdown-header-utilhelpersdwvalueobj-) ⇒ *
+    * _inner_
+        * [~RequiredAttributeException](#markdown-header-utilhelpersrequiredattributeexception)
+            * [new RequiredAttributeException(attribute, [message])](#markdown-header-new-requiredattributeexceptionattribute-message)
+        * [~expandAttributes(attrJSON)](#markdown-header-utilhelpersexpandattributesattrjson-object) ⇒ Object
+        * [~getCustomObject(customObjectName, objectID)](#markdown-header-utilhelpersgetcustomobjectcustomobjectname-objectid-dwobjectcustomattributesdwobjectcustomattributes) ⇒ dw/object/CustomAttributes ⎮ dw.object.CustomAttributes
+        * [~mergeAttributes(newAttributes, oldAttributes)](#markdown-header-utilhelpersmergeattributesnewattributes-oldattributes)
+        * [~getParamValue(attr, data)](#markdown-header-utilhelpersgetparamvalueattr-data-) ⇒ *
+        * [~mapValues(obj, data, outputCallback)](#markdown-header-utilhelpersmapvaluesobj-data-outputcallback)
+        * [~objValues(obj)](#markdown-header-utilhelpersobjvaluesobj-array) ⇒ Array
+        * [~buildSimpleArrayFromIterable(valueKey, iterable, fallbackData)](#markdown-header-utilhelpersbuildsimplearrayfromiterablevaluekey-iterable-fallbackdata-array) ⇒ Array
+        * [~buildMappedArrayFromIterable(objMap, iterable, fallbackData)](#markdown-header-utilhelpersbuildmappedarrayfromiterableobjmap-iterable-fallbackdata-array) ⇒ Array
+        * [~mappingFilter(key, val, data)](#markdown-header-utilhelpersmappingfilterkey-val-data)
+        * [~isNonEmptyString(str)](#markdown-header-utilhelpersisnonemptystringstr-boolean) ⇒ boolean
+        * [~stripXmlNS(xmlStr)](#markdown-header-utilhelpersstripxmlnsxmlstr-string) ⇒ string
+
+### util/helpers.isObject(obj) ⇒ boolean
+Checks if submitted value type is an Object (and not an Array)
+
+**Kind**: static method of [util/helpers](#markdown-header-utilhelpers)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| obj | * | Object to be checked |
+
+### util/helpers.ucfirst(str) ⇒ string
+Uppercases first char of string
+
+**Kind**: static method of [util/helpers](#markdown-header-utilhelpers)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| str | string | String to uppercase |
+
+### util/helpers.dwValue(obj) ⇒ *
+Returns an object's preferred value, based on what DW object type it represents
+
+**Kind**: static method of [util/helpers](#markdown-header-utilhelpers)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| obj | * | Object to use for value return |
+
+### util/helpers~RequiredAttributeException
+**Kind**: inner class of [util/helpers](#markdown-header-utilhelpers)  
+#### new RequiredAttributeException(attribute, [message])
+Custom error, thrown when required attribute is missing.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| attribute | string | Attribute that is missing |
+| [message] | string | Optional custom message |
+
+### util/helpers~expandAttributes(attrJSON) ⇒ Object
+Expands JSON attributes
+
+**Kind**: inner method of [util/helpers](#markdown-header-utilhelpers)  
+
+| Param | Type |
+| --- | --- |
+| attrJSON | string | 
+
+### util/helpers~getCustomObject(customObjectName, objectID) ⇒ dw/object/CustomAttributes ⎮ dw.object.CustomAttributes
+Fetches object definition from Custom Object, creating it if not exists
+
+**Kind**: inner method of [util/helpers](#markdown-header-utilhelpers)  
+
+| Param | Type |
+| --- | --- |
+| customObjectName | string | 
+| objectID | string | 
+
+### util/helpers~mergeAttributes(newAttributes, oldAttributes)
+Merges attribute JS objects in place, preserving old values
+
+**Kind**: inner method of [util/helpers](#markdown-header-utilhelpers)  
+
+| Param | Type |
+| --- | --- |
+| newAttributes | Object | 
+| oldAttributes | Object | 
+
+### util/helpers~getParamValue(attr, data) ⇒ *
+Returns parameter value from data (uses recursion)
+
+**Kind**: inner method of [util/helpers](#markdown-header-utilhelpers)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| attr | string | Period-delimited path to a parameter |
+| data | Array ⎮ Object |  |
+
+### util/helpers~mapValues(obj, data, outputCallback)
+Handles object key/value mapping, writes to callback that accepts key and value as params
+
+**Kind**: inner method of [util/helpers](#markdown-header-utilhelpers)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| obj | Object | Keys serve as the value path, Values serve as the key to be written to |
+| data | Array ⎮ Object | Source of data that should provide values to be mapped. Should be an object, or an array of objects |
+| outputCallback | function | Callback that is executed with resulting key and value. Signature: function(key, value) |
+
+### util/helpers~objValues(obj) ⇒ Array
+Return object values as an array
+
+**Kind**: inner method of [util/helpers](#markdown-header-utilhelpers)  
+
+| Param | Type |
+| --- | --- |
+| obj | Object | 
+
+### util/helpers~buildSimpleArrayFromIterable(valueKey, iterable, fallbackData) ⇒ Array
+Build a simple array of values from a collection
+
+**Kind**: inner method of [util/helpers](#markdown-header-utilhelpers)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| valueKey | string | The key to be fetched from each item in collection |
+| iterable | Array ⎮ dw/util/List ⎮ dw.util.List | Array or List to iterate |
+| fallbackData | Object | Fallback data object |
+
+### util/helpers~buildMappedArrayFromIterable(objMap, iterable, fallbackData) ⇒ Array
+Build an array of objects from a collection
+
+**Kind**: inner method of [util/helpers](#markdown-header-utilhelpers)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| objMap | Object | Keys serve as the value path, Values serve as the key to be written to |
+| iterable | Array ⎮ dw/util/List ⎮ dw.util.List | Array or List to iterate |
+| fallbackData | Object | Fallback data object |
+
+### util/helpers~mappingFilter(key, val, data)
+Mapping callback, called by helpers.mapValues()
+
+**Kind**: inner method of [util/helpers](#markdown-header-utilhelpers)  
+**Throws**:
+
+- [RequiredAttributeException](#markdown-header-new-requiredattributeexceptionattribute-message) 
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| key | string ⎮ Object | The data map definition. Object = complex definition |
+| val | * | The value mapped by helpers.getParamValue() |
+| data | Object | Source of data, used when mapped value is a callback itself |
+
+### util/helpers~isNonEmptyString(str) ⇒ boolean
+**Kind**: inner method of [util/helpers](#markdown-header-utilhelpers)  
+
+| Param | Type |
+| --- | --- |
+| str | * | 
+
+### util/helpers~stripXmlNS(xmlStr) ⇒ string
+Strip XML namespace (interferes with MC xml parser otherwise)
+
+**Kind**: inner method of [util/helpers](#markdown-header-utilhelpers)  
+
+| Param |
+| --- |
+| xmlStr | 
+

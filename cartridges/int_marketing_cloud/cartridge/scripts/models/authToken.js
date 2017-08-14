@@ -9,8 +9,8 @@
  * @const {string}
  * @private
  */
-var customObjectName = 'MarketingCloudAuthToken';
-var helpers = require('./util/helpers');
+const customObjectName = 'MarketingCloudAuthToken';
+const helpers = require('../util/helpers');
 
 /**
  * Retrieves cached token from custom object storage

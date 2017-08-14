@@ -17,8 +17,8 @@
  * Production API: https://www.exacttargetapis.com
  */
 
-var ServiceRegistry = require('dw/svc/ServiceRegistry');
-var Logger = require('dw/system/Logger');
+const ServiceRegistry = require('dw/svc/ServiceRegistry');
+const Logger = require('dw/system/Logger');
 
 /**
  * Inserts auth token into request header
@@ -117,7 +117,7 @@ ServiceRegistry.configure('marketingcloud.rest.auth', {
         if (credArrSiteID !== siteID) {
             // Attempt to set to site-specific credential
             try {
-                svc.setCredentialID(origCredentialID + '-' + siteID);
+                svc.setCredentialID(credArr[0] + '-' + siteID);
             } catch(e) {
                 // site-specific credential doesn't exist, reset
                 svc.setCredentialID(origCredentialID);

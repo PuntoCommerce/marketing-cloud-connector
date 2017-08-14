@@ -19,7 +19,7 @@ const Status = require('dw/system/Status');
 
 function sftpUpload(params, stepExecution) {
     /**
-     * @type {dw/svc/FTPService|dw.io.FTPService}
+     * @type {dw/svc/FTPService|dw.svc.FTPService}
      */
     var sftpService = registerSFTP(params.SFTPServiceID);
     var siteID = require('dw/system/Site').current.ID;
@@ -28,7 +28,13 @@ function sftpUpload(params, stepExecution) {
 
     var returnStatus;
     try {
-        var uploadStatus = sftpService.call({exportFile: exportFile, filename: siteID +'_'+ params.ExportFileName});
+        var uploadStatus = sftpService.call(
+            {
+                exportFile: exportFile,
+                filename: siteID +'_'+ params.ExportFileName,
+                targetPath: params.TargetPath
+            }
+            );
         if (uploadStatus.ok) {
             returnStatus = new Status(Status.OK);
         } else {
@@ -42,12 +48,16 @@ function sftpUpload(params, stepExecution) {
 
 /**
  * @param {string} serviceID
- * @returns {dw/svc/FTPService|dw.io.FTPService}
+ * @returns {dw/svc/FTPService|dw.svc.FTPService}
  */
 function registerSFTP(serviceID) {
     ServiceRegistry.configure(serviceID, {
+        /**
+         * @param {dw/svc/FTPService|dw.svc.FTPService} svc
+         * @param {Object} params
+         */
         createRequest: function (svc, params) {
-            svc.setOperation('putBinary', '/Import/'+params.filename, params.exportFile);
+            svc.setOperation('putBinary', params.targetPath + params.filename, params.exportFile);
         },
         parseResponse: function (svc, uploadStatus) {
             return uploadStatus;

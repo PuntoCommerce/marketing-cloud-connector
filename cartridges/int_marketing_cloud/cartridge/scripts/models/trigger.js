@@ -9,8 +9,8 @@
  * @const {string}
  * @private
  */
-var customObjectName = 'MarketingCloudTriggers';
-var helpers = require('./util/helpers');
+const customObjectName = 'MarketingCloudTriggers';
+const helpers = require('../util/helpers');
 
 /**
  * Returns trigger definition for a hook
@@ -85,6 +85,32 @@ function newMessage(data){
     msg.setFrom(data.fromEmail).setTo(toEmail);
 
     helpers.mapValues(this.attributes, data, function(key, val){
+        if (helpers.isObject(key)) {
+            if ('format' in key) {
+                val = require('dw/util/StringUtils').format(key.format, val);
+            } else {
+                val = helpers.dwValue(val);
+            }
+            if ('type' in key) {
+                switch (key.type) {
+                    case 'array':
+                        // mappedValue can be a string or an object
+                        // if an object, it's similar to the standard attribute mapping definition
+                        var mapDef = key.mappedValue;
+                        if (typeof(mapDef) === 'string') {
+                            val = helpers.buildSimpleArrayFromIterable(mapDef, val, data);
+                        } else {
+                            val = helpers.buildMappedArrayFromIterable(mapDef, val, data);
+                        }
+                        break;
+                    default:
+                        // no change
+                        break;
+                }
+            }
+        } else {
+            val = helpers.dwValue(val);
+        }
         msg.setSubscriberAttribute(key, val);
     });
     this.message = msg;

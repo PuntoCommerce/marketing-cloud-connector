@@ -4,8 +4,8 @@
  * @module communication/giftCertificate
  */
 
-var sendTrigger = require('./util/send').sendTrigger;
-var hookPath = 'app.communication.giftCertificate.';
+const sendTrigger = require('./util/send').sendTrigger;
+const hookPath = 'app.communication.giftCertificate.';
 
 /**
  * Trigger a gift certificate notification

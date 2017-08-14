@@ -58,6 +58,14 @@
               "@trim": "true",
               "description": "Filename for the exported feed.",
               "default-value": "catalogFeed.psv"
+            },
+            {
+              "@name": "TargetPath",
+              "@type": "string",
+              "@required": "false",
+              "@trim": "true",
+              "description": "Directory path the file should be stored into on the destination server.",
+              "default-value": "/Import/"
             }
           ]
         },
@@ -104,6 +112,14 @@
               "@trim": "true",
               "description": "Filename for the exported feed.",
               "default-value": "contentFeed.psv"
+            },
+            {
+              "@name": "TargetPath",
+              "@type": "string",
+              "@required": "false",
+              "@trim": "true",
+              "description": "Directory path the file should be stored into on the destination server.",
+              "default-value": "/Import/"
             }
           ]
         },
@@ -150,6 +166,14 @@
               "@trim": "true",
               "description": "Filename for the exported feed.",
               "default-value": "ordersFeed.psv"
+            },
+            {
+              "@name": "TargetPath",
+              "@type": "string",
+              "@required": "false",
+              "@trim": "true",
+              "description": "Directory path the file should be stored into on the destination server.",
+              "default-value": "/Import/"
             }
           ]
         },
@@ -196,6 +220,14 @@
               "@trim": "true",
               "description": "Filename for the exported feed.",
               "default-value": "customersFeed.psv"
+            },
+            {
+              "@name": "TargetPath",
+              "@type": "string",
+              "@required": "false",
+              "@trim": "true",
+              "description": "Directory path the file should be stored into on the destination server.",
+              "default-value": "/Import/"
             }
           ]
         },
@@ -256,7 +288,6 @@
               "@name": "Delimiter",
               "@type": "string",
               "@required": "true",
-              "@trim": "true",
               "description": "Delimiter character.",
               "default-value": "|",
               "enum-values":
@@ -274,6 +305,34 @@
               "@type": "boolean",
               "@required": "false",
               "description": "If set, only updates since the last export are transmitted."
+            },
+            {
+              "@name": "IncludeMasterProduct",
+              "@type": "boolean",
+              "@required": "false",
+              "description": "Specify whether the exported catalog should include master products.",
+              "default-value": "true"
+            },
+            {
+              "@name": "IncludeVariantProduct",
+              "@type": "boolean",
+              "@required": "false",
+              "description": "Specify whether the exported catalog should include variant products.",
+              "default-value": "true"
+            },
+            {
+              "@name": "IncludeVariationGroupProduct",
+              "@type": "boolean",
+              "@required": "false",
+              "description": "Specify whether the exported catalog should include variation group products.",
+              "default-value": "true"
+            },
+            {
+              "@name": "IncludeSimpleProduct",
+              "@type": "boolean",
+              "@required": "false",
+              "description": "Specify whether the exported catalog should include simple products.",
+              "default-value": "true"
             }
           ]
         },
@@ -328,7 +387,6 @@
               "@name": "Delimiter",
               "@type": "string",
               "@required": "true",
-              "@trim": "true",
               "description": "Delimiter character.",
               "default-value": "|",
               "enum-values":
@@ -400,7 +458,6 @@
               "@name": "Delimiter",
               "@type": "string",
               "@required": "true",
-              "@trim": "true",
               "description": "Delimiter character.",
               "default-value": "|",
               "enum-values":
@@ -472,7 +529,6 @@
               "@name": "Delimiter",
               "@type": "string",
               "@required": "true",
-              "@trim": "true",
               "description": "Delimiter character.",
               "default-value": "|",
               "enum-values":

@@ -4,9 +4,9 @@
  * @module communication/account
  */
 
-var URLUtils = require('dw/web/URLUtils');
+const URLUtils = require('dw/web/URLUtils');
 
-var hookPath = 'app.communication.account.';
+const hookPath = 'app.communication.account.';
 
 /**
  * Wrapper to trigger.sendTrigger() to allow common variable injection for all hooks in the file
