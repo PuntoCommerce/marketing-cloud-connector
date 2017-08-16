@@ -11,9 +11,25 @@ It connects Commerce Cloud to Marketing Cloud "above the API", which means that 
 
 Licensed under the current NDA and licensing agreement in place with your organization. (This is explicitly not open source licensing.)
 
+### Dependencies ###
+
+* [Handler Framework](https://bitbucket.org/demandware/handler-framework)
+
 ### Installation ###
 
 Installation and usage can be found in the [Wiki](https://bitbucket.org/demandware/marketing-cloud-connector/wiki/Home)
+
+## Who do I talk to? ##
+
+* Maintainer: @intel352
+* [Commerce Cloud Community Slack](https://sfcc-community.slack.com)
+
+## Contributing
+
+1. Create a [fork](https://bitbucket.org/demandware/marketing-cloud-connector/fork), if you don't already have one
+2. Ensure your fork is caught up (message from Bitbucket shows up on your fork main page, if you are not current on commits)
+3. Create a new branch in your fork to hold your changes
+4. Submit a [pull request](https://bitbucket.org/demandware/marketing-cloud-connector/pull-requests/new)
 
 ### Changelog ###
 
@@ -86,22 +102,3 @@ Data sync to Marketing Cloud via jobs:
 * Content Catalog
 * Customers
 * Orders
-
-### Dependencies ###
-
-* [Handler Framework](https://bitbucket.org/demandware/handler-framework)
-
-### Changelog ###
-
-
-
-## Contribution guidelines ##
-
-* Writing tests
-* Code review
-* Other guidelines
-
-## Who do I talk to? ##
-
-* @intel352
-* [Commerce Cloud Community Slack](https://sfcc-community.slack.com)
