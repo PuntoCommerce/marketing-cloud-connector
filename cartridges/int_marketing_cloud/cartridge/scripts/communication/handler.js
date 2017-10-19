@@ -16,6 +16,6 @@ exports.registerHandler = function(registerHandler) {
         name: 'Marketing Cloud Connector',
         id: this.handlerID,
         cartridge: module.cartridge,
-        hooks: require('~/cartridge/scripts/hooks.json').hooks
+        hooks: require('~/hooks.json').hooks
     };
 };
