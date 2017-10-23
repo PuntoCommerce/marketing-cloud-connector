@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @module init/bootstrap
+ * @module jobs/triggers
  */
 
 /**

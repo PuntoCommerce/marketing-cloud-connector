@@ -5,15 +5,15 @@
  */
 
 /**
- * @type {dw/io/File|dw.io.File}
+ * @type {dw.io.File}
  */
 const File = require('dw/io/File');
 /**
- * @type {dw/io/FileWriter|dw.io.FileWriter}
+ * @type {dw.io.FileWriter}
  */
 const FileWriter = require('dw/io/FileWriter');
 /**
- * @type {dw/io/CSVStreamWriter|dw.io.CSVStreamWriter}
+ * @type {dw.io.CSVStreamWriter}
  */
 const CSVStreamWriter = require('dw/io/CSVStreamWriter');
 
@@ -35,17 +35,17 @@ function Export(params, iteratorCallback) {
      */
     this._model = require('int_marketing_cloud').dataExport(params.ExportID);
     /**
-     * @type {dw/io/File|dw.io.File}
+     * @type {dw.io.File}
      * @private
      */
     this._file = new File(dirName + File.SEPARATOR + params.ExportFileName);
     /**
-     * @type {dw/io/FileWriter|dw.io.FileWriter}
+     * @type {dw.io.FileWriter}
      * @private
      */
     this._fileWriter = new FileWriter(this._file);
     /**
-     * @type {dw/io/CSVStreamWriter|dw.io.CSVStreamWriter}
+     * @type {dw.io.CSVStreamWriter}
      * @private
      */
     this._csvWriter = new CSVStreamWriter(this._fileWriter, params.Delimiter === 'TAB' ? '\t' : params.Delimiter);
@@ -62,11 +62,14 @@ function Export(params, iteratorCallback) {
      */
     this.header = this._model.header;
     /**
-     * @type {dw/util/Iterator|dw.util.Iterator|Iterator}
+     * @type {dw.util.Iterator|Iterator}
      */
     this.dataIterator = iteratorCallback(this);
 }
 
+/**
+ * @alias module:models/export~Export#prototype
+ */
 Export.prototype = {
     writeHeader: function writeHeader() {
         this._csvWriter.writeNext(this.header);
@@ -106,7 +109,7 @@ Export.prototype = {
 
     /**
      * Writes array of data to file
-     * @param {dw/util/Collection|dw.util.Collection|Array} data
+     * @param {dw.util.Collection|Array} data
      */
     writeRow: function writeRow(data) {
         if (!empty(data)) {

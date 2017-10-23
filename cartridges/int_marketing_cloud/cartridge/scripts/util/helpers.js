@@ -83,17 +83,20 @@ function expandAttributes(attrJSON) {
  * Fetches object definition from Custom Object, creating it if not exists
  * @param {string} customObjectName
  * @param {string} objectID
- * @returns {dw/object/CustomAttributes|dw.object.CustomAttributes}
+ * @param {boolean} [createIfNotExists]
+ * @returns {dw.object.CustomAttributes}
  */
-function getCustomObject(customObjectName, objectID) {
+function getCustomObject(customObjectName, objectID, createIfNotExists) {
     var com = require('dw/object/CustomObjectMgr'),
         objectDefinition = com.getCustomObject(customObjectName, objectID);
-    if (empty(objectDefinition)) {
+    if (empty(objectDefinition) && createIfNotExists === true) {
         require('dw/system/Transaction').wrap(function(){
             objectDefinition = com.createCustomObject(customObjectName, objectID);
         });
     }
-    return objectDefinition.getCustom();
+    if (!empty(objectDefinition)) {
+        return objectDefinition.getCustom();
+    }
 }
 
 /**
@@ -194,7 +197,7 @@ function objValues(obj) {
 /**
  * Build a simple array of values from a collection
  * @param {string} valueKey The key to be fetched from each item in collection
- * @param {Array|dw/util/List|dw.util.List} iterable Array or List to iterate
+ * @param {Array|dw.util.List} iterable Array or List to iterate
  * @param {Object} fallbackData Fallback data object
  * @returns {Array}
  */
@@ -211,7 +214,7 @@ function buildSimpleArrayFromIterable(valueKey, iterable, fallbackData) {
 /**
  * Build an array of objects from a collection
  * @param {Object} objMap Keys serve as the value path, Values serve as the key to be written to
- * @param {Array|dw/util/List|dw.util.List} iterable Array or List to iterate
+ * @param {Array|dw.util.List} iterable Array or List to iterate
  * @param {Object} fallbackData Fallback data object
  * @returns {Array}
  */

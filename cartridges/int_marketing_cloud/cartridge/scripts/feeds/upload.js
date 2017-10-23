@@ -5,21 +5,21 @@
  */
 
 /**
- * @type {dw/io/File|dw.io.File}
+ * @type {dw.io.File}
  */
 const File = require('dw/io/File');
 /**
- * @type {dw/svc/ServiceRegistry|dw.svc.ServiceRegistry}
+ * @type {dw.svc.ServiceRegistry}
  */
 const ServiceRegistry = require('dw/svc/ServiceRegistry');
 /**
- * @type {dw/system/Status|dw.system.Status}
+ * @type {dw.system.Status}
  */
 const Status = require('dw/system/Status');
 
 function sftpUpload(params, stepExecution) {
     /**
-     * @type {dw/svc/FTPService|dw.svc.FTPService}
+     * @type {dw.svc.FTPService}
      */
     var sftpService = registerSFTP(params.SFTPServiceID);
     var siteID = require('dw/system/Site').current.ID;
@@ -48,12 +48,12 @@ function sftpUpload(params, stepExecution) {
 
 /**
  * @param {string} serviceID
- * @returns {dw/svc/FTPService|dw.svc.FTPService}
+ * @returns {dw.svc.FTPService}
  */
 function registerSFTP(serviceID) {
     ServiceRegistry.configure(serviceID, {
         /**
-         * @param {dw/svc/FTPService|dw.svc.FTPService} svc
+         * @param {dw.svc.FTPService} svc
          * @param {Object} params
          */
         createRequest: function (svc, params) {

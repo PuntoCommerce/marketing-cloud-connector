@@ -35,6 +35,26 @@
     {
       "name": "app.communication.order.confirmation",
       "script": "~/cartridge/scripts/communication/order"
+    },
+    {
+      "name": "app.tracking.cachedTrackingLink",
+      "script": "~/cartridge/scripts/tracking/trackingLink"
+    },
+    {
+      "name": "app.tracking.trackCached",
+      "script": "~/cartridge/scripts/tracking/dataLayer"
+    },
+    {
+      "name": "app.tracking.preEvents",
+      "script": "~/cartridge/scripts/tracking/dataLayer"
+    },
+    {
+      "name": "app.tracking.event",
+      "script": "~/cartridge/scripts/tracking/dataLayer"
+    },
+    {
+      "name": "app.tracking.postEvents",
+      "script": "~/cartridge/scripts/tracking/dataLayer"
     }
 
   ]

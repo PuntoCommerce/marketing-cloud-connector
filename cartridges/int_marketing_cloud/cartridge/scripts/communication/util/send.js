@@ -1,22 +1,21 @@
 'use strict';
 
 /**
- * @module communication/util/trigger
+ * @module communication/util/send
  */
 
-var Mail = require('dw/net/Mail');
 var Logger = require('dw/system/Logger');
 
 /**
  * @typedef {Object} CustomerNotification
  * @property {string} fromEmail The email address the communication is sent from
- * @property {string|array} toEmail The email address the communication is sent to
+ * @property {string|Array} toEmail The email address the communication is sent to
  * @property {string} subject The communication subject
  * @property {string} messageBody The body of the communication to send
  * @property {Object} params Object containing additional parameters for usage by the hook
- * @property {dw/web/Forms|dw.web.Forms} params.CurrentForms The forms available in current session
- * @property {dw/web/HttpParameterMap|dw.web.HttpParameterMap} params.CurrentHttpParameterMap The parameters in current request
- * @property {dw/customer/Customer|dw.customer.Customer} params.CurrentCustomer The current customer
+ * @property {dw.web.Forms} params.CurrentForms The forms available in current session
+ * @property {dw.web.HttpParameterMap} params.CurrentHttpParameterMap The parameters in current request
+ * @property {dw.customer.Customer} params.CurrentCustomer The current customer
  */
 
 /**

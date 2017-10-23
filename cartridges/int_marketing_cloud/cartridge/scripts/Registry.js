@@ -40,6 +40,17 @@ var	Registry = {
         return new model(contactKey, eventKey);
     },
     /**
+     * @param {string} analyticEventID The analytic event ID
+     * @returns {module:models/analytic~AnalyticEvent} Instance of AnalyticEvent
+     */
+    analyticEvent : function (analyticEventID) {
+        /**
+         * @type {module:models/analytic~AnalyticEvent}
+         */
+        var model = require(path +'models/analytic');
+        return new model(analyticEventID);
+    },
+    /**
      * @param {string} exportID The data export ID
      * @returns {module:models/dataExport~DataExport} Instance of DataExport
      */

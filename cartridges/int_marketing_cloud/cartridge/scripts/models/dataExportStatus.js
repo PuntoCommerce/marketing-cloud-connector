@@ -26,9 +26,9 @@ function DataExportStatus(exportID) {
     this.siteID_exportID = require('dw/system/Site').current.ID + '_' + exportID;
     /**
      * Definition object
-     * @type {dw/object/CustomAttributes|dw.object.CustomAttributes}
+     * @type {dw.object.CustomAttributes}
      */
-    this._definition = helpers.getCustomObject(customObjectName, this.siteID_exportID);
+    this._definition = helpers.getCustomObject(customObjectName, this.siteID_exportID, true);
     /**
      * Date last exported
      * @type {Date}
@@ -41,6 +41,9 @@ function DataExportStatus(exportID) {
     this.currentExport = new Date();
 }
 
+/**
+ * @alias module:models/dataExportStatus~DataExportStatus#prototype
+ */
 DataExportStatus.prototype = {
     markExported: function markExported() {
         var that = this;
