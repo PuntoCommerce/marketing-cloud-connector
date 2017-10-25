@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+    <job job-id="MCC-CompileMappingTemplates" priority="0">
+        <description/>
+        <parameters/>
+        <flow>
+            <context site-id="SiteGenesis"/>
+            <step step-id="mcc-compile-datafeed-templates" type="custom.MCC-CompileMappingTemplates" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="ObjectType">DataFeeds</parameter>
+                </parameters>
+            </step>
+            <step step-id="mcc-compile-trigger-templates" type="custom.MCC-CompileMappingTemplates" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="ObjectType">Triggers</parameter>
+                </parameters>
+            </step>
+            <step step-id="mcc-compile-analytic-templates" type="custom.MCC-CompileMappingTemplates" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="ObjectType">Analytics</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-once enabled="false">
+                <date>2017-10-03Z</date>
+                <time>05:03:15.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+
     <job job-id="MCC-Feed-Catalog" priority="0">
         <description/>
         <parameters/>
