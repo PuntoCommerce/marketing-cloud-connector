@@ -2,12 +2,12 @@
   "step-types": {
     "script-module-step": [
       {
-        "@type-id": "custom.MCC-Init",
+        "@type-id": "custom.MCC-InitTriggers",
         "@supports-parallel-execution": "false",
         "@supports-site-context": "true",
         "@supports-organization-context": "false",
-        "description": "Marketing Cloud Cartridge Init, useful for developer to recreate trigger configurations.",
-        "module": "int_marketing_cloud/cartridge/scripts/init/bootstrap.js",
+        "description": "Marketing Cloud Trigger Init, useful for developer to recreate trigger configurations.",
+        "module": "int_marketing_cloud/cartridge/scripts/jobs/triggers.js",
         "function": "initTriggers",
         "transactional": "true",
         "timeout-in-seconds": "900",
@@ -250,6 +250,55 @@
       }
     ],
     "chunk-script-module-step": [
+      {
+        "@type-id": "custom.MCC-CompileMappingTemplates",
+        "@supports-parallel-execution": "false",
+        "@supports-site-context": "true",
+        "@supports-organization-context": "false",
+        "description": "Marketing Cloud Cartridge - Compile mapping templates. Generates Velocity templates based on data mapping rules.",
+        "module": "int_marketing_cloud/cartridge/scripts/jobs/compileMappingTemplates.js",
+        "before-step-function": "beforeStep",
+        "total-count-function": "getTotalCount",
+        "before-chunk-function": "",
+        "read-function": "read",
+        "process-function": "process",
+        "write-function": "write",
+        "after-chunk-function": "",
+        "after-step-function": "afterStep",
+        "chunk-size": 10,
+        "transactional": "false",
+        "parameters": {
+          "parameter": [
+            {
+              "@name": "ObjectType",
+              "@type": "string",
+              "@required": "true",
+              "description": "The object type to generate templates for.",
+              "enum-values":
+              {
+                "value":
+                [
+                  "Triggers",
+                  "DataFeeds",
+                  "Analytics"
+                ]
+              }
+            }
+          ]
+        },
+        "status-codes": {
+          "status": [
+            {
+              "@code": "ERROR",
+              "description": "Used when the step failed with an error."
+            },
+            {
+              "@code": "OK",
+              "description": "Used when the step finished successfully."
+            }
+          ]
+        }
+      },
       {
         "@type-id": "custom.MCC-Feed-ExportCatalog",
         "@supports-parallel-execution": "false",

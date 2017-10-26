@@ -139,6 +139,9 @@ function Message(customerKey, sendID) {
     };
 }
 
+/**
+ * @alias module:models/message~Message#prototype
+ */
 Message.prototype = {
     /**
      * Set FROM details

@@ -5,11 +5,11 @@
  */
 
 /**
- * @type {dw/content/ContentSearchModel|dw.content.ContentSearchModel}
+ * @type {dw.content.ContentSearchModel}
  */
 const ContentSearchModel = require('dw/content/ContentSearchModel');
 /**
- * @type {dw/content/ContentMgr|dw.content.ContentMgr}
+ * @type {dw.content.ContentMgr}
  */
 const ContentMgr = require('dw/content/ContentMgr');
 
@@ -24,7 +24,7 @@ const Export = require('../models/export');
 var exportModel;
 
 /**
- * @type {dw/content/ContentSearchModel|dw.content.ContentSearchModel}
+ * @type {dw.content.ContentSearchModel}
  */
 var CSM;
 
@@ -48,7 +48,7 @@ function read(parameters, stepExecution) {
 }
 
 /**
- * @param {dw/content/Content|dw.content.Content} content
+ * @param {dw.content.Content} content
  * @param parameters
  * @param stepExecution
  * @returns {void|Array}

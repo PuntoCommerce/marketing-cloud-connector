@@ -57,6 +57,64 @@
         </group-definitions>
     </custom-type>
 
+    <custom-type type-id="MarketingCloudAnalytics">
+        <display-name xml:lang="x-default">Marketing Cloud Analytics</display-name>
+        <description xml:lang="x-default">Marketing Cloud Analytics definitions</description>
+        <staging-mode>source-to-target</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="analyticEventID">
+            <display-name xml:lang="x-default">Analytic Event ID</display-name>
+            <description xml:lang="x-default">Event ID of the analytic activity being tracked</description>
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="analyticAttributes">
+                <display-name xml:lang="x-default">Analytic Attributes</display-name>
+                <description xml:lang="x-default">Analytic fields, data attributes, etc, should all be defined and mapped here.</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="customEventName">
+                <display-name xml:lang="x-default">Custom Event Name</display-name>
+                <description xml:lang="x-default">Custom event name that is sent to Marketing Cloud</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="description">
+                <display-name xml:lang="x-default">Description</display-name>
+                <description xml:lang="x-default">Analytic event description</description>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="enabled">
+                <display-name xml:lang="x-default">Enabled?</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="default">
+                <display-name xml:lang="x-default">Default</display-name>
+                <attribute attribute-id="analyticEventID"/>
+                <attribute attribute-id="customEventName"/>
+                <attribute attribute-id="description"/>
+                <attribute attribute-id="enabled"/>
+                <attribute attribute-id="analyticAttributes"/>
+                <attribute attribute-id="creationDate" system="true"/>
+                <attribute attribute-id="lastModified" system="true"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
     <custom-type type-id="MarketingCloudDataExport">
         <display-name xml:lang="x-default">Marketing Cloud Data Export</display-name>
         <description xml:lang="x-default">Marketing Cloud Data Export definitions</description>

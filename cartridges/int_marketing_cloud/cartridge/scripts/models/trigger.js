@@ -73,7 +73,7 @@ function rebuildTriggerDefinition() {
 
 /**
  * Returns a new Message instance
- * @param {module:communication/util/trigger~CustomerNotification} data Data to populate the Message with.
+ * @param {module:communication/util/send~CustomerNotification} data Data to populate the Message with.
  * @returns {module:models/message~Message}
  * @alias module:models/trigger~Trigger#newMessage
  */
@@ -120,7 +120,7 @@ function newMessage(data){
 
 /**
  * Sends a trigger message
- * @returns {dw/svc/Result|dw.svc.Result}
+ * @returns {dw.svc.Result}
  * @alias module:models/trigger~Trigger#send
  */
 function sendMessage() {
@@ -135,7 +135,7 @@ function sendMessage() {
     }
 
     /**
-     * @type {dw/svc/Service|dw.svc.Service}
+     * @type {dw.svc.Service}
      */
     var msgSvc = require('dw/svc/ServiceRegistry').get('marketingcloud.rest.messaging.send');
     var message = this.message;
@@ -156,9 +156,9 @@ function Trigger(hookID) {
     this.hookID = hookID;
     /**
      * Definition object
-     * @type {dw/object/CustomAttributes|dw.object.CustomAttributes}
+     * @type {dw.object.CustomAttributes}
      */
-    this.definition = helpers.getCustomObject(customObjectName, hookID);
+    this.definition = helpers.getCustomObject(customObjectName, hookID) || {enabled: false, subscriberAttributes: {}};
     /**
      * Expanded attributes from trigger definition
      * @type {Object}
@@ -171,6 +171,9 @@ function Trigger(hookID) {
     this.message = null;
 }
 
+/**
+ * @alias module:models/trigger~Trigger#prototype
+ */
 Trigger.prototype = {
     /**
      * Returns whether this trigger is enabled

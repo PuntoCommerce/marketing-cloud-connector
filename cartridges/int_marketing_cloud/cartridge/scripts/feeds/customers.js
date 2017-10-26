@@ -5,7 +5,7 @@
  */
 
 /**
- * @type {dw/customer/CustomerMgr|dw.customer.CustomerMgr}
+ * @type {dw.customer.CustomerMgr}
  */
 const CustomerMgr = require('dw/customer/CustomerMgr');
 
@@ -43,7 +43,7 @@ function read(parameters, stepExecution) {
 }
 
 /**
- * @param {dw/customer/Profile|dw.customer.Profile} profile
+ * @param {dw.customer.Profile} profile
  * @param parameters
  * @param stepExecution
  * @returns {void|Array}

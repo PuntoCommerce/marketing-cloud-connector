@@ -71,6 +71,9 @@ function Event(contactKey, eventKey) {
     this.data = {};
 }
 
+/**
+ * @alias module:models/event~Event#prototype
+ */
 Event.prototype = {
     /**
      * If true, the contact key is automatically added to the contact model if it isn't already included, making

@@ -19,12 +19,32 @@
                 <min-length>0</min-length>
                 <regex>[\d\w.-]+</regex>
             </attribute-definition>
+            <attribute-definition attribute-id="mcIncludeTrackingLink">
+                <display-name xml:lang="x-default">Marketing Cloud Include Tracking Link</display-name>
+                <description xml:lang="x-default">Select Yes to output Marketing Cloud Analytics tracking link into the storefront. Requires Member ID to be set.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="mcCollectJsUrl">
+                <display-name xml:lang="x-default">Marketing Cloud collect.js URL</display-name>
+                <description xml:lang="x-default">Marketing Cloud collect.js URL. The string MCMID must exist in the URL, for the marketing cloud MID to be inserted into the URL.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <regex>^(?:https?:)?//(?:.*MCMID.*)$</regex>
+                <default-value>//MCMID.collect.igodigital.com/collect.js</default-value>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="Marketing Cloud">
                 <display-name xml:lang="x-default">Marketing Cloud Connector</display-name>
                 <attribute attribute-id="mcEnableAnalytics"/>
                 <attribute attribute-id="mcMID"/>
+                <attribute attribute-id="mcIncludeTrackingLink"/>
+                <attribute attribute-id="mcCollectJsUrl"/>
             </attribute-group>
         </group-definitions>
     </type-extension>

@@ -5,7 +5,7 @@
  */
 
 /**
- * @type {dw/order/OrderMgr|dw.order.OrderMgr}
+ * @type {dw.order.OrderMgr}
  */
 const OrderMgr = require('dw/order/OrderMgr');
 
@@ -44,7 +44,7 @@ function read(parameters, stepExecution) {
 }
 
 /**
- * @param {dw/order/Order|dw.order.Order} order
+ * @param {dw.order.Order} order
  * @param parameters
  * @param stepExecution
  * @returns {void|Array}
