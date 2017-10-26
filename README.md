@@ -35,13 +35,42 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
 
 #### [unreleased] ####
 
+#### [[1.0.0-rc.3]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.1-rc.1) - 2017-10-24 ####
+
+##### Fixed #####
+ - Fixed incorrect path to hooks.json
+ - Fixed typo in variable casing in catalog feed job
+ - Fixed `isValid401()` check, which was expecting a value as string rather than number
+ - Fixed possible issue with expires comparison
+ - Corrected `marketingcloud.rest.interaction.events` stub.
+
+##### Added #####
+ - Added more returned details to the `parseResponse()` method.
+ - Added job which can be used to generate necessary velocity data mapping templates.
+ - Added Analytics model
+ - Added a currently-unused model for data feed jobs to export using Velocity templates. This is to support future functionality.
+ - Added data layer script for Analytic use. This handles bulk of logic for analytic implementation with Marketing Cloud.
+ - Added tracking link script for Analytic use. This handles tracking link(s) used for analytic init.
+ - Registered 5 new hooks.
+ - Added MCC-CompileMappingTemplates job.
+ - Added custom object MarketingCloudAnalytics
+ - Added MC custom preferences to control tracking link.
+
+##### Changed #####
+ - Service credential fallback now relies upon the service name for fallback credential ID.
+ - Updated `helpers.getCustomObject()` to no longer auto-assume that you want a new object created if it wasn't found.
+ - Slight improvement to `isValidAuth()` check.
+ - Trigger logic no longer auto-creates missing trigger, instead uses plain JS object marking trigger as disabled.
+ - Renamed MCC Init job to MCC InitTriggers.
+ - Updated Order Confirmation email sample with a fully working email template.
+
 #### [[1.0.0-rc.3]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.0-rc.3) - 2017-08-14 ####
 
-#### Fixed ####
+##### Fixed #####
  - Fixed bug where data object wasn't being passed to catalog feed.
  - Fixed issue where feed was being marked as exported when execution completed, rather than using job start timestamp.
  
-#### Added ####
+##### Added #####
  - Added fallback logic for data mappings (to support a fallback object, so if a value isn't found in variant, for example, we then search master)
  - Added function to print list of images for product catalog.
  - Added support for variation groups in catalog feed.
@@ -74,7 +103,7 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
 
 #### [[1.0.0-rc.1]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.0-rc.1) - 2017-06-26 ####
  
-##### Added #####
+#### Added #####
  - Initial packaging of MC Connector Cartridge
  - Added triggered send email support
  - Added data feed support
