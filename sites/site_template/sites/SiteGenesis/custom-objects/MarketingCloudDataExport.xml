@@ -25,6 +25,22 @@
 }</object-attribute>
     </custom-object>
 
+    <custom-object type-id="MarketingCloudDataExport" object-id="promotionsFeed">
+        <object-attribute attribute-id="description">Marketing Cloud Promotions Feed Configuration</object-attribute>
+        <object-attribute attribute-id="exportAttributes">{
+    "SiteID": "SiteID",
+    "Promotion.ID": "PromotionID",
+    "Promotion.name": "PromotionName",
+    "Promotion.promotionClass": "PromotionClass",
+    "Campaign.ID": "CampaignID",
+    "Campaign.description": "CampaignDescription",
+    "Promotion.enabled": "PromotionEnabled",
+    "Promotion.active": "PromotionActive",
+    "Campaign.active": "CampaignActive",
+    "Promotion.customerGroups": {"label":"CustomerGroups", "type":"array", "mappedValue": "ID", "concat": true, "fallback": "Campaign.customerGroups"}
+}</object-attribute>
+    </custom-object>
+
     <custom-object type-id="MarketingCloudDataExport" object-id="ordersFeed">
         <object-attribute attribute-id="description">Marketing Cloud Orders Feed Configuration</object-attribute>
         <object-attribute attribute-id="exportAttributes">{

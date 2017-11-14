@@ -277,7 +277,7 @@ function mappingFilter(key, val, data) {
                             val = buildMappedArrayFromIterable(mapDef, val, data);
                         }
                     }
-                    if (concat === true && !empty(val) && Array.isArray(val)) {
+                    if (concat === true && Array.isArray(val)) {
                         val = val.join(',');
                     }
                     break;
