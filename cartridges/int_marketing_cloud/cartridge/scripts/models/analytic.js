@@ -72,6 +72,10 @@ function AnalyticEvent(analyticEventID) {
                 hookID,
                 hookID.slice(hookID.lastIndexOf('.') + 1)
             );
+            // Fix for hook array return value being an List/ArrayList rather than a plain array...
+            if (filters instanceof (require('dw/util/List'))) {
+                filters = filters.toArray();
+            }
         }
 
         if (empty(mapFilter)) {
