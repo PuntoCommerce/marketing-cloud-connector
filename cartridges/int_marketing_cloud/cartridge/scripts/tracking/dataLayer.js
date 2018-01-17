@@ -323,7 +323,7 @@ function requestEvent(eventName, eventValue, requestData) {
             break;
         case 'orderConfirmation':
             if (empty(dataLayer.trackConversion)) {
-                dataLayer.trackConversion = buildOrder(orderID);
+                dataLayer.trackConversion = buildOrder(eventValue);
             }
             break;
     }

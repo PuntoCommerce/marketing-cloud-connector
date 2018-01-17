@@ -55,6 +55,14 @@
     {
       "name": "app.tracking.postEvents",
       "script": "~/cartridge/scripts/tracking/dataLayer"
+    },
+    {
+      "name": "app.mailingList.subscribe",
+      "script": "~/cartridge/scripts/lists/subscription"
+    },
+    {
+      "name": "app.mailingList.unsubscribe",
+      "script": "~/cartridge/scripts/lists/subscription"
     }
 
   ]
