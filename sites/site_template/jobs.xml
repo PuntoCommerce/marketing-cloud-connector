@@ -170,6 +170,43 @@
         </triggers>
     </job>
 
+    <job job-id="MCC-Feed-Promotions" priority="0">
+        <description/>
+        <parameters/>
+        <split sequential="false">
+            <flow>
+                <context site-id="SiteGenesis"/>
+                <template-ref template-id="template_59"/>
+            </flow>
+            <flow-template template-id="template_59">
+                <step step-id="mcc-feed-exportpromotions" type="custom.MCC-Feed-ExportPromotions" enforce-restart="false">
+                    <description/>
+                    <parameters>
+                        <parameter name="ExportID">promotionsFeed</parameter>
+                        <parameter name="ExportFileName">promotionsFeed.psv</parameter>
+                        <parameter name="Delimiter">|</parameter>
+                        <parameter name="IncrementalExport">false</parameter>
+                    </parameters>
+                </step>
+                <step step-id="mcc-feed-uploadpromotions" type="custom.MCC-Feed-UploadPromotions" enforce-restart="false">
+                    <description/>
+                    <parameters>
+                        <parameter name="SFTPServiceID">marketingcloud.sftp</parameter>
+                        <parameter name="ExportFileName">promotionsFeed.psv</parameter>
+                        <parameter name="TargetPath">/Import/</parameter>
+                    </parameters>
+                </step>
+            </flow-template>
+        </split>
+        <rules/>
+        <triggers>
+            <run-once enabled="false">
+                <date>2017-06-19Z</date>
+                <time>15:37:40.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+
     <job job-id="MCC-InitTriggers" priority="0">
         <description>For developer use, used to recreate trigger configurations</description>
         <parameters/>

@@ -15,6 +15,7 @@
  * Sandbox Env: https://mc.test.exacttarget.com
  *
  * Production API: https://www.exacttargetapis.com
+ * QA API: https://www.qa.exacttargetapis.com
  */
 
 const ServiceRegistry = require('dw/svc/ServiceRegistry');

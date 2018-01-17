@@ -35,7 +35,22 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
 
 #### [unreleased] ####
 
-#### [[1.0.0-rc.3]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.1-rc.1) - 2017-10-24 ####
+#### [[1.0.2]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.2) - 2017-01-17 ####
+
+##### Fixed #####
+ - Fix for treegen doc generation to ignore dot-files
+ - Fixed array conversion error for analytics
+ - Fixed order ID missing for analytics
+
+##### Added #####
+ - Added Promotions/Campaigns feed
+ - Added mailing list / subscription functionality
+ - Added soap service
+ - Added two hooks for mailing list subscribe / unsubscribe
+ - Added wsdl generated API zip file for reference
+ - Added new site preferences
+
+#### [[1.0.1-rc.1]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.1-rc.1) - 2017-10-24 ####
 
 ##### Fixed #####
  - Fixed incorrect path to hooks.json

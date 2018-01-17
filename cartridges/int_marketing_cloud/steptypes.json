@@ -195,6 +195,60 @@
         }
       },
       {
+        "@type-id": "custom.MCC-Feed-UploadPromotions",
+        "@supports-parallel-execution": "true",
+        "@supports-site-context": "true",
+        "@supports-organization-context": "false",
+        "description": "Marketing Cloud Feed Upload Promotions",
+        "module": "int_marketing_cloud/cartridge/scripts/feeds/upload.js",
+        "function": "sftpUpload",
+        "transactional": "false",
+        "timeout-in-seconds": "900",
+        "parameters": {
+          "parameter": [
+            {
+              "@name": "SFTPServiceID",
+              "@type": "string",
+              "@required": "true",
+              "description": "Administration>Operations>Services - SFTP Service ID",
+              "default-value": "marketingcloud.sftp"
+            },
+            {
+              "@name": "ExportFileName",
+              "@type": "string",
+              "@required": "true",
+              "@trim": "true",
+              "description": "Filename for the exported feed.",
+              "default-value": "promotionsFeed.psv"
+            },
+            {
+              "@name": "TargetPath",
+              "@type": "string",
+              "@required": "false",
+              "@trim": "true",
+              "description": "Directory path the file should be stored into on the destination server.",
+              "default-value": "/Import/"
+            }
+          ]
+        },
+        "status-codes": {
+          "status": [
+            {
+              "@code": "ERROR",
+              "description": "Used when the step failed with an error."
+            },
+            {
+              "@code": "FINISHED",
+              "description": "Used when the step finished successfully."
+            },
+            {
+              "@code": "FINISHED_WITH_WARNINGS",
+              "description": "Used when the step finished with warnings."
+            }
+          ]
+        }
+      },
+      {
         "@type-id": "custom.MCC-Feed-UploadCustomers",
         "@supports-parallel-execution": "true",
         "@supports-site-context": "true",
@@ -502,6 +556,77 @@
               "@trim": "true",
               "description": "Filename for the exported feed.",
               "default-value": "ordersFeed.psv"
+            },
+            {
+              "@name": "Delimiter",
+              "@type": "string",
+              "@required": "true",
+              "description": "Delimiter character.",
+              "default-value": "|",
+              "enum-values":
+              {
+                "value":
+                [
+                  "|",
+                  ",",
+                  "TAB"
+                ]
+              }
+            },
+            {
+              "@name": "IncrementalExport",
+              "@type": "boolean",
+              "@required": "false",
+              "description": "If set, only updates since the last export are transmitted."
+            }
+          ]
+        },
+        "status-codes": {
+          "status": [
+            {
+              "@code": "ERROR",
+              "description": "Used when the step failed with an error."
+            },
+            {
+              "@code": "OK",
+              "description": "Used when the step finished successfully."
+            }
+          ]
+        }
+      },
+      {
+        "@type-id": "custom.MCC-Feed-ExportPromotions",
+        "@supports-parallel-execution": "false",
+        "@supports-site-context": "true",
+        "@supports-organization-context": "false",
+        "description": "Marketing Cloud Promotions Export",
+        "module": "int_marketing_cloud/cartridge/scripts/feeds/promotions.js",
+        "before-step-function": "beforeStep",
+        "total-count-function": "getTotalCount",
+        "before-chunk-function": "",
+        "read-function": "read",
+        "process-function": "process",
+        "write-function": "write",
+        "after-chunk-function": "",
+        "after-step-function": "afterStep",
+        "chunk-size": 10,
+        "transactional": "false",
+        "parameters": {
+          "parameter": [
+            {
+              "@name": "ExportID",
+              "@type": "string",
+              "@required": "true",
+              "description": "Export ID for this feed, should match exportID value from custom object definition.",
+              "default-value": "promotionsFeed"
+            },
+            {
+              "@name": "ExportFileName",
+              "@type": "string",
+              "@required": "true",
+              "@trim": "true",
+              "description": "Filename for the exported feed.",
+              "default-value": "promotionsFeed.psv"
             },
             {
               "@name": "Delimiter",
