@@ -12,6 +12,12 @@
         <password masked="true">********</password>
     </service-credential>
 
+    <service-credential service-credential-id="marketingcloud.soap">
+        <url>https://www.exacttargetapis.com</url>
+        <user-id/>
+        <password masked="true">********</password>
+    </service-credential>
+
     <service-credential service-credential-id="marketingcloud.rest.auth">
         <url>https://auth.exacttargetapis.com/v1/requestToken</url>
         <user-id>API User ID</user-id>
@@ -19,6 +25,16 @@
     </service-credential>
 
     <service-profile service-profile-id="marketingcloud.rest">
+        <timeout-millis>0</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service-profile service-profile-id="marketingcloud.soap">
         <timeout-millis>0</timeout-millis>
         <rate-limit-enabled>false</rate-limit-enabled>
         <rate-limit-calls>0</rate-limit-calls>
@@ -56,6 +72,26 @@
         <mock-mode-enabled>false</mock-mode-enabled>
         <profile-id>marketingcloud.rest</profile-id>
         <credential-id>marketingcloud.rest</credential-id>
+    </service>
+
+    <service service-id="marketingcloud.soap.create">
+        <service-type>SOAP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>marketingcloud_soap</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>marketingcloud.soap</profile-id>
+        <credential-id>marketingcloud.soap</credential-id>
+    </service>
+
+    <service service-id="marketingcloud.soap.retrieve">
+        <service-type>SOAP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>marketingcloud_soap</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>marketingcloud.soap</profile-id>
+        <credential-id>marketingcloud.soap</credential-id>
     </service>
 
     <service service-id="marketingcloud.sftp">
