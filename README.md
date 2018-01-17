@@ -35,6 +35,11 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
 
 #### [unreleased] ####
 
+#### [[1.0.2.1]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.2.1) - 2017-01-17 ####
+
+##### Added #####
+ - Added missing service configuration definitions
+
 #### [[1.0.2]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.2) - 2017-01-17 ####
 
 ##### Fixed #####
