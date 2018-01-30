@@ -35,6 +35,12 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
 
 #### [unreleased] ####
 
+##### Added #####
+ - Added OMS email hooks
+
+##### Fixed #####
+ - Fixed a syntax error in compileMappingTemplates.js
+
 #### [[1.0.2.1]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.2.1) - 2017-01-17 ####
 
 ##### Added #####
