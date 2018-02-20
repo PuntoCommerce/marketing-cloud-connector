@@ -8,17 +8,18 @@ const webRef = require('int_marketing_cloud').soapReference();
 
 /**
  * Subscriber class
- * @param customerOrEmail {dw.customer.Customer|string} Customer instance or email string
+ * @param customerOrData {dw.customer.Customer|Object} Customer instance or custom data
  * @constructor
  * @alias module:models/subscriber~Subscriber
  */
-function Subscriber(customerOrEmail) {
-    if (typeof(customerOrEmail) === 'string') {
-        this.customer = null;
-        this.email = customerOrEmail;
+function Subscriber(customerOrData) {
+    if (customerOrData instanceof dw.customer.Customer) {
+    	this.customer = customerOrData;
+        this.email = customerOrData.profile && customerOrData.profile.email;
     } else {
-        this.customer = customerOrEmail;
-        this.email = customerOrEmail.profile && customerOrEmail.profile.email;
+        this.customer = null;
+        this.email = customerOrData.email;
+        this.setSubscriberAttributes(customerOrData.optionalAttributes);
     }
 
     if (!this.email) {
@@ -28,7 +29,13 @@ function Subscriber(customerOrEmail) {
     this.instance = new webRef.Subscriber();
     this.instance.emailAddress = this.email;
     this.instance.subscriberKey = this.email;
-
+    let count = 0;
+    for(x in this.getOptionalAttributes()){
+    	this.instance.attributes[count] = new webRef.Attribute();
+    	this.instance.attributes[count].name = x;
+    	this.instance.attributes[count].value = this._optionalAttributes[x];
+    	count++;
+    }
     this._fetchSubscriber();
     this.currentSubscriptions = new Array();
     this._fetchLists();
@@ -40,6 +47,16 @@ function Subscriber(customerOrEmail) {
  * @alias module:models/subscriber~Subscriber#prototype
  */
 Subscriber.prototype = {
+	_optionalAttributes : new dw.util.HashMap(),
+	_addSubscriberAttribute : function(key, value){
+		this._optionalAttributes.put(key, value);
+	},
+	setSubscriberAttributes : function(objmap){
+		this._optionalAttributes = objmap;
+	},
+	getOptionalAttributes : function(){
+		return this._optionalAttributes;
+	},
     _fetchSubscriber : function() {
         var filter = webRef.SimpleFilterPart();
         filter.property = 'SubscriberKey';

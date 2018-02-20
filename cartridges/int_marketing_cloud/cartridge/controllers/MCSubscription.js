@@ -104,14 +104,16 @@ function submit() {
     var subscriptionResult = subscriptionForm.handleAction({
         subscribe: function (formgroup) {
             subscribed = true;
-
+            let optionalattributes = getSubscriberAttributesFromForm(formgroup);
+            
             hookID = 'app.mailingList.subscribe';
             if (HookMgr.hasHook(hookID)) {
                 return HookMgr.callHook(
                     hookID,
                     hookID.slice(hookID.lastIndexOf('.') + 1),
                     {
-                        email: formgroup.email.value
+                        email: formgroup.email.value,
+                        optionalAttributes : optionalattributes
                     }
                 );
             }
@@ -170,6 +172,19 @@ function submit() {
             break;
     }
 }
+
+
+function getSubscriberAttributesFromForm(formgroup){
+	let subscriberattributes = new dw.util.HashMap();
+	
+	for(var x in formgroup){
+		if(formgroup[x] instanceof dw.web.FormField)
+			subscriberattributes.put(x, formgroup[x].value);
+	}
+	
+	return subscriberattributes;
+}
+
 
 /* Web exposed methods */
 

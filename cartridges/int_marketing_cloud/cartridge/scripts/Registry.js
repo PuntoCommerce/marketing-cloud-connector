@@ -88,12 +88,12 @@ var	Registry = {
      * @param {dw.customer.Customer|string} customerOrEmail A customer instance or email string
      * @returns {module:models/subscriber~Subscriber} Instance of Subscriber
      */
-    subscriber : function (customerOrEmail) {
+    subscriber : function (customerOrData) {
         /**
          * @type {module:models/subscriber~Subscriber}
          */
         var model = require(path +'models/subscriber');
-        return new model(customerOrEmail);
+        return new model(customerOrData);
     },
     soapReference : function () {
         return webreferences2.etframework;
