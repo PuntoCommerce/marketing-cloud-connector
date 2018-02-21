@@ -121,14 +121,15 @@ function submit() {
         subscribeFooter: function (formgroup) {
             subscribed = true;
             //noDecorator = true;
-
+			let optionalattributes = getSubscriberAttributesFromForm(formgroup);
             hookID = 'app.mailingList.subscribe';
             if (HookMgr.hasHook(hookID)) {
                 return HookMgr.callHook(
                     hookID,
                     hookID.slice(hookID.lastIndexOf('.') + 1),
                     {
-                        email: formgroup.email.value
+                        email: formgroup.email.value,
+						optionalAttributes : optionalattributes
                     }
                 );
             }
