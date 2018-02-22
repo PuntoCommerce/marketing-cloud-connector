@@ -104,7 +104,7 @@ function submit() {
     var subscriptionResult = subscriptionForm.handleAction({
         subscribe: function (formgroup) {
             subscribed = true;
-            let optionalattributes = getSubscriberAttributesFromForm(formgroup);
+            let optionalAttributes = getOptionalAttributesFromForm(formgroup);
             
             hookID = 'app.mailingList.subscribe';
             if (HookMgr.hasHook(hookID)) {
@@ -113,7 +113,7 @@ function submit() {
                     hookID.slice(hookID.lastIndexOf('.') + 1),
                     {
                         email: formgroup.email.value,
-                        optionalAttributes : optionalattributes
+                        optionalAttributes : optionalAttributes
                     }
                 );
             }
@@ -121,7 +121,7 @@ function submit() {
         subscribeFooter: function (formgroup) {
             subscribed = true;
             //noDecorator = true;
-			let optionalattributes = getSubscriberAttributesFromForm(formgroup);
+			let optionalAttributes = getOptionalAttributesFromForm(formgroup);
             hookID = 'app.mailingList.subscribe';
             if (HookMgr.hasHook(hookID)) {
                 return HookMgr.callHook(
@@ -129,7 +129,7 @@ function submit() {
                     hookID.slice(hookID.lastIndexOf('.') + 1),
                     {
                         email: formgroup.email.value,
-						optionalAttributes : optionalattributes
+						optionalAttributes : optionalAttributes
                     }
                 );
             }
@@ -175,15 +175,15 @@ function submit() {
 }
 
 
-function getSubscriberAttributesFromForm(formgroup){
-	let subscriberattributes = new dw.util.HashMap();
+function getOptionalAttributesFromForm(formgroup){
+	let optionalattributes = new dw.util.HashMap();
 	
 	for(var x in formgroup){
-		if(formgroup[x] instanceof dw.web.FormField)
-			subscriberattributes.put(x, formgroup[x].value);
+		if(formgroup[x] instanceof dw.web.FormField && !empty(formgroup[x]))
+			optionalattributes.put(x, formgroup[x].value);
 	}
 	
-	return subscriberattributes;
+	return optionalattributes;
 }
 
 

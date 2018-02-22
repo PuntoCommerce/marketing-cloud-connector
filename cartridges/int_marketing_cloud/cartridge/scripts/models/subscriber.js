@@ -19,7 +19,7 @@ function Subscriber(customerOrData) {
     } else {
         this.customer = null;
         this.email = customerOrData.email;
-        this.setSubscriberAttributes(customerOrData.optionalAttributes);
+        this.setOptionalAttributes(customerOrData.optionalAttributes);
     }
 
     if (!this.email) {
@@ -48,10 +48,10 @@ function Subscriber(customerOrData) {
  */
 Subscriber.prototype = {
 	_optionalAttributes : new dw.util.HashMap(),
-	_addSubscriberAttribute : function(key, value){
+	_addOptionalAttribute : function(key, value){
 		this._optionalAttributes.put(key, value);
 	},
-	setSubscriberAttributes : function(objmap){
+	setOptionalAttributes : function(objmap){
 		this._optionalAttributes = objmap;
 	},
 	getOptionalAttributes : function(){
