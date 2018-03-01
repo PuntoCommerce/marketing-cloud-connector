@@ -60,6 +60,13 @@
               "default-value": "catalogFeed.psv"
             },
             {
+              "@name": "AddDateExtension",
+              "@type": "boolean",
+              "@required": "false",
+              "description": "Add the current date as an extension to the file name",
+              "default-value": "false"
+            },
+            {
               "@name": "TargetPath",
               "@type": "string",
               "@required": "false",
@@ -112,6 +119,13 @@
               "@trim": "true",
               "description": "Filename for the exported feed.",
               "default-value": "contentFeed.psv"
+            },
+            {
+              "@name": "AddDateExtension",
+              "@type": "boolean",
+              "@required": "false",
+              "description": "Add the current date as an extension to the file name",
+              "default-value": "false"
             },
             {
               "@name": "TargetPath",
@@ -168,6 +182,13 @@
               "default-value": "ordersFeed.psv"
             },
             {
+              "@name": "AddDateExtension",
+              "@type": "boolean",
+              "@required": "false",
+              "description": "Add the current date as an extension to the file name",
+              "default-value": "false"
+            },
+            {
               "@name": "TargetPath",
               "@type": "string",
               "@required": "false",
@@ -222,6 +243,13 @@
               "default-value": "promotionsFeed.psv"
             },
             {
+              "@name": "AddDateExtension",
+              "@type": "boolean",
+              "@required": "false",
+              "description": "Add the current date as an extension to the file name",
+              "default-value": "false"
+            },
+            {
               "@name": "TargetPath",
               "@type": "string",
               "@required": "false",
@@ -274,6 +302,13 @@
               "@trim": "true",
               "description": "Filename for the exported feed.",
               "default-value": "customersFeed.psv"
+            },
+            {
+              "@name": "AddDateExtension",
+              "@type": "boolean",
+              "@required": "false",
+              "description": "Add the current date as an extension to the file name",
+              "default-value": "false"
             },
             {
               "@name": "TargetPath",
