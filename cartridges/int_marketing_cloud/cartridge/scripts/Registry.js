@@ -85,7 +85,7 @@ var	Registry = {
         return new model(hookID);
     },
     /**
-     * @param {dw.customer.Customer|string} customerOrData A customer instance or Object representing data to be submitted.
+     * @param {dw.customer.Customer|object} customerOrData A customer instance or Object representing data to be submitted.
      * @returns {module:models/subscriber~Subscriber} Instance of Subscriber
      */
     subscriber : function (customerOrData) {
