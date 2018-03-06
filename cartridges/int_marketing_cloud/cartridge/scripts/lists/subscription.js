@@ -25,7 +25,7 @@ function subscribe(subscriberData) {
 
 function unsubscribe(subscriberData) {
     var defaultLists = (new ArrayList(Site.current.getCustomPreferenceValue('mcDefaultMailingLists'))).toArray();
-    var subscriber = require('int_marketing_cloud').subscriber(subscriberData.email);
+    var subscriber = require('int_marketing_cloud').subscriber(subscriberData);
     var lists = empty(subscriberData.lists) ? defaultLists : lists;
     if (lists instanceof ArrayList) {
         lists = lists.toArray();
