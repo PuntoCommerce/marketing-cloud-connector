@@ -30,7 +30,7 @@ function Subscriber(customerOrData) {
     this.instance.emailAddress = this.email;
     this.instance.subscriberKey = this.email;
     let count = 0;
-    for(x in this.getOptionalAttributes()){
+    for(var x in this.getOptionalAttributes()){
     	this.instance.attributes[count] = new webRef.Attribute();
     	this.instance.attributes[count].name = x;
     	this.instance.attributes[count].value = this._optionalAttributes[x];
