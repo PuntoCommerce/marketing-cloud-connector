@@ -37,6 +37,18 @@
       "script": "~/cartridge/scripts/communication/order"
     },
     {
+      "name": "app.communication.oms.invoiceProcessed",
+      "script": "~/cartridge/scripts/communication/oms"
+    },
+    {
+      "name": "app.communication.oms.returnOrderCreated",
+      "script": "~/cartridge/scripts/communication/oms"
+    },
+    {
+      "name": "app.communication.oms.shipment",
+      "script": "~/cartridge/scripts/communication/oms"
+    },
+    {
       "name": "app.tracking.cachedTrackingLink",
       "script": "~/cartridge/scripts/tracking/trackingLink"
     },
