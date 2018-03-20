@@ -37,6 +37,7 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
 
 ##### Added #####
  - Added OMS email hooks
+ - Added ability to populate/send custom attributes via Subscriber form (thanks @pfscsantiago)
 
 ##### Fixed #####
  - Fixed a syntax error in compileMappingTemplates.js
