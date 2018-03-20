@@ -23,7 +23,7 @@ var Logger = require('dw/system/Logger');
  * Resolves promise with a {{status: string}} Response object. At a minimum it should contain a status string: OK= indicates success, ERROR= indicates failure, anything else also indicates failure
  * @param {string} hookID
  * @param {SynchronousPromise} promise
- * @param {module:communication/util/trigger~CustomerNotification} data
+ * @param {module:communication/util/send~CustomerNotification} data
  * @param {Function} [cb] Optional callback, is called with the created trigger instance and the data object
  * @returns {SynchronousPromise}
  */
