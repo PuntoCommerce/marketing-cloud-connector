@@ -94,6 +94,21 @@
                 "name": "app.communication.order.confirmation",
                 "script": "~/cartridge/scripts/communication/order",
                 "enabled": true
+            },
+            {
+                "name": "app.communication.oms.invoiceProcessed",
+                "script": "./communication/oms",
+                "enabled": false
+            },
+            {
+                "name": "app.communication.oms.returnOrderCreated",
+                "script": "./communication/oms",
+                "enabled": false
+            },
+            {
+                "name": "app.communication.oms.shipment",
+                "script": "./communication/oms",
+                "enabled": false
             }
         ],
         "enabled": true

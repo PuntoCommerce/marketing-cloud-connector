@@ -35,6 +35,13 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
 
 #### [unreleased] ####
 
+##### Added #####
+ - Added OMS email hooks
+ - Added ability to populate/send custom attributes via Subscriber form (thanks @pfscsantiago)
+
+##### Fixed #####
+ - Fixed a syntax error in compileMappingTemplates.js
+
 #### [[1.0.2.1]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.2.1) - 2017-01-17 ####
 
 ##### Added #####
@@ -130,6 +137,11 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
 
 ### Features ###
 
+#### API Implementation ####
+This cartridge implements in-part both the REST API and SOAP API from Marketing Cloud.  
+The inclusion of both APIs means that the groundwork is started to help you along with your own custom use of Marketing 
+Cloud's APIs, of which there are many abilities not already employed within this cartridge.
+
 #### Analytics ####
 Analytic tracking, using MC's `collect.js`, is enabled via configuration.
 The following events are tracked by default:
@@ -145,6 +157,13 @@ The above tracked information then prepares you for MC's Abandonment functionali
 MC's Abandonment functionality includes abandoned cart, abandoned browse, abandoned search.
 
 In addition to tracking page analytics, you can also opt to enable Streaming Updates, which updates your product catalog and content assets in MC's database as they are viewed.
+
+#### Marketing Management ####
+Marketing management is enabled by providing the following abilities:  
+
+- Marketing opt-in check-box (during registration and ordering)
+- Email subscribe form support
+- Marketing preferences page in My Account, for selectively opting into or out of specific mailing lists
 
 #### Transactional emails ####
 The following OOB SiteGenesis emails are replaced with MC email triggers: 
@@ -167,3 +186,4 @@ Data sync to Marketing Cloud via jobs:
 * Content Catalog
 * Customers
 * Orders
+* Promotions/Campaigns
