@@ -29,8 +29,14 @@ var exportModel;
  */
 var PSM;
 
+/**
+ * Object hash to manage variation masters with sliced catalog 
+ * @type {Object}
+ */
+var masterList = {};
+
 function beforeStep(parameters, stepExecution) {
-    exportModel = new Export(parameters, function(em){
+	exportModel = new Export(parameters, function(em){
         PSM = new ProductSearchModel();
         PSM.setCategoryID(CatalogMgr.siteCatalog.root.ID);
         PSM.setRecursiveCategorySearch(true);
@@ -127,8 +133,21 @@ function process(product, parameters, stepExecution) {
     }
 
     // skip offline, product set, product bundle, and variant (variants handled by writeProduct() )
-    if (!product.isOnline() || product.isProductSet() || product.isBundle() || product.isVariant()) {
+    if (!product.isOnline() || product.isProductSet() || product.isBundle()) {
         skip = true;
+    }
+    // in case of slicing, include variant master through reverse master lookup, and cache it
+    if (product.isVariant() && !skip) {
+    	var masterProduct = product.variationModel.master;
+    	if (!masterList['id'+ masterProduct.ID]){
+    		masterList['id' + masterProduct.ID] = true;
+    		if (masterProduct.isOnline()) {
+    			return function outputProductVariant(writeNextCB){
+    				writeProduct(masterProduct, parameters, writeNextCB);
+    			};
+    		}
+    	}
+    	skip = true;
     }
     if (!skip) {
         return function outputProduct(writeNextCB){
