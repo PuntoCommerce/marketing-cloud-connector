@@ -25,13 +25,14 @@ function sftpUpload(params, stepExecution) {
     var siteID = require('dw/system/Site').current.ID;
     var dirName = File.IMPEX + File.SEPARATOR + 'mccfeeds' + File.SEPARATOR + siteID;
     var exportFile = new File(dirName + File.SEPARATOR + params.ExportFileName);
+    var fileName = params.AddDateExtension ? siteID +'_'+ params.ExportFileName.split('.').join('_' + new Date().toISOString().split('T')[0] + '.') : siteID +'_'+ params.ExportFileName;
 
     var returnStatus;
     try {
         var uploadStatus = sftpService.call(
             {
                 exportFile: exportFile,
-                filename: siteID +'_'+ params.ExportFileName,
+                filename: fileName,
                 targetPath: params.TargetPath
             }
             );
