@@ -52,7 +52,7 @@ function read(parameters, stepExecution) {
 function process(order, parameters, stepExecution) {
     //getOrderExportXML throws an error on failed orders
     //so we skip those
-    var skip = order.status === order.EXPORT_STATUS_FAILED;
+    var skip = order.status === order.ORDER_STATUS_FAILED;
     if (exportModel.isIncremental && !skip) {
         if (order.lastModified < exportModel.lastExported) {
             skip = true;
