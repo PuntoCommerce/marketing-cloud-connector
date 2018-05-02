@@ -240,7 +240,7 @@ function buildMappedArrayFromIterable(objMap, iterable, fallbackData) {
  */
 function initiateTransform(hookID, key, data){
 	let output;
-	let transformData = {params : data};
+	let transformData = [data];
 	try{
 		let hook = hookID.slice(0,hookID.lastIndexOf('.')+1) + key.method;
 		if(!require('dw/system/HookMgr').hasHook(hook)){
@@ -300,7 +300,7 @@ function mappingFilter(key, val, data) {
                             val = buildMappedArrayFromIterable(mapDef, val, data);
                         }
                     }
-                    if (concat === true && Array.isArray(val)) {
+                    if (concat === true && !empty(val) && Array.isArray(val)) {
                         val = val.join(',');
                     }
                     break;
