@@ -33,7 +33,7 @@ var PSM;
  * Object hash to manage variation masters with sliced catalog 
  * @type {Object}
  */
-var masterList = {};
+var masterList = new dw.util.HashMap();
 
 function beforeStep(parameters, stepExecution) {
 	exportModel = new Export(parameters, function(em){
@@ -126,6 +126,7 @@ function standardPrice(cfg, data) {
  */
 function process(product, parameters, stepExecution) {
     var skip = false;
+
     if (exportModel.isIncremental) {
         if (product.lastModified < exportModel.lastExported) {
             skip = true;
@@ -139,8 +140,8 @@ function process(product, parameters, stepExecution) {
     // in case of slicing, include variant master through reverse master lookup, and cache it
     if (product.isVariant() && !skip) {
     	var masterProduct = product.variationModel.master;
-    	if (!masterList['id'+ masterProduct.ID]){
-    		masterList['id' + masterProduct.ID] = true;
+    	if (!masterList.containsKey('id'+ masterProduct.ID)){
+    		masterList.put('id' + masterProduct.ID, true);
     		if (masterProduct.isOnline()) {
     			return function outputProductVariant(writeNextCB){
     				writeProduct(masterProduct, parameters, writeNextCB);
@@ -247,7 +248,7 @@ function write(lines, parameters, stepExecution) {
 }
 
 function afterStep(success, parameters, stepExecution) {
-    exportModel.close();
+	exportModel.close();
 }
 
 module.exports = {
