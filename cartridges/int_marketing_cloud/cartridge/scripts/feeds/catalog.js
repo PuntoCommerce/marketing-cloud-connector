@@ -8,6 +8,10 @@
  * @type {dw.catalog.ProductSearchModel}
  */
 const ProductSearchModel = require('dw/catalog/ProductSearchModel');
+
+const imageMethods = {'transformable' : {'method' : 'getHttpsImageURL'},
+						'non-transformable' : {'method' : 'getHttpsURL'}};
+
 /**
  * @type {dw.catalog.CatalogMgr}
  */
@@ -61,10 +65,12 @@ function read(parameters, stepExecution) {
  * @returns {dw.web.URL}
  */
 function imageLink(cfg, data) {
+	let method = !!cfg.transformable && !!cfg.dimensions ? 'transformable' : 'non-transformable';
+	
     if (cfg.hasOwnProperty('imageType')) {
         var img = data.Product.getImage(cfg.imageType);
         if (img) {
-            return img.absURL.https().toString();
+            return !!cfg.transformable && !!cfg.dimensions? img[imageMethods[method].method](cfg.dimensions).toString() : img[imageMethods[method].method]().toString();
         }
     }
 }
@@ -76,11 +82,12 @@ function imageLink(cfg, data) {
  * @returns {Array}
  */
 function images(cfg, data) {
+	let method = !!cfg.transformable && !!cfg.dimensions ? 'transformable' : 'non-transformable';
     if (cfg.hasOwnProperty('imageType')) {
         var images = data.Product.getImages(cfg.imageType);
         if (!empty(images)) {
             return images.toArray().map(function(imgFile){
-                return imgFile.absURL.https().toString();
+                return !!cfg.transformable && !!cfg.dimensions? imgFile[imageMethods[method].method](cfg.dimensions).toString() : imgFile[imageMethods[method].method]().toString();
             });
         }
     }
@@ -126,6 +133,7 @@ function standardPrice(cfg, data) {
  */
 function process(product, parameters, stepExecution) {
     var skip = false;
+
     if (exportModel.isIncremental) {
         if (product.lastModified < exportModel.lastExported) {
             skip = true;
@@ -247,7 +255,7 @@ function write(lines, parameters, stepExecution) {
 }
 
 function afterStep(success, parameters, stepExecution) {
-    exportModel.close();
+	exportModel.close();
 }
 
 module.exports = {
