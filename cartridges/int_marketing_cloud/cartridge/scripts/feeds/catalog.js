@@ -151,7 +151,6 @@ function process(product, parameters, stepExecution) {
     	}
     }
     
-    
     if (exportModel.isIncremental) {
         if (product.lastModified < exportModel.lastExported) {
             skip = true;
