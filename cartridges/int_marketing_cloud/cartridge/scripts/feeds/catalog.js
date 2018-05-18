@@ -141,12 +141,16 @@ function process(product, parameters, stepExecution) {
     if (product.isVariant() && !skip) {
     	var masterProduct = product.variationModel.master;
     	if (!masterList.containsKey('id'+ masterProduct.ID)){
-    		masterList.put('id' + masterProduct.ID, true);
+    		masterList.put('id' + masterProduct.ID, 1);
     		if (masterProduct.isOnline()) {
     			return function outputProductVariant(writeNextCB){
     				writeProduct(masterProduct, parameters, writeNextCB);
     			};
     		}
+    	}
+    	masterList['id' + masterProduct.ID] += 1;
+    	if(masterList['id' + masterProduct.ID] == masterProduct.variants.length){
+    		masterList.remove('id' + masterProduct.ID);
     	}
     	skip = true;
     }
