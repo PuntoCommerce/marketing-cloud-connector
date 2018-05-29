@@ -84,7 +84,7 @@ function rebuildTriggerDefinition() {
 function newMessage(data){
     var messageModel = require('./message');
     var msg = new messageModel(this.definition.customerKey);
-
+    var _self = this;
     var toEmail = Array.isArray(data.toEmail) ? data.toEmail[0] : data.toEmail;
     msg.setFrom(data.fromEmail).setTo(toEmail);
 
@@ -106,6 +106,10 @@ function newMessage(data){
                         } else {
                             val = helpers.buildMappedArrayFromIterable(mapDef, val, data);
                         }
+                        break;
+                    case 'transform':
+                        val = helpers.initiateTransform(_self.hookID, key, val);
+                        key = key.label;
                         break;
                     default:
                         // no change
