@@ -148,8 +148,6 @@ function process(product, parameters, stepExecution) {
     		}
     	}else if(masterProduct.variants.length > 1){
     		masterList.put('id' + masterProduct.ID, 1);
-    		if(masterList.size > count)
-    			count = masterList.size;
     	}
     }
     
