@@ -126,7 +126,25 @@ function standardPrice(cfg, data) {
  */
 function process(product, parameters, stepExecution) {
     var skip = false;
-
+    
+    //if the product is a variant and we've seen it before
+    //increment how many children we've seen
+    if(product.isVariant()){
+    	var masterProduct = product.variationModel.master;
+    	if(masterList.containsKey('id' + masterProduct.ID)){
+    		skip = true;
+    		if(masterList['id' + masterProduct.ID] < masterProduct.variants.length - 1){
+    			masterList['id' + masterProduct.ID] += 1;
+    		}else{
+    			//we've seen them all remove the master we don't need it anymore
+        		masterList.remove('id' + masterProduct.ID);
+    		}
+    	}else if(masterProduct.variants.length > 1){
+    		masterList.put('id' + masterProduct.ID, 1);
+    	}
+    }
+    
+    
     if (exportModel.isIncremental) {
         if (product.lastModified < exportModel.lastExported) {
             skip = true;
@@ -139,15 +157,12 @@ function process(product, parameters, stepExecution) {
     }
     // in case of slicing, include variant master through reverse master lookup, and cache it
     if (product.isVariant() && !skip) {
-    	var masterProduct = product.variationModel.master;
-    	if (!masterList.containsKey('id'+ masterProduct.ID)){
-    		masterList.put('id' + masterProduct.ID, true);
-    		if (masterProduct.isOnline()) {
-    			return function outputProductVariant(writeNextCB){
-    				writeProduct(masterProduct, parameters, writeNextCB);
-    			};
-    		}
+    	if (masterProduct.isOnline()) {
+    		return function outputProductVariant(writeNextCB){
+    			writeProduct(masterProduct, parameters, writeNextCB);
+    		};
     	}
+
     	skip = true;
     }
     if (!skip) {
