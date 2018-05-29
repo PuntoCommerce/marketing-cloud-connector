@@ -150,7 +150,7 @@ function process(product, parameters, stepExecution) {
     		masterList.put('id' + masterProduct.ID, 1);
     	}
     }
-    
+
     if (exportModel.isIncremental) {
         if (product.lastModified < exportModel.lastExported) {
             skip = true;
