@@ -149,10 +149,10 @@ AnalyticEvent.prototype = {
                 require('dw/system/Logger').error('Error parsing JSON: {0}', e);
             }
         }catch(e) {
-            if (this.mapFilter.isRequiredException(e)) {
+            if (this.mapFilter && this.mapFilter.isRequiredException(e)) {
                 // do nothing
             } else {
-                require('dw/system/Logger').error('Error tracking event: {0}', e.message);
+                require('dw/system/Logger').error('Error tracking event: {0}\nStacktrace: {1}', e.message, e.stack);
             }
         }
     }

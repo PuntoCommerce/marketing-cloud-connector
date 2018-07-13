@@ -58,7 +58,11 @@ function passwordChanged(promise, data) {
  * @returns {SynchronousPromise}
  */
 function passwordReset(promise, data) {
-    data.ResetPasswordLink = URLUtils.https('Account-SetNewPassword', 'Token', data.params.ResetPasswordToken);
+    if (data.params.containsKey('url')) { // SFRA compat
+        data.ResetPasswordLink = data.params.url;
+    } else {
+        data.ResetPasswordLink = URLUtils.https('Account-SetNewPassword', 'Token', data.params.ResetPasswordToken);
+    }
     return sendTrigger(hookPath + 'passwordReset', promise, data);
 }
 
