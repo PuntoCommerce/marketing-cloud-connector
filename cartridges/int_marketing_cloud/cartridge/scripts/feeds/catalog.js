@@ -116,7 +116,7 @@ function standardPrice(cfg, data) {
     if (!empty(priceModel) && priceModel.price.available) {
         var priceBook = priceModel.priceInfo.priceBook;
 
-        while (priceBook.parentPriceBook) {
+        while (priceBook.parentPriceBook && priceBook.ID !== priceBook.parentPriceBook.ID) { // Ensure no endless loop
             priceBook = priceBook.parentPriceBook ? priceBook.parentPriceBook : priceBook;
         }
 
