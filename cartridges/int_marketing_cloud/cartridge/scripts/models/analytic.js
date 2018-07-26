@@ -13,6 +13,10 @@ const HookMgr = require('dw/system/HookMgr');
  */
 const StringWriter = require('dw/io/StringWriter');
 /**
+ * @type {dw.io.File}
+ */
+const File = require('dw/io/File');
+/**
  * @type {dw.template.Velocity}
  */
 const velocity = require('dw/template/Velocity');
@@ -122,6 +126,57 @@ AnalyticEvent.prototype = {
         return jsonOut.toString();
     },
 
+    _tplDir: function _tplDir() {
+        const siteID = require('dw/system/Site').current.ID;
+        const rootDir = File.getRootDirectory(File.DYNAMIC + File.SEPARATOR + siteID);
+
+        if (!rootDir.exists()) {
+            return false;
+        }
+
+        var relFilePath = this.template.substring(0, this.template.lastIndexOf(File.SEPARATOR));
+        var dir;
+        if (relFilePath) {
+            dir = new File(rootDir, relFilePath);
+        } else {
+            dir = rootDir;
+        }
+
+        if (!dir.exists()) {
+            return false;
+        }
+        return dir;
+    },
+
+    _templateExists: function _templateExists() {
+        var dir = this._tplDir();
+
+        var baseFilename = this.template.substring(this.template.lastIndexOf(File.SEPARATOR)+1);
+        var file = new File(dir, baseFilename);
+        return file.exists();
+    },
+
+    _writeTemplate: function _writeTemplate() {
+        var tplOutput;
+        var tplHookID = 'app.objectMapper.buildTplFromJson';
+        var writerHookID = 'app.velocity.writeTemplate';
+        if (HookMgr.hasHook(tplHookID) && HookMgr.hasHook(writerHookID)) {
+            tplOutput = HookMgr.callHook(
+                tplHookID,
+                tplHookID.slice(tplHookID.lastIndexOf('.') + 1),
+                this.attributes
+            );
+            HookMgr.callHook(
+                writerHookID,
+                writerHookID.slice(writerHookID.lastIndexOf('.') + 1),
+                this.template,
+                tplOutput
+            );
+        } else {
+            require('dw/system/Logger').debug('no hooks registered for {0} or {1}', tplHookID, writerHookID);
+        }
+    },
+
     /**
      * Returns whether this trigger is enabled
      * @returns {boolean}
@@ -152,7 +207,11 @@ AnalyticEvent.prototype = {
             if (this.mapFilter && this.mapFilter.isRequiredException(e)) {
                 // do nothing
             } else {
-                require('dw/system/Logger').error('Error tracking event: {0}\nStacktrace: {1}', e.message, e.stack);
+                if (this._tplDir() !== false && this._templateExists() !== false) {
+                    this._writeTemplate();
+                    require('dw/system/Logger').info('Template {0} was missing, writeTemplate initiated.', this.template);
+                }
+                require('dw/system/Logger').error('Error tracking event: {0}\nError: {1}\nStacktrace: {2}', this.analyticEventID, e.message, e.stack);
             }
         }
     }
