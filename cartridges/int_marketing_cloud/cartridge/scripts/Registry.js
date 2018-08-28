@@ -97,6 +97,10 @@ var	Registry = {
     },
     soapReference : function () {
         return webreferences2.etframework;
+    },
+    sfraInstalled : function () {
+        var sfraVersion = require('dw/web/Resource').msg('global.version.number', 'version', '');
+        return sfraVersion !== '';
     }
 };
 
