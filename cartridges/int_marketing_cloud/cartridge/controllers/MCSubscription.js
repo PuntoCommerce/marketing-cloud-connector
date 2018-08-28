@@ -10,6 +10,7 @@ const curSite = require('dw/system/Site').current;
 const ArrayList = require('dw/util/ArrayList');
 const HookMgr = require('dw/system/HookMgr');
 const ISML = require('dw/template/ISML');
+const Logger = require('dw/system/Logger');
 
 function manage() {
     var subscriber = require('int_marketing_cloud').subscriber(customer);
@@ -336,14 +337,14 @@ function formHandleAction(form, formHandler) {
         }
         // Logs a warning and returns null if no explicit error handler is defined.
         else {
-            dw.system.Logger.warn('Action handler called without action ' + form.formId);
+            Logger.warn('Action handler called without action ' + form.formId);
             return null;
         }
     } else {
         if (formHandler[action.formId]) {
             return formHandler[action.formId].apply(formHandler, [form, action]);
         } else {
-            dw.system.Logger.error('Action handler for action "{0}"" not defined.', action.formId);
+            Logger.error('Action handler for action "{0}"" not defined.', action.formId);
             // Throws an error as this is an implementation bug.
             throw new Error('Form handler undefined');
         }
@@ -352,9 +353,15 @@ function formHandleAction(form, formHandler) {
 
 function render(tpl, tplArgs) {
     try {
+        var sfraInstalled = require('int_marketing_cloud').sfraInstalled();
+        if (!empty(tplArgs.nodecorator) && tplArgs.nodecorator === true) {
+            tplArgs.DecoratorTemplate = 'marketingcloud/empty';
+        } else {
+            tplArgs.DecoratorTemplate = sfraInstalled === true ? 'common/layout/page' : 'account/pt_account';
+        }
         ISML.renderTemplate(tpl, tplArgs);
     } catch (e) {
-        dw.system.Logger.error('Error while rendering template ' + tpl);
+        Logger.error('Error while rendering template ' + tpl);
         throw e;
     }
 }
