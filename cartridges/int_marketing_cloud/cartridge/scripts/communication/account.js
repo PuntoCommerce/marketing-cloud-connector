@@ -16,7 +16,11 @@ const hookPath = 'app.communication.account.';
  * @returns {SynchronousPromise}
  */
 function sendTrigger(hookID, promise, data){
-    data.Profile = data.params.Customer.profile;
+    if  (!empty(data.params.Customer)) {
+        data.Profile = data.params.Customer.profile;
+    } else if (!empty(data.params.CurrentCustomer)) {
+        data.Profile = data.params.CurrentCustomer.profile;
+    }
     data.AccountHomeLink = URLUtils.https('Account-Show');
     return require('./util/send').sendTrigger(hookID, promise, data);
 }
@@ -62,6 +66,9 @@ function passwordReset(promise, data) {
         data.ResetPasswordLink = data.params.url;
     } else {
         data.ResetPasswordLink = URLUtils.https('Account-SetNewPassword', 'Token', data.params.ResetPasswordToken);
+    }
+    if (!data.params.containsKey('Customer') && data.params.containsKey('resettingCustomer')) { // SFRA compat
+        data.params.Customer = data.params.resettingCustomer;
     }
     return sendTrigger(hookPath + 'passwordReset', promise, data);
 }
