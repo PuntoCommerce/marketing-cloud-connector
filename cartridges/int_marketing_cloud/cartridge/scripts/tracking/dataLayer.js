@@ -316,6 +316,7 @@ function requestEvent(eventName, eventValue, requestData) {
                 }
             }
             break;
+        case 'viewCart':
         case 'basketUpdated':
             if (empty(dataLayer.trackCart)) {
                 dataLayer.trackCart = buildBasket();
