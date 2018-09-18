@@ -13,23 +13,24 @@ Licensed under the current NDA and licensing agreement in place with your organi
 
 ### Dependencies ###
 
-* [Handler Framework](https://bitbucket.org/demandware/handler-framework)
+* [Handler Framework](https://github.com/SalesforceCommerceCloud/handler-framework)
 
 ### Installation ###
 
-Installation and usage can be found in the [Wiki](https://bitbucket.org/demandware/marketing-cloud-connector/wiki/Home)
+Installation and usage can be found in the [Wiki](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/wiki)
 
 ## Who do I talk to? ##
 
 * Maintainer: @intel352
-* [Commerce Cloud Community Slack](https://sfcc-community.slack.com)
+* [XChange Developer Forum](https://xchange.demandware.com/community/developer/marketing-cloud-connector/activity)
+* [Unofficial Community Slack](https://sfcc-unofficial.slack.com)
 
 ## Contributing
 
-1. Create a [fork](https://bitbucket.org/demandware/marketing-cloud-connector/fork), if you don't already have one
-2. Ensure your fork is caught up (message from Bitbucket shows up on your fork main page, if you are not current on commits)
+1. Create a fork, if you don't already have one
+2. Ensure your fork is synced with the latest changes from the main repository
 3. Create a new branch in your fork to hold your changes
-4. Submit a [pull request](https://bitbucket.org/demandware/marketing-cloud-connector/pull-requests/new)
+4. Submit a [pull request](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/compare)
 
 ### Changelog ###
 
@@ -42,12 +43,12 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
 ##### Fixed #####
  - Fixed a syntax error in compileMappingTemplates.js
 
-#### [[1.0.2.1]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.2.1) - 2017-01-17 ####
+#### [[1.0.2.1]](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/releases/tag/1.0.2.1) - 2017-01-17 ####
 
 ##### Added #####
  - Added missing service configuration definitions
 
-#### [[1.0.2]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.2) - 2017-01-17 ####
+#### [[1.0.2]](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/releases/tag/1.0.2) - 2017-01-17 ####
 
 ##### Fixed #####
  - Fix for treegen doc generation to ignore dot-files
@@ -62,7 +63,7 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
  - Added wsdl generated API zip file for reference
  - Added new site preferences
 
-#### [[1.0.1-rc.1]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.1-rc.1) - 2017-10-24 ####
+#### [[1.0.1-rc.1]](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/releases/tag/1.0.1-rc.1) - 2017-10-24 ####
 
 ##### Fixed #####
  - Fixed incorrect path to hooks.json
@@ -91,7 +92,7 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
  - Renamed MCC Init job to MCC InitTriggers.
  - Updated Order Confirmation email sample with a fully working email template.
 
-#### [[1.0.0-rc.3]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.0-rc.3) - 2017-08-14 ####
+#### [[1.0.0-rc.3]](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/releases/tag/1.0.0-rc.3) - 2017-08-14 ####
 
 ##### Fixed #####
  - Fixed bug where data object wasn't being passed to catalog feed.
@@ -123,12 +124,12 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
  - Updated jobs definitions export to change incremental to false by default (otherwise troubleshooting on a fresh install is problematic)
  - Updated api doc
 
-#### [[1.0.0-rc.2]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.0-rc.2) - 2017-06-27 ####
+#### [[1.0.0-rc.2]](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/releases/tag/1.0.0-rc.2) - 2017-06-27 ####
  
 ##### Changed #####
  - MC service now attempts to use site-specific credentials, if they exist.
 
-#### [[1.0.0-rc.1]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.0-rc.1) - 2017-06-26 ####
+#### [[1.0.0-rc.1]](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/releases/tag/1.0.0-rc.1) - 2017-06-26 ####
  
 #### Added #####
  - Initial packaging of MC Connector Cartridge
