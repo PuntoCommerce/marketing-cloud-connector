@@ -59,6 +59,15 @@
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
+			<attribute-definition attribute-id="mcUnsubscribeAllowed">
+                <display-name xml:lang="x-default">Marketing Cloud Allow Unsubscribing from Lists over Deletion</display-name>
+                <description xml:lang="x-default">This flag will allow the Marketing Cloud cartridge to Unsubscribe users from assigned mailing lists, thus updating the subscriber's status from "Active" to "Unsubscribed".&#13;
+This will be used in place of fully deleting the record from the list.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="Marketing Cloud">
@@ -70,6 +79,7 @@
                 <attribute attribute-id="mcEnableMailingLists"/>
                 <attribute attribute-id="mcDefaultMailingLists"/>
                 <attribute attribute-id="mcMailingListsWhitelist"/>
+				<attribute attribute-id="mcUnsubscribeAllowed"/>
             </attribute-group>
         </group-definitions>
     </type-extension>

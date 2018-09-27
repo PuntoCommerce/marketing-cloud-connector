@@ -17,7 +17,7 @@
                     <div class="form-row label-inline form-indent">
                         <div class="field-wrapper">
                             <input class="input-checkbox" type="checkbox" id="${list.enabled.htmlName}" name="${list.enabled.htmlName}"
-                                   value="true" <isif condition="${pdict.subscribedLists.indexOf(list.listID.value) !== -1}">checked="checked"</isif>>
+                                   value="true" <isif condition="${pdict.subscribedLists.get(list.listID.value) && pdict.subscribedLists.get(list.listID.value) === 'ACTIVE'}">checked="checked"</isif>>
                         </div>
                         <label for="${list.enabled.htmlName}"><span>${currentList.name}<isif condition="${!empty(currentList.description)}"> - ${currentList.description}</isif></span></label>
                         <div class="form-caption"></div>

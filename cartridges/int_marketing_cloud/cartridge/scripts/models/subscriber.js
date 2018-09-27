@@ -37,7 +37,7 @@ function Subscriber(customerOrData) {
     	count++;
     }
     this._fetchSubscriber();
-    this.currentSubscriptions = new Array();
+    this.currentSubscriptions = new dw.util.HashMap();
     this._fetchLists();
 
     trace(JSON.stringify(this._currentSubscriber));
@@ -73,13 +73,14 @@ Subscriber.prototype = {
         this._currentSubscriber = null;
         if (response.ok) {
             for each (var subscriber in response.object.results) {
-                this._currentSubscriber = {
+                //NOTE - if subscriber is on multiple lists, all data (e.g. status) here pertains to the first list result
+            	this._currentSubscriber = {
                     id: subscriber.ID,
                     status: subscriber.status.value(),
                     subscriberKey: subscriber.subscriberKey,
                     unsubscribedDate: subscriber.unsubscribedDate,
                     emailTypePreference: subscriber.emailTypePreference.value(),
-                    lists: subscriber.lists.toArray(),
+                    lists: subscriber.lists.toArray(), //this will never return properly as it's not retrieved from Subscriber object
                     attributes: subscriber.attributes.toArray().map(function(attr){
                         return {
                             name: attr.name,
@@ -94,7 +95,7 @@ Subscriber.prototype = {
     },
 
     _fetchLists : function() {
-        this.currentSubscriptions = new Array();
+        this.currentSubscriptions = new dw.util.HashMap();
 
         if (this._currentSubscriber) {
             var filter = webRef.SimpleFilterPart();
@@ -111,7 +112,7 @@ Subscriber.prototype = {
             var response = retSvc.call(req);
             if (response.ok) {
                 for each (var list in response.object.results) {
-                    this.currentSubscriptions.push(list.listID);
+                    this.currentSubscriptions.put(list.listID, list.status.toString()); //place status alongside list into hashmap for more detailed results
                 }
             }
         }
@@ -119,10 +120,11 @@ Subscriber.prototype = {
 
     /**
      * @param listIDs {number|Array} One or more list IDs to update for subscriber. Array or number
-     * @param create {boolean} Whether the lists should be created/assigned or deleted/removed
+     * @param action {string} Whether the subscriber on the list should be created, deleted, updated in action
+     * @param status {string} Determining subscriber's status on the list as ACTIVE or UNSUBSCRIBED 
      * @returns {module:models/subscriber~Subscriber}
      */
-    _updateLists : function(listIDs, create) {
+    _updateLists : function(listIDs, action, status) {
         if (typeof(listIDs) === 'number') {
             listIDs = [listIDs];
         }
@@ -132,8 +134,8 @@ Subscriber.prototype = {
         listIDs.forEach(function(listID){
             subList = new webRef.SubscriberList();
             subList.ID = listID;
-            subList.action = create ? 'create' : 'delete';
-            subList.status = create ? webRef.SubscriberStatus.ACTIVE : webRef.SubscriberStatus.UNSUBSCRIBED;
+            subList.action = action;
+            subList.status = webRef.SubscriberStatus[status];
             instance.lists.add(subList);
         });
 
@@ -141,7 +143,7 @@ Subscriber.prototype = {
     },
 
     isExistingSubscriber : function() {
-        return this._currentSubscriber && this._currentSubscriber.status === 'Active';
+        return !!this._currentSubscriber; //checking for Active status here gives false results
     },
 
     fetchAvailableLists : function() {
@@ -174,7 +176,7 @@ Subscriber.prototype = {
      * @returns {module:models/subscriber~Subscriber}
      */
     assignLists : function(listIDs) {
-        return this._updateLists(listIDs, true);
+        return this._updateLists(listIDs, 'create', 'ACTIVE');
     },
 
     /**
@@ -183,7 +185,25 @@ Subscriber.prototype = {
      * @returns {module:models/subscriber~Subscriber}
      */
     unassignLists : function(listIDs) {
-        return this._updateLists(listIDs, false);
+        return this._updateLists(listIDs, 'delete', 'UNSUBSCRIBED');
+    },
+    
+    /**
+     *
+     * @param listIDs {number|Array} One or more list IDs to resubscribe an unsubscribed subscriber. Array or number
+     * @returns {module:models/subscriber~Subscriber}
+     */
+    resubscribeLists : function(listIDs) {
+       return this._updateLists(listIDs, 'update', 'ACTIVE');
+    },
+    
+    /**
+     *
+     * @param listIDs {number|Array} One or more list IDs to unsubscribe an active subscriber. Array or number
+     * @returns {module:models/subscriber~Subscriber}
+     */
+    unsubscribeLists : function(listIDs) {
+       return this._updateLists(listIDs, 'update', 'UNSUBSCRIBED');
     },
 
     commit : function() {
