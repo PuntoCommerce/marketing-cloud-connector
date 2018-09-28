@@ -146,8 +146,10 @@ function getParamValue(attr, data) {
                     obj = obj[k];
                 }
             }
-            if (i === arr.length-1) {
-                value = obj;
+            if (i === arr.length-1) { // last param in path
+                if (obj !== data[di]) { // only map obj to value, if not same as starting obj
+                    value = obj;
+                }
             }
         });
 

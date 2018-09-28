@@ -67,6 +67,9 @@ function passwordReset(promise, data) {
     } else {
         data.ResetPasswordLink = URLUtils.https('Account-SetNewPassword', 'Token', data.params.ResetPasswordToken);
     }
+    if (!data.params.containsKey('ResetPasswordToken') && data.params.containsKey('passwordResetToken')) { // SFRA compat
+        data.params.ResetPasswordToken = data.params.passwordResetToken;
+    }
     if (!data.params.containsKey('Customer') && data.params.containsKey('resettingCustomer')) { // SFRA compat
         data.params.Customer = data.params.resettingCustomer;
     }
