@@ -38,10 +38,21 @@ function savePreferences() {
         save: function (formgroup) {
             var subscriber = require('int_marketing_cloud').subscriber(customer);
             for each (var list in formgroup.lists) {
-                if (list.enabled.checked) {
-                    subscriber.assignLists(list.listID.value);
-                } else {
-                    subscriber.unassignLists(list.listID.value);
+            	if (list.enabled.checked) {
+            		//if already on list, update to Active status instead creating new record
+                	if (subscriber.currentSubscriptions.containsKey(list.listID.value)) {
+                		subscriber.resubscribeLists(list.listID.value);
+                	} else {
+                    	subscriber.assignLists(list.listID.value);
+                	}
+                } //can only unassign from lists they are on or it will fail 
+            	else if (subscriber.currentSubscriptions.containsKey(list.listID.value)) {
+                	//if unsubscribe flag is true, update to Unsubscribed status instead of full record deletion
+                	if (curSite.getCustomPreferenceValue('mcUnsubscribeAllowed')) {
+                		subscriber.unsubscribeLists(list.listID.value);
+                	} else {
+                		subscriber.unassignLists(list.listID.value);
+                	}
                 }
             }
             return subscriber.commit();
