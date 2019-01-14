@@ -34,6 +34,10 @@ Installation and usage can be found in the [Wiki](https://github.com/SalesforceC
 
 ### Changelog ###
 
+#### 1.0.3 ####
+- SFRA Support added for MC Connector (Refer Handler framework 1.0.1 Wiki)
+
+
 #### [unreleased] ####
 
 ##### Added #####
