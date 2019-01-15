@@ -195,13 +195,15 @@ Data sync to Marketing Cloud via jobs:
 
 ## Terms & Conditions ##
 
-Copyright 2018 [salesforce.com](https://www.salesforce.com/), inc. All rights reserved. 
+MC Connector Terms of Use (FINAL)
 
-These Terms of Use are between **You**, (being the Customer that purchased Commerce Cloud Services) and salesforce.com, inc. or its Affiliate ("**SFDC**") that entered into a subscription agreement (the "**Agreement**") with You that governs Your purchase of Commerce Cloud Services (formerly known as “Demandware Services”).
+Copyright 2018 salesforce.com inc. All rights reserved. 
+
+ These Terms of Use are between *You*, (being the Customer that purchased Commerce Cloud Services) and salesforce.com, inc. or its Affiliate (“*SFDC*”) that entered into a subscription agreement (the “*Agreement*”) with You that governs Your purchase of Commerce Cloud Services (formerly known as “Demandware Services”).
  
-These Terms of Use were last updated on  June 11, 2018 and constitute a legally binding agreement between You and SFDC effective upon Your first download, installation or use of the Connector, whichever is earliest. If You do not have authority to bind the Customer that entered into the Agreement or You do not agree to these Terms of Use, You may not install or use the Connector
+These Terms of Use were last updated on  June 11, 2018* *and constitute a legally binding agreement between You and SFDC effective upon Your first download, installation or use of the Connector, whichever is earliest. If You do not have authority to bind the Customer that entered into the Agreement or You do not agree to these Terms of Use, You may not install or use the Connector
  
-SFDC grants You a limited non-exclusive, nontransferable, non-sublicensable, revocable license to use the Connector internally solely for the purpose of integrating Your subscription to Commerce Cloud Services with Your subscription to SFDC’s Marketing Cloud Services in the manner as described by the Documentation.  
+SFDC grants You a limited non-exclusive, non­transferable, non-sublicensable, revocable license to use the Connector internally solely for the purpose of integrating Your subscription to Commerce Cloud Services with Your subscription to SFDC’s Marketing Cloud Services in the manner as described by the Documentation.  
 
 Subject to the limited rights expressly granted hereunder, SFDC reserves all rights, title and interest in and to all intellectual property rights subsisting in the Connector. No rights are granted to You hereunder other than as expressly set forth herein.  Users residing in countries on the United States Office of Foreign Assets Control sanction list, or which are otherwise subject to a US export embargo, may not use the Connector.
  
