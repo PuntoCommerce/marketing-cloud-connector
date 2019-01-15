@@ -50,8 +50,10 @@ function read(parameters, stepExecution) {
  * @returns {void|Array}
  */
 function process(order, parameters, stepExecution) {
-    var skip = false;
-    if (exportModel.isIncremental) {
+    //getOrderExportXML throws an error on failed orders
+    //so we skip those
+    var skip = order.status.value === order.ORDER_STATUS_FAILED || order.status.value === order.ORDER_STATUS_CREATED;
+    if (exportModel.isIncremental && !skip) {
         if (order.lastModified < exportModel.lastExported) {
             skip = true;
         }

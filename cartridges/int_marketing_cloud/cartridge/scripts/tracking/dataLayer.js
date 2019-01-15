@@ -66,9 +66,9 @@ function buildBasket() {
     /**
      * @type {dw.order.Basket}
      */
-    var basket = require('dw/order/BasketMgr').currentBasket;
+    var basket = session.customer && require('dw/order/BasketMgr').currentBasket;
     var basketInfo = {};
-    if (basket.allProductLineItems.length > 0) {
+    if (basket && basket.allProductLineItems.length > 0) {
         basketInfo.cart = buildCartItems(basket.allProductLineItems);
     } else {
         basketInfo.clear_cart = true;
@@ -316,6 +316,7 @@ function requestEvent(eventName, eventValue, requestData) {
                 }
             }
             break;
+        case 'viewCart':
         case 'basketUpdated':
             if (empty(dataLayer.trackCart)) {
                 dataLayer.trackCart = buildBasket();
@@ -334,7 +335,7 @@ function requestEvent(eventName, eventValue, requestData) {
         RequestData: requestData,
         Session: session,
         Customer: customer,
-        Basket: require('dw/order/BasketMgr').currentBasket
+        Basket: customer && require('dw/order/BasketMgr').currentBasket
     });
     if (!empty(customEvent.details)) {
         dataLayer.trackEvents.push(customEvent);

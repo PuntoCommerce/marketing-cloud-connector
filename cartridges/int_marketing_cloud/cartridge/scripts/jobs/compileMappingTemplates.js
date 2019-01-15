@@ -44,7 +44,7 @@ function beforeStep(parameters, stepExecution) {
             attributesId = 'analyticAttributes';
             break;
         default:
-            throw new Error('Expecting a valid ObjectType. Unknown value submitted: {0}', parameters.ObjectType);
+            throw new Error('Expecting a valid ObjectType. Unknown value submitted: '+ parameters.ObjectType);
             break;
     }
 

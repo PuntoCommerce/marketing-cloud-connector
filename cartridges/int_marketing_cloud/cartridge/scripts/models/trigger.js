@@ -25,7 +25,7 @@ function getTriggerDefinition(hookID, attributes) {
 
     var description = '';
     var hookAttributes = {};
-    dw.system.Logger.debug('hookFile: {0}', hookFile);
+    //require('dw/system/Logger').debug('hookFile: {0}', hookFile);
     var triggerDefinitions = require('../communication/'+ hookFile).triggerDefinitions();
     if (triggerDefinitions && triggerDefinitions.hasOwnProperty(hookFunction)) {
         if (triggerDefinitions[hookFunction].hasOwnProperty('description')) {
@@ -56,9 +56,13 @@ function getTriggerDefinition(hookID, attributes) {
  */
 function rebuildTriggerDefinition() {
     var tx = require('dw/system/Transaction');
+    // ensure a custom object is created automatically, necessary for rebuild
+    this.definition = helpers.getCustomObject(customObjectName, this.hookID, true);
+
     var definition = getTriggerDefinition(this.hookID, this.attributes);
     this.attributes = definition.attributes;
 
+    //trace('hookID: {0} ;; description: {1} ;; attributes: {2}', this.hookID, definition.description, JSON.stringify(this.attributes, null, 4));
     tx.begin();
     try {
         if (empty(this.definition.description)) {
@@ -80,7 +84,7 @@ function rebuildTriggerDefinition() {
 function newMessage(data){
     var messageModel = require('./message');
     var msg = new messageModel(this.definition.customerKey);
-
+    var _self = this;
     var toEmail = Array.isArray(data.toEmail) ? data.toEmail[0] : data.toEmail;
     msg.setFrom(data.fromEmail).setTo(toEmail);
 
@@ -102,6 +106,10 @@ function newMessage(data){
                         } else {
                             val = helpers.buildMappedArrayFromIterable(mapDef, val, data);
                         }
+                        break;
+                    case 'transform':
+                        val = helpers.initiateTransform(_self.hookID, key, val);
+                        key = key.label;
                         break;
                     default:
                         // no change
@@ -158,7 +166,7 @@ function Trigger(hookID) {
      * Definition object
      * @type {dw.object.CustomAttributes}
      */
-    this.definition = helpers.getCustomObject(customObjectName, hookID) || {enabled: false, subscriberAttributes: {}};
+    this.definition = helpers.getCustomObject(customObjectName, hookID) || {enabled: false, subscriberAttributes: ''};
     /**
      * Expanded attributes from trigger definition
      * @type {Object}

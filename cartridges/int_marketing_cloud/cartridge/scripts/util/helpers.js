@@ -146,8 +146,10 @@ function getParamValue(attr, data) {
                     obj = obj[k];
                 }
             }
-            if (i === arr.length-1) {
-                value = obj;
+            if (i === arr.length-1) { // last param in path
+                if (obj !== data[di]) { // only map obj to value, if not same as starting obj
+                    value = obj;
+                }
             }
         });
 
@@ -229,6 +231,29 @@ function buildMappedArrayFromIterable(objMap, iterable, fallbackData) {
         arrOut.push(val);
     }
     return arrOut;
+}
+
+
+/**
+ * Build a custom output from user defined hook
+ * @param {Object} key The key containing the hook method and label needed to transform
+ * @param {Object} data The complex object to be transformed by custom hook to output
+ * @returns {string}
+ */
+function initiateTransform(hookID, key, data){
+	let output;
+	let transformData = [data];
+	try{
+		let hook = hookID.slice(0,hookID.lastIndexOf('.')+1) + key.method;
+		if(!require('dw/system/HookMgr').hasHook(hook)){
+			throw new Error('Custom transformation hook not registered!');
+		}
+		output = require('dw/system/HookMgr').callHook(hook, key.method, transformData);
+	}catch(e){
+		require('dw/system/Logger').error('Error in custom transform {0} : {1}', hookID, e);
+		output = e.message;
+	}
+	return output;
 }
 
 /**
@@ -333,6 +358,7 @@ function RequiredAttributeException(attribute, message) {
     this.message = message || 'Required attribute "'+ attribute +'" is missing.';
     this.stack = (new Error()).stack;
 }
+
 RequiredAttributeException.prototype = Object.create(Error.prototype);
 RequiredAttributeException.prototype.constructor = RequiredAttributeException;
 
@@ -351,3 +377,4 @@ exports.mappingFilter = mappingFilter;
 exports.isNonEmptyString = isNonEmptyString;
 exports.stripXmlNS = stripXmlNS;
 exports.RequiredAttributeException = RequiredAttributeException;
+exports.initiateTransform = initiateTransform;

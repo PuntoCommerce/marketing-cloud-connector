@@ -8,6 +8,10 @@
  * @type {dw.catalog.ProductSearchModel}
  */
 const ProductSearchModel = require('dw/catalog/ProductSearchModel');
+
+const imageMethods = {'transformable' : {'method' : 'getHttpsImageURL'},
+						'non-transformable' : {'method' : 'getHttpsURL'}};
+
 /**
  * @type {dw.catalog.CatalogMgr}
  */
@@ -29,8 +33,14 @@ var exportModel;
  */
 var PSM;
 
+/**
+ * Object hash to manage variation masters with sliced catalog 
+ * @type {Object}
+ */
+var masterList = new dw.util.HashMap();
+
 function beforeStep(parameters, stepExecution) {
-    exportModel = new Export(parameters, function(em){
+	exportModel = new Export(parameters, function(em){
         PSM = new ProductSearchModel();
         PSM.setCategoryID(CatalogMgr.siteCatalog.root.ID);
         PSM.setRecursiveCategorySearch(true);
@@ -55,10 +65,12 @@ function read(parameters, stepExecution) {
  * @returns {dw.web.URL}
  */
 function imageLink(cfg, data) {
+	let method = !!cfg.transformable && !!cfg.dimensions ? 'transformable' : 'non-transformable';
+	
     if (cfg.hasOwnProperty('imageType')) {
         var img = data.Product.getImage(cfg.imageType);
         if (img) {
-            return img.absURL.https().toString();
+            return !!cfg.transformable && !!cfg.dimensions? img[imageMethods[method].method](cfg.dimensions).toString() : img[imageMethods[method].method]().toString();
         }
     }
 }
@@ -70,11 +82,12 @@ function imageLink(cfg, data) {
  * @returns {Array}
  */
 function images(cfg, data) {
+	let method = !!cfg.transformable && !!cfg.dimensions ? 'transformable' : 'non-transformable';
     if (cfg.hasOwnProperty('imageType')) {
         var images = data.Product.getImages(cfg.imageType);
         if (!empty(images)) {
             return images.toArray().map(function(imgFile){
-                return imgFile.absURL.https().toString();
+                return !!cfg.transformable && !!cfg.dimensions? imgFile[imageMethods[method].method](cfg.dimensions).toString() : imgFile[imageMethods[method].method]().toString();
             });
         }
     }
@@ -103,7 +116,7 @@ function standardPrice(cfg, data) {
     if (!empty(priceModel) && priceModel.price.available) {
         var priceBook = priceModel.priceInfo.priceBook;
 
-        while (priceBook.parentPriceBook) {
+        while (priceBook.parentPriceBook && priceBook.parentPriceBook.ID && priceBook.ID !== priceBook.parentPriceBook.ID) { // Ensure no endless loop
             priceBook = priceBook.parentPriceBook ? priceBook.parentPriceBook : priceBook;
         }
 
@@ -120,6 +133,28 @@ function standardPrice(cfg, data) {
  */
 function process(product, parameters, stepExecution) {
     var skip = false;
+    
+    //if the product is a variant and we've seen it before
+    //increment how many children we've seen
+    if(product.isVariant()){
+    	var masterProduct = product.variationModel.master;
+    	if(masterList.containsKey('id' + masterProduct.ID)){
+    		skip = true;
+    		if(masterList['id' + masterProduct.ID] < masterProduct.variants.length - 1){
+    			masterList['id' + masterProduct.ID] += 1;
+    		}else{
+    			//we've seen them all remove the master we don't need it anymore
+        		masterList.remove('id' + masterProduct.ID);
+    		}
+    	}else if(masterProduct.variants.length > 1){
+    		masterList.put('id' + masterProduct.ID, 1);
+    	}
+    }
+<<<<<<< HEAD
+    
+=======
+
+>>>>>>> da173e38439fa015dc6469aafab90079b66f18ae
     if (exportModel.isIncremental) {
         if (product.lastModified < exportModel.lastExported) {
             skip = true;
@@ -127,8 +162,18 @@ function process(product, parameters, stepExecution) {
     }
 
     // skip offline, product set, product bundle, and variant (variants handled by writeProduct() )
-    if (!product.isOnline() || product.isProductSet() || product.isBundle() || product.isVariant()) {
+    if (!product.isOnline() || product.isProductSet() || product.isBundle()) {
         skip = true;
+    }
+    // in case of slicing, include variant master through reverse master lookup, and cache it
+    if (product.isVariant() && !skip) {
+    	if (masterProduct.isOnline()) {
+    		return function outputProductVariant(writeNextCB){
+    			writeProduct(masterProduct, parameters, writeNextCB);
+    		};
+    	}
+
+    	skip = true;
     }
     if (!skip) {
         return function outputProduct(writeNextCB){
@@ -228,7 +273,7 @@ function write(lines, parameters, stepExecution) {
 }
 
 function afterStep(success, parameters, stepExecution) {
-    exportModel.close();
+	exportModel.close();
 }
 
 module.exports = {

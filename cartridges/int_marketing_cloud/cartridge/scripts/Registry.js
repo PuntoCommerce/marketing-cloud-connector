@@ -85,18 +85,22 @@ var	Registry = {
         return new model(hookID);
     },
     /**
-     * @param {dw.customer.Customer|string} customerOrEmail A customer instance or email string
+     * @param {dw.customer.Customer|object} customerOrData A customer instance or Object representing data to be submitted.
      * @returns {module:models/subscriber~Subscriber} Instance of Subscriber
      */
-    subscriber : function (customerOrEmail) {
+    subscriber : function (customerOrData) {
         /**
          * @type {module:models/subscriber~Subscriber}
          */
         var model = require(path +'models/subscriber');
-        return new model(customerOrEmail);
+        return new model(customerOrData);
     },
     soapReference : function () {
         return webreferences2.etframework;
+    },
+    sfraInstalled : function () {
+        var sfraVersion = require('dw/web/Resource').msg('global.version.number', 'version', '');
+        return sfraVersion !== '';
     }
 };
 

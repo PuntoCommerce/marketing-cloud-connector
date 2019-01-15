@@ -13,34 +13,46 @@ Licensed under the current NDA and licensing agreement in place with your organi
 
 ### Dependencies ###
 
-* [Handler Framework](https://bitbucket.org/demandware/handler-framework)
+* [Handler Framework](https://github.com/SalesforceCommerceCloud/handler-framework)
 
 ### Installation ###
 
-Installation and usage can be found in the [Wiki](https://bitbucket.org/demandware/marketing-cloud-connector/wiki/Home)
+Installation and usage can be found in the [Wiki](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/wiki)
 
 ## Who do I talk to? ##
 
 * Maintainer: @intel352
-* [Commerce Cloud Community Slack](https://sfcc-community.slack.com)
+* [XChange Developer Forum](https://xchange.demandware.com/community/developer/marketing-cloud-connector/activity)
+* [Unofficial Community Slack](https://sfcc-unofficial.slack.com)
 
 ## Contributing
 
-1. Create a [fork](https://bitbucket.org/demandware/marketing-cloud-connector/fork), if you don't already have one
-2. Ensure your fork is caught up (message from Bitbucket shows up on your fork main page, if you are not current on commits)
+1. Create a fork, if you don't already have one
+2. Ensure your fork is synced with the latest changes from the main repository
 3. Create a new branch in your fork to hold your changes
-4. Submit a [pull request](https://bitbucket.org/demandware/marketing-cloud-connector/pull-requests/new)
+4. Submit a [pull request](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/compare)
 
 ### Changelog ###
 
+#### 1.0.3 ####
+- SFRA Support added for MC Connector (Refer Handler framework 1.0.1 Wiki)
+
+
 #### [unreleased] ####
 
-#### [[1.0.2.1]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.2.1) - 2017-01-17 ####
+##### Added #####
+ - Added OMS email hooks
+ - Added ability to populate/send custom attributes via Subscriber form (thanks @pfscsantiago)
+
+##### Fixed #####
+ - Fixed a syntax error in compileMappingTemplates.js
+
+#### [[1.0.2.1]](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/releases/tag/1.0.2.1) - 2017-01-17 ####
 
 ##### Added #####
  - Added missing service configuration definitions
 
-#### [[1.0.2]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.2) - 2017-01-17 ####
+#### [[1.0.2]](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/releases/tag/1.0.2) - 2017-01-17 ####
 
 ##### Fixed #####
  - Fix for treegen doc generation to ignore dot-files
@@ -55,7 +67,7 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
  - Added wsdl generated API zip file for reference
  - Added new site preferences
 
-#### [[1.0.1-rc.1]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.1-rc.1) - 2017-10-24 ####
+#### [[1.0.1-rc.1]](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/releases/tag/1.0.1-rc.1) - 2017-10-24 ####
 
 ##### Fixed #####
  - Fixed incorrect path to hooks.json
@@ -84,7 +96,7 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
  - Renamed MCC Init job to MCC InitTriggers.
  - Updated Order Confirmation email sample with a fully working email template.
 
-#### [[1.0.0-rc.3]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.0-rc.3) - 2017-08-14 ####
+#### [[1.0.0-rc.3]](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/releases/tag/1.0.0-rc.3) - 2017-08-14 ####
 
 ##### Fixed #####
  - Fixed bug where data object wasn't being passed to catalog feed.
@@ -116,12 +128,12 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
  - Updated jobs definitions export to change incremental to false by default (otherwise troubleshooting on a fresh install is problematic)
  - Updated api doc
 
-#### [[1.0.0-rc.2]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.0-rc.2) - 2017-06-27 ####
+#### [[1.0.0-rc.2]](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/releases/tag/1.0.0-rc.2) - 2017-06-27 ####
  
 ##### Changed #####
  - MC service now attempts to use site-specific credentials, if they exist.
 
-#### [[1.0.0-rc.1]](https://bitbucket.org/demandware/marketing-cloud-connector/commits/tag/1.0.0-rc.1) - 2017-06-26 ####
+#### [[1.0.0-rc.1]](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/releases/tag/1.0.0-rc.1) - 2017-06-26 ####
  
 #### Added #####
  - Initial packaging of MC Connector Cartridge
@@ -129,6 +141,11 @@ Installation and usage can be found in the [Wiki](https://bitbucket.org/demandwa
  - Added data feed support
 
 ### Features ###
+
+#### API Implementation ####
+This cartridge implements in-part both the REST API and SOAP API from Marketing Cloud.  
+The inclusion of both APIs means that the groundwork is started to help you along with your own custom use of Marketing 
+Cloud's APIs, of which there are many abilities not already employed within this cartridge.
 
 #### Analytics ####
 Analytic tracking, using MC's `collect.js`, is enabled via configuration.
@@ -145,6 +162,13 @@ The above tracked information then prepares you for MC's Abandonment functionali
 MC's Abandonment functionality includes abandoned cart, abandoned browse, abandoned search.
 
 In addition to tracking page analytics, you can also opt to enable Streaming Updates, which updates your product catalog and content assets in MC's database as they are viewed.
+
+#### Marketing Management ####
+Marketing management is enabled by providing the following abilities:  
+
+- Marketing opt-in check-box (during registration and ordering)
+- Email subscribe form support
+- Marketing preferences page in My Account, for selectively opting into or out of specific mailing lists
 
 #### Transactional emails ####
 The following OOB SiteGenesis emails are replaced with MC email triggers: 
@@ -167,3 +191,25 @@ Data sync to Marketing Cloud via jobs:
 * Content Catalog
 * Customers
 * Orders
+* Promotions/Campaigns
+
+## Terms & Conditions ##
+
+Copyright 2018 [salesforce.com](https://www.salesforce.com/), inc. All rights reserved. 
+
+These Terms of Use are between **You**, (being the Customer that purchased Commerce Cloud Services) and salesforce.com, inc. or its Affiliate ("**SFDC**") that entered into a subscription agreement (the "**Agreement**") with You that governs Your purchase of Commerce Cloud Services (formerly known as “Demandware Services”).
+ 
+These Terms of Use were last updated on  June 11, 2018 and constitute a legally binding agreement between You and SFDC effective upon Your first download, installation or use of the Connector, whichever is earliest. If You do not have authority to bind the Customer that entered into the Agreement or You do not agree to these Terms of Use, You may not install or use the Connector
+ 
+SFDC grants You a limited non-exclusive, nontransferable, non-sublicensable, revocable license to use the Connector internally solely for the purpose of integrating Your subscription to Commerce Cloud Services with Your subscription to SFDC’s Marketing Cloud Services in the manner as described by the Documentation.  
+
+Subject to the limited rights expressly granted hereunder, SFDC reserves all rights, title and interest in and to all intellectual property rights subsisting in the Connector. No rights are granted to You hereunder other than as expressly set forth herein.  Users residing in countries on the United States Office of Foreign Assets Control sanction list, or which are otherwise subject to a US export embargo, may not use the Connector.
+ 
+The Connector is not part of the Commerce Cloud Services nor the Marketing Cloud Services. Implementation of the Connector requires development work and appropriate configuration and permissions within Your instances of Commerce Cloud and Marketing Cloud for which You are responsible. The Connector may contain bugs, errors and incompatibilities with Your configuration of Commerce Cloud Services or Marketing Cloud Services and is made available on an AS IS basis without support, updates, or service level commitments. 
+ 
+SFDC reserves the right at any time to modify or discontinue, temporarily or permanently, the Connector (or any part thereof) with or without notice. You agree that SFDC shall not be liable to You or to any third party for any modification, suspension or discontinuance
+
+WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, THE CONNECTOR IS NOT SUPPORTED, AND IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. IN NO EVENT SHALL  SFDC HAVE ANY LIABILITY FOR ANY DAMAGES, INCLUDING BUT NOT LIMITED TO, DIRECT, INDIRECT, SPECIAL, INCIDENTAL, PUNITIVE, OR CONSEQUENTIAL DAMAGES, OR DAMAGES BASED ON LOST PROFITS, DATA OR USE, IN CONNECTION WITH THE CONNECTOR, HOWEVER CAUSED AND, WHETHER IN CONTRACT, TORT OR UNDER ANY OTHER THEORY OF LIABILITY, WHETHER OR NOT YOU HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+ 
+These Terms of Use shall be governed exclusively by the internal laws of the State of California, without regard to its conflicts of laws rules. Each party hereby consents to the exclusive jurisdiction of the state and federal courts located in San Francisco County,California to adjudicate any dispute arising out of or relating to this Agreement. Except as expressly stated in these Terms of Use, these Terms of Use constitute the entire agreement between the parties, and supersede all prior and contemporaneous agreements, proposals or representations, written or oral, concerning their subject matter.No modification, amendment, or waiver of any provision of these Terms of Use shall be effective unless it is by an update to these Terms of Use that we make available on this website, or is in writing and signed by the party against whom the modification, amendment or waiver is to be asserted.
