@@ -150,11 +150,7 @@ function process(product, parameters, stepExecution) {
     		masterList.put('id' + masterProduct.ID, 1);
     	}
     }
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> da173e38439fa015dc6469aafab90079b66f18ae
     if (exportModel.isIncremental) {
         if (product.lastModified < exportModel.lastExported) {
             skip = true;
