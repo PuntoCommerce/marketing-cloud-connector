@@ -15,13 +15,15 @@ Licensed under the current NDA and licensing agreement in place with your organi
 
 * [Handler Framework](https://github.com/SalesforceCommerceCloud/handler-framework)
 
-### Installation ###
+### Installation Guides ###
 
-Installation and usage can be found in the [Wiki](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/wiki)
+1. Marketing Cloud Connector Cartridge: 
+2. Handler Framework Cartridge
+3. SiteGenesis Instructions
+4. SFRA Instructions
 
 ## Who do I talk to? ##
 
-* Maintainer: @intel352
 * [XChange Developer Forum](https://xchange.demandware.com/community/developer/marketing-cloud-connector/activity)
 * [Unofficial Community Slack](https://sfcc-unofficial.slack.com)
 
