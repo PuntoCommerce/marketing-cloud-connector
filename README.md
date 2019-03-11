@@ -19,7 +19,7 @@ Licensed under the current NDA and licensing agreement in place with your organi
 
 1. Marketing Cloud Connector Cartridge: 
 2. [HandlerFramework Cartridge](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Installation.md)
-3. [SiteGenesis Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification Instructions for SiteGenesis.md)
+3. [SiteGenesis Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SiteGenesis.md)
 4. [SFRA Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SFRA.md)
 
 ## Who do I talk to? ##
