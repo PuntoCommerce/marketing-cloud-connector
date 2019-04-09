@@ -5,16 +5,16 @@
 A [Salesforce Labs](https://twitter.com/salesforce_labs?lang=en) project that facilitates an "above the API" integration between Salesforce B2C Commerce and Marketing Clouds.
 
 ## Table of Contents
-1. [Commerce Cloud Configuration] (#Config)
+1. [Commerce Cloud Configuration](#Config)
 2. [Triggered Send / Transactional Emails](#Triggered)
-3. [Marketing Cloud App and API Key] (#MarketingCloudApp)
-4. [Commerce Cloud - Service Configuration] (#ServiceConfig)
-5. [Marketing Cloud - Triggered Send Configuration] (#TSConfig)
-6. [Marketing Cloud - Predictive Web Configuration (collect.js / Analytics)] (#PWConfig)
-7. [Sync Your Catalog] (#CatalogSync)
+3. [Marketing Cloud App and API Key](#MarketingCloudApp)
+4. [Commerce Cloud - Service Configuration](#ServiceConfig)
+5. [Marketing Cloud - Triggered Send Configuration](#TSConfig)
+6. [Marketing Cloud - Predictive Web Configuration (collect.js / Analytics)](#PWConfig)
+7. [Sync Your Catalog](#CatalogSync)
 8. [Commerce Cloud - Marketing Opt-in / Subscription Management](#OptIn)
 9. [Commerce Cloud - Custom Object Configuration](#CustomObjectConfig)
-10. [Data Feeds] (#DataFeeds)
+10. [Data Feeds](#DataFeeds)
 
 <a name="Config"></a>
 #Commerce Cloud Configuration #

@@ -1,10 +1,10 @@
 # Salesforce B2C Commerce to Marketing Cloud Connector #
 
-1. [Application Overview] (#Overview)
-2. [Application Documentation] (#Doc)
-3. [More Information] (#MoreInfo)
-4. [Application Changelog] (#Changes)
-5. [Terms and Conditions] (#Legalese)
+1. [Application Overview](#Overview)
+2. [Application Documentation](#Doc)
+3. [More Information](#MoreInfo)
+4. [Application Changelog](#Changes)
+5. [Terms and Conditions](#Legalese)
 
 
 ## Introduction ##
