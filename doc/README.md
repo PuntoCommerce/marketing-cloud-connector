@@ -58,13 +58,13 @@ Data sync to Marketing Cloud via jobs:
 * Orders
 * Promotions/Campaigns
 
-##Application Documentation ##
+## Application Documentation ##
 
 
 1. [HandlerFramework Cartridge](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/Handler-Installation.md) 
 2. [Marketing Cloud Connector Cartridge](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/marketing-cloud-connector-docs/Home.md) 
-	3. [SiteGenesis Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SiteGenesis.md)
-	3. [SFRA Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SFRA.md)
+    1. [SiteGenesis Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SiteGenesis.md)
+    2. [SFRA Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SFRA.md)
 
 
 ## More Information ##
