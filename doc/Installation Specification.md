@@ -1,4 +1,10 @@
-# Table of Contents
+# marketing-cloud-connector: Installation Guide #
+---
+###### - Done? Go Back to the [readMe.md](README.md)
+**What is the marketing-cloud-connector?**   
+A [Salesforce Labs](https://twitter.com/salesforce_labs?lang=en) project that facilitates an "above the API" integration between Salesforce B2C Commerce and Marketing Clouds.
+
+## Table of Contents
 1. [Commerce Cloud Configuration] (#Config)
 2. [Triggered Send / Transactional Emails](#Triggered)
 3. [Marketing Cloud App and API Key] (#MarketingCloudApp)

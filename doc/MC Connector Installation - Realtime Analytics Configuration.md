@@ -1,4 +1,10 @@
-# MC Connector Installation - Realtime Analytics Configuration
+# marketing-cloud-connector: Realtime Analytics Configuration #
+---
+###### - Done? Go Back to the [readMe.md](README.md)
+**What is the marketing-cloud-connector?**   
+A [Salesforce Labs](https://twitter.com/salesforce_labs?lang=en) project that facilitates an "above the API" integration between Salesforce B2C Commerce and Marketing Clouds.
+
+---
 
 Work with your Marketing Cloud representative to address any questions or concerns that may arise.
 Everything on this page merely exists as recommendations, intended to help you configure your account.

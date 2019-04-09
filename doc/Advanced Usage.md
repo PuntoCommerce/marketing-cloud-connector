@@ -1,4 +1,10 @@
-# Advanced Usage and Configuration
+# marketing-cloud-connector: Advanced Usage and Configuration  #
+---
+###### - Done? Go Back to the [readMe.md](README.md)
+**What is the marketing-cloud-connector?**   
+A [Salesforce Labs](https://twitter.com/salesforce_labs?lang=en) project that facilitates an "above the API" integration between Salesforce B2C Commerce and Marketing Clouds.
+
+---
 
 This page contains details around advanced usage of Marketing Cloud Connector cartridge.
 

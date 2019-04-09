@@ -1,9 +1,17 @@
 # Salesforce B2C Commerce to Marketing Cloud Connector #
 
+1. [Application Overview] (#Overview)
+2. [Application Documentation] (#Doc)
+3. [More Information] (#MoreInfo)
+4. [Application Changelog] (#Changes)
+5. [Terms and Conditions] (#Legalese)
+
+
 ## Introduction ##
 
 The Salesforce B2C Commerce to Marketing Cloud Connector is a project that facilitates the integration between the two clouds. The project connects Commerce Cloud to Marketing Cloud "above the API", meaning it is using public API rather than direct backend integration. This framework allows you to share and synchronize data between the two clouds.
 
+<a name="Overview"></a>
 ## Application Overview ##
 ### Features ###
 
@@ -58,6 +66,7 @@ Data sync to Marketing Cloud via jobs:
 * Orders
 * Promotions/Campaigns
 
+<a name="Doc"></a>
 ## Application Documentation ##
 
 
@@ -66,12 +75,9 @@ Data sync to Marketing Cloud via jobs:
     1. [SiteGenesis Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SiteGenesis.md)
     2. [SFRA Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SFRA.md)
 
-
+<a name="MoreInfo"></a>
 ## More Information ##
  
-
-
-
 ### Who do I talk to? ##
 
 * [XChange Developer Forum](https://xchange.demandware.com/community/developer/marketing-cloud-connector/activity)
@@ -84,7 +90,8 @@ Data sync to Marketing Cloud via jobs:
 3. Create a new branch in your fork to hold your changes.
 4. Submit a [pull request](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/compare).
 
-### Changelog ###
+<a name="Changes"></a>
+## Changelog ##
 
 #### 1.0.3 ####
 - SFRA Support added for MC Connector (Refer Handler framework 1.0.1 Wiki)
@@ -198,6 +205,7 @@ Data sync to Marketing Cloud via jobs:
 
 Licensed under the current NDA and licensing agreement in place with your organization. (This is explicitly not open source licensing.)
 
+<a name="Legalese"></a>
 ## Terms & Conditions ##
 
 Copyright 2018 [salesforce.com](https://www.salesforce.com/), inc. All rights reserved. 

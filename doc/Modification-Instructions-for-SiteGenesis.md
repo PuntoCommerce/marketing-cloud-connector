@@ -1,4 +1,10 @@
-# SiteGenesis Modification Instructions
+# marketing-cloud-connector: SiteGenesis Modification Instructions #
+---
+###### - Done? Go Back to the [readMe.md](README.md)
+**What is the marketing-cloud-connector?**   
+A [Salesforce Labs](https://twitter.com/salesforce_labs?lang=en) project that facilitates an "above the API" integration between Salesforce B2C Commerce and Marketing Clouds.
+
+---
 
 [TOC]
 
