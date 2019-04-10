@@ -67,13 +67,14 @@ Data sync to Marketing Cloud via jobs:
 <a name="Doc"></a>
 ## Application Documentation ##
 
-1. [Marketing Cloud Connector Integration Specification](/doc/IntegrationSpecification.md)
+1. [Marketing Cloud Connector Installation](/doc/IntegrationSpecification.md)
 2. [Handler Framework Cartridge Installation](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/Handler-Installation.md) 
     1. [SiteGenesis Modification Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SiteGenesis.md)
     2. [SFRA Modification Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SFRA.md)
 3. [Marketing Cloud Connector Installation](/doc/InstallationSpecification.md)
-4. [Triggered Send Configuration](MCConnectorInstallation-TriggeredSendConfiguration.md)
+4. [Triggered Send Configuration] (MCConnectorInstallation-TriggeredSendConfiguration.md)
 5. [Realtime Analytics Configuration](MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
+6. [Advanced Usage](AdvancedUsage.md) 
 
 <a name="Community"></a>
 ## Community ##

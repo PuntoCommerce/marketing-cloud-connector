@@ -1,12 +1,13 @@
 # marketing-cloud-connector: Debugging #
 ---
-###### - Done? Go Back to the [readMe.md](README.md)
-**What is the marketing-cloud-connector?**   
-A [Salesforce Labs](https://twitter.com/salesforce_labs?lang=en) project that facilitates an "above the API" integration between Salesforce B2C Commerce and Marketing Clouds.
+## Table of Contents #
 
----
+1. [Commerce Cloud Log Settings](#Log)
+2. [Synchronous Promise Errors](#Synch)
+3. [Authorization Token Request](#Auth)
+4. [Sent Message Status](#SentMsg)
 
-
+<a name="Log"></a>
 ##Commerce Cloud Log Settings##
 
 To turn on the debug logs:
@@ -32,8 +33,8 @@ Navigate to Custom Object Editor: **Merchant Tools > Custom Objects > Custom Obj
    Subscriber Attributes has been defined, which is a mapping of available values from Commerce Cloud to the 
    attribute key they should be sent as to Marketing Cloud.
 
-
-##Synchronous Promise Errors##
+<a name="Synch"></a>
+## Synchronous Promise Errors ##
 
 If debugging indicates `SynchronousPromise.js` errors, make sure that the file is placed in a directory where the function can be accessed globally, such as the module directory.
 
@@ -41,6 +42,7 @@ To debug, use a client to ease web request testing such as [Restlet Client](http
 
 Below are some sample calls you can use to perform direct API testing. The Host value will vary based on what Marketing Cloud instance you're connecting to.
 
+<a name="Auth"></a>
 ## Authorization Token Request ##
 
 Request an API token (replace `Host value`, `CLIENTID`, and `CLIENTSECRETVALUE`):
@@ -71,6 +73,7 @@ Date: Mon, 14 Aug 2017 14:31:35 GMT
 
 **Important**: For all requests other than auth, you need to include an Authorization header with the value of `accessToken`. 
 
+<a name="SentMsg"></a>
 ## Sent Message Status ##
 
 After you have issued a triggered send, the response value contains a `location` header. This location gives you a follow-up URL to request the status of the sent message. 
