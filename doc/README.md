@@ -2,10 +2,10 @@
 
 ### Table of Contents ###
 
-1. [Application Overview](#Overview)
-2. [Application Documentation](#Doc)
+1. [Connector Overview](#Overview)
+2. [Connector Documentation](#Doc)
 3. [Community](#Community)
-4. [Application Changelog](#Changes)
+4. [Changelog](#Changes)
 5. [Terms and Conditions](#Legalese)
 
 
@@ -67,11 +67,13 @@ Data sync to Marketing Cloud via jobs:
 <a name="Doc"></a>
 ## Application Documentation ##
 
-
-1. [HandlerFramework Cartridge](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/Handler-Installation.md) 
-2. [Marketing Cloud Connector Cartridge](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/marketing-cloud-connector-docs/Home.md) 
-    1. [SiteGenesis Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SiteGenesis.md)
-    2. [SFRA Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SFRA.md)
+1. [Marketing Cloud Connector Installation](/doc/IntegrationSpecification.md)
+2. [Handler Framework Cartridge Installation](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/Handler-Installation.md) 
+    1. [SiteGenesis Modification Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SiteGenesis.md)
+    2. [SFRA Modification Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SFRA.md)
+3. [Marketing Cloud Connector Installation](/doc/InstallationSpecification.md)
+4. [Triggered Send Configuration] (MCConnectorInstallation-TriggeredSendConfiguration.md)
+5. [Realtime Analytics Configuration](MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 
 <a name="Community"></a>
 ## Community ##

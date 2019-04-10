@@ -1,30 +1,32 @@
 # marketing-cloud-connector: SFRA Modification Instructions #
 ---
-###### - Done? Go Back to the [readMe.md](README.md)
-**What is the marketing-cloud-connector?**   
-A [Salesforce Labs](https://twitter.com/salesforce_labs?lang=en) project that facilitates an "above the API" integration between Salesforce B2C Commerce and Marketing Clouds.
+## Table of Contents
 
----
+1. [Using the SFRA Overlay Cartridge](#Overlay)
+2. [Manual Modifications to SFRA](#Manual)
 
-##Using the SFRA Overlay Cartridge
+--
+<a name="Overlay"></a>
+## Using the SFRA Overlay Cartridge
 
-**Note:** These instructions are only relevant for Version 2.0.0 of the Marketing Cloud Connector after the merging of [Pull Request 27](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/pull/27).  If you're using a previous release, use the instructions _Manual Modifications to SFRA_
+**Note:** These instructions are only relevant for Version 2.0.0 of the Marketing Cloud Connector, after the merging of [Pull Request 27](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/pull/27).  If you're using a previous release, use the [Manual Modifications to SFRA](#Manual).
 
-With the release of Version 2.0.0 of the Marketing Cloud Connector, a new cartridge is supplied called _plugin\_marketing\_cloud_.  This cartridge is intended to overlay the SFRA main cartridge (_app\_storefront\_base_) and replaces the functionality with that needed to activate the Marketing Cloud Connector hooks.  Essentially, it contains all of the changes the instructions below advise you to make.  You will still need to import and configure all the metadata and custom objects as described below; you just won't have to manually cut and paste all the code from these instructions into your version of SFRA.
+With the release of the Marketing Cloud Connector version 2.0.0, a new cartridge is supplied called _plugin\_marketing\_cloud_.  This cartridge is intended to overlay the SFRA main cartridge (_app\_storefront\_base_) and replace the functionality with that needed to activate the Marketing Cloud Connector hooks.  Essentially, it contains all of the changes the Manual Modifications instructions advise you to make.  You will still need to import and configure all the metadata and custom objects as described below; you just won't have to manually cut and paste all the code from these instructions into your version of SFRA.
 
 After loading up the _plugin\_marketing\_cloud_ cartridge, adjust your cartridge path to look like:
 `plugin_marketing_cloud:app_storefront_base:int_marketing_cloud:int_handlerframework`
 
-##Manual Modifications to SFRA
+<a name="Manual"></a>
+## Manual Modifications to SFRA
 
 Release 1.0.1 (https://github.com/SalesforceCommerceCloud/handler-framework/tree/1.0.1)
 
 
-###Modify the Following Files - Release 1.0.1
+### Modify the Following Files - Release 1.0.1
 
 **Note**: The following line numbers are approximations, verify the content that you are modifying. 
 
-####app\_storefront\_base/cartridge/controllers/Account.js
+#### app\_storefront\_base/cartridge/controllers/Account.js
 
 1. Line 531: 
 
@@ -121,7 +123,7 @@ Release 1.0.1 (https://github.com/SalesforceCommerceCloud/handler-framework/tree
 	```
 5. Save and close the file.	
 	
-####app_storefront_base/cartridge/scripts/helpers/accountHelpers.js
+#### app_storefront_base/cartridge/scripts/helpers/accountHelpers.js
 
 1. Line 89: 
 
@@ -174,9 +176,9 @@ Release 1.0.1 (https://github.com/SalesforceCommerceCloud/handler-framework/tree
 
 3. Save and close the file.
 
-###Modify the Following Files - Previous Releases
+### Modify the Following Files - Previous Releases
 
-####app\_storefront\_base/cartridge/controllers/Account.js
+#### app\_storefront\_base/cartridge/controllers/Account.js
 
 1. Line 90: 
 
@@ -452,7 +454,7 @@ Release 1.0.1 (https://github.com/SalesforceCommerceCloud/handler-framework/tree
 
 5. Save and close the file.
 
-####app\_storefront\_base/cartridge/scripts/checkout/checkoutHelpers.js####
+#### app\_storefront\_base/cartridge/scripts/checkout/checkoutHelpers.js####
 
 1. Line 7: 
 
@@ -555,7 +557,7 @@ Release 1.0.1 (https://github.com/SalesforceCommerceCloud/handler-framework/tree
 
 3. Save and close the file.
 
-####app\_storefront\_base/cartridge/scripts/order/orderHelpers.js:**
+#### app\_storefront\_base/cartridge/scripts/order/orderHelpers.js:
 
 1. Line 3: 
 
@@ -655,7 +657,7 @@ Release 1.0.1 (https://github.com/SalesforceCommerceCloud/handler-framework/tree
 
 3. Save and close the file.
 
-####app\_storefront\_base/cartridge/templates/default/common/htmlHead.isml####
+#### app\_storefront\_base/cartridge/templates/default/common/htmlHead.isml####
 
 1. At the end of the file, add:
 	
@@ -669,7 +671,7 @@ Release 1.0.1 (https://github.com/SalesforceCommerceCloud/handler-framework/tree
 2. Save and close the file.
 
 
-####app\_storefront\_base/cartridge/templates/default/common/scripts.isml####
+#### app\_storefront\_base/cartridge/templates/default/common/scripts.isml####
 
 1. At the end of the file, add:
 

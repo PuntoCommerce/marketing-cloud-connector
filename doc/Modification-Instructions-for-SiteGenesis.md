@@ -1,36 +1,37 @@
 # marketing-cloud-connector: SiteGenesis Modification Instructions #
 ---
-###### - Done? Go Back to the [readMe.md](README.md)
-**What is the marketing-cloud-connector?**   
-A [Salesforce Labs](https://twitter.com/salesforce_labs?lang=en) project that facilitates an "above the API" integration between Salesforce B2C Commerce and Marketing Clouds.
+## Table of Contents
 
----
+1. [Clone or Pull From Community SiteGenesis](#Clone)
+2. [Manual Modifications to SiteGenesis](#Manual)
 
-[TOC]
+--
 
-## Option 1: Clone or Pull From Community SiteGenesis
+<a name="Clone"></a>
+## Clone or Pull from Community SiteGenesis 
 
-The official Javascript Controller based SiteGenesis repository is in maintenance-only mode while a new Mobile First Reference Architecture is in development. Hence, a community-supported fork of SiteGenesis has been established ([Community Site Genesis](https://bitbucket.org/demandware/community-sitegenesis)), allowing the community to continue enhancing and extending SiteGenesis.
+The official Javascript Controller based SiteGenesis repository is in maintenance-only mode while a new Mobile First Reference Architecture is in development. A community-supported fork of SiteGenesis has been established ([Community Site Genesis](https://www.google.com/url?q=https://github.com/SalesforceCommerceCloud/community-sitegenesis)), allowing the community to continue enhancing and extending SiteGenesis.
 
 For detailed information on the SiteGenesis JavaScript Controller, review the existing [Commerce Cloud Documentation](https://documentation.demandware.com/DOC1/topic/com.demandware.dochelp/SGJC/SiteGenesisSetup.html?cp=0_4_13).
 
-1. Community SiteGenesis:
+1. Update SiteGenesis:
     1. For a fresh install of SiteGenesis, clone the Community Site Genesis repository.
-    2. For an existing project that is based on Site Genesis git repository (and has the SG git history intact), then you should be able to add the Community Site Genesis as a new git remote, and pull/merge in the community changes.
+    2. For an existing project that is based on the SiteGenesis git repository (and has the git history intact), add the Community Site Genesis as a new git remote, and pull or merge in the community changes.
+    
 2. Open the file `app_storefront_controllers/cartridge/scripts/hooks.json`, and delete: 
 
-            :::javascript
-                {
-                    "name": "app.mail.sendMail",
-                    "script": "./mail/mailHook"
-                },
-
+    ```:::javascript
+        {
+            "name": "app.mail.sendMail",
+            "script": "./mail/mailHook"
+        },
+	```
   
 
-If your project cannot take advantage of Community SiteGenesis for some reason, review the other options below.
+If your project cannot take advantage of Community SiteGenesis for some reason, review the Manual Modifications to SiteGenesis Cartridge.
 
-
-## Option 2: Manual modifications to SiteGenesis cartridge
+<a name="Manual"></a>
+## Manual Modifications to SiteGenesis Cartridge ##
 
 ###Modify the Following Files###
 
@@ -232,7 +233,7 @@ If your project cannot take advantage of Community SiteGenesis for some reason, 
 	
 11. Save and close the file.
 
-####app\_storefront\_controllers/cartridge/controllers/CustomerService.js####
+#### app\_storefront\_controllers/cartridge/controllers/CustomerService.js ####
 
 1. Line 50: 
 
@@ -252,7 +253,7 @@ If your project cannot take advantage of Community SiteGenesis for some reason, 
 	```
 2. Save and close the file.
 
-####Open app\_storefront\_controllers/cartridge/scripts/models/EmailModel.js####
+#### app\_storefront\_controllers/cartridge/scripts/models/EmailModel.js ####
 
 1. Line 9: 
 
@@ -410,7 +411,7 @@ If your project cannot take advantage of Community SiteGenesis for some reason, 
 7. Save and close the file.
 	
 
-####app\_storefront\_controllers/cartridge/scripts/models/OrderModel.js####
+#### app\_storefront\_controllers/cartridge/scripts/models/OrderModel.js ####
 
 1. Line 9: 
 
@@ -474,7 +475,7 @@ If your project cannot take advantage of Community SiteGenesis for some reason, 
 3. Save and close the file.
 	
 	
-####app\_storefront\_controllers/cartridge/scripts/request/OnRequest.js####
+#### app\_storefront\_controllers/cartridge/scripts/request/OnRequest.js ####
 
 1. Line 16:
 
@@ -519,7 +520,7 @@ If your project cannot take advantage of Community SiteGenesis for some reason, 
 	```
 2. Save and close the file.
 
-####app\_storefront\_core/cartridge/templates/default/checkout/cart/refreshcart.isml####
+#### app\_storefront\_core/cartridge/templates/default/checkout/cart/refreshcart.isml ####
 
 1. Line 6: 
 
@@ -539,7 +540,7 @@ If your project cannot take advantage of Community SiteGenesis for some reason, 
 	```
 2. Save and close the file.
 
-####Open app\_storefront\_core/cartridge/templates/default/components/footer/footer_UI.isml####
+#### app\_storefront\_core/cartridge/templates/default/components/footer/footer_UI.isml ####
 
 1. Line 33: 
 
@@ -561,7 +562,7 @@ If your project cannot take advantage of Community SiteGenesis for some reason, 
 	```
 2. Save and close the file.	
 
-####Open app\_storefront\_core/cartridge/templates/default/components/header/htmlhead.isml####
+#### app\_storefront\_core/cartridge/templates/default/components/header/htmlhead.isml ####
 
 1. Line 76:
 
@@ -582,7 +583,7 @@ If your project cannot take advantage of Community SiteGenesis for some reason, 
 	```
 2. Save and close the file.
 
-####app\_storefront\_core/cartridge/templates/default/util/pt_empty.isml####
+#### app\_storefront\_core/cartridge/templates/default/util/pt_empty.isml ####
 
 1. Line 76:
 
@@ -606,7 +607,7 @@ If your project cannot take advantage of Community SiteGenesis for some reason, 
 2. Save and close the file.
 
 
-####app\_storefront\_core/cartridge/templates/resources/account.properties####
+#### app\_storefront\_core/cartridge/templates/resources/account.properties ####
 
 1. Line 176: 
 
@@ -638,7 +639,7 @@ If your project cannot take advantage of Community SiteGenesis for some reason, 
 	account.updatedemail.message3=This is an automatically generated email, please do not reply.
 	```
 
-####app\_storefront\_controllers/cartridge/scripts/hooks.json####
+#### app\_storefront\_controllers/cartridge/scripts/hooks.json ####
 
 1. Find, and delete this entry, if it exists:
 
@@ -689,11 +690,11 @@ If your project cannot take advantage of Community SiteGenesis for some reason, 
 
 
 
-###Create the Following New Files###
+### Create the Following New Files ###
 
 The code samples below need to be created as new files. 
 
-###app\_storefront\_controllers/cartridge/scripts/mail/mailHook.js###
+### app\_storefront\_controllers/cartridge/scripts/mail/mailHook.js ###
 
 ```javascript
 'use strict';
@@ -734,7 +735,7 @@ function sendMail(args) {
 exports.sendMail = sendMail;
 ```
 
-###app\_storefront\_controllers/cartridge/scripts/template/hookHelper.js###
+### app\_storefront\_controllers/cartridge/scripts/template/hookHelper.js ###
 
 ```javascript
 'use strict';
@@ -787,7 +788,7 @@ exports.stringifyError = stringifyError;
 exports.callHook = callHook;
 ```
 
-###app_storefront_controllers/cartridge/scripts/template/templateHooks.js###
+### app_storefront_controllers/cartridge/scripts/template/templateHooks.js ###
 
 ```javascript
 'use strict';
@@ -849,7 +850,7 @@ exports.afterFooter = afterFooter;
 exports.ajaxPartial = ajaxPartial;
 ```
 
-###app\_storefront\_core/cartridge/templates/default/hooks/afterFooter.isml###
+### app\_storefront\_core/cartridge/templates/default/hooks/afterFooter.isml ###
 
 ```
 <!--- TEMPLATENAME: hooks/afterFooter.isml --->
@@ -857,7 +858,7 @@ exports.ajaxPartial = ajaxPartial;
 <!-- hooks/afterFooter is successfully loaded -->
 ```
 
-###app\_storefront\_core/cartridge/templates/default/mail/accountcreatedemail.isml###
+### app\_storefront\_core/cartridge/templates/default/mail/accountcreatedemail.isml ###
 
 ```
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
@@ -897,7 +898,7 @@ exports.ajaxPartial = ajaxPartial;
 </html>
 ```
 
-###app\_storefront\_core/cartridge/templates/default/mail/accountupdatedemail.isml###
+### app\_storefront\_core/cartridge/templates/default/mail/accountupdatedemail.isml ###
 
 ```
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
