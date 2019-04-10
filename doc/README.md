@@ -1,24 +1,22 @@
 # Salesforce B2C Commerce to Marketing Cloud Connector #
 
+### Table of Contents ###
+
 1. [Application Overview](#Overview)
 2. [Application Documentation](#Doc)
-3. [More Information](#MoreInfo)
+3. [Community](#Community)
 4. [Application Changelog](#Changes)
 5. [Terms and Conditions](#Legalese)
 
 
-## Introduction ##
-
-The Salesforce B2C Commerce to Marketing Cloud Connector is a project that facilitates the integration between the two clouds. The project connects Commerce Cloud to Marketing Cloud "above the API", meaning it is using public API rather than direct backend integration. This framework allows you to share and synchronize data between the two clouds.
-
 <a name="Overview"></a>
 ## Application Overview ##
+The Salesforce B2C Commerce to Marketing Cloud Connector is a project that facilitates the integration between the two clouds. The project connects Commerce Cloud to Marketing Cloud "above the API", meaning it is using public API rather than direct backend integration. This framework allows you to share and synchronize data between the two clouds.
 ### Features ###
 
 #### API Implementation ####
-This cartridge implements in-part both the REST API and SOAP API from Marketing Cloud.  
-The inclusion of both APIs means that the groundwork is started to help you along with your own custom use of Marketing 
-Cloud's APIs, of which there are many abilities not already employed within this cartridge.
+This cartridge implements in-part both the REST API and SOAP API from MC (Marketing Cloud).  
+The inclusion of both APIs means that the groundwork is started to help you along with your own custom use of MC APIs, of which there are many abilities not already employed within this cartridge.
 
 #### Analytics ####
 Analytic tracking, using MC's `collect.js`, is enabled via configuration.
@@ -31,7 +29,7 @@ The following events are tracked by default:
 - Cart (add/modify/remove)
 - Order placement
 
-The above tracked information then prepares you for MC's Abandonment functionality (which requires a services engagement with MC team).
+The tracked information then you for MC Abandonment functionality (which requires a services engagement).
 MC's Abandonment functionality includes abandoned cart, abandoned browse, abandoned search.
 
 In addition to tracking page analytics, you can also opt to enable Streaming Updates, which updates your product catalog and content assets in MC's database as they are viewed.
@@ -39,9 +37,9 @@ In addition to tracking page analytics, you can also opt to enable Streaming Upd
 #### Marketing Management ####
 Marketing management is enabled by providing the following abilities:  
 
-- Marketing opt-in check-box (during registration and ordering)
-- Email subscribe form support
-- Marketing preferences page in My Account, for selectively opting into or out of specific mailing lists
+- Marketing opt-in check-box (during registration and ordering).
+- Email subscribe form support.
+- Marketing preferences page in My Account, for selectively opting into or out of specific mailing lists.
 
 #### Transactional emails ####
 The following OOB SiteGenesis emails are replaced with MC email triggers: 
@@ -55,9 +53,9 @@ The following OOB SiteGenesis emails are replaced with MC email triggers:
 * Gift Certificate - Send Certificate
 * Order - Confirmation 
 
-Transactional emails are  built using SFCC platform hooks, leveraging "triggered email" functionality in Marketing Cloud, to send emails. Configurable trigger definitions, stored in Custom Objects, are used to support custom trigger keys as well as support mapping of data for each trigger, from predefined attribute values to data extension attributes that you define. Configuration can be used to achieve a mix and match of SiteGenesis emails with Marketing Cloud emails.
+Transactional emails are built using SFCC platform hooks leveraging "triggered email" functionality in Marketing Cloud, to send emails. Configurable trigger definitions, stored in Custom Objects, are used to support custom trigger keys as well as support mapping of data for each trigger from predefined attribute values to data extension attributes that you define. Configuration can be used to achieve a mix and match of SiteGenesis emails with Marketing Cloud emails.
 
-#### Data sync ####
+#### Data Sync ####
 Data sync to Marketing Cloud via jobs:
 
 * Product Catalog
@@ -75,15 +73,15 @@ Data sync to Marketing Cloud via jobs:
     1. [SiteGenesis Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SiteGenesis.md)
     2. [SFRA Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SFRA.md)
 
-<a name="MoreInfo"></a>
-## More Information ##
+<a name="Community"></a>
+## Community ##
  
-### Who do I talk to? ##
+### Contact ##
 
 * [XChange Developer Forum](https://xchange.demandware.com/community/developer/marketing-cloud-connector/activity)
 * [Unofficial Community Slack](https://sfcc-unofficial.slack.com)
 
-### Contributing
+### Contribute
 
 1. Create a fork, if you don't already have one.
 2. Ensure your fork is synced with the latest changes from the main repository.
