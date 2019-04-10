@@ -67,7 +67,7 @@ Data sync to Marketing Cloud via jobs:
 <a name="Doc"></a>
 ## Application Documentation ##
 
-1. [Marketing Cloud Connector Installation](/doc/IntegrationSpecification.md)
+1. [Marketing Cloud Connector Integration Specification](/doc/IntegrationSpecification.md)
 2. [Handler Framework Cartridge Installation](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/Handler-Installation.md) 
     1. [SiteGenesis Modification Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SiteGenesis.md)
     2. [SFRA Modification Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SFRA.md)
