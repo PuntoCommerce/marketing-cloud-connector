@@ -74,6 +74,7 @@ Data sync to Marketing Cloud via jobs:
 3. [Marketing Cloud Connector Installation](/doc/InstallationSpecification.md)
 4. [Triggered Send Configuration] (MCConnectorInstallation-TriggeredSendConfiguration.md)
 5. [Realtime Analytics Configuration](MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
+6. [Advanced Usage](AdvancedUsage.md) 
 
 <a name="Community"></a>
 ## Community ##

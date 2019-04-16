@@ -5,7 +5,7 @@
 
 ## Additional Resources & Useful Links
 
-* [Marketing Cloud Connector Installation Guide](InstallationSpecification.md)
+* [Marketing Cloud Connector Installation Guide] (InstallationSpecification.md)
 * [Marketing Cloud Connector Triggered Send Configuration](MCConnectorInstallation-TriggeredSendConfiguration.md)
 * [Marketing Cloud Connector Repository](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector)
 * [Handler Framework Dependencies](https://github.com/SalesforceCommerceCloud/handler-framework)
