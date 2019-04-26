@@ -1,5 +1,5 @@
 # marketing-cloud-connector 
--
+
 ## 1. Project and Architectural Overview  #
 
 ### Navigation

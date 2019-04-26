@@ -1,5 +1,5 @@
 # marketing-cloud-connector: 
--
+
 ## 2.2 Marketing Cloud Cartridge Installation
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)

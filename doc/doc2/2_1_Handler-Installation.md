@@ -1,6 +1,6 @@
 
 # marketing-cloud-connector 
--
+
 ## 2.1. Handler Framework Installation 
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)

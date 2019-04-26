@@ -1,5 +1,5 @@
-# marketing-cloud-connector: 
--
+# marketing-cloud-connector:
+
 ## 2. Install Commerce Cloud Components
 
 ### Navigation

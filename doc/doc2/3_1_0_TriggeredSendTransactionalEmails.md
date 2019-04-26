@@ -1,5 +1,5 @@
 # marketing-cloud-connector: 
--
+
 ## 3.1 Triggered Send / Transactional Emails #
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
