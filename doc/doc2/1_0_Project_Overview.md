@@ -1,19 +1,29 @@
 # marketing-cloud-connector 
 -
 ## 1. Project and Architectural Overview  #
-### Table of Contents
-1. A
-2. B
-3. C
 
+### Navigation
+1. [**Project Overview**](1_0_Project_Overview.md)
+2. [Install Commerce Cloud Components](2_0_Commerce_Cloud_Component_Installation.md)
+	
+	2.1 [Handler Framework Installation](2_1_Handler-Installation.md)
+	
+	2.2 [Marketing Cloud Cartridge Installation](2_2_MarketingCloudCart.md)
+	
+	2.3 [SFRA Modification Instructions](2_3_Modification-Instructions-for-SFRA.md)
+	
+	2.4. [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
 
-## Additional Resources & Useful Links
+7. [Modify Marketing Cloud Instance](3_0_ModifyMarketingCloud.md)
 
-* [Marketing Cloud Connector Installation Guide](InstallationSpecification.md)
-* [Marketing Cloud Connector Triggered Send Configuration](MCConnectorInstallation-TriggeredSendConfiguration.md)
-* [Marketing Cloud Connector Repository](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector)
-* [Handler Framework Dependencies](https://github.com/SalesforceCommerceCloud/handler-framework)
-* [Handler Framework - Installation Guide](https://github.com/SalesforceCommerceCloud/handler-framework/wiki/Installation)
+	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md)
+	
+	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md)
+	
+	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
+	
+11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
+12. [ Debugging](5.0_Debugging.md)
 
 
 ## Marketing Cloud Connector: Overview
@@ -56,7 +66,7 @@ Catalog, content, customer, and order sync to Marketing Cloud via jobs.
 
 The Marketing Cloud Connector itself doesn’t have any touch-points in SiteGenesis, rather the Handler Framework that it depends on, does the SiteGenesis integration.
 
-For more details, see the [Handler Framework - Installation Guide](https://bitbucket.org/demandware/marketing-cloud-connector/wiki/Handler%20Framework%20-%20Installation%20Guide).
+For more details, see the [Handler Framework Installation Guide](2_1_Handler-Installation.md).
 
 ### Implementation Approach
 
@@ -382,7 +392,7 @@ Custom chunk-oriented job steps are defined for each data extract. A task-orient
 Jobs execute at the site level.
 The approach used for chunk and task-oriented custom job steps has followed the recommendations documented in InfoCenter.
 
-For more information, see [Creating Custom Jobs](https://documentation.demandware.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FJobs%2FCreatingCustomJobSteps.html).
+For more information, see [Creating Custom Jobs](https://documentation.b2c.commercecloud.salesforce.com/DOC1/topic/com.demandware.dochelp/Jobs/CreateCustomJobStep.html).
 
 Feeds and import activities follow the documentation provided for Marketing Cloud:
 
