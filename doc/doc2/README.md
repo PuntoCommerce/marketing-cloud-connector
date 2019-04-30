@@ -1,3 +1,4 @@
+<a name="Top"></a>
 # Salesforce B2C Commerce to Marketing Cloud Connector #
 
 ### Table of Contents ###
@@ -245,3 +246,6 @@ WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, THE CONNECTOR IS NOT SUPPORTED
 
  
 These Terms of Use shall be governed exclusively by the internal laws of the State of California, without regard to its conflicts of laws rules. Each party hereby consents to the exclusive jurisdiction of the state and federal courts located in San Francisco County,California to adjudicate any dispute arising out of or relating to this Agreement. Except as expressly stated in these Terms of Use, these Terms of Use constitute the entire agreement between the parties, and supersede all prior and contemporaneous agreements, proposals or representations, written or oral, concerning their subject matter.No modification, amendment, or waiver of any provision of these Terms of Use shall be effective unless it is by an update to these Terms of Use that we make available on this website, or is in writing and signed by the party against whom the modification, amendment or waiver is to be asserted.
+
+---
+[Back to the top](#Top)
