@@ -1,6 +1,7 @@
+<a name="Top"></a>
 # marketing-cloud-connector 
 
-## 1. Project and Architectural Overview  #
+## 1. Project and Architectural Overview  
 
 ### Navigation
 1. [**Project Overview**](1_0_Project_Overview.md)
@@ -34,7 +35,7 @@ The Marketing Cloud Connector is a reusable code asset to support the enablement
 
 The Marketing Cloud Connector cartridge will have new functionality added to it in an incremental manner. 
 
-### Implemented requirements
+### Implemented Requirements
 
 **Transactional Emails**
 
@@ -62,7 +63,7 @@ Catalog, content, customer, and order sync to Marketing Cloud via jobs.
 
 ## Implementation Details
 
-### Storefront integration touch-points
+### Storefront Integration Touch-points
 
 The Marketing Cloud Connector itself doesn’t have any touch-points in SiteGenesis, rather the Handler Framework that it depends on, does the SiteGenesis integration.
 
@@ -223,7 +224,7 @@ For more details, see the [Handler Framework Installation Guide](2_1_Handler-Ins
 
 Transactional emails will make use of the triggered email functionality in Marketing Cloud.
 
-### REST APIS
+### REST APIs
 
 We're using REST API for MC Connector implementation.
 
@@ -243,7 +244,7 @@ If a token is missing or expired, a new token is automatically requested in this
 All standard API calls have their response parsed, and the response object wrapped.
 The object wrapper contains checks indicating if there was a JSON parsing error, such as an auth error.
 
-**Example API Response Handling**
+**API Response Handling Example**
 
 ```
 return {
@@ -440,3 +441,6 @@ See int\_marketing\_cloud/cartridge/steptypes.json
 For Phase 1, this integration is not leveraging any Site Preferences. The capability to turn off Marketing Cloud transactional emails is available via a custom object configuratino.
 
 Site Preferences are used to manage some preferences related to Analytics collection in Phase 2.
+
+--
+[Back to the top](#Top)

@@ -1,7 +1,7 @@
-# marketing-cloud-connector: 
+<a name="Top"></a>
+#marketing-cloud-connector: 
 
 ## 3. Modify Marketing Cloud Instance
-
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
 2. [Install Commerce Cloud Components](2_0_Commerce_Cloud_Component_Installation.md)
@@ -26,7 +26,7 @@
 12. [ Debugging](5.0_Debugging.md)
 
 
-## Marketing Cloud App and API Key#
+## Marketing Cloud App and API Key
 
 This step must be done for each Commerce Cloud Business Unit that you want to connect with.
 
@@ -40,7 +40,7 @@ See [Salesforce Developers App Center](https://developer.salesforce.com/docs/atl
 
 3. If necessary, create a package.
 
-	See [Create and Install Packages] (https://developer.salesforce.com/docs/atlas.en-us.mc-app-development.meta/mc-app-development/install-packages.htm) for additional information.
+	See [Create and Install Packages](https://developer.salesforce.com/docs/atlas.en-us.mc-app-development.meta/mc-app-development/install-packages.htm) for additional information.
 	
 	**Note:** You must deselect Create with enhanced functionality when creating your package.
 	
@@ -53,3 +53,6 @@ See [Salesforce Developers App Center](https://developer.salesforce.com/docs/atl
 	- Data - Data Extensions: Read and Write
 
 5. Save the Details page for your records.
+
+--
+[Back to the top](#Top)

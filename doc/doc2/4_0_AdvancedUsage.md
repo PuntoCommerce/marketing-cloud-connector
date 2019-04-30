@@ -1,9 +1,7 @@
+<a name="Top"></a>
 # marketing-cloud-connector
 
 ## 4. Advanced Usage and Configuration  
-
-### Table of Contents
-
 
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
@@ -257,3 +255,6 @@ The map value, as an object, may have the following properties:
     "Product.shortDescription": "Description"
 }
 ```
+
+--
+[Back to the top](#Top)

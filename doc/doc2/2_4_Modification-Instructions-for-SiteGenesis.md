@@ -1,6 +1,6 @@
+<a name="Top"></a>
 # marketing-cloud-connector: 
 ## 2.3.2 SiteGenesis Modification Instructions #
-
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
 2. [Install Commerce Cloud Components](2_0_Commerce_Cloud_Component_Installation.md)
@@ -956,3 +956,5 @@ exports.ajaxPartial = ajaxPartial;
 </body>
 </html>
 ```
+--
+[Back to the top](#Top)

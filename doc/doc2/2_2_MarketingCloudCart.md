@@ -1,6 +1,8 @@
+<a name="Top"></a>
 # marketing-cloud-connector: 
 
 ## 2.2 Marketing Cloud Cartridge Installation
+
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
 2. [Install Commerce Cloud Components](2_0_Commerce_Cloud_Component_Installation.md)
@@ -97,14 +99,16 @@ If you have multiple Commerce Cloud sites, and follow the pattern of connecting 
 		
 	2. Click **Apply**.
 		
-4. Select **MarketingCloudTriggers** from Object Type dropdown, and click **Find**.
+4. Select **MarketingCloudTriggers** from the Object Type dropdown, and click **Find**.
 
 	1. Edit each hook as necessary. 
 	
 		Each trigger has a trigger key that maps to Marketing Cloud. Each trigger can be directly enabled/disabled. Additionally, a list of Subscriber Attributes has been defined, which is a mapping of available values from Commerce Cloud to the attribute key they should be sent as to Marketing Cloud.
 		
-		See [Marketing Cloud - Triggered Send Configuration](#TSConfig) for additional information. 
+		See [3.1.1  Marketing Cloud - Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md) for additional information. 
 		
 	2. Click **Apply**.
 
+--
+[Back to the top](#Top)
 

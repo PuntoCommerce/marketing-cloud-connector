@@ -1,6 +1,8 @@
+<a name="Top"></a>
 # marketing-cloud-connector: 
 
 ## 3.1 Triggered Send / Transactional Emails #
+
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
 2. [Install Commerce Cloud Components](2_0_Commerce_Cloud_Component_Installation.md)
@@ -57,3 +59,6 @@ In Marketing Cloud:
 4. Ensure your triggered send is in a running state, otherwise it cannot be used by Commerce Cloud.  
 
 See the [3.1.1 Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md) document for additional information.  
+
+--
+[Back to the top](#Top)

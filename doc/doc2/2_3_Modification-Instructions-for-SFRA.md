@@ -1,3 +1,4 @@
+<a name="Top"></a>
 # marketing-cloud-connector: 
 
 ## 2.3.1 SFRA Modification Instructions #
@@ -703,3 +704,6 @@ Release 1.0.1 (https://github.com/SalesforceCommerceCloud/handler-framework/tree
 	```
 
 2. Save and close the file.
+
+--
+[Back to the top](#Top)

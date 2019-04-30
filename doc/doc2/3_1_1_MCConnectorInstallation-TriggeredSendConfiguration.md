@@ -1,3 +1,4 @@
+<a name="Top"></a>
 # marketing-cloud-connector: 
 ## 3.1.1 Triggered Send Configuration 
 
@@ -1646,3 +1647,6 @@ Subscriber Attributes:
     "Invoice": ""
 }
 ```
+
+--
+[Back to the top](#Top)
