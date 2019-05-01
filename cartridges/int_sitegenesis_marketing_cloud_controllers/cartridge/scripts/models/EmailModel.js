@@ -6,7 +6,7 @@
  * @module models/EmailModel
  */
 
-var AbstractModel = require('app_storefront_controllers/cartridge/scripts/models/AbstractModel');
+var AbstractModel = require('*/cartridge/scripts/models/AbstractModel');
 var HookMgr = require('dw/system/HookMgr');
 var Logger = require('dw/system/Logger');
 var Site = require('dw/system/Site');
@@ -74,7 +74,7 @@ var EmailModel = AbstractModel.extend({
      */
     send: function (args) {
         // Add some default keys
-        var params = require('app_storefront_controllers/cartridge/scripts/object').toHashMap(args);
+        var params = require('*/cartridge/scripts/object').toHashMap(args);
         params.CurrentForms = session.forms;
         params.CurrentHttpParameterMap = request.httpParameterMap;
         params.CurrentCustomer = customer;

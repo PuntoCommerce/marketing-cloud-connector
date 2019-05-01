@@ -15,8 +15,8 @@ var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
-var app = require('app_storefront_controllers/cartridge/scripts/app');
-var guard = require('app_storefront_controllers/cartridge/scripts/guard');
+var app = require('*/cartridge/scripts/app');
+var guard = require('*/cartridge/scripts/guard');
 
 /**
  * Redirects the user to the last visited catalog URL if known, otherwise redirects to
@@ -25,7 +25,7 @@ var guard = require('app_storefront_controllers/cartridge/scripts/guard');
  */
 function continueShopping() {
 
-    var location = require('app_storefront_controllers/cartridge/scripts/util/Browsing').lastCatalogURL();
+    var location = require('*/cartridge/scripts/util/Browsing').lastCatalogURL();
 
     if (location) {
         response.redirect(location);
@@ -229,7 +229,7 @@ function submitForm() {
     if (formResult) {
         cartAsset = app.getModel('Content').get('cart');
 
-        pageMeta = require('app_storefront_controllers/cartridge/scripts/meta');
+        pageMeta = require('*/cartridge/scripts/meta');
         pageMeta.update(cartAsset);
 
         if (formResult.dontRedirect) {
@@ -369,7 +369,7 @@ function addBonusProductJson() {
 
                         // TODO: CommonJSify cart/UpdateProductOptionSelections.ds and import here
 
-                        var UpdateProductOptionSelections = require('app_storefront_core/cartridge/scripts/cart/UpdateProductOptionSelections');
+                        var UpdateProductOptionSelections = require('*/cartridge/scripts/cart/UpdateProductOptionSelections');
                         UpdateProductOptionSelections.update({
                             SelectedOptions: new ArrayList(productsJSON[i].options),
                             Product: childProduct
@@ -387,7 +387,7 @@ function addBonusProductJson() {
         } else {
             Transaction.rollback();
 
-            let r = require('app_storefront_controllers/cartridge/scripts/util/Response');
+            let r = require('*/cartridge/scripts/util/Response');
             r.renderJSON({
                 success: false
             });
@@ -398,7 +398,7 @@ function addBonusProductJson() {
     cart.calculate();
     Transaction.commit();
 
-    let r = require('app_storefront_controllers/cartridge/scripts/util/Response');
+    let r = require('*/cartridge/scripts/util/Response');
     r.renderJSON({
         success: true
     });
@@ -423,7 +423,7 @@ function addCouponJson() {
     });
 
     if (request.httpParameterMap.format.stringValue === 'ajax') {
-        let r = require('app_storefront_controllers/cartridge/scripts/util/Response');
+        let r = require('*/cartridge/scripts/util/Response');
         r.renderJSON({
             status: couponStatus.code,
             message: Resource.msgf('cart.' + couponStatus.code, 'checkout', null, couponCode),

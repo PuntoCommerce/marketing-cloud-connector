@@ -17,8 +17,8 @@ var Resource = require('dw/web/Resource');
 
 
 /* Script Modules */
-var app = require('app_storefront_controllers/cartridge/scripts/app');
-var guard = require('app_storefront_controllers/cartridge/scripts/guard');
+var app = require('*/cartridge/scripts/app');
+var guard = require('*/cartridge/scripts/guard');
 
 
 /**
@@ -32,7 +32,7 @@ var guard = require('app_storefront_controllers/cartridge/scripts/guard');
 function list() {
     var wallet = customer.getProfile().getWallet();
     var paymentInstruments = wallet.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
-    var pageMeta = require('app_storefront_controllers/cartridge/scripts/meta');
+    var pageMeta = require('*/cartridge/scripts/meta');
     var paymentForm = app.getForm('paymentinstruments');
 
     paymentForm.clear();
@@ -97,7 +97,7 @@ function handlePaymentForm() {
  * @param {dw.web.FormGroup} params.CreditCardFormFields - new credit card form.
  */
 function save(params) {
-    var saveCustomerCreditCard = require('app_storefront_core/cartridge/scripts/checkout/SaveCustomerCreditCard');
+    var saveCustomerCreditCard = require('*/cartridge/scripts/checkout/SaveCustomerCreditCard');
     var result = saveCustomerCreditCard.save(params);
     if (result === PIPELET_ERROR) {
         throw new Error('Problem saving credit card');

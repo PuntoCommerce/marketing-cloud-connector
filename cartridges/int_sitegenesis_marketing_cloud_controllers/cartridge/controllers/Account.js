@@ -10,13 +10,13 @@
 /* API includes */
 var Resource = require('dw/web/Resource');
 var URLUtils = require('dw/web/URLUtils');
-var Form = require('app_storefront_controllers/cartridge/scripts/models/FormModel');
+var Form = require('*/cartridge/scripts/models/FormModel');
 var HookMgr = require('dw/system/HookMgr');
 var OrderMgr = require('dw/order/OrderMgr');
 
 /* Script Modules */
-var app = require('app_storefront_controllers/cartridge/scripts/app');
-var guard = require('app_storefront_controllers/cartridge/scripts/guard');
+var app = require('*/cartridge/scripts/app');
+var guard = require('*/cartridge/scripts/guard');
 var Transaction = require('dw/system/Transaction');
 
 /**
@@ -29,7 +29,7 @@ function show() {
     Content = app.getModel('Content');
     accountHomeAsset = Content.get('myaccount-home');
 
-    pageMeta = require('app_storefront_controllers/cartridge/scripts/meta');
+    pageMeta = require('*/cartridge/scripts/meta');
     pageMeta.update(accountHomeAsset);
 
     app.getView({downloadAvailable: true}).render('account/accountoverview');
@@ -40,8 +40,8 @@ function show() {
  */
 function datadownload() {
     var profile = customer.profile;
-    var profileDataHelper = require('app_storefront_controllers/cartridge/scripts/profileDataHelper');
-    let response = require('app_storefront_controllers/cartridge/scripts/util/Response');
+    var profileDataHelper = require('*/cartridge/scripts/profileDataHelper');
+    let response = require('*/cartridge/scripts/util/Response');
     var site = require('dw/system/Site');
     var fileName = site.current.name + '_' + profile.firstName + '_' + profile.lastName + '.json';
     response.renderData(profileDataHelper.getProfileData(profile), fileName);
@@ -76,7 +76,7 @@ function editProfile() {
     }
     accountPersonalDataAsset = Content.get('myaccount-personaldata');
 
-    pageMeta = require('app_storefront_controllers/cartridge/scripts/meta');
+    pageMeta = require('*/cartridge/scripts/meta');
     pageMeta.update(accountPersonalDataAsset);
     // @FIXME bctext2 should generate out of pagemeta - also action?!
     app.getView({
@@ -106,12 +106,17 @@ function editForm() {
 
             var emailtype = 6  //Account Updated
 
+            var form_email = app.getForm('profile.customer.email').value();
+            var form_emailconfirm = app.getForm('profile.customer.emailconfirm').value();
+            var form_firstname = app.getForm('profile.customer.firstname').value();
+            var form_lastname = app.getForm('profile.customer.lastname').value();
+            
             if (!Customer.checkUserName()) {
                 app.getForm('profile.customer.email').invalidate();
                 isProfileUpdateValid = false;
             }
 
-            if (app.getForm('profile.customer.email').value() !== app.getForm('profile.customer.emailconfirm').value()) {
+            if (form_email !== form_emailconfirm) {
                 app.getForm('profile.customer.emailconfirm').invalidate();
                 isProfileUpdateValid = false;
             }
@@ -122,7 +127,10 @@ function editForm() {
             }
 
             if (isProfileUpdateValid) {
-                hasEditSucceeded = Customer.editAccount(app.getForm('profile.customer.email').value(), app.getForm('profile.login.password').value(), app.getForm('profile.login.password').value(), app.getForm('profile'));
+                var original_firstname = customer.profile.firstName;
+                var original_lastname = customer.profile.lastName;
+                var original_email = customer.profile.email;
+                hasEditSucceeded = Customer.editAccount(form_email, app.getForm('profile.login.password').value(), app.getForm('profile.login.password').value(), app.getForm('profile'));
 
                 if (!hasEditSucceeded) {
                     app.getForm('profile.login.password').invalidate();
@@ -130,11 +138,10 @@ function editForm() {
                 }
                 
                 // send a different email if name or email has changed
-            	if (customer.profile.firstName != app.getForm('profile.customer.firstname').value() ||
-            		customer.profile.lastName != app.getForm('profile.customer.lastname').value()) {
+            	if ((original_firstname != form_firstname) || (original_lastname != form_lastname)) {
                     emailtype = 7; // Account name changed
             	}
-            	if (customer.profile.email != app.getForm('profile.customer.email').value()) {
+            	if (original_email != form_email) {
                     emailtype = 10; // Account email changed
             	}  
             }

@@ -12,15 +12,15 @@ var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
-var app = require('app_storefront_controllers/cartridge/scripts/app');
-var guard = require('app_storefront_controllers/cartridge/scripts/guard');
+var app = require('*/cartridge/scripts/app');
+var guard = require('*/cartridge/scripts/guard');
 
 /**
  * Gets a ContentModel that wraps the myaccount-addresses content asset.
  * Updates the page metadata and renders the addresslist template.
  */
 function list() {
-    var pageMeta = require('app_storefront_controllers/cartridge/scripts/meta');
+    var pageMeta = require('*/cartridge/scripts/meta');
 
     var content = app.getModel('Content').get('myaccount-addresses');
     if (content) {
@@ -105,7 +105,7 @@ function handleForm() {
     });
     
     if (request.httpParameterMap.format.stringValue === 'ajax') {
-        let r = require('app_storefront_controllers/cartridge/scripts/util/Response');
+        let r = require('*/cartridge/scripts/util/Response');
 
         r.renderJSON({
             success: success,
@@ -185,7 +185,7 @@ function Delete() {
         return;
     }
 
-    let r = require('app_storefront_controllers/cartridge/scripts/util/Response');
+    let r = require('*/cartridge/scripts/util/Response');
 
     r.renderJSON({
         status: deleteAddressResult ? 'OK' : CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST,

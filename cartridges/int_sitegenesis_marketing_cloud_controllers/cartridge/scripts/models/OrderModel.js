@@ -6,7 +6,7 @@
 */
 
 /* API Includes */
-var AbstractModel = require('./AbstractModel');
+var AbstractModel = require('*/cartridge/scripts/models/AbstractModel');
 var HookMgr = require('dw/system/HookMgr');
 var Order = require('dw/order/Order');
 var OrderMgr = require('dw/order/OrderMgr');
@@ -63,8 +63,8 @@ OrderModel.get = function (parameter) {
  * @return {Object} object If order cannot be placed, object.error is set to true. Ortherwise, object.order_created is true, and object.Order is set to the order.
  */
 OrderModel.submit = function (order) {
-    var Email = require('../scripts/models/EmailModel');
-    var GiftCertificate = require('./GiftCertificateModel');
+    var Email = require('./EmailModel');
+    var GiftCertificate = require('*/cartridge/scripts/models/GiftCertificateModel');
     try {
         Transaction.begin();
         placeOrder(order);
@@ -85,6 +85,15 @@ OrderModel.submit = function (order) {
         };
     }
 
+    Email.sendMail({
+        template: 'mail/orderconfirmation',
+        recipient: order.getCustomerEmail(),
+        subject: Resource.msg('order.orderconfirmation-email.001', 'order', null),
+        context: {
+            Order: order
+        }
+    });
+    
     if (session.forms.billing.billingAddress.addToEmailList.checked) {
         var hookID = 'app.mailingList.subscribe';
         if (HookMgr.hasHook(hookID)) {
