@@ -11,17 +11,15 @@ It connects Commerce Cloud to Marketing Cloud "above the API", which means that 
 
 Licensed under the current NDA and licensing agreement in place with your organization. (This is explicitly not open source licensing.)
 
-### Dependencies ###
+### Installation Guides ###
 
-* [Handler Framework](https://github.com/SalesforceCommerceCloud/handler-framework)
-
-### Installation ###
-
-Installation and usage can be found in the [Wiki](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/wiki)
+1. [HandlerFramework Cartridge](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Installation.md) (install first)
+2. [Marketing Cloud Connector Cartridge](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/marketing-cloud-connector-docs/Home.md) (install next)
+3a. [SiteGenesis Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SiteGenesis.md)
+3b. [SFRA Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SFRA.md)
 
 ## Who do I talk to? ##
 
-* Maintainer: @intel352
 * [XChange Developer Forum](https://xchange.demandware.com/community/developer/marketing-cloud-connector/activity)
 * [Unofficial Community Slack](https://sfcc-unofficial.slack.com)
 
