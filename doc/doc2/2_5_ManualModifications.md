@@ -13,7 +13,7 @@
 	
 	2.3 [SFRA Modification Instructions](2_3_Modification-Instructions-for-SFRA.md)
 	
-	2.4. [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
+	2.4 [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
 	
 	2.5. [**Manual Modification Instructions**](2_5_ManualModifications.md)
 
@@ -26,7 +26,7 @@
 	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
 11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
-12. [ Debugging](5_0_Debugging.md)
+12. [Debugging](5_0_Debugging.md)
 
 --
 ## Overview
