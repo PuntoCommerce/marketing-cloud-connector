@@ -5,7 +5,7 @@
 
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
-2. [Install Commerce Cloud Components](2_0_Commerce_Cloud_Component_Installation.md)
+2. [Install B2C Commerce Components](2_0_Commerce_Cloud_Component_Installation.md)
 	
 	2.1 [Handler Framework Installation](2_1_Handler-Installation.md)
 	
@@ -15,7 +15,7 @@
 	
 	2.4. [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
 
-7. [Modify Marketing Cloud Instance](3_0_ModifyMarketingCloud.md)
+7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
 	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md)
 	
@@ -24,23 +24,12 @@
 	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
 11. [**Advanced Usage and Configuration**](4_0_AdvancedUsage.md)
-12. [ Debugging](5.0_Debugging.md)
+12. [ Debugging](5_0_Debugging.md)
 
 --
 
-
-<a name="PWConfig"></a>
-
-## 4.1 Predictive Web Configuration (collect.js / Analytics) #
-
-Predictive Web, also referred to as Analytics or collect.js, provides you with the ability to track customer activity throughout your storefront. This information can be used to power personalized recommendations, as well as used to facilitate abandoned cart, search, or browse journeys.  
-
-The Predictive Web feature can be found under Personalization Builder. To ensure that you set up Personalization Builder correctly, it is recommended that you work with your Marketing Cloud representative.
-
-Personalization Builder provides you with a wizard that walks you through the set-up process. In this process, you define whether you want to personalize products, content, or both. You also define additional fields that you want to store within the product and content catalog to be used for recommendation behavior.  
-
 <a name="CatalogSync"></a>
-## 4.2 Sync Your Catalog ##
+## 4.1 Sync Your Catalog ##
 
 ### Streaming Updates ###
 
@@ -51,7 +40,7 @@ The Predictive Web feature supports streaming updates for your catalogs. As a pr
 Batch import can occur via a data feed, once per day. See [Data Feeds](#DataFeeds) for more information.
 
 <a name="OptIn"></a>
-## 4.3 Marketing Opt-in / Subscription Management 
+## 4.2 Marketing Opt-in / Subscription Management 
 
 Marketing opt-in and subscription management is available via a new controller included with the cartridge. 
 
@@ -72,7 +61,7 @@ The following preferences are available for you to manage this functionality:
 
 
 <a name="DataFeeds"></a>
-## 4.4 Data Feeds ##
+## 4.3 Data Feeds ##
 
 ### Feed Configuration ###
 
@@ -145,7 +134,7 @@ An “Import File” activity was dragged into “Step 1”, and configured as:
 [[images/installation-specification-5.png]]
 
 <a name="DataExport"></a>
-## 4.5 Data Export Mapping
+## 4.4 Data Export Mapping
 
 Within the `MarketingCloudDataExport` custom object, the `Export Attributes` field contains a JSON object that maps fields to export values. The map key is where the feed output value should be retrieved from. The map value can be a string (the column name to map the value into), an object (which is detailed below), or an array of strings and objects, which allows you to map one value into multiple columns.
 
@@ -255,6 +244,7 @@ The map value, as an object, may have the following properties:
     "Product.shortDescription": "Description"
 }
 ```
+[test](5_0_Debugging.md#SentMsg)
 
 --
 [Back to the top](#Top)

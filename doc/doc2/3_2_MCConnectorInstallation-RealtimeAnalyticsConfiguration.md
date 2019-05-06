@@ -4,7 +4,7 @@
 ## 3.2 Realtime Analytics Configuration 
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
-2. [Install Commerce Cloud Components](2_0_Commerce_Cloud_Component_Installation.md)
+2. [Install B2C Commerce Components](2_0_Commerce_Cloud_Component_Installation.md)
 	
 	2.1 [Handler Framework Installation](2_1_Handler-Installation.md)
 	
@@ -14,7 +14,7 @@
 	
 	2.4. [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
 
-7. [Modify Marketing Cloud Instance](3_0_ModifyMarketingCloud.md)
+7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
 	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md)
 	
@@ -23,10 +23,16 @@
 	3.2. [**Realtime Analytics Configuration**](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
 11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
-12. [ Debugging](5.0_Debugging.md)
+12. [ Debugging](5_0_Debugging.md)
 
 --
+##Overview 
 
+Predictive Web, also referred to as Analytics or collect.js, provides you with the ability to track customer activity throughout your storefront. This information can be used to power personalized recommendations, as well as used to facilitate abandoned cart, search, or browse journeys.
+
+The Predictive Web feature can be found under Personalization Builder. To ensure that you set up Personalization Builder correctly, it is recommended that you work with your Marketing Cloud representative.
+
+Personalization Builder provides you with a wizard that walks you through the set-up process. In this process, you define whether you want to personalize products, content, or both. You also define additional fields that you want to store within the product and content catalog to be used for recommendation behavior.
 Work with your Marketing Cloud representative to address any questions or concerns that may arise.
 Everything on this page merely exists as recommendations, intended to help you configure your account.
 

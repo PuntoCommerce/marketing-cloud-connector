@@ -4,7 +4,7 @@
 ## 5. Debugging #
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
-2. [Install Commerce Cloud Components](2_0_Commerce_Cloud_Component_Installation.md)
+2. [Install B2C Commerce Components](2_0_Commerce_Cloud_Component_Installation.md)
 	
 	2.1 [Handler Framework Installation](2_1_Handler-Installation.md)
 	
@@ -14,7 +14,7 @@
 	
 	2.4. [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
 
-7. [Modify Marketing Cloud Instance](3_0_ModifyMarketingCloud.md)
+7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
 	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md)
 	
@@ -23,10 +23,10 @@
 	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
 11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
-12. [**Debugging**](5.0_Debugging.md)
+12. [**Debugging**](5_0_Debugging.md)
 
 <a name="Log"></a>
-##5.1 Commerce Cloud Log Settings##
+## 5.1 B2C Commerce Log Settings
 
 To turn on the debug logs:
 
@@ -48,11 +48,11 @@ Navigate to Custom Object Editor: **Merchant Tools > Custom Objects > Custom Obj
 
 	Each trigger has a Trigger Key that maps it to Marketing Cloud. Enter the External key that we 
    got from the Triggered Send we created. Each trigger can be directly enabled/disabled. Additionally, a list of 
-   Subscriber Attributes has been defined, which is a mapping of available values from Commerce Cloud to the 
+   Subscriber Attributes has been defined, which is a mapping of available values from B2C Commerce to the 
    attribute key they should be sent as to Marketing Cloud.
 
 <a name="Synch"></a>
-##5.2 Synchronous Promise Errors ##
+## 5.2 Synchronous Promise Errors
 
 If debugging indicates `SynchronousPromise.js` errors, make sure that the file is placed in a directory where the function can be accessed globally, such as the module directory.
 
@@ -61,7 +61,7 @@ To debug, use a client to ease web request testing such as [Restlet Client](http
 Below are some sample calls you can use to perform direct API testing. The Host value will vary based on what Marketing Cloud instance you're connecting to.
 
 <a name="Auth"></a>
-## 5.3 Authorization Token Request ##
+## 5.3 Authorization Token Request 
 
 Request an API token (replace `Host value`, `CLIENTID`, and `CLIENTSECRETVALUE`):
 
@@ -92,7 +92,7 @@ Date: Mon, 14 Aug 2017 14:31:35 GMT
 **Important**: For all requests other than auth, you need to include an Authorization header with the value of `accessToken`. 
 
 <a name="SentMsg"></a>
-##5.4 Sent Message Status ##
+## 5.4 Sent Message Status 
 
 After you have issued a triggered send, the response value contains a `location` header. This location gives you a follow-up URL to request the status of the sent message. 
 

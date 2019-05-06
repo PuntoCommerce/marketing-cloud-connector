@@ -5,7 +5,7 @@
 <a name="Top"></a>
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
-2. [Install Commerce Cloud Components](2_0_Commerce_Cloud_Component_Installation.md)
+2. [Install B2C Commerce Components](2_0_Commerce_Cloud_Component_Installation.md)
 	
 	2.1 [**Handler Framework Installation**](2_1_Handler-Installation.md)
 	
@@ -14,8 +14,10 @@
 	2.3 [SFRA Modification Instructions](2_3_Modification-Instructions-for-SFRA.md)
 	
 	2.4. [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
+		
+	2.5. [Manual Modification Instructions](2_5_ManualModifications.md)
 
-7. [Modify Marketing Cloud Instance](3_0_ModifyMarketingCloud.md)
+7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
 	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md)
 	
@@ -24,19 +26,19 @@
 	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
 11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
-12. [ Debugging](5.0_Debugging.md)
+12. [ Debugging](5_0_Debugging.md)
 
 
 <a name="Overview"></a>
 ## 2.1.1 Overview
 
-The Handler Framework for the Marketing Cloud Connector cartridge introduces reusable integration points into SiteGenesis and Storefront Reference Architecture (SFRA). It supports the management of integrations points via Commerce Cloud site configuration rather than applying custom code changes, ultimately allowing additional integrations to be installed without having to modify numerous areas of SiteGenesis or SFRA. Instead of implementing these changes directly into the reference application, the functionality has been moved into this utility cartridge to provide as much as customization flexibility as possible while separating both code bases.  
+The Handler Framework for the Marketing Cloud Connector cartridge introduces reusable integration points into SiteGenesis and Storefront Reference Architecture (SFRA). It supports the management of integrations points via B2C Commerce site configuration rather than applying custom code changes, ultimately allowing additional integrations to be installed without having to modify numerous areas of SiteGenesis or SFRA. Instead of implementing these changes directly into the reference application, the functionality has been moved into this utility cartridge to provide as much as customization flexibility as possible while separating both code bases.  
 
 Currently supported through site configurations and preferences is the management of Communication Handlers. 
 
-Communication Handlers allow the granular definition of triggered/send email origins, such as Commerce Cloud/ SiteGenesis or Marketing Cloud. 
+Communication Handlers allow the granular definition of triggered/send email origins, such as B2C Commerce SiteGenesis or Marketing Cloud. 
 
-The following email types are supported to be used with either Commerce Cloud or Marketing Cloud:
+The following email types are supported to be used with either B2C Commerce or Marketing Cloud:
 
 
     1. Account - Created
@@ -49,12 +51,12 @@ The following email types are supported to be used with either Commerce Cloud or
     8. Order - Confirmation
 
 
-The installation instructions refer to the setup and implementation within a Commerce Cloud environment (Business Manager and custom code repository). Knowledge of Commerce Cloud code development techniques and tools are a prerequisite.
+The installation instructions refer to the setup and implementation within a B2C Commerce environment (Business Manager and custom code repository). Knowledge of B2C Commerce code development techniques and tools are a prerequisite.
   
 <a name="Installation"></a>
 ## 2.1.2 Install the Handler Framework ###
 
-1. Check out the latest tagged release from the  [Handler Framework Github Repository](https://github.com/SalesforceCommerceCloud/handler-framework/releases).
+1. Check out the latest tagged release from the  [Marketing Cloud Connector Repository](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector).
 
 2. Add the `int_handlerframework` and `modules` directories to your storefront repository cartridges directory, and upload the cartridges to your storefront instance.
     
@@ -64,7 +66,7 @@ The installation instructions refer to the setup and implementation within a Com
 
 	To do so, activate a different code version (in Business Manager, go to **Administration > Site Development > Code Deployment**) and then reactivate your current code version. This ensures that the necessary job-step types are registered correctly, which is necessary before importing.
 	
-4. Import the metadata, custom objects, and jobs definitions into your Commerce Cloud environment. 
+4. Import the metadata, custom objects, and jobs definitions into your B2C Commerce environment. 
 	
 	XML definitions can be found in the [/site_template/ directory](https://github.com/SalesforceCommerceCloud/handler-framework/tree/develop/sites/site_template).
 	
@@ -76,12 +78,3 @@ To do so:
 
 5. Update your site cartridge path:  `app_storefront_controllers:app_storefront_core:int_handlerframework`
 
-<a name="Modifications"></a>
-## 2.1.3 Apply Modifications to Storefront
-
-Depending on your use of SFRA or SiteGensis, your Storefront modifications will vary. Refer to the correct modification instrutions, based on your instance.
-
-[Modification Instructions for SFRA](Modification-Instructions-for-SFRA.md
-)
-
-[Modification Instructions for SiteGenesis](Modification-Instructions-for-SiteGenesis.md)

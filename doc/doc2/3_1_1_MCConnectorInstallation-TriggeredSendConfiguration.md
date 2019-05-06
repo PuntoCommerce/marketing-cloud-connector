@@ -4,7 +4,7 @@
 
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
-2. [Install Commerce Cloud Components](2_0_Commerce_Cloud_Component_Installation.md)
+2. [Install B2C Commerce Components](2_0_Commerce_Cloud_Component_Installation.md)
 	
 	2.1 [Handler Framework Installation](2_1_Handler-Installation.md)
 	
@@ -14,7 +14,7 @@
 	
 	2.4. [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
 
-7. [Modify Marketing Cloud Instance](3_0_ModifyMarketingCloud.md)
+7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
 	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md)
 	
@@ -23,7 +23,7 @@
 	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
 11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
-12. [ Debugging](5.0_Debugging.md)
+12. [ Debugging](5_0_Debugging.md)
 
 
 --
@@ -676,7 +676,7 @@ SET @email = AttributeValue("CustomerEmailAddress")
                     <tr>
                         <td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
 
-                            <p style="font-family:georgia;font-size:20px;">Salesforce Commerce Cloud</p>
+                            <p style="font-family:georgia;font-size:20px;">Salesforce B2C Commerce</p>
 
                             <p>Name:
                                 %%=v(@fn)=%%
@@ -802,7 +802,7 @@ SET @storelink = AttributeValue("StoreHomeLink")
 
                             <p>
                                 %%=IIF(EMPTY(@sendname),"Someone",@sendname)=%%
-                                pays attention to you and has sent you a %%=v(@amount)=%% gift certificate for the <a href="%%=v(@storelink)=%%">Salesforce Commerce Cloud Online Store</a>.
+                                pays attention to you and has sent you a %%=v(@amount)=%% gift certificate for the <a href="%%=v(@storelink)=%%">Salesforce B2C Commerce Online Store</a>.
                             </p>
 
                             %%[IF NOT EMPTY(@gcmsg) THEN]%%
@@ -911,7 +911,7 @@ var @storeaddress, @storelocation, @storephone
 var @confthankyou, @confmessage, @confcontact
 var @orderxml, @orderdate, @ordernumber, @order
 var @orderTotalSubtotal, @orderTotalTax, @orderTotalGross
-SET @storename = "Salesforce Commerce Cloud SiteGenesis"
+SET @storename = "Salesforce B2C Commerce SiteGenesis"
 SET @storedisplayurl = "salesforce.com"
 SET @storelogo = "http://www.demandware.com/img/logos/img-demandware-logo.svg"
 SET @storelink = "http://www.salesforce.com/"

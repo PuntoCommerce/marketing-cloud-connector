@@ -13,9 +13,11 @@
 	
 	2.3 [SFRA Modification Instructions](2_3_Modification-Instructions-for-SFRA.md)
 	
-	2.4. [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
+	2.4. [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)		
+	
+	2.5. [Manual Modification Instructions](2_5_ManualModifications.md)
 
-7. [Modify Marketing Cloud Instance](3_0_ModifyMarketingCloud.md)
+7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
 	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md)
 	
@@ -24,7 +26,7 @@
 	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
 11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
-12. [ Debugging](5.0_Debugging.md)
+12. [ Debugging](5_0_Debugging.md)
 
 --
 
@@ -70,6 +72,9 @@ If you have multiple Commerce Cloud sites, and follow the pattern of connecting 
 	3. Populate the User ID field with your own API User ID from Marketing Cloud (aka "Client ID").
 	4. Populate the Password field with your own API password from Marketing Cloud (aka "Client Secret").
 	5. Click **Apply**.
+
+	![Test](images/MCC_Mapping.png)
+	
 3. Click the **Services** tab, and click the new service.
 	
 	If you're modifying `marketingcloud.rest.auth` directly, click that.
@@ -108,6 +113,34 @@ If you have multiple Commerce Cloud sites, and follow the pattern of connecting 
 		See [3.1.1  Marketing Cloud - Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md) for additional information. 
 		
 	2. Click **Apply**.
+
+##Site Preferences
+
+
+**Name**|**What it does**|**Default Value**
+-----|-----|-----
+Marketing Cloud Enable Analytics|Select Yes to enable Marketing Cloud Analytics tracking. Requires Member ID to be set.|Yes
+Marketing Cloud Member ID|Marketing Cloud Business Unit Member ID aka MID| 
+Marketing Cloud Include Tracking Link|Select Yes to output Marketing Cloud Analytics tracking link into the storefront. Requires Member ID to be set.|Yes
+Marketing Cloud collect.js URL|Marketing Cloud collect.js URL. The string MCMID must exist in the URL for the marketing cloud MID to be inserted into the URL.|//MCMID.collect.igodigital.com/collect.js
+Marketing Cloud Enable Mailing List Hooks|Select Yes to enable Marketing Cloud mailing list functionality.|Yes
+Marketing Cloud Default Mailing Lists|Default Marketing Cloud mailing lists to assign when customer subscribes. Please provide the numeric ""List ID"" value.| 
+Marketing Cloud Mailing Lists Whitelist|Whitelist of Marketing Cloud mailing lists. If left empty, all lists are listed for customer. Please provide the numeric ""List ID"" value.| 
+Marketing Cloud Allow Unsubscribing from Lists over Deletion|This flag will allow the Marketing Cloud cartridge to Unsubscribe users from assigned mailing lists, thus updating the subscriber's status from ""Active"" to ""Unsubscribed"". This will be used in place of fully deleting the record from the list.|No
+
+<a name="Modifications"></a>
+## Apply Modifications to Storefront
+
+Depending on your use of SFRA or SiteGensis, your Storefront modifications will vary. 
+
+If you're going to build against an SFRA-based storefront, see:
+
+[2.3 Modification Instructions for SFRA](2_3_Modification-Instructions-for-SFRA.md
+)
+
+If you're going to build against a SiteGenesis-based storefront, see:
+
+[2.4 Modification Instructions for SiteGenesis](2_4_Modification-Instructions-for-SiteGenesis.md)
 
 --
 [Back to the top](#Top)

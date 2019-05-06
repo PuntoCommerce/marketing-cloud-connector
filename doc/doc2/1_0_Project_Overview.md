@@ -5,7 +5,7 @@
 
 ### Navigation
 1. [**Project Overview**](1_0_Project_Overview.md)
-2. [Install Commerce Cloud Components](2_0_Commerce_Cloud_Component_Installation.md)
+2. [Install B2C Commerce Components](2_0_Commerce_Cloud_Component_Installation.md)
 	
 	2.1 [Handler Framework Installation](2_1_Handler-Installation.md)
 	
@@ -14,8 +14,10 @@
 	2.3 [SFRA Modification Instructions](2_3_Modification-Instructions-for-SFRA.md)
 	
 	2.4. [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
+		
+	2.5. [Manual Modification Instructions](2_5_ManualModifications.md)
 
-7. [Modify Marketing Cloud Instance](3_0_ModifyMarketingCloud.md)
+7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
 	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md)
 	
@@ -24,12 +26,12 @@
 	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
 11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
-12. [ Debugging](5.0_Debugging.md)
+12. [ Debugging](5_0_Debugging.md)
 
 
 ## Marketing Cloud Connector: Overview
 
-The Marketing Cloud Connector is a reusable code asset to support the enablement and acceleration of specific integration use cases between Commerce Cloud and Marketing Cloud. SiteGenesis is used as a reference storefront for MC Connector cartridge integration. 
+The Marketing Cloud Connector is a reusable code asset to support the enablement and acceleration of specific integration use cases between B2C Commerce and Marketing Cloud. B2C Commerce Reference Architechtures are used as a reference storefront for MC Connector cartridge integration. 
 
 ## Features & Requirements
 
@@ -39,7 +41,7 @@ The Marketing Cloud Connector cartridge will have new functionality added to it 
 
 **Transactional Emails**
 
-The following OOB SiteGenesis emails are replaced with Marketing Cloud email triggers: 
+The following OOB Reference Architecture emails are replaced with Marketing Cloud email triggers: 
 
 1. Account - Created
 2. Account - Updated
@@ -50,7 +52,7 @@ The following OOB SiteGenesis emails are replaced with Marketing Cloud email tri
 7. Gift Certificate - Send Certificate
 8. Order - Confirmation 
 
-Transactional emails are built using the Salesforce Commerce Cloud platform hooks, leveraging "triggered email" functionality in Marketing Cloud, to send emails. Configurable trigger definitions, stored in Custom Objects, are used to support custom trigger keys and support mapping of data for each trigger, from predefined attribute values to data extension attributes that you define. Configuration can be used to achieve a mix and match of SiteGenesis emails with Marketing Cloud emails.
+Transactional emails are built using the Salesforce B2C Commerce platform hooks, leveraging "triggered email" functionality in Marketing Cloud, to send emails. Configurable trigger definitions, stored in Custom Objects, are used to support custom trigger keys and support mapping of data for each trigger, from predefined attribute values to data extension attributes that you define. Configuration can be used to achieve a mix and match of Reference Architecture emails with Marketing Cloud emails.
 
 **Data Sync**
 
@@ -62,12 +64,6 @@ Catalog, content, customer, and order sync to Marketing Cloud via jobs.
 [[images/integration-specification-1.jpg]]
 
 ## Implementation Details
-
-### Storefront Integration Touch-points
-
-The Marketing Cloud Connector itself doesn’t have any touch-points in SiteGenesis, rather the Handler Framework that it depends on, does the SiteGenesis integration.
-
-For more details, see the [Handler Framework Installation Guide](2_1_Handler-Installation.md).
 
 ### Implementation Approach
 
@@ -81,7 +77,7 @@ For more details, see the [Handler Framework Installation Guide](2_1_Handler-Ins
     * Incorporating Analytics into the template
     * Product/Content Recommendations
     * Opt-in/Opt-out/Marketing preferences
-* Support mixing of SiteGenesis email with Marketing Cloud triggered email
+* Support mixing of Reference Architecture email with Marketing Cloud triggered email
 * Platform Service Framework is used to communicate to MC
     * service ID: marketingcloud.rest.messaging.send
     * service is used globally
@@ -320,7 +316,7 @@ module.exports = require('dw/system/HookMgr').callHook(
 
 ### Simple Email Sending Implementation
 
-To support triggering MC emails, we replace the current email logic within various locations of SiteGenesis with the Marketing Cloud alternative. This is only an alternative, so we still need to support standard email execution.
+To support triggering MC emails, we replace the current email logic within various locations of the Reference Architecture with the Marketing Cloud alternative. This is only an alternative, so we still need to support standard email execution.
 
 **Simple Email Hook Implementation**
 
@@ -435,12 +431,6 @@ Job Step Type: chunk-script-module-step
 
 See int\_marketing\_cloud/cartridge/steptypes.json
 
-
-## Site Preferences
-
-For Phase 1, this integration is not leveraging any Site Preferences. The capability to turn off Marketing Cloud transactional emails is available via a custom object configuratino.
-
-Site Preferences are used to manage some preferences related to Analytics collection in Phase 2.
 
 --
 [Back to the top](#Top)
