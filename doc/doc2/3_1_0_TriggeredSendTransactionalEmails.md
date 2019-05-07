@@ -1,7 +1,5 @@
 <a name="Top"></a>
-# marketing-cloud-connector: 
-
-## 3.1 Triggered Send / Transactional Emails #
+# marketing-cloud-connector
 
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
@@ -14,6 +12,8 @@
 	2.3 [SFRA Modification Instructions](2_3_Modification-Instructions-for-SFRA.md)
 	
 	2.4 [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
+	
+	2.5 [Manual Modification Instructions](2_5_ManualModifications.md)
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
@@ -21,14 +21,13 @@
 	
 	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md)
 	
-	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
+	3.2 [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
-11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
+11. [Additional Features](4_0_AdditionalFeatures.md)
 12. [Debugging](5_0_Debugging.md)
 
--- 
-  
-### Overview
+## 3.1 Triggered Send / Transactional Emails
+
 
 **Important:** Make sure that your Marketing Cloud representative is aware that you intend to use Triggered Send functionality, Triggered Send Data Extension templates, and that you are connecting to Triggered Send using REST API. Your representative should be able to ensure that the necessary permissions are turned on and enabled for your account. These permissions should be checked and enabled, or inherited, for every Business Unit that you want to utilize with Triggered Sends.  
 
@@ -58,7 +57,7 @@ In Marketing Cloud:
 	 
 4. Ensure your triggered send is in a running state, otherwise it cannot be used by B2C Commerce.  
 
-See the [3.1.1 Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md) document for additional information.  
+See [3.1.1 Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md) for additional information.  
 
 --
 [Back to the top](#Top)

@@ -1,7 +1,6 @@
 <a name="Top"></a>
 # marketing-cloud-connector: 
 
-## 2.3.1 SFRA Modification Instructions #
 
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
@@ -15,7 +14,7 @@
 	
 	2.4 [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
 			
-	2.5. [Manual Modification Instructions](2_5_ManualModifications.md)
+	2.5 [Manual Modification Instructions](2_5_ManualModifications.md)
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
@@ -25,12 +24,12 @@
 	
 	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
-11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
+11. [Additional Features](4_0_AdditionalFeatures.md)
 12. [Debugging](5_0_Debugging.md)
 
---
+## 2.3 SFRA Modification Instructions 
 <a name="Overlay"></a>
-## Using the SFRA Overlay Cartridge
+### Using the SFRA Overlay Cartridge
 
 With the release of the Marketing Cloud Connector version 2.0.0, a new cartridge is supplied called _plugin\_marketing\_cloud_.  This cartridge is intended to overlay the SFRA main cartridge (_app\_storefront\_base_) and replace the functionality with that needed to activate the Marketing Cloud Connector hooks.  Essentially, it contains all of the changes the Manual Modifications instructions advise you to make.  You will still need to import and configure all the metadata and custom objects as described below; you just won't have to manually cut and paste all the code from these instructions into your version of SFRA.
 

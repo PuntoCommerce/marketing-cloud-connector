@@ -1,8 +1,6 @@
 <a name="Top"></a>
 # marketing-cloud-connector 
 
-## 1. Project and Architectural Overview  
-
 ### Navigation
 1. [**Project Overview**](1_0_Project_Overview.md)
 2. [Install B2C Commerce Components](2_0_Commerce_Cloud_Component_Installation.md)
@@ -15,7 +13,7 @@
 	
 	2.4 [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
 		
-	2.5. [Manual Modification Instructions](2_5_ManualModifications.md)
+	2.5 [Manual Modification Instructions](2_5_ManualModifications.md)
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
@@ -23,17 +21,16 @@
 	
 	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md)
 	
-	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
+	3.2 [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
-11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
+11. [Additional Features](4_0_AdditionalFeatures.md)
 12. [Debugging](5_0_Debugging.md)
 
-
-## Marketing Cloud Connector: Overview
+## 1. Project and Architectural Overview  
 
 The Marketing Cloud Connector is a reusable code asset to support the enablement and acceleration of specific integration use cases between B2C Commerce and Marketing Cloud. B2C Commerce Reference Architechtures are used as a reference storefront for MC Connector cartridge integration. 
 
-## Features & Requirements
+## 1.1 Features & Requirements
 
 The Marketing Cloud Connector cartridge will have new functionality added to it in an incremental manner. 
 
@@ -59,11 +56,11 @@ Transactional emails are built using the Salesforce B2C Commerce platform hooks,
 Catalog, content, customer, and order sync to Marketing Cloud via jobs.
 
 
-## Integration Architecture Diagram
+## 1.2 Integration Architecture Diagram
 
 [[images/integration-specification-1.jpg]]
 
-## Implementation Details
+## 1.3 Implementation Details
 
 ### Implementation Approach
 
@@ -216,7 +213,7 @@ Catalog, content, customer, and order sync to Marketing Cloud via jobs.
 | | |__version.txt
 ```
 
-## Transactional Emails - Implementation Details
+## 1.4 Transactional Emails - Implementation Details
 
 Transactional emails will make use of the triggered email functionality in Marketing Cloud.
 
@@ -377,7 +374,7 @@ module.exports = require('dw/system/HookMgr').callHook(
 ```
 
 
-## Data Sync - Implementation Details
+## 1.5 Data Sync - Implementation Details
 
 Catalog, content, order, and customer data need to be exported to Marketing Cloud.
 Custom jobs are built to be executed within Business Manager.

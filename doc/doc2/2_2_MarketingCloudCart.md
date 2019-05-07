@@ -1,7 +1,5 @@
 <a name="Top"></a>
-# marketing-cloud-connector: 
-
-## 2.2 Marketing Cloud Cartridge Installation
+# marketing-cloud-connector
 
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
@@ -15,7 +13,7 @@
 	
 	2.4 [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)		
 	
-	2.5. [Manual Modification Instructions](2_5_ManualModifications.md)
+	2.5 [Manual Modification Instructions](2_5_ManualModifications.md)
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
@@ -23,15 +21,16 @@
 	
 	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md)
 	
-	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
+	3.2 [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
-11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
+11. [Additional Features](4_0_AdditionalFeatures.md)
 12. [Debugging](5_0_Debugging.md)
 
---
 
+
+## 2.2 Marketing Cloud Cartridge Installation
 <a name="Config"></a>
-# Metadata and Cartridge Installation #
+## Metadata and Cartridge Installation 
 
 Ensure that the Handler Framework has been installed according to instructions and your storefront code has been adjusted.
 
@@ -55,7 +54,7 @@ See the [Handler Framework Cartridge Installation](https://github.com/Salesforce
 
 
 <a name="ServiceConfig"></a>
-# Commerce Cloud - Service Configuration #
+## Commerce Cloud - Service Configuration 
 
 Within Commerce Cloud Business Manager, update the services that have been imported into Commerce Cloud using the provided XML files.
 
@@ -86,12 +85,12 @@ If you have multiple Commerce Cloud sites, and follow the pattern of connecting 
 5. Click **Apply**.
 
 <a name="CustomObjectConfig"></a>
-# Commerce Cloud – Custom Object Configuration #
+## Commerce Cloud – Custom Object Configuration 
 
 
 1. In Business Manager, go to **Merchant Tools > Custom Objects > Custom Objects Editor**.
 2. Select **CommunicationHandlers** from the Object Type dropdown, and click **Find**.
-3. Click the "**development**" instanceType to edit the object.
+3. Click the **development** instanceType to edit the object.
 	
 	A JSON object with the two top-level properties of `standard_email` and `int_marketing_cloud` displays.
 	
@@ -114,7 +113,7 @@ If you have multiple Commerce Cloud sites, and follow the pattern of connecting 
 		
 	2. Click **Apply**.
 
-##Site Preferences
+## Site Preferences
 
 
 **Name**|**What it does**|**Default Value**

@@ -92,7 +92,7 @@ The documents below, and their respective filenames, are numbered in sequence fo
 	
 	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
-11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
+11. [Additional Features](4_0_AdditionalFeatures.md)
 12. [Debugging](5_0_Debugging.md)
 
 

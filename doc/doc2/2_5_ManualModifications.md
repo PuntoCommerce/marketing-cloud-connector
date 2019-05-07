@@ -1,7 +1,5 @@
 <a name="Top"></a>
-# marketing-cloud-connector: 
-
-## 2.5 Manual Modification Instructions
+# marketing-cloud-connector
 
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
@@ -15,7 +13,7 @@
 	
 	2.4 [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
 	
-	2.5. [**Manual Modification Instructions**](2_5_ManualModifications.md)
+	2.5 [**Manual Modification Instructions**](2_5_ManualModifications.md)
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
@@ -23,19 +21,20 @@
 	
 	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md)
 	
-	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
+	3.2 [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
-11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
+11. [Additional Features](4_0_AdditionalFeatures.md)
 12. [Debugging](5_0_Debugging.md)
 
---
-## Overview
 
-These instructions are only relevant for releases before Version 2.0.0 of the Marketing Cloud Connector. We recommend using the SFRA or SiteGenesis overlay cartridges if possible. If you are using an older version, or cannot use the overlay cartridges for architectural or customization reasons, you can modify the cartridges manually.
+## 2.5 Manual Modification Instructions
 
-[Manual Modifications to SFRA](#SFRA)
 
-[Manual Modifications to SiteGenesis](#SiteGen)
+These instructions are only relevant for releases before Version 2.0.0 of the Marketing Cloud Connector. We recommend using the SFRA or SiteGenesis overlay cartridges if possible. If you are using an older version, or cannot use the overlay cartridges for architectural or customization reasons, see the following instructions to modify the cartridges manually.
+
+See [Manual Modifications to SFRA](#SFRA).
+
+See [Manual Modifications to SiteGenesis](#SiteGen).
 
 <a name="SFRA"></a>
 ## Manual Modifications to SFRA

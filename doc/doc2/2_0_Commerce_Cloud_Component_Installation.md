@@ -1,7 +1,5 @@
 <a name="Top"></a>
-# marketing-cloud-connector:
-
-## 2. Install B2C Commerce Components
+# marketing-cloud-connector
 
 ### Navigation
 
@@ -16,7 +14,7 @@
 	
 	2.4 [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
 			
-	2.5. [Manual Modification Instructions](2_5_ManualModifications.md)
+	2.5 [Manual Modification Instructions](2_5_ManualModifications.md)
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
@@ -24,16 +22,18 @@
 	
 	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md)
 	
-	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
+	3.2 [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
-11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
+11. [Additional Features](4_0_AdditionalFeatures.md)
 12. [Debugging](5_0_Debugging.md)
 
-
+## 2. Install B2C Commerce Components
 
 ### Overview 
 
 To begin, start with the [Handler Framework Installation](2_1_Handler-Installation.md).
+
+Add more verbiage here to explain what is going on in this section and what can be ignored.
 
 --
 [Back to the top](#Top)

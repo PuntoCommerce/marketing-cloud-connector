@@ -1,7 +1,5 @@
 <a name="Top"></a>
-# marketing-cloud-connector:
-
-## 2. Postman Automation
+# marketing-cloud-connector
 
 ### Navigation
 
@@ -15,6 +13,8 @@
 	2.3 [SFRA Modification Instructions](2_3_Modification-Instructions-for-SFRA.md)
 	
 	2.4 [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
+					
+	2.5 [Manual Modification Instructions](2_5_ManualModifications.md)
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
@@ -22,14 +22,13 @@
 	
 	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md)
 	
-	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
+	3.2 [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
-11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
+11. [Additional Features](4_0_AdditionalFeatures.md)
 12. [Debugging](5_0_Debugging.md)
 
 
-
-### Overview 
+## Postman Automation
 
 Postman Automation can be used automate the setup steps. 
 
@@ -38,22 +37,22 @@ Postman Automation can be used automate the setup steps.
 
 
 1. Install Postman and import the Postman scripts from the /POSTMAN Folder.
-2. Install Legacy Package to make API Calls.
-3. Send Management is filled correctly. From Email address is done right.
-4. Get the Auth/Soap/Rest Endpoints/Client Id/ Client Secret.
-5. Enable Soap calls in MC account for the user. By Default, it is disabled.
-6. To the soap url, make sure to add */service.asmx* at the end while filling in SoapEndPoint variable.
+2. Install the Legacy Package to make API Calls.
+3. Verify Send Management is filled correctly, and the From Email address is done right.
+4. Get the Auth/SOAP/Rest Endpoints/Client Id/ Client Secret information.
+5. Enable SOAP calls in Marketing Cloud account for the user. By Default, it is disabled.
+6.  make sure to add */service.asmx* to the end if the SOAP url while filling in SoapEndPoint variable.
 7. Enable username/password for web service calls.
-8. Use Legacy package client credentials to request access token.
+8. Use the legacy package client credentials to request access token.
 9. Fill in the requisite values.
 
 ### Variables
 
 | Variable Name | Notes |
 |---------------|-------|
-| soapEndPoint | This information can be found in the installed package. Please suffix '/Service.asmx' |
-| soapUserName | This is the username used to login to the MC Account. |
-| soapPassword | This is the password used to login to the MC Account. |
+| soapEndPoint | This information can be found in the installed package. Please suffix */Service.asmx* |
+| soapUserName | This is the username used to login to the Marketing Cloud Account. |
+| soapPassword | This is the password used to login to the Marketing Cloud Account. |
 | restEndPoint | This information can be found in the installed package. |
 | authEndPoint | This information can be found in the installed package. |
 | clientId | This information can be found in the installed package. |
@@ -62,10 +61,10 @@ Postman Automation can be used automate the setup steps.
 
 ### Scripts
 
-Execute the scripts in the following order :
+Execute the scripts in the following order:
 
 
-1. Auth : Request SFMC Token : This step saves the auth token.
+1. Auth : Request SFMC Token - This step saves the auth token.
 2. General: Gets the data extension template ID's and stores them in the variables.
 3. Account Created.
 4. Account Updated.

@@ -1,8 +1,6 @@
-
+<a name="Top"></a>
 # marketing-cloud-connector 
 
-## 2.1. Handler Framework Installation 
-<a name="Top"></a>
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
 2. [Install B2C Commerce Components](2_0_Commerce_Cloud_Component_Installation.md)
@@ -15,7 +13,7 @@
 	
 	2.4 [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
 		
-	2.5. [Manual Modification Instructions](2_5_ManualModifications.md)
+	2.5 [Manual Modification Instructions](2_5_ManualModifications.md)
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
@@ -23,14 +21,12 @@
 	
 	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md)
 	
-	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
+	3.2 [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
-11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
+11. [Additional Features](4_0_AdditionalFeatures.md)
 12. [Debugging](5_0_Debugging.md)
 
-
-<a name="Overview"></a>
-## 2.1.1 Overview
+## 2.1 Handler Framework Installation 
 
 The Handler Framework for the Marketing Cloud Connector cartridge introduces reusable integration points into SiteGenesis and Storefront Reference Architecture (SFRA). It supports the management of integrations points via B2C Commerce site configuration rather than applying custom code changes, ultimately allowing additional integrations to be installed without having to modify numerous areas of SiteGenesis or SFRA. Instead of implementing these changes directly into the reference application, the functionality has been moved into this utility cartridge to provide as much as customization flexibility as possible while separating both code bases.  
 
@@ -54,7 +50,7 @@ The following email types are supported to be used with either B2C Commerce or M
 The installation instructions refer to the setup and implementation within a B2C Commerce environment (Business Manager and custom code repository). Knowledge of B2C Commerce code development techniques and tools are a prerequisite.
   
 <a name="Installation"></a>
-## 2.1.2 Install the Handler Framework ###
+## Install the Handler Framework 
 
 1. Check out the latest tagged release from the  [Marketing Cloud Connector Repository](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector).
 

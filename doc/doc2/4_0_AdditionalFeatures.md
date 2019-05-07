@@ -1,7 +1,5 @@
 <a name="Top"></a>
-# marketing-cloud-connector
-
-## 4. Advanced Usage and Configuration  
+# marketing-cloud-connector  
 
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
@@ -14,6 +12,8 @@
 	2.3 [SFRA Modification Instructions](2_3_Modification-Instructions-for-SFRA.md)
 	
 	2.4 [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
+				
+	2.5 [Manual Modification Instructions](2_5_ManualModifications.md)
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
@@ -21,13 +21,12 @@
 	
 	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md)
 	
-	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
+	3.2 [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
-11. [**Advanced Usage and Configuration**](4_0_AdvancedUsage.md)
+11. [**Additional Features**](4_0_AdditionalFeatures.md)
 12. [Debugging](5_0_Debugging.md)
 
---
-
+## 4. Additional Features
 <a name="CatalogSync"></a>
 ## 4.1 Sync Your Catalog ##
 
@@ -244,7 +243,5 @@ The map value, as an object, may have the following properties:
     "Product.shortDescription": "Description"
 }
 ```
-[test](5_0_Debugging.md#SentMsg)
-
 --
 [Back to the top](#Top)

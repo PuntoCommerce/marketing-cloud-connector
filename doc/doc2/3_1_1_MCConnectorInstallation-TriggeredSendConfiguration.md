@@ -1,6 +1,5 @@
 <a name="Top"></a>
-# marketing-cloud-connector: 
-## 3.1.1 Triggered Send Configuration 
+# marketing-cloud-connector  
 
 ### Navigation
 1. [Project Overview](1_0_Project_Overview.md)
@@ -13,6 +12,8 @@
 	2.3 [SFRA Modification Instructions](2_3_Modification-Instructions-for-SFRA.md)
 	
 	2.4 [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)
+	
+	2.5 [Manual Modification Instructions](2_5_ManualModifications.md)
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
 
@@ -20,15 +21,13 @@
 	
 	3.1.1 [**Triggered Send Configuration**](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md)
 	
-	3.2. [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
+	3.2 [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
 	
-11. [Advanced Usage and Configuration](4_0_AdvancedUsage.md)
+11. [Additional Features](4_0_AdditionalFeatures.md)
 12. [Debugging](5_0_Debugging.md)
 
 
---
-<a name="Overview"></a>
-## Overview
+## 3.1.1 Triggered Send Configuration
 
 Work with your Marketing Cloud representative to address any questions or concerns that may arise.
 Everything on this page merely exists as recommendations, intended to help you configure your account.
