@@ -2,29 +2,29 @@
 # marketing-cloud-connector
 
 ### Navigation
-1. [Project Overview](1_0_Project_Overview.md)
-2. [Install Commerce Cloud Components](2_0_Commerce_Cloud_Component_Installation.md)
+1. [Project Overview](1_0_Project_Overview.md#navlink)
+2. [Install Commerce Cloud Components](2_0_Commerce_Cloud_Component_Installation.md#navlink)
 	
-	2.1 [Handler Framework Installation](2_1_Handler-Installation.md)
+	2.1 [Handler Framework Installation](2_1_Handler-Installation.md#navlink)
 	
-	2.2 [**Marketing Cloud Cartridge Installation**](2_2_MarketingCloudCart.md)
+	2.2 [**Marketing Cloud Cartridge Installation**](2_2_MarketingCloudCart.md#navlink)
 	
-	2.3 [SFRA Modification Instructions](2_3_Modification-Instructions-for-SFRA.md)
+	2.3 [SFRA Modification Instructions](2_3_Modification-Instructions-for-SFRA.md#navlink)
 	
-	2.4 [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md)		
+	2.4 [SiteGenesis Modification Instructions](2_4_Modification-Instructions-for-SiteGenesis.md#navlink)		
 	
-	2.5 [Manual Modification Instructions](2_5_ManualModifications.md)
+	2.5 [Manual Modification Instructions](2_5_ManualModifications.md#navlink)
 
-7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md)
+7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md#navlink)
 
-	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md)
+	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md#navlink)
 	
-	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md)
+	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink)
 	
-	3.2 [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
+	3.2 [Realtime Analytics Configuration](3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md#navlink)
 	
-11. [Additional Features](4_0_AdditionalFeatures.md)
-12. [Debugging](5_0_Debugging.md)
+11. [Additional Features](4_0_AdditionalFeatures.md#navlink)
+12. [Debugging](5_0_Debugging.md#navlink)
 
 
 
@@ -34,7 +34,7 @@
 
 Ensure that the Handler Framework has been installed according to instructions and your storefront code has been adjusted.
 
-See the [Handler Framework Cartridge Installation](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/Handler-Installation.md) if necessary.
+See the [Handler Framework Cartridge Installation](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/Handler-Installation.md#navlink) if necessary.
 
 1. Check out the latest tagged release from the [Marketing Cloud Connector Github Repository](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector).
 
@@ -109,7 +109,7 @@ If you have multiple Commerce Cloud sites, and follow the pattern of connecting 
 	
 		Each trigger has a trigger key that maps to Marketing Cloud. Each trigger can be directly enabled/disabled. Additionally, a list of Subscriber Attributes has been defined, which is a mapping of available values from Commerce Cloud to the attribute key they should be sent as to Marketing Cloud.
 		
-		See [3.1.1  Marketing Cloud - Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md) for additional information. 
+		See [3.1.1  Marketing Cloud - Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink) for additional information. 
 		
 	2. Click **Apply**.
 
@@ -139,7 +139,7 @@ If you're going to build against an SFRA-based storefront, see:
 
 If you're going to build against a SiteGenesis-based storefront, see:
 
-[2.4 Modification Instructions for SiteGenesis](2_4_Modification-Instructions-for-SiteGenesis.md)
+[2.4 Modification Instructions for SiteGenesis](2_4_Modification-Instructions-for-SiteGenesis.md#navlink)
 
 --
 [Back to the top](#Top)
