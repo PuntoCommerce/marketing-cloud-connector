@@ -32,9 +32,9 @@
 Work with your Marketing Cloud representative to address any questions or concerns that may arise.
 Everything on this page merely exists as recommendations, intended to help you configure your account.
 
-Data extension data retention is wholly up to you.  
-Data extensions should be marked as sendable at a minimum.  
-It's recommended to create all data extension fields as nullable.  
+- Data extension data retention is wholly up to you.  
+- Data extensions should be marked as sendable at a minimum.  
+- It's recommended to create all data extension fields as nullable.  
 
 For email creation, it's recommended to use Content Builder, which you may need to opt-in to before you can see it.
 

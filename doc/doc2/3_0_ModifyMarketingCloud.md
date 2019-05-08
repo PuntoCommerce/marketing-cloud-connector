@@ -29,7 +29,7 @@
 <a name="navlink"></a>
 ## 3. Install Marketing Cloud Components
 
-Some words here about importance possibly?
+The next step in connecting Commerce Cloud to Marketing Cloud, is installing the Marketing Cloud Components. 
  
 ## Marketing Cloud App and API Key
 
@@ -61,7 +61,7 @@ See [Salesforce Developers App Center](https://developer.salesforce.com/docs/atl
 
 ## Postman Automation
 
-Postman Automation can be used automate the setup steps. 
+A postman automation script is provided to expedite the setup of Marketing Cloud Data Extensions and Email Templates for the transactional use cases supported by the Commerce-to-Marketing Connector. If you wish to manually set up the data extensions and email templates, refer to 3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink). 
 
 ### Prerequisites
 

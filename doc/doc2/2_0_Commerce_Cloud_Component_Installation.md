@@ -30,10 +30,10 @@
 <a name="navlink"></a>
 ## 2. Install B2C Commerce Components
 
+In order to connect Commerce Cloud to Marketing Cloud, you must first install the b2C Commerce Cloud components.
 
 To begin, start with the [Handler Framework Installation](2_1_Handler-Installation.md#navlink).
 
-Add more verbiage here to explain what is going on in this section and what can be ignored.
 
 - - -
 
