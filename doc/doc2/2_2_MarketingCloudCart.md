@@ -141,7 +141,6 @@ If you're going to build against a SiteGenesis-based storefront, see:
 
 [2.4 Modification Instructions for SiteGenesis](2_4_Modification-Instructions-for-SiteGenesis.md#navlink)
 
-
 - - -
 
 [Back to the top](#Top)
