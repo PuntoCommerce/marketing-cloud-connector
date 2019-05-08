@@ -244,5 +244,6 @@ The map value, as an object, may have the following properties:
     "Product.shortDescription": "Description"
 }
 ```
---
+- - -
+
 [Back to the top](#Top)

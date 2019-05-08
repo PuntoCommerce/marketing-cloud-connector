@@ -39,5 +39,6 @@ After loading up the _plugin\_marketing\_cloud_ cartridge, adjust your cartridge
 
 **Note:** These instructions are only relevant for Version 2.0.0 of the Marketing Cloud Connector, after the merging of [Pull Request 27](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/pull/27).  If you're using a previous release, use the [Manual Modification Instructions](2_5_ManualModifications.md#navlink).
 
---
+- - -
+
 [Back to the top](#Top)

@@ -60,5 +60,6 @@ In Marketing Cloud:
 
 See [3.1.1 Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink) for additional information.  
 
---
+- - -
+
 [Back to the top](#Top)

@@ -160,5 +160,6 @@ dataLayer.events.push(['some-custom-event-ID', 'some-custom-event-value']);
 
 For additional reference, please review the code for pre-defined events, found in the [Handler Framework's tracking data layer](https://github.com/SalesforceCommerceCloud/handler-framework/tree/develop/cartridges/int_handlerframework/cartridge/scripts/tracking).
 
---
+- - -
+
 [Back to the top](#Top)

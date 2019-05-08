@@ -52,4 +52,6 @@ For detailed information on the SiteGenesis JavaScript Controller, review the ex
 
 If your project cannot take advantage of Community SiteGenesis for some reason, review the Manual Modifications to SiteGenesis Cartridge.
 
+- - -
+
 [Back to the top](#Top)
