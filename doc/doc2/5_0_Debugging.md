@@ -29,7 +29,7 @@
 <a name="navlink"></a>
 ## 5. Debugging 
 <a name="Log"></a>
-## 5.1 B2C Commerce Log Settings
+## B2C Commerce Log Settings
 
 To turn on the debug logs:
 
@@ -55,7 +55,7 @@ Navigate to Custom Object Editor: **Merchant Tools > Custom Objects > Custom Obj
    attribute key they should be sent as to Marketing Cloud.
 
 <a name="Synch"></a>
-## 5.2 Synchronous Promise Errors
+## Synchronous Promise Errors
 
 If debugging indicates `SynchronousPromise.js` errors, make sure that the file is placed in a directory where the function can be accessed globally, such as the module directory.
 
@@ -64,7 +64,7 @@ To debug, use a client to ease web request testing such as [Restlet Client](http
 Below are some sample calls you can use to perform direct API testing. The Host value will vary based on what Marketing Cloud instance you're connecting to.
 
 <a name="Auth"></a>
-## 5.3 Authorization Token Request 
+## Authorization Token Request 
 
 Request an API token (replace `Host value`, `CLIENTID`, and `CLIENTSECRETVALUE`):
 
@@ -95,7 +95,7 @@ Date: Mon, 14 Aug 2017 14:31:35 GMT
 **Important**: For all requests other than auth, you need to include an Authorization header with the value of `accessToken`. 
 
 <a name="SentMsg"></a>
-## 5.4 Sent Message Status 
+## Sent Message Status 
 
 After you have issued a triggered send, the response value contains a `location` header. This location gives you a follow-up URL to request the status of the sent message. 
 

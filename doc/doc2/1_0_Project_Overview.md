@@ -31,7 +31,7 @@
 
 The Marketing Cloud Connector is a reusable code asset to support the enablement and acceleration of specific integration use cases between B2C Commerce and Marketing Cloud. B2C Commerce Reference Architechtures are used as a reference storefront for MC Connector cartridge integration. 
 
-## 1.1 Features & Requirements
+## Features & Requirements
 
 The Marketing Cloud Connector cartridge will have new functionality added to it in an incremental manner. 
 
@@ -57,11 +57,11 @@ Transactional emails are built using the Salesforce B2C Commerce platform hooks,
 Catalog, content, customer, and order sync to Marketing Cloud via jobs.
 
 
-## 1.2 Integration Architecture Diagram
+## Integration Architecture Diagram
 
 [[images/integration-specification-1.jpg]]
 
-## 1.3 Implementation Details
+## Implementation Details
 
 ### Implementation Approach
 
@@ -214,7 +214,7 @@ Catalog, content, customer, and order sync to Marketing Cloud via jobs.
 | | |__version.txt
 ```
 
-## 1.4 Transactional Emails - Implementation Details
+## Transactional Emails - Implementation Details
 
 Transactional emails will make use of the triggered email functionality in Marketing Cloud.
 
@@ -375,7 +375,7 @@ module.exports = require('dw/system/HookMgr').callHook(
 ```
 
 
-## 1.5 Data Sync - Implementation Details
+## Data Sync - Implementation Details
 
 Catalog, content, order, and customer data need to be exported to Marketing Cloud.
 Custom jobs are built to be executed within Business Manager.

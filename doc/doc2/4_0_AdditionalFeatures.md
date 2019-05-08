@@ -29,7 +29,7 @@
 <a name="navlink"></a>
 ## 4. Additional Features
 <a name="CatalogSync"></a>
-## 4.1 Sync Your Catalog ##
+## Sync Your Catalog ##
 
 ### Streaming Updates ###
 
@@ -40,7 +40,7 @@ The Predictive Web feature supports streaming updates for your catalogs. As a pr
 Batch import can occur via a data feed, once per day. See [Data Feeds](#DataFeeds) for more information.
 
 <a name="OptIn"></a>
-## 4.2 Marketing Opt-in / Subscription Management 
+## Marketing Opt-in / Subscription Management 
 
 Marketing opt-in and subscription management is available via a new controller included with the cartridge. 
 
@@ -61,7 +61,7 @@ The following preferences are available for you to manage this functionality:
 
 
 <a name="DataFeeds"></a>
-## 4.3 Data Feeds ##
+## Data Feeds ##
 
 ### Feed Configuration ###
 
@@ -134,7 +134,7 @@ An “Import File” activity was dragged into “Step 1”, and configured as:
 [[images/installation-specification-5.png]]
 
 <a name="DataExport"></a>
-## 4.4 Data Export Mapping
+## Data Export Mapping
 
 Within the `MarketingCloudDataExport` custom object, the `Export Attributes` field contains a JSON object that maps fields to export values. The map key is where the feed output value should be retrieved from. The map value can be a string (the column name to map the value into), an object (which is detailed below), or an array of strings and objects, which allows you to map one value into multiple columns.
 
