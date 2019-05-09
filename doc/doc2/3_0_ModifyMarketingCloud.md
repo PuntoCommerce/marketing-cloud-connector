@@ -33,7 +33,7 @@ The next step in connecting Commerce Cloud to Marketing Cloud, is installing the
  
 ## Marketing Cloud App and API Key
 
-This step must be done for each Commerce Cloud Business Unit that you want to connect with.
+This must be done for each Commerce Cloud Business Unit that you want to connect with.
 
 See [Salesforce Developers App Center](https://developer.salesforce.com/docs/atlas.en-us.mc-getting-started.meta/mc-getting-started/get-api-key.htm) for more information.
 
@@ -61,26 +61,28 @@ See [Salesforce Developers App Center](https://developer.salesforce.com/docs/atl
 
 ## Postman Automation
 
-A postman automation script is provided to expedite the setup of Marketing Cloud Data Extensions and Email Templates for the transactional use cases supported by the Commerce-to-Marketing Connector. If you wish to manually set up the data extensions and email templates, refer to 3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink). 
+A Postman automation script is provided to expedite the setup of Marketing Cloud Data Extensions and Email Templates for the transactional use cases supported by the Commerce-to-Marketing Connector. 
+
+If you wish to manually set up the data extensions and email templates, see [3.1.1 Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink). 
 
 ### Prerequisites
 
 
-1. Install Postman and import the Postman scripts from the /POSTMAN Folder.
+1. Install Postman and import the Postman scripts from the `/POSTMAN` directory.
 2. Install the Legacy Package to make API Calls.
-3. Verify Send Management is filled correctly, and the From Email address is done right.
-4. Get the Auth/SOAP/Rest Endpoints/Client Id/ Client Secret information.
-5. Enable SOAP calls in Marketing Cloud account for the user. By Default, it is disabled.
-6.  make sure to add */service.asmx* to the end if the SOAP url while filling in SoapEndPoint variable.
-7. Enable username/password for web service calls.
-8. Use the legacy package client credentials to request access token.
+3. Verify that Send Management is configured correctly, and the From Email address is correct.
+4. Get the Auth, SOAP, Rest Endpoints, Client Id, and Client Secret information.
+5. Enable SOAP calls in the Marketing Cloud account for the user, as it is disabled by default.
+6. Make sure to add */service.asmx* to the end of the SOAP URL while populating the SoapEndPoint variable.
+7. Enable username and password for web service calls.
+8. Use the legacy package client credentials to request an access token.
 9. Fill in the requisite values.
 
 ### Variables
 
 | Variable Name | Notes |
 |---------------|-------|
-| soapEndPoint | This information can be found in the installed package. Please suffix */Service.asmx* |
+| soapEndPoint | This information can be found in the installed package. Be sure to add the suffix */Service.asmx* |
 | soapUserName | This is the username used to login to the Marketing Cloud Account. |
 | soapPassword | This is the password used to login to the Marketing Cloud Account. |
 | restEndPoint | This information can be found in the installed package. |
@@ -108,9 +110,9 @@ Execute the scripts in the following order:
 ### Debugging
 
 
-1. Check at the response.
+1. Check the response.
 2. If the response is not clear, check if all variables have been filled.
-3. If steps 1 and 2 do not work, type in the variables directly in the SOAP/REST body and try.
+3. If steps 1 and 2 do not work, type the variables directly in the SOAP/REST body and try.
 
 - - -
 

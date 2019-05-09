@@ -29,7 +29,7 @@
 <a name="navlink"></a>
 ## 2.5 Manual Modification Instructions
 
-These instructions are only relevant for releases before Version 2.0.0 of the Marketing Cloud Connector. We recommend using the SFRA or SiteGenesis overlay cartridges if possible. If you are using an older version, or cannot use the overlay cartridges for architectural or customization reasons, see the following instructions to modify the cartridges manually.
+These instructions are only relevant for releases before Version 2.0.0 of the Marketing Cloud Connector. We highly recommend using the SFRA or SiteGenesis overlay cartridges if possible. If you are using an older version, or cannot use the overlay cartridges for architectural or customization reasons, see the following instructions to modify the cartridges manually.
 
 See [Manual Modifications to SFRA](#SFRA).
 

@@ -29,7 +29,7 @@
 <a name="navlink"></a>
 ## 3.2 Realtime Analytics Configuration 
 
-Predictive Web, also referred to as Analytics or collect.js, provides you with the ability to track customer activity throughout your storefront. This information can be used to power personalized recommendations, as well as used to facilitate abandoned cart, search, or browse journeys.
+Predictive Web, also referred to as Analytics or collect.js, provides you with the ability to track customer activity throughout your storefront. This information can be used to power personalized recommendations, and used to facilitate abandoned cart, search, or browse journeys.
 
 The Predictive Web feature can be found under Personalization Builder. To ensure that you set up Personalization Builder correctly, it is recommended that you work with your Marketing Cloud representative.
 
@@ -39,8 +39,8 @@ Everything on this page merely exists as recommendations, intended to help you c
 
 ## Events
 
-Marketing Cloud Connectors Analytics functionality supports configurable event tracking, using a field mapping approach similar to Triggers and Data Feeds.  
-The Connector also supports *custom events* that you can output based on predefined storefront events occurring.
+Marketing Cloud Connectors Analytics functionality supports configurable event tracking, using a field-mapping approach similar to Triggers and Data Feeds.  
+The Connector also supports *custom events* that can output based on predefined storefront event occurrences.
 
 ### Available Events
 
@@ -112,7 +112,7 @@ The Connector also supports *custom events* that you can output based on predefi
 
 Custom events can be fired when any of the available events occur. A custom event can be named whatever value desired.  
 
-**Note**: Custom events are sent to Marketing Cloud using the collect.js `trackEvent` method. This data may or may not be usable on the Marketing Cloud side, so we recommend you speak with your representative to confirm. To ensure that custom event data is always available in some form, custom event data is also added to the `setUserInfo` method. Work with your representative to ensure you're able to react to information set on the user profile.
+**Note**: Custom events are sent to Marketing Cloud using the collect.js `trackEvent` method. This data  may not be usable on the Marketing Cloud side, so we recommend that you speak with your representative to confirm. To ensure that custom event data is always available in some form, custom event data is also added to the `setUserInfo` method. Work with your representative to ensure you're able to react to information set on the user profile.
 
 All custom events have the following attributes available for data mapping:
 

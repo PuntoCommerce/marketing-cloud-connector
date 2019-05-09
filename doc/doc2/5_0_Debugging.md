@@ -34,26 +34,26 @@
 To turn on the debug logs:
 
 1. In Business Manager, navigate to **Administrator > Operations > Custom Log Settings**.
-2. Choose Log level as the Debug for Log Category root.
-3. Add email . to custom log targets.
+	2. Choose Log level as the Debug for Log Category root.
+	3. Add email . to custom log targets.
 
-Navigate to Custom Object Editor: **Merchant Tools > Custom Objects > Custom Objects**
+1. Navigate to Custom Object Editor: **Merchant Tools > Custom Objects > Custom Objects**
 
-1. Select *CommunicationHandlers* from Object Type, and click **Find**.
-2. Click to edit "development" object.
-
-	You should be presented with a JSON object, with two top-level properties: 
-	 - standard_email 
-	 - int\_marketing\_cloud
-4. Make sure int\_marketing\_cloud is enabled, and standard_email is disabled, and click **Apply**.
-5. Select *MarketingCloudTriggers* from Object Type, and click **Find**.
-6. Edit each entry. 
-
-	Each trigger has a Trigger Key that maps it to Marketing Cloud. Enter the External key that we 
-   got from the Triggered Send we created. Each trigger can be directly enabled/disabled. Additionally, a list of 
-   Subscriber Attributes has been defined, which is a mapping of available values from B2C Commerce to the 
-   attribute key they should be sent as to Marketing Cloud.
-
+	1. Select *CommunicationHandlers* from Object Type, and click **Find**.
+	2. Click to edit "development" object.
+	
+		You should be presented with a JSON object, with two top-level properties: 
+		 - standard_email 
+		 - int\_marketing\_cloud
+	4. Make sure int\_marketing\_cloud is enabled, and standard_email is disabled, and click **Apply**.
+	5. Select *MarketingCloudTriggers* from Object Type, and click **Find**.
+	6. Edit each entry. 
+	
+		Each trigger has a Trigger Key that maps it to Marketing Cloud. Enter the External key that we 
+	   got from the Triggered Send we created. Each trigger can be directly enabled/disabled. Additionally, a list of 
+	   Subscriber Attributes has been defined, which is a mapping of available values from B2C Commerce to the 
+	   attribute key they should be sent as to Marketing Cloud.
+	
 <a name="Synch"></a>
 ## Synchronous Promise Errors
 

@@ -32,7 +32,7 @@
 <a name="Overlay"></a>
 ### Using the SFRA Overlay Cartridge
 
-With the release of the Marketing Cloud Connector version 2.0.0, a new cartridge is supplied called _plugin\_marketing\_cloud_.  This cartridge is intended to overlay the SFRA main cartridge (_app\_storefront\_base_) and replace the functionality with that needed to activate the Marketing Cloud Connector hooks.  Essentially, it contains all of the changes the Manual Modifications instructions advise you to make.  You will still need to import and configure all the metadata and custom objects as described below; you just won't have to manually cut and paste all the code from these instructions into your version of SFRA.
+With the release of the Marketing Cloud Connector version 2.0.0, comes the _plugin\_marketing\_cloud_ cartridge.  This cartridge is intended to overlay the SFRA main cartridge (_app\_storefront\_base_) and replace the functionality to activate the Marketing Cloud Connector hooks.  Essentially, it contains all of the changes the manual modifications instructions advise you to make.  You will still need to import and configure all the metadata and custom objects; you just won't have to manually cut and paste all the code from these instructions into your version of SFRA.
 
 After loading up the _plugin\_marketing\_cloud_ cartridge, adjust your cartridge path to look like:
 `plugin_marketing_cloud:app_storefront_base:int_marketing_cloud:int_handlerframework`

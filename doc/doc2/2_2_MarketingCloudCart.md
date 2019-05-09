@@ -32,7 +32,7 @@
 <a name="Config"></a>
 ## Metadata and Cartridge Installation 
 
-Ensure that the Handler Framework has been installed according to instructions and your storefront code has been adjusted.
+Ensure that the Handler Framework has been installed correctly and your storefront code has been adjusted accordingly.
 
 See the [Handler Framework Cartridge Installation](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/Handler-Installation.md#navlink) if necessary.
 
@@ -72,7 +72,7 @@ If you have multiple Commerce Cloud sites, and follow the pattern of connecting 
 	4. Populate the Password field with your own API password from Marketing Cloud (aka "Client Secret").
 	5. Click **Apply**.
 
-	![Test](images/MCC_Mapping.png)
+	![Mapping](images/MCC_Mapping.png)
 	
 3. Click the **Services** tab, and click the new service.
 	
@@ -92,14 +92,14 @@ If you have multiple Commerce Cloud sites, and follow the pattern of connecting 
 2. Select **CommunicationHandlers** from the Object Type dropdown, and click **Find**.
 3. Click the **development** instanceType to edit the object.
 	
-	A JSON object with the two top-level properties of `standard_email` and `int_marketing_cloud` displays.
+	A JSON object with top-level properties of `standard_email` and `int_marketing_cloud` displays.
 	
 	Each top-level property contains a list of hooks (each of which can be enabled or disabled), followed by an `enabled` property, to either turn the entire section on or off.
-	1. Update the JSON object's "enabled" properties as desired. 
+	1. Update the JSON object's `enabled` properties as desired. 
 		
-		Keep in mind that if you allow two handlers to have the same hook enabled, the first hook executed that returns a value will succeed.
+		Keep in mind that if you allow two handlers to have the same hook enabled, the first executed hook that returns a value will succeed.
 		
-		**NOTE**: The order of execution furthermore depends on cartridge path priority. Hence the lookup path will be: cartridge location in path > hook definition > “enabled” property.
+		**NOTE**: The order of execution furthermore depends on cartridge path priority. Hence the lookup path will be: cartridge location in path, followed by hook definition, followed by the “enabled” property.
 		
 	2. Click **Apply**.
 		
@@ -107,7 +107,7 @@ If you have multiple Commerce Cloud sites, and follow the pattern of connecting 
 
 	1. Edit each hook as necessary. 
 	
-		Each trigger has a trigger key that maps to Marketing Cloud. Each trigger can be directly enabled/disabled. Additionally, a list of Subscriber Attributes has been defined, which is a mapping of available values from Commerce Cloud to the attribute key they should be sent as to Marketing Cloud.
+		Each trigger has a trigger key that maps to Marketing Cloud. Each trigger can be directly enabled or disabled. Additionally, a list of Subscriber Attributes has been defined, which is a mapping of available values from Commerce Cloud to the attribute key they should be sent as to Marketing Cloud.
 		
 		See [3.1.1  Marketing Cloud - Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink) for additional information. 
 		
@@ -123,14 +123,14 @@ Marketing Cloud Member ID|Marketing Cloud Business Unit Member ID aka MID|
 Marketing Cloud Include Tracking Link|Select Yes to output Marketing Cloud Analytics tracking link into the storefront. Requires Member ID to be set.|Yes
 Marketing Cloud collect.js URL|Marketing Cloud collect.js URL. The string MCMID must exist in the URL for the marketing cloud MID to be inserted into the URL.|//MCMID.collect.igodigital.com/collect.js
 Marketing Cloud Enable Mailing List Hooks|Select Yes to enable Marketing Cloud mailing list functionality.|Yes
-Marketing Cloud Default Mailing Lists|Default Marketing Cloud mailing lists to assign when customer subscribes. Please provide the numeric ""List ID"" value.| 
-Marketing Cloud Mailing Lists Whitelist|Whitelist of Marketing Cloud mailing lists. If left empty, all lists are listed for customer. Please provide the numeric ""List ID"" value.| 
-Marketing Cloud Allow Unsubscribing from Lists over Deletion|This flag will allow the Marketing Cloud cartridge to Unsubscribe users from assigned mailing lists, thus updating the subscriber's status from ""Active"" to ""Unsubscribed"". This will be used in place of fully deleting the record from the list.|No
+Marketing Cloud Default Mailing Lists|Default Marketing Cloud mailing lists to assign when customer subscribes. Please provide the numeric "List ID" value.| 
+Marketing Cloud Mailing Lists Whitelist|Whitelist of Marketing Cloud mailing lists. If left empty, all lists are listed for customer. Please provide the numeric "List ID" value.| 
+Marketing Cloud Allow Unsubscribing from Lists over Deletion|This flag will allow the Marketing Cloud cartridge to Unsubscribe users from assigned mailing lists, thus updating the subscriber's status from "Active" to "Unsubscribed". This will be used in place of fully deleting the record from the list.|No
 
 <a name="Modifications"></a>
 ## Apply Modifications to Storefront
 
-Depending on your use of SFRA or SiteGensis, your Storefront modifications will vary. 
+Depending on your choice of Reference Architecture, your Storefront modifications will vary. 
 
 If you're going to build against an SFRA-based storefront, see:
 

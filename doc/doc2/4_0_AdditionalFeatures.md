@@ -33,7 +33,7 @@
 
 ### Streaming Updates ###
 
-The Predictive Web feature supports streaming updates for your catalogs. As a product or content item is viewed, its details are sent to Marketing Cloud so that the latest information about that item is updated. A caveat to this feature is that the complete details for the product or content item should be sent, ensuring that you match the same data structure that is sent by any data feed for the product and content catalogs. If fields are omitted, it is assumed those fields are intended to be emptied out.  
+The Predictive Web feature supports streaming updates for your catalogs. As a product or content item is viewed, details are sent to Marketing Cloud so that the latest information about that item is updated. A caveat to this feature is that the complete details for the product or content item should be sent, ensuring that you match the same data structure of any data feed for the product and content catalogs. If fields are omitted, it is assumed those fields are intended to be emptied out.  
 
 ### Batch Upload ###
 
@@ -92,11 +92,11 @@ To use a Marketing Cloud-provided SFTP account:
 
 1. Log into your Marketing Cloud dashboard, and proceed to Administration by hovering your username in the upper right corner, and click **Administration** in the dropdown.
 
-	[[images/installation-specification-1.png]]
+	![](images/installation-specification-1.png)
 
 2. Within Administration, navigate to **Account > FTP Accounts**.
 
-	[[images/installation-specification-2.png]]
+	![](images/installation-specification-2.png)
 
 	If an account has already been created, you see a user listed under FTP Users. 
 	1. If you do not already have an FTP user defined, click **Add FTP User**. 
@@ -113,9 +113,9 @@ To use a Marketing Cloud-provided SFTP account:
 
 Product and Content catalogs can be imported into Marketing Cloud through Personalization Builder. Personalization Builder provides you with a wizard for setup (described earlier), which includes configuring your product and content catalogs. Personalization Builder also walks you through entering your FTP/SFTP, and specifying the path to your file. 
 
-A recommended configuration looks like the following image:
+A recommended configuration looks like:
 
-[[images/installation-specification-3.png]]
+![](images/installation-specification-3.png)
 
 
 ### Customers and Orders Feeds ##
@@ -127,11 +127,11 @@ See [Update a List or Data Extension with an External File](http://help.marketin
 
 Within Journey Builder, the automation's trigger was defined as follows:
 
-[[images/installation-specification-4.png]]
+![](images/installation-specification-4.png)
 
 An “Import File” activity was dragged into “Step 1”, and configured as:
 
-[[images/installation-specification-5.png]]
+![](images/installation-specification-5.png)
 
 <a name="DataExport"></a>
 ## Data Export Mapping
@@ -143,7 +143,6 @@ Within the `MarketingCloudDataExport` custom object, the `Export Attributes` fie
 The map key should reflect the path to a value in the feed data record that is being output.
 
 #### Catalog Data Object
-
 
 ```
 #!javascript
@@ -158,9 +157,7 @@ The map key should reflect the path to a value in the feed data record that is b
 }
 ```
 
-
 #### Content Data Object
-
 
 ```
 #!javascript
@@ -171,9 +168,7 @@ The map key should reflect the path to a value in the feed data record that is b
 }
 ```
 
-
 #### Customer Data Object
-
 
 ```
 #!javascript
@@ -197,17 +192,22 @@ The map key should reflect the path to a value in the feed data record that is b
 }
 ```
 
-
 ### Map Value Object Reference
 
 The map value, as an object, may have the following properties:
 
 - **fallback**: Specify the map key to use as a fallback when no value found for the primary-mapping.
-    - type: string
+
+    type: string
+
 - **format**: Calls `dw.util.StringUtils.format()`, passing in the provided format and the mapped value result.
-    - type: string
+    
+     type: string
+
 - **required**: Specifies whether the field is required. If a required field is missing, the record is skipped.
-    - type: boolean
+    
+    type: boolean
+    
 - **type**: Allows for some basic type conversion/handling.
     - type: string
     - possible values:

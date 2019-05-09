@@ -29,7 +29,7 @@
 <a name="navlink"></a>
 ## 1. Project and Architectural Overview  
 
-The Marketing Cloud Connector is a reusable code asset to support the enablement and acceleration of specific integration use cases between B2C Commerce and Marketing Cloud. B2C Commerce Reference Architechtures are used as a reference storefront for MC Connector cartridge integration. 
+The Marketing Cloud Connector is a reusable code asset to support the enablement and acceleration of specific integration use cases between B2C Commerce and Marketing Cloud. B2C Commerce Reference Architechtures are used as a reference storefront for connector cartridge integration. 
 
 ## Features & Requirements
 
@@ -50,16 +50,17 @@ The following OOB Reference Architecture emails are replaced with Marketing Clou
 7. Gift Certificate - Send Certificate
 8. Order - Confirmation 
 
-Transactional emails are built using the Salesforce B2C Commerce platform hooks, leveraging "triggered email" functionality in Marketing Cloud, to send emails. Configurable trigger definitions, stored in Custom Objects, are used to support custom trigger keys and support mapping of data for each trigger, from predefined attribute values to data extension attributes that you define. Configuration can be used to achieve a mix and match of Reference Architecture emails with Marketing Cloud emails.
+Transactional emails are built using Salesforce B2C Commerce platform hooks leveraging the "triggered email" functionality in Marketing Cloud. Configurable trigger definitions, stored in Custom Objects, are used to support custom trigger keys and support mapping of data for each trigger, ranging from predefined attribute values to data extension attributes that you define. Configuration can be used to achieve a mix and match of Reference Architecture emails with Marketing Cloud emails.
 
 **Data Sync**
 
-Catalog, content, customer, and order sync to Marketing Cloud via jobs.
+Catalog, content, customer, and order data sync to Marketing Cloud via jobs.
 
 
 ## Integration Architecture Diagram
 
-[[images/integration-specification-1.jpg]]
+
+![Integration Architechture](images/integration-specification-1.jpg)
 
 ## Implementation Details
 
@@ -314,7 +315,7 @@ module.exports = require('dw/system/HookMgr').callHook(
 
 ### Simple Email Sending Implementation
 
-To support triggering MC emails, we replace the current email logic within various locations of the Reference Architecture with the Marketing Cloud alternative. This is only an alternative, so we still need to support standard email execution.
+To support triggering Marketing Cloud emails, we replace the current email logic within various locations of the Reference Architecture with the Marketing Cloud alternative. This is only an alternative, so we still need to support standard email execution.
 
 **Simple Email Hook Implementation**
 
@@ -385,9 +386,7 @@ Each job can be enabled/disabled separately from the other available jobs.
 Jobs have been defined using the native Job Scheduler, as script-based workflows, with a job existing for each type of data to be exported.
 Custom chunk-oriented job steps are defined for each data extract. A task-oriented job step is defined for the file transfer handling.
 Jobs execute at the site level.
-The approach used for chunk and task-oriented custom job steps has followed the recommendations documented in InfoCenter.
-
-For more information, see [Creating Custom Jobs](https://documentation.b2c.commercecloud.salesforce.com/DOC1/topic/com.demandware.dochelp/Jobs/CreateCustomJobStep.html).
+The approach used for chunk and task-oriented custom job steps has followed the recommendations documented in the Commerce Cloud InfoCenter, at [Creating Custom Jobs](https://documentation.b2c.commercecloud.salesforce.com/DOC1/topic/com.demandware.dochelp/Jobs/CreateCustomJobStep.html).
 
 Feeds and import activities follow the documentation provided for Marketing Cloud:
 

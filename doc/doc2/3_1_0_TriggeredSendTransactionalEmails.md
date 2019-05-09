@@ -42,19 +42,25 @@ For attributes to be sent to Marketing Cloud, a triggered email needs to be defi
 
 In Marketing Cloud: 
 
-1. [Create a data extension from a template](https://help.marketingcloud.com/en/documentation/exacttarget/subscribers/data_extensions_for_exacttarget_marketing_cloud/creating_a_data_extension_from_a_template/). 
+1. Create a data extension from a template. 
 
 	Each triggered send must connect to a **Data Extension**. A data extension can be shared,= when the data being stored overlaps between triggers.
 	
-	**Note:** Data extensions that collect triggering subscriber information must be built using a triggered-send-source data extension template.  
-
-2. [Build a template-based email.](https://help.marketingcloud.com/en/documentation/exacttarget/content/create_an_email/build_a_template_based_email/)
-
-	Each triggered send requires an email. It's recommended to create your email using Content Builder.  
-
-3. [Create a triggered email message interaction.](https://help.marketingcloud.com/en/documentation/exacttarget/interactions/triggered_emails/triggered_emails_guide/how_to_create_a_triggered_email_message_interaction/)
+	**Note:** Data extensions that collect triggering subscriber information must be built using a triggered-send-source data extension template.
 	
-	Be sure to associate the email and data extension that you created. It's also recommended to enable the feature to Disable the Triggered Send when API errors are encountered. 
+	See [Create a Marketing Cloud Data Extension from a Template](https://help.marketingcloud.com/en/documentation/exacttarget/subscribers/data_extensions_for_exacttarget_marketing_cloud/creating_a_data_extension_from_a_template/).
+
+2. Build a template-based email.
+
+	Each triggered send requires an email. We recommended you create your email using Content Builder.  
+	
+	See [How to Build a Template Based Email Using the Classic Tools](https://help.marketingcloud.com/en/documentation/exacttarget/content/create_an_email/build_a_template_based_email/).
+
+3. Create a triggered email message interaction.
+	
+	Be sure to associate the email and data extension that you created. We recommended you enable the feature to Disable the Triggered Send when API errors are encountered. 
+	
+	 See [Create a Triggered Email Message Interaction] (https://help.marketingcloud.com/en/documentation/exacttarget/interactions/triggered_emails/triggered_emails_guide/how_to_create_a_triggered_email_message_interaction/).
 	 
 4. Ensure your triggered send is in a running state, otherwise it cannot be used by B2C Commerce.  
 
