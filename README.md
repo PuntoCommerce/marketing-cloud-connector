@@ -84,7 +84,7 @@ The documents below, and their respective filenames, are numbered in sequence fo
 	
 	2.5 [Manual Modification Instructions](docs/2_5_ManualModifications.md#navlink)
 
-7. [Install Marketing Cloud Components](docs/3_0_ModifyMarketingCloud.md#navlink)
+3. [Install Marketing Cloud Components](docs/3_0_ModifyMarketingCloud.md#navlink)
 
 	3.1 [Triggered Send / Transactional Emails](docs/3_1_0_TriggeredSendTransactionalEmails.md#navlink)
 	
@@ -92,15 +92,8 @@ The documents below, and their respective filenames, are numbered in sequence fo
 	
 	3.2. [Realtime Analytics Configuration](docs/3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md#navlink)
 	
-11. [Additional Features](docs/4_0_AdditionalFeatures.md#navlink)
-12. [Debugging](docs/5_0_Debugging.md#navlink)
-
-
-
-<a name="Community"></a>
-## Community ##
- 
-### Contact ##
+4. [Additional Features](docs/4_0_AdditionalFeatures.md#navlink)
+5. [Debugging](docs/5_0_Debugging.md#navlink)
 
 * [XChange Developer Forum](https://xchange.demandware.com/community/developer/marketing-cloud-connector/activity)
 * [Unofficial Community Slack](https://sfcc-unofficial.slack.com)
