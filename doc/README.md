@@ -1,3 +1,4 @@
+<a name="Top"></a>
 # Salesforce B2C Commerce to Marketing Cloud Connector #
 
 ### Table of Contents ###
@@ -10,8 +11,9 @@
 
 
 <a name="Overview"></a>
-## Application Overview ##
-The Salesforce B2C Commerce to Marketing Cloud Connector is a project that facilitates the integration between the two clouds. The project connects Commerce Cloud to Marketing Cloud "above the API", meaning it is using public API rather than direct backend integration. This framework allows you to share and synchronize data between the two clouds.
+## Connector Overview ##
+The Salesforce B2C Commerce to Marketing Cloud Connector is a project that facilitates the integration between the two clouds. The project connects B2C Commerce to Marketing Cloud "above the API", meaning it is using public API rather than direct backend integration. This framework allows you to share and synchronize data between the two clouds.
+
 ### Features ###
 
 #### API Implementation ####
@@ -65,16 +67,35 @@ Data sync to Marketing Cloud via jobs:
 * Promotions/Campaigns
 
 <a name="Doc"></a>
-## Application Documentation ##
+## Connector Documentation ##
 
-1. [Marketing Cloud Connector Installation](/doc/IntegrationSpecification.md)
-2. [Handler Framework Cartridge Installation](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/Handler-Installation.md) 
-    1. [SiteGenesis Modification Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SiteGenesis.md)
-    2. [SFRA Modification Instructions](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector/docs/handler-framework-docs/Modification-Instructions-for-SFRA.md)
-3. [Marketing Cloud Connector Installation](/doc/InstallationSpecification.md)
-4. [Triggered Send Configuration] (MCConnectorInstallation-TriggeredSendConfiguration.md)
-5. [Realtime Analytics Configuration](MCConnectorInstallation-RealtimeAnalyticsConfiguration.md)
-6. [Advanced Usage](AdvancedUsage.md) 
+The documents below, and their respective filenames, are numbered in sequence for installing and configuring the B2C Commerce to Marketing Cloud Connector. 
+
+1. [Project Overview](docs/1_0_Project_Overview.md#navlink)
+2. [Install B2C Commerce Components](docs/2_0_Commerce_Cloud_Component_Installation.md#navlink)
+	
+	2.1 [Handler Framework Installation](docs/2_1_Handler-Installation.md#navlink)
+	
+	2.2 [Marketing Cloud Cartridge Installation](docs/2_2_MarketingCloudCart.md#navlink)
+	
+	2.3 [SFRA Modification Instructions](docs/2_3_Modification-Instructions-for-SFRA.md#navlink)
+	
+	2.4 [SiteGenesis Modification Instructions](docs/2_4_Modification-Instructions-for-SiteGenesis.md#navlink)
+	
+	2.5 [Manual Modification Instructions](docs/2_5_ManualModifications.md#navlink)
+
+7. [Install Marketing Cloud Components](docs/3_0_ModifyMarketingCloud.md#navlink)
+
+	3.1 [Triggered Send / Transactional Emails](docs/3_1_0_TriggeredSendTransactionalEmails.md#navlink)
+	
+	3.1.1 [Triggered Send Configuration](docs/3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink)
+	
+	3.2. [Realtime Analytics Configuration](docs/3_2_MCConnectorInstallation-RealtimeAnalyticsConfiguration.md#navlink)
+	
+11. [Additional Features](docs/4_0_AdditionalFeatures.md#navlink)
+12. [Debugging](docs/5_0_Debugging.md#navlink)
+
+
 
 <a name="Community"></a>
 ## Community ##
@@ -211,15 +232,15 @@ Licensed under the current NDA and licensing agreement in place with your organi
 
 Copyright 2018 [salesforce.com](https://www.salesforce.com/), inc. All rights reserved. 
 
-These Terms of Use are between **You**, (being the Customer that purchased Commerce Cloud Services) and salesforce.com, inc. or its Affiliate ("**SFDC**") that entered into a subscription agreement (the "**Agreement**") with You that governs Your purchase of Commerce Cloud Services (formerly known as “Demandware Services”).
+These Terms of Use are between **You**, (being the Customer that purchased B2C Commerce Services) and salesforce.com, inc. or its Affiliate ("**SFDC**") that entered into a subscription agreement (the "**Agreement**") with You that governs Your purchase of B2C Commerce Services (formerly known as “Demandware Services”).
  
 These Terms of Use were last updated on  June 11, 2018 and constitute a legally binding agreement between You and SFDC effective upon Your first download, installation or use of the Connector, whichever is earliest. If You do not have authority to bind the Customer that entered into the Agreement or You do not agree to these Terms of Use, You may not install or use the Connector
  
-SFDC grants You a limited non-exclusive, nontransferable, non-sublicensable, revocable license to use the Connector internally solely for the purpose of integrating Your subscription to Commerce Cloud Services with Your subscription to SFDC’s Marketing Cloud Services in the manner as described by the Documentation.  
+SFDC grants You a limited non-exclusive, nontransferable, non-sublicensable, revocable license to use the Connector internally solely for the purpose of integrating Your subscription to B2C Commerce Services with Your subscription to SFDC’s Marketing Cloud Services in the manner as described by the Documentation.  
 
 Subject to the limited rights expressly granted hereunder, SFDC reserves all rights, title and interest in and to all intellectual property rights subsisting in the Connector. No rights are granted to You hereunder other than as expressly set forth herein.  Users residing in countries on the United States Office of Foreign Assets Control sanction list, or which are otherwise subject to a US export embargo, may not use the Connector.
  
-The Connector is not part of the Commerce Cloud Services nor the Marketing Cloud Services. Implementation of the Connector requires development work and appropriate configuration and permissions within Your instances of Commerce Cloud and Marketing Cloud for which You are responsible. The Connector may contain bugs, errors and incompatibilities with Your configuration of Commerce Cloud Services or Marketing Cloud Services and is made available on an AS IS basis without support, updates, or service level commitments. 
+The Connector is not part of the B2C Commerce Services nor the Marketing Cloud Services. Implementation of the Connector requires development work and appropriate configuration and permissions within Your instances of B2C Commerce and Marketing Cloud for which You are responsible. The Connector may contain bugs, errors and incompatibilities with Your configuration of B2C Commerce Services or Marketing Cloud Services and is made available on an AS IS basis without support, updates, or service level commitments. 
  
 SFDC reserves the right at any time to modify or discontinue, temporarily or permanently, the Connector (or any part thereof) with or without notice. You agree that SFDC shall not be liable to You or to any third party for any modification, suspension or discontinuance
 
@@ -227,3 +248,6 @@ WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, THE CONNECTOR IS NOT SUPPORTED
 
  
 These Terms of Use shall be governed exclusively by the internal laws of the State of California, without regard to its conflicts of laws rules. Each party hereby consents to the exclusive jurisdiction of the state and federal courts located in San Francisco County,California to adjudicate any dispute arising out of or relating to this Agreement. Except as expressly stated in these Terms of Use, these Terms of Use constitute the entire agreement between the parties, and supersede all prior and contemporaneous agreements, proposals or representations, written or oral, concerning their subject matter.No modification, amendment, or waiver of any provision of these Terms of Use shall be effective unless it is by an update to these Terms of Use that we make available on this website, or is in writing and signed by the party against whom the modification, amendment or waiver is to be asserted.
+
+---
+[Back to the top](#Top)
