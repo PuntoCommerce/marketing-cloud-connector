@@ -59,9 +59,9 @@ function hasBasketUpdated() {
  * Limited usage of session.custom for sharing data across separate threads within same request
  */
 function init() {
-    // Only run true init when executed by ONREQUEST thread (real start of request)
+    // Only run true init for start of request, ignoring server-side includes
     if (!initExecuted && !isBM() && !isSystemRequest()) {
-        if (request.httpHeaders.get('x-is-notify') === 'ONREQUEST') {
+        if (!request.isIncludeRequest()) {
             // We need to track basket ID, so we can know if it has changed since request start
             var currentBasket = session.customer && require('dw/order/BasketMgr').currentBasket;
             var origBasketState = '';
@@ -69,7 +69,10 @@ function init() {
                 origBasketState = currentBasket.etag;
             }
             requestDataLayer.origBasketState = origBasketState;
-            session.custom.origBasketState = origBasketState;
+            if (session.custom.origBasketState !== origBasketState) {
+                // avoid setting unnecessarily to prevent custom group recalculation
+                session.custom.origBasketState = origBasketState;
+            }
         } else {
             requestDataLayer.origBasketState = session.custom.origBasketState;
         }
