@@ -43,7 +43,7 @@ Marketing management is enabled by providing the following abilities:
 - Email subscribe form support.
 - Marketing preferences page in My Account, for selectively opting into or out of specific mailing lists.
 
-#### Transactional emails ####
+#### Transactional Emails ####
 The following OOB SiteGenesis emails are replaced with MC email triggers: 
 
 * Account - Created
@@ -98,7 +98,8 @@ The documents below, and their respective filenames, are numbered in sequence fo
 * [XChange Developer Forum](https://xchange.demandware.com/community/developer/marketing-cloud-connector/activity)
 * [Unofficial Community Slack](https://sfcc-unofficial.slack.com)
 
-### Contribute
+<a name="Community"></a>
+## Contribute
 
 1. Create a fork, if you don't already have one.
 2. Ensure your fork is synced with the latest changes from the main repository.
@@ -107,6 +108,12 @@ The documents below, and their respective filenames, are numbered in sequence fo
 
 <a name="Changes"></a>
 ## Changelog ##
+
+#### 2.0.0 ####
+
+- Overlay cartridges for SiteGenesis and SFRA
+- Includes the int\_handler\_framework cartridge
+- Improved documentation tied to this release (instead of in the wiki)
 
 #### 1.0.3 ####
 - SFRA Support added for MC Connector (Refer Handler framework 1.0.1 Wiki)
