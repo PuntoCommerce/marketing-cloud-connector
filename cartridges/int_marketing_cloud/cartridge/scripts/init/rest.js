@@ -133,9 +133,12 @@ ServiceRegistry.configure('marketingcloud.rest.auth', {
             throw new Error('Service configuration requires valid client ID (user) and secret (password)');
         }
 
-        var requestBody = {
-            clientId: svcCredential.user,
-            clientSecret: svcCredential.password
+        var requestBody = {//Changing the request body to incorporate the additional fields required by OAUTH2.0 based API.
+            client_id: svcCredential.user,
+            client_secret: svcCredential.password,
+            grant_type: "client_credentials",
+            scope: "email_send",
+            account_id: "1452893"//TODO: this needs to be picked dynamically. Leaving it as such for now.
         };
 
         svc.setAuthentication('NONE');

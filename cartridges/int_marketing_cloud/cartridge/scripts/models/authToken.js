@@ -29,12 +29,19 @@ function getObject() {
  */
 function updateCachedTokenObject(obj) {
     var custObj = getObject();
-
+    const tokenObject = {	//creating new object with property names matching the rest of the application.	
+        accessToken: obj.access_token,		
+        tokenType: obj.token_type,		
+        expires: obj.expires_in,		
+        scope: obj.scope,		
+        soapInstance: obj.soap_nstace,		
+        restInstance: obj.restInstance		
+    }	
     require('dw/system/Transaction').wrap(function(){
-        custObj.token = JSON.stringify(obj);
+        custObj.token = JSON.stringify(tokenObject);
     });
 
-    return obj;
+    return tokenObject;
 }
 
 /**
