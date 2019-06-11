@@ -17,7 +17,7 @@
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md#navlink)
 
-	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md#navlink)
+	3.1 [Triggered Send and Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md#navlink)
 	
 	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink)
 	
@@ -29,59 +29,58 @@
 <a name="navlink"></a>
 ## 3.2 Realtime Analytics Configuration 
 
-Predictive Web, also referred to as Analytics or collect.js, provides you with the ability to track customer activity throughout your storefront. This information can be used to power personalized recommendations, and used to facilitate abandoned cart, search, or browse journeys.
+You can use the Predictive Web feature, also referred to as Analytics or collect.js, to track customer activity throughout your storefront. You can use the information can be used to power personalized recommendations, and facilitate abandoned cart, search, or browse journeys.
 
-The Predictive Web feature can be found under Personalization Builder. To ensure that you set up Personalization Builder correctly, it is recommended that you work with your Marketing Cloud representative.
+The Predictive Web feature is part of Personalization Builder. To ensure that you set up Personalization Builder correctly, work with your Marketing Cloud representative.
 
-Personalization Builder provides you with a wizard that walks you through the set-up process. In this process, you define whether you want to personalize products, content, or both. You also define additional fields that you want to store within the product and content catalog to be used for recommendation behavior.
-Work with your Marketing Cloud representative to address any questions or concerns that may arise.
-Everything on this page merely exists as recommendations, intended to help you configure your account.
+A Personalization Builder wizard walks you through the setup process. You can define whether you want to personalize products, content, or both. You also define additional fields that you want to store within the product and content catalog to be used for recommendation behavior.
+Work with your Marketing Cloud representative to address questions or concerns that arise.
 
 ## Events
 
-Marketing Cloud Connectors Analytics functionality supports configurable event tracking, using a field-mapping approach similar to Triggers and Data Feeds.  
-The Connector also supports *custom events* that can output based on predefined storefront event occurrences.
+Marketing Cloud Connectors Analytics functionality supports configurable event tracking using a field-mapping approach similar to triggers and data feeds.  
+The connector also supports custom events that can output based on predefined storefront event occurrences.
 
 ### Available Events
 
 - search
     - Endpoints: `Search-Show`
     - Required params: `q`
-    - Event value: The search string
+    - Event value: Search string
 - category
     - Endpoints: `Search-Show`
     - Required params: `cgid`
-    - Event value: The category ID
+    - Event value: Category ID
 - content
     - Endpoints: `Page-Show`
     - Required params: `cid`
-    - Event value: The content ID
+    - Event value: Content ID
 - product
     - Endpoints: `Product-Show`, `Product-ShowInCategory`
     - Required params: `pid`
-    - Event value: The product ID
+    - Event value: Product ID
 - cartAddProduct
     - Endpoints: `Cart-AddProduct`
     - Required params: `pid`
-    - Event value: The product ID
+    - Event value: Product ID
 - viewCart
     - Endpoints: `Cart-Show`
 - cartAddCoupon
     - Endpoints: `Cart-SubmitForm`
     - Required Form ID: `cart`
     - Required Form Action: `addCoupon`
-    - Event value: The submitted coupon code
+    - Event value: Submitted coupon code
 - wishlistAddProduct
     - Endpoints: `Wishlist-Add`
     - Required params: `pid`
-    - Event value: The product ID
+    - Event value: Product ID
 - registryAddProduct
     - Endpoints: `GiftRegistry-AddProduct`
     - Required params: `pid`
-    - Event value: The product ID
+    - Event value: Product ID
 - checkout
     - Endpoints: `COCustomer-Start`, `COShipping-Start`, `COBilling-Start`, `COSummary-Start`
-    - Event value: The current step number, i.e. - `step0`, `step1`, `step2`, or `step3`
+    - Event value: Current step number, i.e. - `step0`, `step1`, `step2`, or `step3`
 - coShipping
     - Endpoints: `COShipping-SingleShipping`
     - Required Form ID: `singleshipping`
@@ -96,7 +95,7 @@ The Connector also supports *custom events* that can output based on predefined 
     - Endpoints: `COBilling-Billing`
     - Required Form ID: `billing`
     - Required Form Action: `save`
-    - Event value: The submitted email address (this event only fires if subscribe option is checked)
+    - Event value: Submitted email address (this event fires only when the subscribe option is enabled)
 - coSummary
     - Endpoints: `COSummary-Submit`
     - Event value: `submitted`
@@ -104,15 +103,15 @@ The Connector also supports *custom events* that can output based on predefined 
     - Endpoints: `COSummary-Submit`
     - Event value: Order ID string
 - basketUpdated
-    - Fires when basket etag hash has changed
+    - Fires when the basket etag hash has changed
 - ajaxRequest
-    - Fired when an ajax template is requested
+    - Fires when an Ajax template is requested
 
 #### Custom Events
 
-Custom events can be fired when any of the available events occur. A custom event can be named whatever value desired.  
+Custom events can be fired when any available event occurs. You can name a custom event anything you want.  
 
-**Note**: Custom events are sent to Marketing Cloud using the collect.js `trackEvent` method. This data  may not be usable on the Marketing Cloud side, so we recommend that you speak with your representative to confirm. To ensure that custom event data is always available in some form, custom event data is also added to the `setUserInfo` method. Work with your representative to ensure you're able to react to information set on the user profile.
+**Note**: Custom events are sent to Marketing Cloud using the collect.js `trackEvent` method. This data might not be usable on the Marketing Cloud side, so we recommend that you speak with your representative to confirm. To ensure that custom event data is always available in some form, custom event data is also added to the `setUserInfo` method. Work with your representative to ensure that you can react to information set on the user profile.
 
 All custom events have the following attributes available for data mapping:
 
@@ -125,19 +124,19 @@ All custom events have the following attributes available for data mapping:
 - RequestData
     - Type: `object`
     - Structure:
-        - `RequestData.origBasketState` (`string` - hash value representing state of basket at start of request)
-        - `RequestData.request.requestID` (`string` - the base request ID)
+        - `RequestData.origBasketState` (`string` - hash value representing the state of the basket at the start of the request)
+        - `RequestData.request.requestID` (`string` - base request ID)
         - `RequestData.request.referer` (`string` - referrer according to last clickstream)
-        - `RequestData.request.urlPath` (`string` - url path according to last clickstream)
+        - `RequestData.request.urlPath` (`string` - URL path according to last clickstream)
         - `RequestData.request.queryString` (`string` - request query string according to last clickstream)
         - `RequestData.request.triggeredForm.formID` (`string` - submitted form ID)
         - `RequestData.request.triggeredForm.actionID` (`string` - submitted form action)
-        - `RequestData.request.params` (`object` - submitted url parameters)
+        - `RequestData.request.params` (`object` - submitted URL parameters)
         - `RequestData.request.clickstreamPipeline` (`string` - the last requested pipeline)
         - `RequestData.request.detectedController.controller` (`string` - detected controller that is executing)
         - `RequestData.request.detectedController.method` (`string` - detected controller method that is executing)
-        - `RequestData.request.isAjaxRequest` (`boolean` - whether current request is AJAX based)
-        - `RequestData.events` (`array` - each entry is an array of event name and possible additional parameter)
+        - `RequestData.request.isAjaxRequest` (`boolean` - whether current request is Ajax based)
+        - `RequestData.events` (`array` - each entry is an array of the event name and possible additional parameter)
 - Session
     - Type: `dw.system.Session`
 - Customer
@@ -145,7 +144,7 @@ All custom events have the following attributes available for data mapping:
 - Basket
     - Type: `dw.order.Basket`
 
-If the above available events are insufficient, and you want to introduce your own events to be used for tracking, you *should* be able to do something like:
+If you want to introduce your own events to be used for tracking,use something like this:
 
 ```
 const HookMgr = require('dw/system/HookMgr');
@@ -158,7 +157,7 @@ var dataLayer = HookMgr.callHook(
 dataLayer.events.push(['some-custom-event-ID', 'some-custom-event-value']);
 ```
 
-For additional reference, please review the code for pre-defined events, found in the [Handler Framework's tracking data layer](https://github.com/SalesforceCommerceCloud/handler-framework/tree/develop/cartridges/int_handlerframework/cartridge/scripts/tracking).
+For more information, review the code for pre-defined events, found in the [Handler Framework's tracking data layer](https://github.com/SalesforceCommerceCloud/handler-framework/tree/develop/cartridges/int_handlerframework/cartridge/scripts/tracking).
 
 - - -
 

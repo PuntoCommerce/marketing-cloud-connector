@@ -17,7 +17,7 @@
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md#navlink)
 
-	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md#navlink)
+	3.1 [Triggered Send and Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md#navlink)
 	
 	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink)
 	
@@ -37,22 +37,19 @@ To turn on the debug logs:
 	2. Choose Log level as the Debug for Log Category root.
 	3. Add email . to custom log targets.
 
-1. Navigate to Custom Object Editor: **Merchant Tools > Custom Objects > Custom Objects**
+1. Navigate to **Merchant Tools > Custom Objects > Custom Objects**
 
-	1. Select *CommunicationHandlers* from Object Type, and click **Find**.
-	2. Click to edit "development" object.
+	1. For Object Type, select *CommunicationHandlers*, and click **Find**.
+	2. Click to edit development object.
 	
-		You should be presented with a JSON object, with two top-level properties: 
+		The JSON object appears with two top-level properties: 
 		 - standard_email 
 		 - int\_marketing\_cloud
 	4. Make sure int\_marketing\_cloud is enabled, and standard_email is disabled, and click **Apply**.
 	5. Select *MarketingCloudTriggers* from Object Type, and click **Find**.
 	6. Edit each entry. 
 	
-		Each trigger has a Trigger Key that maps it to Marketing Cloud. Enter the External key that we 
-	   got from the Triggered Send we created. Each trigger can be directly enabled/disabled. Additionally, a list of 
-	   Subscriber Attributes has been defined, which is a mapping of available values from B2C Commerce to the 
-	   attribute key they should be sent as to Marketing Cloud.
+		Each trigger has a trigger key that maps it to Marketing Cloud. Enter the external key that we got from the Triggered Send. You can directly enable or disable each trigger. Additionally, a list of subscriber attributes is defined, which is a mapping of available values from B2C Commerce, to the matching attribute key recognized by Marketing Cloud.
 	
 <a name="Synch"></a>
 ## Synchronous Promise Errors
@@ -61,12 +58,12 @@ If debugging indicates `SynchronousPromise.js` errors, make sure that the file i
 
 To debug, use a client to ease web request testing such as [Restlet Client](https://restlet.com/modules/client/?utm_source=DHC).
 
-Below are some sample calls you can use to perform direct API testing. The Host value will vary based on what Marketing Cloud instance you're connecting to.
+Below are some sample calls to perform direct API testing. The host value varies vary based on what Marketing Cloud instance you're connecting to.
 
 <a name="Auth"></a>
 ## Authorization Token Request 
 
-Request an API token (replace `Host value`, `CLIENTID`, and `CLIENTSECRETVALUE`):
+Request an API token (replace `Host value`, `CLIENTID`, and `CLIENTSECRETVALUE`).
 
 ```
 POST /v1/requestToken HTTP/1.1
@@ -99,7 +96,7 @@ Date: Mon, 14 Aug 2017 14:31:35 GMT
 
 After you have issued a triggered send, the response value contains a `location` header. This location gives you a follow-up URL to request the status of the sent message. 
 
-That location value has been requested below:
+That location value has been requested here.
 
 ```
 GET /messaging/v1/messageDefinitionSends/be52dfb1-134a-e711-ada2-38eaa791d4a1/deliveryRecords/a408d926-e100-46ce-aef5-a576520668ec HTTP/1.1
