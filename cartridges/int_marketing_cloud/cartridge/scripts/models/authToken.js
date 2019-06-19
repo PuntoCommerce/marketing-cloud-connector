@@ -32,10 +32,10 @@ function updateCachedTokenObject(obj) {
     const tokenObject = {	//creating new object with property names matching the rest of the application.	
         accessToken: obj.access_token,		
         tokenType: obj.token_type,		
-        expires: obj.expires_in,		
+        expiresIn: obj.expires_in,		
         scope: obj.scope,		
-        soapInstance: obj.soap_nstace,		
-        restInstance: obj.restInstance		
+        soapInstanceURL: obj.soap_instance_url,		
+        restInstanceURL: obj.rest_instance_url		
     }	
     require('dw/system/Transaction').wrap(function(){
         custObj.token = JSON.stringify(tokenObject);
@@ -88,9 +88,13 @@ function AuthToken() {
      * Token object returned by Marketing Cloud
      * @type {Object}
      * @property {string} accessToken The token auth string
+     * @property {string} tokenType Will be “Bearer”
      * @property {number} expiresIn Expiration in seconds, relative to when requested
      * @property {number} issued Date issued in milliseconds
      * @property {number} expires Date expires in milliseconds
+     * @property {string} scope Scope values assigned to the client ID and secret pair, returns all the allowed scopes
+     * @property {string} soapInstanceURL SOAP based URL for making the API calls
+     * @property {string} restInstanceURL REST based URL for making the API calls
      */
     this.token = null;
 }
