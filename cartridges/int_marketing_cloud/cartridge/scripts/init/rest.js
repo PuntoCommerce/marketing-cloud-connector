@@ -158,12 +158,12 @@ ServiceRegistry.configure('marketingcloud.rest.auth', {
 
         try {
             responseObj = JSON.parse(client.text);
-            if (responseObj && responseObj.accessToken && responseObj.expiresIn) {
+            if (responseObj && responseObj.access_token && responseObj.expires_in) {
                 var responseDate = new Date(client.getResponseHeader('Date') || null); // Ensure we pass valid string or null
 
                 // Set the millisecond timestamp values
                 responseObj.issued = responseDate.valueOf();
-                responseObj.expires = responseDate.valueOf() + (responseObj.expiresIn * 1000);
+                responseObj.expires = responseDate.valueOf() + (responseObj.expires_in * 1000);
             }
         } catch(e) {
             responseObj = client.text;

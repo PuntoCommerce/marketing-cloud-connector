@@ -35,7 +35,9 @@ function updateCachedTokenObject(obj) {
         expiresIn: obj.expires_in,		
         scope: obj.scope,		
         soapInstanceURL: obj.soap_instance_url,		
-        restInstanceURL: obj.rest_instance_url		
+        restInstanceURL: obj.rest_instance_url,
+        issued: obj.issued,
+        expires: obj.expires
     }	
     require('dw/system/Transaction').wrap(function(){
         custObj.token = JSON.stringify(tokenObject);
