@@ -29,23 +29,23 @@
 <a name="navlink"></a>
 ## 2.1 Handler Framework Installation
 
-The Handler Framework for the Marketing Cloud Connector cartridge introduces reusable integration points into Commerce Cloud Reference Architecture (Storefront Reference Architecture (SFRA) or SiteGenesis). Supporting the management of integration points via B2C Commerce site configuration rather than applying custom code changes, ultimately allows more integrations to be installed without having to modify numerous areas of the reference architecture. Instead of implementing these changes directly into the reference application, the functionality has been moved into this utility cartridge to provide as much as customization flexibility as possible while separating both code bases.  
+The Handler Framework for the Marketing Cloud Connector cartridge introduces reusable integration points into the Commerce Cloud Reference Architecture (Storefront Reference Architecture (SFRA) or SiteGenesis). Managing integration points via B2C Commerce site configuration rather than applying custom code changes, lets you install more integrations without modifying numerous areas of the reference architecture. Instead of implementing these changes directly in the reference application, we moved the functionality to the utility cartridge to provide as much customization flexibility as possible while keeping both code bases seperate.  
 
 Currently supported through site configurations and preferences is the management of Communication Handlers.
 
 Communication Handlers allow the granular definition of triggered/send email origins, such as B2C Commerce Reference Architecture or Marketing Cloud.
 
-The following email types are supported to be used with either B2C Commerce or Marketing Cloud:
 
+You can use the following email types  with either B2C Commerce or Marketing Cloud.
 
-    1. Account - Created
-    2. Account - Updated
-    3. Account - Password Changed
-    4. Account - Password Reset
-    5. Account - Locked Out
-    6. Customer Service - Contact Us
-    7. Gift Certificate - Send Certificate
-    8. Order - Confirmation
+* Account - Created
+* Account - Updated
+* Account - Password Changed
+* Account - Password Reset
+* Account - Locked Out
+* Customer Service - Contact Us
+* Gift Certificate - Send Certificate
+* Order - Confirmation
 
 
 The installation instructions refer to the setup and implementation within a B2C Commerce environment (Business Manager and custom code repository). Knowledge of B2C Commerce code development techniques and tools are a prerequisite.
@@ -53,7 +53,7 @@ The installation instructions refer to the setup and implementation within a B2C
 <a name="Installation"></a>
 ## Install the Handler Framework
 
-1. Check out the latest tagged release from the  [Marketing Cloud Connector Repository](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector).
+1. Check out the latest tagged release in the  [Marketing Cloud Connector Repository](https://github.com/SalesforceCommerceCloud/marketing-cloud-connector).
 
 2. Add the `int_handlerframework` and `modules` directories to your storefront repository cartridges directory, and upload the cartridges to your storefront instance.  Please note that there is a file called `synchronous-promise.js` which is included in this release, but is not within the `int_handlerframework` cartridge.  This file will need to be uploaded to the `modules` directory along with the other `modules` files.  The `synchronous-promise.js` file is located in the `cartridges` directory, parallel to the `int_handlerframework` directory.
 
