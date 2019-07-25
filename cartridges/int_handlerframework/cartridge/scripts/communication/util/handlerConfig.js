@@ -75,7 +75,7 @@ function getConfig() {
     var com = require('dw/object/CustomObjectMgr'),
         instanceType = getInstanceType(),
         config = com.getCustomObject(customObjectName, instanceType);
-    if (empty(config)) {
+    if (empty(config) && getInstanceType() != 'production') {
         require('dw/system/Transaction').wrap(function(){
             config = com.createCustomObject(customObjectName, instanceType);
         });
