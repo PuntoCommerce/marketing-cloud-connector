@@ -116,7 +116,8 @@ ServiceRegistry.configure('marketingcloud.rest.auth', {
         var origCredentialID = svc.getCredentialID() || svc.getConfiguration().getID(),
             credArr = origCredentialID.split('-'),
             credArrSiteID = credArr[credArr.length-1],
-            siteID = require('dw/system/Site').current.ID;
+            currentSite = require('dw/system/Site').current,
+            siteID = currentSite.ID;
         if (credArrSiteID !== siteID) {
             // Attempt to set to site-specific credential
             try {
@@ -133,9 +134,10 @@ ServiceRegistry.configure('marketingcloud.rest.auth', {
             throw new Error('Service configuration requires valid client ID (user) and secret (password)');
         }
 
-        var requestBody = {
-            clientId: svcCredential.user,
-            clientSecret: svcCredential.password
+        var requestBody = {//Changing the request body to incorporate the additional fields required by OAUTH2.0 based API.
+            client_id: svcCredential.user,
+            client_secret: svcCredential.password,
+            grant_type: "client_credentials"
         };
 
         svc.setAuthentication('NONE');
@@ -153,12 +155,12 @@ ServiceRegistry.configure('marketingcloud.rest.auth', {
 
         try {
             responseObj = JSON.parse(client.text);
-            if (responseObj && responseObj.accessToken && responseObj.expiresIn) {
+            if (responseObj && responseObj.access_token && responseObj.expires_in) {
                 var responseDate = new Date(client.getResponseHeader('Date') || null); // Ensure we pass valid string or null
 
                 // Set the millisecond timestamp values
                 responseObj.issued = responseDate.valueOf();
-                responseObj.expires = responseDate.valueOf() + (responseObj.expiresIn * 1000);
+                responseObj.expires = responseDate.valueOf() + (responseObj.expires_in * 1000);
             }
         } catch(e) {
             responseObj = client.text;
@@ -170,7 +172,11 @@ ServiceRegistry.configure('marketingcloud.rest.auth', {
     mockCall: function (/*svc, requestBody*/) {
         var obj = {
             "accessToken": "7Gcb2QiDuMUhuTpZ5kv88o4W",
-            "expiresIn": 3479
+            "expiresIn": 3479,
+            "tokenType":"Bearer",
+            "scope":"email_send",
+            "soapInstanceURL":"https://mc2csz87qkzslg80-66g48pc30t0.soap.marketingcloudapis.com/",
+            "restInstanceURL":"https://mc2csz87qkzslg80-66g48pc30t0.rest.marketingcloudapis.com/"
         };
         return {
             statusCode: 200,
