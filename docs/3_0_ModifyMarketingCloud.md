@@ -45,9 +45,8 @@ See [Salesforce Developers App Center](https://developer.salesforce.com/docs/atl
 
 3. If necessary, create a package.
 
-	See [Create and Install Packages](https://developer.salesforce.com/docs/atlas.en-us.mc-app-development.meta/mc-app-development/install-packages.htm) for additional information.
+	See [Create and Install Enhanced Package](https://developer.salesforce.com/docs/atlas.en-us.mc-app-development.meta/mc-app-development/create-integration-enhanced.htm) for additional information.
 	
-	**Note:** You must deselect **Create with enhanced functionality** when creating your package.
 	
 4. Create an API Integration component.
 
