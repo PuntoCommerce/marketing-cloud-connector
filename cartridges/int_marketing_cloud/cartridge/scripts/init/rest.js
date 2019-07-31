@@ -137,10 +137,7 @@ ServiceRegistry.configure('marketingcloud.rest.auth', {
         var requestBody = {//Changing the request body to incorporate the additional fields required by OAUTH2.0 based API.
             client_id: svcCredential.user,
             client_secret: svcCredential.password,
-            grant_type: "client_credentials",
-            scope: "email_send data_extensions_write",
-            account_id: currentSite.getCustomPreferenceValue('mcMID')
-
+            grant_type: "client_credentials"
         };
 
         svc.setAuthentication('NONE');
