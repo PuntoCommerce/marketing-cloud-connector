@@ -9,6 +9,12 @@
 4. [Changelog](#Changes)
 5. [Terms and Conditions](#Legalese)
 
+```
+The latest release 2.1.0 (and the latest code in the Master branch) is compatible with the new 
+Marketing Cloud enhanced package and supports OAuth 2.0. 
+
+To use Legacy package based Authentication (OAuth 1.0), Please get the version 2.0.3 from releases.
+```
 
 <a name="Overview"></a>
 ## Connector Overview ##
@@ -108,6 +114,10 @@ The documents below, and their respective filenames, are numbered in sequence fo
 
 <a name="Changes"></a>
 ## Changelog ##
+
+#### 2.1.0 ####
+- Support for MC OAuth 2.0 and Enhanced package functionality.
+- Updated documentation.
 
 #### 2.0.0 ####
 
