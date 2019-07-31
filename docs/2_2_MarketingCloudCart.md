@@ -64,14 +64,20 @@ If you have multiple Commerce Cloud sites and connect a single site to a single 
 1. In Business Manager, go to **Administration > Operations > Services**, and click the **Creditials** tab.
 
 	**Note**: If you have multiple sites in Commerce Cloud but intend to only use one Marketing Cloud business unit, you can modify the `marketingcloud.rest.auth` service credential directly.
+	
+	
 
 2.  Click **New**, and create a new service credential based on `marketingcloud.rest.auth`.
+
+	
 
 	1. Append your own Business Manager Site ID to the Credential Name (for example, `marketingcloud.rest.auth-SiteGenesis`).
 	2. Enter the URL.
 	3. Populate the User ID field with your own API User ID, also called the Client ID, from Marketing Cloud.
 	4. Populate the Password field with your own API password, also called Client Secret, from Marketing Cloud.
 	5. Click **Apply**.
+	6. Please use ClientId and Client Secret from the **Enhanced package** which supports OAuth 2.0.
+
 
 	![Mapping](images/MCC_Mapping.png)
 	
