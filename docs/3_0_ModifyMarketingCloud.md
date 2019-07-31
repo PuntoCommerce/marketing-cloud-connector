@@ -51,7 +51,7 @@ See [Salesforce Developers App Center](https://developer.salesforce.com/docs/atl
 	
 4. Create an API Integration component.
 
-	See [Create an API Integration in Legacy Packages](https://developer.salesforce.com/docs/atlas.en-us.mc-app-development.meta/mc-app-development/create-integration-legacy.htm) for more information.
+	See [Create an API Integration in Enhanced Package](https://developer.salesforce.com/docs/atlas.en-us.mc-app-development.meta/mc-app-development/create-integration-enhanced.htm) for more information.
 	 
 	- Channels - Email: Send
 	- Data - Data Extensions: Read and Write
