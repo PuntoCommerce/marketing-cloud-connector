@@ -75,7 +75,10 @@
     {
       "name": "app.mailingList.unsubscribe",
       "script": "~/cartridge/scripts/lists/subscription"
+    },
+    {
+      "name": "app.server.registerRoute",
+      "script": "~/cartridge/scripts/tracking/dataLayer"
     }
-
   ]
 }
