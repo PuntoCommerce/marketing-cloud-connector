@@ -52,16 +52,24 @@ function hasBasketUpdated() {
 }
 
 /**
+ * onRequest hook that executes init() and sets session origBasketState if necessary
+ */
+function onRequest() {
+    init(true);
+}
+
+/**
  * This init method runs onRequest, so it needs to remain light.
  * The onRequest hook doesn't execute for server includes, so init() is also executed by getDataLayer() (if not already executed)
  * No value returned, to ensure other onRequest hooks are executed.
  *
  * Limited usage of session.custom for sharing data across separate threads within same request
+ * @param {boolean} isOnRequest
  */
-function init() {
+function init(isOnRequest) {
     // Only run true init when executed by ONREQUEST thread (real start of request)
     if (!initExecuted && !isBM() && !isSystemRequest()) {
-        if (request.httpHeaders.get('x-is-notify') === 'ONREQUEST') {
+        if (isOnRequest === true && !request.isIncludeRequest()) {
             // We need to track basket ID, so we can know if it has changed since request start
             var currentBasket = session.customer && require('dw/order/BasketMgr').currentBasket;
             var origBasketState = '';
@@ -96,15 +104,20 @@ function expandDataLayer() {
 function buildEvents() {
     const format = require('dw/util/StringUtils').format;
     var params = request.httpParameterMap;
-    var paramMap = params.getParameterMap('param_');
+    var paramMap = request.includeRequest ? params.getParameterMap('param_') : params;
 
     var controller = requestDataLayer.request.detectedController.controller || '';
     var method = requestDataLayer.request.detectedController.method || '';
-    var controllerAndMethod = format('{0}-{1}', controller, method).toLowerCase();
-    var pipeline = (requestDataLayer.request.clickstreamPipeline || '').toLowerCase();
+    var controllerAndMethod;
+    if (controller !== '') {
+        controllerAndMethod = format('{0}-{1}', controller, method).toLowerCase();
+    } else {
+        // only fall back to clickstream in worst-case scenario
+        controllerAndMethod = (requestDataLayer.request.clickstreamPipeline || '').toLowerCase();
+    }
 
     function isEndpoint(endpointArray) {
-        return (endpointArray.indexOf(controllerAndMethod) !== -1) || (endpointArray.indexOf(pipeline) !== -1);
+        return endpointArray.indexOf(controllerAndMethod) !== -1;
     }
 
     var triggeredForm = requestDataLayer.request.triggeredForm;
@@ -239,9 +252,14 @@ function buildEvents() {
  * @returns {Object}
  */
 function buildCurrentRequest() {
+    const helper = require('~/cartridge/scripts/util/helper');
+
     var lastClick = session.clickStream.last || {};
     var params = request.httpParameterMap;
-    var paramMap = params.getParameterMap('param_');
+    var paramMap = request.includeRequest ? params.getParameterMap('param_') : params;
+
+    var controllerAndMethod = helper.detectController();
+
     return {
         requestID: request.requestID.replace(/-\d+-\d+$/, ''),
         referer: lastClick.referer,
@@ -251,10 +269,10 @@ function buildCurrentRequest() {
         params: buildParams(paramMap),
         clickstreamPipeline: lastClick.pipelineName,
         detectedController: {
-            controller: params.isParameterSubmitted('currentController') ? params.get('currentController').stringValue : '',
-            method: params.isParameterSubmitted('currentControllerMethod') ? params.get('currentControllerMethod').stringValue : ''
+            controller: request.includeRequest ? params.get('currentController').stringValue : controllerAndMethod.controller,
+            method: request.includeRequest ? params.get('currentControllerMethod').stringValue : controllerAndMethod.method
         },
-        isAjaxRequest: params.isParameterSubmitted('isAjax') && params.get('isAjax').getBooleanValue(false)
+        isAjaxRequest: helper.isAjaxRequest()
     };
 }
 
@@ -289,16 +307,20 @@ function buildParams(parameterMap) {
 
 /**
  * Returns the current data layer object, false if not defined.
+ * @param {Function} cb Optional callback
  * @returns {Object|boolean}
  */
-function getDataLayer() {
+function getDataLayer(cb) {
     init();
     if (!dataLayerExpanded) {
         expandDataLayer();
     }
+    if (cb) {
+        cb(requestDataLayer);
+    }
     return requestDataLayer || false;
 }
 
-exports.onRequest = init;
+exports.onRequest = onRequest;
 exports.getDataLayer = getDataLayer;
 exports.hasBasketUpdated = hasBasketUpdated;
