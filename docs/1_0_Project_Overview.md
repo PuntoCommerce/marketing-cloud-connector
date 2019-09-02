@@ -29,7 +29,7 @@
 <a name="navlink"></a>
 ## 1. Project and Architectural Overview  
 
-The Marketing Cloud Connector is a reusable code asset to support the enablement and acceleration of specific integration use cases between B2C Commerce and Marketing Cloud. B2C Commerce Reference Architechtures are used as a reference storefront for connector cartridge integration. 
+The Marketing Cloud Connector is a reusable code asset to support the enablement and acceleration of specific integration use cases between B2C Commerce and Marketing Cloud. B2C Commerce Reference Architectures are used as a reference storefront for connector cartridge integration. 
 
 ## Features and Requirements
 
@@ -59,7 +59,7 @@ Use jobs to sync catalog, content, customer, and order data to Marketing Cloud.
 ## Integration Architecture Diagram
 
 
-![Integration Architechture](images/integration-specification-1.jpg)
+![Integration Architecture](images/integration-specification-1.jpg)
 
 ## Implementation Details
 

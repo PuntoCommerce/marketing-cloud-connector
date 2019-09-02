@@ -59,9 +59,9 @@ See the [Handler Framework Cartridge Installation](https://github.com/Salesforce
 
 Within Commerce Cloud Business Manager, update the services that have been imported into Commerce Cloud using the provided XML files.
 
-If you have multiple Commerce Cloud sites and connect a single site to a single business unit, create a separate service cedential for each site, repeating the steps described below. 
+If you have multiple Commerce Cloud sites and connect a single site to a single business unit, create a separate service credential for each site, repeating the steps described below. 
 
-1. In Business Manager, go to **Administration > Operations > Services**, and click the **Creditials** tab.
+1. In Business Manager, go to **Administration > Operations > Services**, and click the **Credentials** tab.
 
 	**Note**: If you have multiple sites in Commerce Cloud but intend to only use one Marketing Cloud business unit, you can modify the `marketingcloud.rest.auth` service credential directly.
 	

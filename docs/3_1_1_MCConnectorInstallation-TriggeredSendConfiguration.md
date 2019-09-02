@@ -438,7 +438,7 @@ List — Any list of your choice
 Data Extension — Account or Account Password Changed  
 Disable API Calls (on error) — Enabled  
 
-### Custom Object Field MField Mappingapping (Business Manager)
+### Custom Object Field Mapping (Business Manager)
 
 Hook ID — app.communication.account.passwordChanged  
 Trigger External Key — account.passwordChanged  
@@ -1552,7 +1552,7 @@ Subscriber attributes:
 <a name="OMSInvoice"></a>
 ## OMS - Invoice Processed
 
-The OMS Invoice Processsed trigger is specific to the SFCC Order Management System (OMS) product, and might not apply to your storefront.  
+The OMS Invoice Processed trigger is specific to the SFCC Order Management System (OMS) product, and might not apply to your storefront.  
 This example of an Invoice Processed email doesn't include all options. See [API doc for dw.om.invoices.InvoiceDetail](https://documentation.demandware.com/API1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPP-18.8-API-doc%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_om_invoices_InvoiceDetail.html) to determine which fields are available for mapping.  
 See [OMS Tasks repository](https://github.com/SalesforceCommerceCloud/order-management-tasks) for hook usage examples.  
 
