@@ -218,15 +218,23 @@ function trackCached() {
          * the 'try' block below is hooking into ajax success responses globally
          * it looks for an '__mccEvents' property in JSON responses, and passes as SFMC events
          */
-        "try {\n" +
-        "\t$( document ).ajaxSuccess(function(event, request, settings, data) {\n" +
-        "\t\tif (settings.dataTypes.indexOf('json') > -1) {\n" +
-        "\t\t\tif (data && '__mccEvents' in data && Array.isArray(data.__mccEvents)) {\n" +
-        "\t\t\t\tdata.__mccEvents.forEach(function mccEvent(mccEvent){_etmc.push(mccEvent);});\n" +
-        "\t\t\t}\n" +
-        "\t\t}\n" +
-        "\t});\n" +
-        "} catch (e) { console.error(e); }\n" +
+        "function mccEventLoader() {\n" +
+            "\ttry {\n" +
+            "\t\t$( document ).ajaxSuccess(function(event, request, settings, data) {\n" +
+            "\t\t\tif (settings.dataTypes.indexOf('json') > -1) {\n" +
+            "\t\t\t\tif (data && '__mccEvents' in data && Array.isArray(data.__mccEvents)) {\n" +
+            "\t\t\t\t\tdata.__mccEvents.forEach(function mccEvent(mccEvent){_etmc.push(mccEvent);});\n" +
+            "\t\t\t\t}\n" +
+            "\t\t\t}\n" +
+            "\t\t});\n" +
+            "\t\tdocument.removeEventListener(\"DOMContentLoaded\", mccEventLoader);\n" +
+            "\t} catch (e) { console.error(e); }\n" +
+        "};\n" +
+        "if (document.readyState === \"complete\") {\n" +
+        "\tmccEventLoader();\n" +
+        "} else {\n" +
+        "\tdocument.addEventListener(\"DOMContentLoaded\", mccEventLoader);\n" +
+        "}\n" +
         "</script>\n" +
         "<!-- End Marketing Cloud Analytics - cached -->\n";
 
