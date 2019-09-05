@@ -227,13 +227,13 @@ function trackCached() {
             "\t\t\t\t}\n" +
             "\t\t\t}\n" +
             "\t\t});\n" +
-            "\t\tdocument.removeEventListener(\"DOMContentLoaded\", mccEventLoader);\n" +
+            "\t\tdocument.removeEventListener('DOMContentLoaded', mccEventLoader);\n" +
             "\t} catch (e) { console.error(e); }\n" +
         "};\n" +
-        "if (document.readyState === \"complete\") {\n" +
+        "if (document.readyState === 'complete') {\n" +
         "\tmccEventLoader();\n" +
         "} else {\n" +
-        "\tdocument.addEventListener(\"DOMContentLoaded\", mccEventLoader);\n" +
+        "\tdocument.addEventListener('DOMContentLoaded', mccEventLoader);\n" +
         "}\n" +
         "</script>\n" +
         "<!-- End Marketing Cloud Analytics - cached -->\n";
