@@ -76,8 +76,12 @@ function sendAccountEditedEmail(profile, type) {
 }
 
 module.exports = {
-    getLoginRedirectURL: base.getLoginRedirectURL,
-    sendCreateAccountEmail: base.sendCreateAccountEmail,
     sendPasswordResetEmail: sendPasswordResetEmail,
     sendAccountEditedEmail: sendAccountEditedEmail
 };
+Object.keys(base).forEach(function (prop) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (!module.exports.hasOwnProperty(prop)) {
+        module.exports[prop] = base[prop];
+    }
+});
