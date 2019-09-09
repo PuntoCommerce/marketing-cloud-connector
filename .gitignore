@@ -108,3 +108,5 @@ typings/
 
 # Ignore dwupload config
 dw.json
+
+test/integration/config.json
