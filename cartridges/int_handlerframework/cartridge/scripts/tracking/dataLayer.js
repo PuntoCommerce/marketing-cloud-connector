@@ -116,124 +116,159 @@ function buildEvents() {
         controllerAndMethod = (requestDataLayer.request.clickstreamPipeline || '').toLowerCase();
     }
 
-    function isEndpoint(endpointArray) {
-        return endpointArray.indexOf(controllerAndMethod) !== -1;
+    var paramPojo = {};
+    for each (var param in params.parameterNames) {
+        paramPojo[param] = params.get(param).stringValue;
     }
 
     var triggeredForm = requestDataLayer.request.triggeredForm;
     var events = [];
-    if (isEndpoint(['search-show', 'search-content'])) {
-        if (paramMap.isParameterSubmitted('q')) {
-            events.push(['search', paramMap.get('q').stringValue]);
-        }
-        if (paramMap.isParameterSubmitted('cgid')) {
-            events.push(['category', paramMap.get('cgid').stringValue]);
-        }
-    }
-    if (isEndpoint(['page-show'])) {
-        if (paramMap.isParameterSubmitted('cid')) {
-            events.push(['content', paramMap.get('cid').stringValue]);
-        }
-    }
-    if (isEndpoint(['product-show', 'product-showincategory', 'product-variation', 'product-showquickview'])) {
-        if (paramMap.isParameterSubmitted('pid')) {
-            events.push(['product', paramMap.get('pid').stringValue]);
-        }
-    }
-    if (isEndpoint(['cart-addproduct'])) {
-        if (paramMap.isParameterSubmitted('pid')) {
-            events.push(['cartAddProduct', paramMap.get('pid').stringValue]);
-        }
-    }
-    if (isEndpoint(['cart-show', 'cart-minicart', 'cart-get', 'cart-minicartshow'])) {
-        events.push(['viewCart']);
-    }
-    if (isEndpoint(['cart-addcoupon'])) {
-        if (paramMap.isParameterSubmitted('couponCode')) {
-            events.push(['cartAddCoupon', paramMap.get('couponCode').stringValue]);
-        }
-    }
-    if (isEndpoint(['cart-submitform'])) {
-        if (triggeredForm) {
-            if (triggeredForm.formID === 'cart' && triggeredForm.actionID === 'addCoupon') {
-                try {
-                    var coupon = session.forms.cart.couponCode.htmlValue;
-                    if (coupon) {
-                        events.push(['cartAddCoupon', coupon]);
+
+    switch (controllerAndMethod) {
+        case 'search-show':
+        case 'search-content':
+            if (paramMap.isParameterSubmitted('q')) {
+                events.push(['search', paramMap.get('q').stringValue]);
+            }
+            if (paramMap.isParameterSubmitted('cgid')) {
+                events.push(['category', paramMap.get('cgid').stringValue]);
+            }
+            break;
+        case 'page-show':
+            if (paramMap.isParameterSubmitted('cid')) {
+                events.push(['content', paramMap.get('cid').stringValue]);
+            }
+            break;
+        case 'product-show':
+        case 'product-showincategory':
+        case 'product-variation':
+        case 'product-showquickview':
+            if (paramMap.isParameterSubmitted('pid')) {
+                events.push(['product', paramMap.get('pid').stringValue]);
+            }
+            break;
+        case 'cart-addproduct':
+            if (paramMap.isParameterSubmitted('pid')) {
+                events.push(['cartAddProduct', paramMap.get('pid').stringValue]);
+            }
+            break;
+        case 'cart-show':
+        case 'cart-minicart':
+        case 'cart-get':
+        case 'cart-minicartshow':
+            events.push(['viewCart']);
+            break;
+        case 'cart-addcoupon':
+            if (paramMap.isParameterSubmitted('couponCode')) {
+                events.push(['cartAddCoupon', paramMap.get('couponCode').stringValue]);
+            }
+            break;
+        case 'cart-submitform':
+            if (triggeredForm) {
+                if (triggeredForm.formID === 'cart' && triggeredForm.actionID === 'addCoupon') {
+                    try {
+                        var coupon = session.forms.cart.couponCode.htmlValue;
+                        if (coupon) {
+                            events.push(['cartAddCoupon', coupon]);
+                        }
+                    }catch (e) {
+                        // log error?
                     }
-                }catch (e) {
-                    // log error?
                 }
             }
-        }
-    }
-    if (isEndpoint(['wishlist-add'])) {
-        if (paramMap.isParameterSubmitted('pid')) {
-            events.push(['wishlistAddProduct', paramMap.get('pid').stringValue]);
-        }
-    }
-    if (isEndpoint(['giftregistry-addproduct'])) {
-        if (paramMap.isParameterSubmitted('pid')) {
-            events.push(['registryAddProduct', paramMap.get('pid').stringValue]);
-        }
-    }
-    if (isEndpoint(['checkout-login', 'checkout-begin'])) {
-        if(paramMap.get('stage').stringValue === 'shipping'){
+            break;
+        case 'wishlist-add':
+            if (paramMap.isParameterSubmitted('pid')) {
+                events.push(['wishlistAddProduct', paramMap.get('pid').stringValue]);
+            }
+            break;
+        case 'giftregistry-addproduct':
+            if (paramMap.isParameterSubmitted('pid')) {
+                events.push(['registryAddProduct', paramMap.get('pid').stringValue]);
+            }
+            break;
+        // SFRA checkout
+        case 'checkout-login':
+        case 'checkout-begin':
+            var stage = paramMap.get('stage').stringValue;
+            switch (stage) {
+                case 'shipping':
+                    events.push(['checkout', 'step1']);
+                    break;
+                case 'payment':
+                    events.push(['checkout', 'step2']);
+                    break;
+                case 'placeOrder':
+                    events.push(['checkout', 'step3']);
+                    break;
+                default:
+                    if (params.isParameterSubmitted('ID')) {
+                        var orderID = params.get('ID').stringValue;
+                        events.push(['orderConfirmation', orderID]);
+                    } else {
+                        events.push(['checkout', 'step0']);
+                    }
+                    break;
+            }
+            break;
+        case 'checkoutshippingservices-submitshipping':
             events.push(['checkout', 'step1']);
-        } else if(paramMap.get('stage').stringValue === 'payment'){
+            break;
+        case 'checkoutservices-submitpayment':
             events.push(['checkout', 'step2']);
-        } else if(paramMap.get('stage').stringValue === 'placeOrder'){
+            break;
+        case 'checkoutservices-placeorder':
             events.push(['checkout', 'step3']);
-        } else if (params.isParameterSubmitted('ID')) {
-            var orderID = params.get('ID').stringValue;
-            events.push(['orderConfirmation', orderID]);
-        } else {
+            break;
+        case 'order-confirm':
+            events.push(['orderConfirmation', paramMap.get('ID').stringValue]);
+            break;
+        // SG checkout
+        case 'cocustomer-start':
             events.push(['checkout', 'step0']);
-        }
-    }
-    if (isEndpoint(['order-confirm'])) {
-        events.push(['orderConfirmation', requestDataLayer.request.params.ID]);
-    }
-    if (isEndpoint(['cocustomer-start'])) {
-        events.push(['checkout', 'step0']);
-    }
-    if (isEndpoint(['coshipping-start'])) {
-        events.push(['checkout', 'step1']);
-    }
-    if (isEndpoint(['coshipping-singleshipping'])) {
-        if (triggeredForm && triggeredForm.formID) {
-            if (triggeredForm.formID === 'singleshipping' && triggeredForm.actionID === 'save') {
-                events.push(['coShipping', 'submitted']);
-            }
-        }
-    }
-    if (isEndpoint(['cobilling-start', 'cobilling-publicstart'])) {
-        events.push(['checkout', 'step2']);
-    }
-    if (isEndpoint(['cobilling-billing'])) {
-        if (triggeredForm && triggeredForm.formID) {
-            if (triggeredForm.formID === 'billing' && triggeredForm.actionID === 'save') {
-                events.push(['coBilling', 'submitted']);
-                try {
-                    if (session.forms.billing.billingAddress.addToEmailList.isChecked() === true) {
-                        var email = session.forms.billing.billingAddress.email.emailAddress.htmlValue;
-                        events.push(['mailingListSubscribed', email]);
-                    }
-                }catch (e) {
-                    // log error?
+            break;
+        case 'coshipping-start':
+            events.push(['checkout', 'step1']);
+            break;
+        case 'coshipping-singleshipping':
+            if (triggeredForm && triggeredForm.formID) {
+                if (triggeredForm.formID === 'singleshipping' && triggeredForm.actionID === 'save') {
+                    events.push(['coShipping', 'submitted']);
                 }
             }
-        }
-    }
-    if (isEndpoint(['cosummary-start'])) {
-        events.push(['checkout', 'step3']);
-    }
-    if (isEndpoint(['cosummary-submit'])) {
-        events.push(['coSummary', 'submitted']);
-        if (params.isParameterSubmitted('orderNo')) {
-            var orderID = params.get('orderNo').stringValue;
-            events.push(['orderConfirmation', orderID]);
-        }
+            break;
+        case 'cobilling-start':
+        case 'cobilling-publicstart':
+            events.push(['checkout', 'step2']);
+            break;
+        case 'cobilling-billing':
+            if (triggeredForm && triggeredForm.formID) {
+                if (triggeredForm.formID === 'billing' && triggeredForm.actionID === 'save') {
+                    events.push(['coBilling', 'submitted']);
+                    try {
+                        if (session.forms.billing.billingAddress.addToEmailList.isChecked() === true) {
+                            var email = session.forms.billing.billingAddress.email.emailAddress.htmlValue;
+                            events.push(['mailingListSubscribed', email]);
+                        }
+                    }catch (e) {
+                        // log error?
+                    }
+                }
+            }
+            break;
+        case 'cosummary-start':
+            events.push(['checkout', 'step3']);
+            break;
+        case 'cosummary-submit':
+            events.push(['coSummary', 'submitted']);
+            if (params.isParameterSubmitted('orderNo')) {
+                var orderID = params.get('orderNo').stringValue;
+                events.push(['orderConfirmation', orderID]);
+            }
+            break;
+        // end checkout
+        default:
+            break;
     }
 
     if (hasBasketUpdated()) {

@@ -175,7 +175,12 @@ function buildCustomEvent(eventID, dataObject) {
  * @param route
  */
 function registerRoute(route) {
-    route.on('route:BeforeComplete', function onRouteBeforeCompleteHandler(req, res) {
+    var onCompleteListeners = route.listeners('route:Complete');
+    // deregister existing Complete listeners
+    route.off('route:Complete');
+
+    // ensuring our listener executes first
+    route.on('route:Complete', function onRouteCompleteHandler(req, res) {
         var hookID = 'app.tracking.trackNonCached';
         if (HookMgr.hasHook(hookID)) {
             var isJson = false;
@@ -202,6 +207,11 @@ function registerRoute(route) {
         } else {
             dw.system.Logger.debug('no hook registered for {0}', hookID);
         }
+    });
+
+    // re-register Complete listeners
+    onCompleteListeners.forEach(function(listener){
+        route.on('route:Complete', listener);
     });
 }
 
@@ -427,10 +437,10 @@ function requestEvent(eventName, eventValue, requestData, cb) {
 function eventsOutput(requestData, cb) {
     var eventsArray = [];
 
+    if (!empty(dataLayer.setUserInfo)) {
+        eventsArray.push(['setUserInfo', dataLayer.setUserInfo ]);
+    }
     if (!requestData.request.isAjaxRequest) {
-        if (!empty(dataLayer.setUserInfo)) {
-            eventsArray.push(['setUserInfo', dataLayer.setUserInfo ]);
-        }
         if (!empty(dataLayer.updateItems)) {
             eventsArray.push(['updateItem', dataLayer.updateItems ]);
         }
