@@ -34,7 +34,14 @@ var SynchronousPromise = require('synchronous-promise');
 function sendEmail(emailObj, template, context) {
     var result;
     var params = new (require('dw/util/HashMap'))();
+    var emailTypes = require('*/cartridge/scripts/helpers/emailHelpers').emailTypes;
     var emailData = {};
+
+    // Pass all provided context forward as params
+    for (var p in context) {
+        params[p] = context[p];
+    }
+
     params.put('CurrentForms', session && session.forms);
     params.put('CurrentHttpParameterMap', request && request.httpParameterMap);
     params.put('CurrentCustomer', customer);
@@ -46,44 +53,44 @@ function sendEmail(emailObj, template, context) {
     var hookID = hookPath;
 
     if (emailObj) {
-
-        /*registration*/
-        if (emailObj.type === 1) {
-            hookID += 'account.created';
-        }
-
-        /*passwordReset*/
-        else if (emailObj.type === 2) {
-            params.put('CurrentCustomer', context.resettingCustomer);
-            params.put('ResetPasswordToken', context.passwordResetToken);
-            hookID += 'account.passwordReset';
-        }
-
-        /*passwordChanged*/
-        else if (emailObj.type === 3) {
-            params.put('CurrentCustomer', context.resettingCustomer);
-            hookID += 'account.passwordChanged';
-        }
-
-        /*orderConfirmation*/
-        else if (emailObj.type === 4) {
-        	const OrderMgr = require('dw/order/OrderMgr');
-        	var orderId = context.order.orderNumber;
-            params.put('Order', OrderMgr.getOrder(orderId));
-            hookID += 'order.confirmation';
-        }
-
-        /*accountLocked*/
-        else if (emailObj.type === 5) {
-            hookID += 'account.lockedOut';
-        }
-
-        /*accountEdited*/
-        else if (emailObj.type >= 6) {
-            params.put('EmailType', emailObj.type);
-            hookID += 'account.updated';
-        } else {
-            Logger.warn('Mail send hook called, but correct action undetermined, mail not sent as a result.');
+        switch(emailObj.type) {
+            case emailTypes.registration:
+                hookID += 'account.created';
+                break;
+            case emailTypes.passwordReset:
+                params.put('CurrentCustomer', context.resettingCustomer);
+                params.put('ResetPasswordToken', context.passwordResetToken);
+                hookID += 'account.passwordReset';
+                break;
+            case emailTypes.passwordChanged:
+                params.put('CurrentCustomer', context.resettingCustomer);
+                hookID += 'account.passwordChanged';
+                break;
+            case emailTypes.orderConfirmation:
+                const OrderMgr = require('dw/order/OrderMgr');
+                var orderId = context.order.orderNumber;
+                params.put('Order', OrderMgr.getOrder(orderId));
+                hookID += 'order.confirmation';
+                break;
+            case emailTypes.accountLocked:
+                hookID += 'account.lockedOut';
+                break;
+            case emailTypes.accountEdited:
+            case emailTypes.accountNameChanged:
+            case emailTypes.accountAddressChanged:
+            case emailTypes.accountPaymentChanged:
+            case emailTypes.accountEmailChanged:
+                params.put('EmailType', emailObj.type);
+                hookID += 'account.updated';
+                break;
+            case emailTypes.contactUs:
+                context.myquestion = context.topic;
+                params.put('ContactUs', context);
+                hookID += 'customerService.contactUs';
+                break;
+            default:
+                Logger.warn('Mail send hook called, but correct action undetermined, mail not sent as a result.');
+                break;
         }
     }
 

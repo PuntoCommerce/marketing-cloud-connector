@@ -23,7 +23,12 @@ function contactUs(promise, data) {
  * @param {module:communication/util/trigger~CustomerNotification} data
  */
 function customFromTo(trigger, data) {
-    trigger.message.from.name = data.params.CurrentForms.contactus.firstname.value +' '+ data.params.CurrentForms.contactus.lastname.value;
+    var sfraInstalled = require('int_marketing_cloud').sfraInstalled();
+    if (sfraInstalled) {
+        trigger.message.from.name = data.params.ContactUs.firstname +' '+ data.params.ContactUs.lastname;
+    } else {
+        trigger.message.from.name = data.params.CurrentForms.contactus.firstname.value +' '+ data.params.CurrentForms.contactus.lastname.value;
+    }
 }
 
 /**
@@ -31,20 +36,37 @@ function customFromTo(trigger, data) {
  * @returns {Object} Map of hook function to an array of strings
  */
 function triggerDefinitions() {
-    return {
-        contactUs: {
-            description: 'Contact Us trigger',
-            attributes: [
-                'CurrentForms.contactus.myquestion',
-                'CurrentForms.contactus.firstname',
-                'CurrentForms.contactus.lastname',
-                'CurrentForms.contactus.email',
-                'CurrentForms.contactus.phone',
-                'CurrentForms.contactus.ordernumber',
-                'CurrentForms.contactus.comment'
-            ]
-        }
-    };
+    var sfraInstalled = require('int_marketing_cloud').sfraInstalled();
+
+    if (sfraInstalled) {
+        return {
+            contactUs: {
+                description: 'Contact Us trigger',
+                attributes: [
+                    'ContactUs.myquestion',
+                    'ContactUs.firstname',
+                    'ContactUs.lastname',
+                    'ContactUs.email',
+                    'ContactUs.comment'
+                ]
+            }
+        };
+    } else {
+        return {
+            contactUs: {
+                description: 'Contact Us trigger',
+                attributes: [
+                    'CurrentForms.contactus.myquestion',
+                    'CurrentForms.contactus.firstname',
+                    'CurrentForms.contactus.lastname',
+                    'CurrentForms.contactus.email',
+                    'CurrentForms.contactus.phone',
+                    'CurrentForms.contactus.ordernumber',
+                    'CurrentForms.contactus.comment'
+                ]
+            }
+        };
+    }
 }
 
 module.exports = require('dw/system/HookMgr').callHook(
