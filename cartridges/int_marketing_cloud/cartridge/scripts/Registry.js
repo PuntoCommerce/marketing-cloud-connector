@@ -101,6 +101,28 @@ var	Registry = {
     sfraInstalled : function () {
         var sfraVersion = require('dw/web/Resource').msg('global.version.number', 'version', '');
         return sfraVersion !== '';
+    },
+    restService : function (alias) {
+        var rest = require(path +'webservices/rest');
+        if (alias === '') {
+            return rest;
+        }
+        if (alias in rest) {
+            return rest[alias]();
+        } else {
+            throw new Error('Invalid MCC Rest Service Alias provided: "'+ alias +'"');
+        }
+    },
+    soapService : function (alias) {
+        var soap = require(path +'webservices/soap');
+        if (alias === '') {
+            return soap;
+        }
+        if (alias in soap) {
+            return soap[alias]();
+        } else {
+            throw new Error('Invalid MCC SOAP Service Alias provided: "'+ alias +'"');
+        }
     }
 };
 

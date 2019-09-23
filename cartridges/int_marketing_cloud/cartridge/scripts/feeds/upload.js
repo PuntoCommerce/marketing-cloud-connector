@@ -9,9 +9,9 @@
  */
 const File = require('dw/io/File');
 /**
- * @type {dw.svc.ServiceRegistry}
+ * @type {dw.svc.LocalServiceRegistry}
  */
-const ServiceRegistry = require('dw/svc/ServiceRegistry');
+const LocalServiceRegistry = require('dw/svc/LocalServiceRegistry');
 /**
  * @type {dw.system.Status}
  */
@@ -52,7 +52,7 @@ function sftpUpload(params, stepExecution) {
  * @returns {dw.svc.FTPService}
  */
 function registerSFTP(serviceID) {
-    ServiceRegistry.configure(serviceID, {
+    return LocalServiceRegistry.createService(serviceID, {
         /**
          * @param {dw.svc.FTPService} svc
          * @param {Object} params
@@ -65,8 +65,6 @@ function registerSFTP(serviceID) {
         },
         mockCall: function (svc, params) {}
     });
-
-    return ServiceRegistry.get(serviceID);
 }
 
 exports.sftpUpload = sftpUpload;
