@@ -25,8 +25,6 @@ describe('Add Product to cart', function () {
             }
         };
 
-        var cookieString;
-
         var addProd = '/Cart-AddProduct';
         var action = 'Cart-AddProduct';
         var message = 'Product added to cart';
@@ -38,6 +36,7 @@ describe('Add Product to cart', function () {
             price: 24,
             itemType: 'product'
         };
+        product.url = '/' + product.name.toLowerCase().replace(/\s/g, '-') + '/' + product.variantId + '.html?lang=en_US';
 
         // ----- adding product(s):
         myRequest.url = config.baseUrl + addProd;
@@ -51,11 +50,20 @@ describe('Add Product to cart', function () {
             .then(function (response) {
                 assert.equal(response.statusCode, 200);
 
+                var cookieString = cookieJar.getCookieString(myRequest.url);
+                var dwSid = cookieString.match(/dwanonymous_[^=]+=([^;]+);/)[1];
+
                 var expectedResBody = {
                     'quantityTotal': product.qty,
                     'action': action,
                     'message': message,
                     '__mccEvents': [
+                        [
+                            'setUserInfo',
+                            {
+                                'email': dwSid
+                            }
+                        ],
                         [
                             'trackCart',
                             {
@@ -65,7 +73,9 @@ describe('Add Product to cart', function () {
                                         'unique_id': product.variantId,
                                         'name': product.name,
                                         'price': product.price,
-                                        'item_type': product.itemType
+                                        'sale_price': 48,
+                                        'item_type': product.itemType,
+                                        'url': product.url
                                     }
                                 ]
                             }
@@ -75,8 +85,32 @@ describe('Add Product to cart', function () {
 
                 var bodyAsJson = JSON.parse(response.body);
                 assert.equal(bodyAsJson.quantityTotal, expectedResBody.quantityTotal);
+                assert.isArray(bodyAsJson.__mccEvents, 'MCC events array exists');
 
-                cookieString = cookieJar.getCookieString(myRequest.url);
+                expectedResBody.__mccEvents.forEach(function(expectedEvent){
+                    var event;
+                    for (var i in bodyAsJson.__mccEvents) {
+                        event = bodyAsJson.__mccEvents[i];
+                        if (event[0] === expectedEvent[0]) {
+                            break;
+                        }
+                    }
+                    assert.equal(event[0], expectedEvent[0], 'event name matches');
+
+                    if (expectedEvent.length>1) {
+                        // exception for trackCart, storefront URL configuration might have different SEO structure
+                        if (expectedEvent[0] === 'trackCart') {
+                            expectedEvent[1].cart.forEach(function(expectedProduct, index){
+                                var product = event[1].cart[index];
+                                assert.include(product.url, expectedProduct.url, 'trackCart product URL matches');
+
+                                // we've validated URL, set event's URL so deep matching doesn't fail on SEO difference
+                                event[1].cart[index].url = expectedProduct.url;
+                            });
+                        }
+                        assert.deepEqual(event[1], expectedEvent[1], 'event object details match');
+                    }
+                });
             });
     });
 });
