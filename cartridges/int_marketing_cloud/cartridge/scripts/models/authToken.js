@@ -29,16 +29,16 @@ function getObject() {
  */
 function updateCachedTokenObject(obj) {
     var custObj = getObject();
-    const tokenObject = {	//creating new object with property names matching the rest of the application.	
-        accessToken: obj.access_token,		
-        tokenType: obj.token_type,		
-        expiresIn: obj.expires_in,		
-        scope: obj.scope,		
-        soapInstanceURL: obj.soap_instance_url,		
+    const tokenObject = {	//creating new object with property names matching the rest of the application.
+        accessToken: obj.access_token,
+        tokenType: obj.token_type,
+        expiresIn: obj.expires_in,
+        scope: obj.scope,
+        soapInstanceURL: obj.soap_instance_url,
         restInstanceURL: obj.rest_instance_url,
         issued: obj.issued,
         expires: obj.expires
-    }	
+    };
     require('dw/system/Transaction').wrap(function(){
         custObj.token = JSON.stringify(tokenObject);
     });
@@ -71,7 +71,7 @@ function isValidAuth() {
  */
 function getValidToken() {
     if(!this.isValidAuth()){
-        var result = require('dw/svc/ServiceRegistry').get('marketingcloud.rest.auth').call();
+        var result = require('int_marketing_cloud').restService('auth').call();
         if (result.status === 'OK' && result.object) {
             this.token = updateCachedTokenObject(result.object);
         }

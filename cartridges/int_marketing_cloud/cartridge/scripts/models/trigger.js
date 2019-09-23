@@ -145,7 +145,7 @@ function sendMessage() {
     /**
      * @type {dw.svc.Service}
      */
-    var msgSvc = require('dw/svc/ServiceRegistry').get('marketingcloud.rest.messaging.send');
+    var msgSvc = require('int_marketing_cloud').restService('messagingSend');
     var message = this.message;
     return msgSvc.call(this.message);
 }
