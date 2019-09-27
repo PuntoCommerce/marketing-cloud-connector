@@ -11,10 +11,10 @@
 
 ```
 The latest release 2.2.0 (and the latest code in the Master branch) is compatible with the new 
-Marketing Cloud enhanced package and supports OAuth 2.0. 
+Marketing Cloud enhanced package and supports OAuth 2.0 AND Commerce Cloud API 19.10
 
 To use Legacy package based Authentication (OAuth 1.0), Please get the version 2.0.3 from releases.
-Please note that this version is not compatible with Commerce Cloud API release 19.10.   
+Please note that V2.0.3 is not compatible with Commerce Cloud API release 19.10.   
 ```
 
 <a name="Overview"></a>
