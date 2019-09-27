@@ -6,7 +6,7 @@
 1. [Connector Overview](#Overview)
 2. [Connector Documentation](#Doc)
 3. [Community](#Community)
-4. [Changelog](#Changes)
+4. [Changelog] (new for V2.2.0) (#Changes)
 5. [Terms and Conditions](#Legalese)
 
 ```
@@ -114,6 +114,42 @@ The documents below, and their respective filenames, are numbered in sequence fo
 
 <a name="Changes"></a>
 ## Changelog ##
+#### 2.2.0 ####
+
+**DEPRECATED COMMERCE API’s - COMPATIBILITY MODE 19.10**
+
+**Commerce-to-Marketing Connector 2.2.0**
+
+With the release of B2C Commerce 19.10, Commerce Cloud has introduced Compatibility Mode (CM) 19.10 (see Release Note (https://help.salesforce.com/articleView?id=b2c_19_10_W6488941_comp_mode_la.htm&type=5)). Part of the release of this Compatibility Mode is the **removal** of the following classes/subclasses from the Script API:
+
+* dw.svc.ServiceRegistry
+* dw.svc.ServiceDefinition (and it’s subclasses)
+
+These classes had been **deprecated** and replaced with dw.svc.LocalServiceRegistry. We have determined that the Marketing Cloud (MC) Connector currently leverages the above deprecated classes/subclasses. Customers using Commerce-to-Marketing Connector versions 2.1.0 or lower may or may not be affected by this change, depending on whether or not they leverage CM 19.10. 
+
+Customers will not be affected in the following scenarios:
+
+* An existing MC Connector customer does not select CM 19.10, ie, does not run the dbinit job to use the latest CM.
+* A new MC Connector customer implements MC Connector version 2.2.0 or higher from Master branch (via GitHub).
+
+However, customers using the MC Connector will be affected in the following scenario:
+
+* An existing Commerce-to-Marketing Connector customer using versions <2.2.0 and *_does_* select is using CM 19.10 in their Commerce Cloud platform, ie, the dbinit job to use the latest CM does run. 
+    * Note: If no CM is explicitly selected, the instance will default to the latest CM.
+
+The above scenario means that their MC Connector implementation would attempt to use the classes/subclasses that are no longer available, resulting in broken functionality.
+
+**Customer Call to Action:**
+
+In order to avoid a break in functionality, existing Commerce-to-Marketing Connector customers have the following options:
+
+* Do not use Commerce Cloud CM 19.10 (until their Connector code has been updated appropriately to leverage the new dw.svc.LocalServiceRegistry classes). 
+* Update to the latest version of the MC Connector, which has been modified for compatibility with Commerce Cloud CM 19.10. 
+    * Note: As of the August 2019 update, the MC Connector also requires the use of a new MC API package with OAuth 2.0. See README file on GitHub for more information.
+* Manually change the impacted classes to use dw.svc.LocalServiceRegistry. 
+
+
+
 
 #### 2.1.0 ####
 - Support for MC OAuth 2.0 and Enhanced package functionality.
