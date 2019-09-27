@@ -6,7 +6,7 @@
 1. [Connector Overview](#Overview)
 2. [Connector Documentation](#Doc)
 3. [Community](#Community)
-4. [Changelog] (new for V2.2.0) (#Changes)
+4. [Changelog](#Changes) (please read for V2.2.0 deprecated API changes!) 
 5. [Terms and Conditions](#Legalese)
 
 ```
