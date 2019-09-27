@@ -68,7 +68,7 @@ Subscriber.prototype = {
         req.properties.add(['ID', 'CreatedDate', 'Client.ID', 'SubscriberKey', 'UnsubscribedDate', 'Status', 'EmailTypePreference']);
         req.filter = filter;
 
-        var retSvc = require('dw/svc/ServiceRegistry').get('marketingcloud.soap.retrieve');
+        var retSvc = require('int_marketing_cloud').soapService('retrieve');
         var response = retSvc.call(req);
         this._currentSubscriber = null;
         if (response.ok) {
@@ -108,7 +108,7 @@ Subscriber.prototype = {
             req.properties.add(['ListID', 'SubscriberKey', 'Status']);
             req.filter = filter;
 
-            var retSvc = require('dw/svc/ServiceRegistry').get('marketingcloud.soap.retrieve');
+            var retSvc = require('int_marketing_cloud').soapService('retrieve');
             var response = retSvc.call(req);
             if (response.ok) {
                 for each (var list in response.object.results) {
@@ -121,7 +121,7 @@ Subscriber.prototype = {
     /**
      * @param listIDs {number|Array} One or more list IDs to update for subscriber. Array or number
      * @param action {string} Whether the subscriber on the list should be created, deleted, updated in action
-     * @param status {string} Determining subscriber's status on the list as ACTIVE or UNSUBSCRIBED 
+     * @param status {string} Determining subscriber's status on the list as ACTIVE or UNSUBSCRIBED
      * @returns {module:models/subscriber~Subscriber}
      */
     _updateLists : function(listIDs, action, status) {
@@ -152,7 +152,7 @@ Subscriber.prototype = {
         req.objectType = 'List';
         req.properties.add(['ID', 'ListName', 'Description']);
 
-        var retSvc = require('dw/svc/ServiceRegistry').get('marketingcloud.soap.retrieve');
+        var retSvc = require('int_marketing_cloud').soapService('retrieve');
         var response = retSvc.call(req);
         if (response.ok) {
             var i=0;
@@ -187,7 +187,7 @@ Subscriber.prototype = {
     unassignLists : function(listIDs) {
         return this._updateLists(listIDs, 'delete', 'UNSUBSCRIBED');
     },
-    
+
     /**
      *
      * @param listIDs {number|Array} One or more list IDs to resubscribe an unsubscribed subscriber. Array or number
@@ -196,7 +196,7 @@ Subscriber.prototype = {
     resubscribeLists : function(listIDs) {
        return this._updateLists(listIDs, 'update', 'ACTIVE');
     },
-    
+
     /**
      *
      * @param listIDs {number|Array} One or more list IDs to unsubscribe an active subscriber. Array or number
@@ -216,7 +216,7 @@ Subscriber.prototype = {
             options.saveOptions.saveOption.add(saveOption);
         }
 
-        var createSvc = require('dw/svc/ServiceRegistry').get('marketingcloud.soap.create');
+        var createSvc = require('int_marketing_cloud').soapService('create');
         var response = createSvc.call(this.instance, options);
         if (!(response && response.ok && response.object && response.object.overallStatus!=='Error')) {
             require('dw/system/Logger').error('Error subscribing user "{0}" with result: {1}', this.email, response && response.object && response.object.overallStatus);

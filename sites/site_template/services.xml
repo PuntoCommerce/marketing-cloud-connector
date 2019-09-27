@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
     <service-credential service-credential-id="marketingcloud.sftp">
-        <url>ftp.s7.exacttarget.com</url>
+        <url>ftp.YOUR_INSTANCE.exacttarget.com</url>
         <user-id>SFTP USER ID</user-id>
         <password masked="true">********</password>
     </service-credential>
 
-    <service-credential service-credential-id="marketingcloud.rest">
-        <url>https://www.exacttargetapis.com</url>
-        <user-id/>
-        <password masked="true">********</password>
-    </service-credential>
-
-    <service-credential service-credential-id="marketingcloud.soap">
-        <url>https://www.exacttargetapis.com</url>
-        <user-id/>
-        <password masked="true">********</password>
-    </service-credential>
-
     <service-credential service-credential-id="marketingcloud.rest.auth">
-        <url>https://auth.exacttargetapis.com/v1/requestToken</url>
+        <url>https://YOUR_SUBDOMAIN.auth.marketingcloudapis.com/v2/token</url>
         <user-id>API User ID</user-id>
         <password masked="true">********</password>
     </service-credential>
@@ -71,7 +59,7 @@
         <comm-log-enabled>true</comm-log-enabled>
         <mock-mode-enabled>false</mock-mode-enabled>
         <profile-id>marketingcloud.rest</profile-id>
-        <credential-id>marketingcloud.rest</credential-id>
+        <credential-id/>
     </service>
 
     <service service-id="marketingcloud.soap.create">
@@ -81,7 +69,7 @@
         <comm-log-enabled>true</comm-log-enabled>
         <mock-mode-enabled>false</mock-mode-enabled>
         <profile-id>marketingcloud.soap</profile-id>
-        <credential-id>marketingcloud.soap</credential-id>
+        <credential-id/>
     </service>
 
     <service service-id="marketingcloud.soap.retrieve">
@@ -91,7 +79,7 @@
         <comm-log-enabled>true</comm-log-enabled>
         <mock-mode-enabled>false</mock-mode-enabled>
         <profile-id>marketingcloud.soap</profile-id>
-        <credential-id>marketingcloud.soap</credential-id>
+        <credential-id/>
     </service>
 
     <service service-id="marketingcloud.sftp">
