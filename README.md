@@ -10,10 +10,10 @@
 5. [Terms and Conditions](#Legalese)
 
 ```
-The latest release 2.1.0 (and the latest code in the Master branch) is compatible with the new 
+The latest release 2.2.0 (and the latest code in the Master branch) is compatible with the new 
 Marketing Cloud enhanced package and supports OAuth 2.0. 
 
-To use Legacy package based Authentication (OAuth 1.0), Please get the version 2.0.3 from releases.
+To use Legacy package based Authentication (OAuth 1.0), Please get the version 2.0.3 from releases. Please note that this version is not compatible with Commerce Cloud API release 19.10.   
 ```
 
 <a name="Overview"></a>
