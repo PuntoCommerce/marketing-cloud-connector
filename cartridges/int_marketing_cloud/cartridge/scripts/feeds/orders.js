@@ -61,7 +61,7 @@ function process(order, parameters, stepExecution) {
     if (!skip) {
         var data = {
             Order: order,
-            orderAsXML: helpers.stripXmlNS( order.getOrderExportXML(null, null, false) )
+            orderAsXML: helpers.stripXmlNS( order.getOrderExportXML(null, null) )
         };
         return exportModel.buildRow(data);
     }
