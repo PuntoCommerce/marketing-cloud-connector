@@ -70,8 +70,6 @@ function getInstanceType() {
  * @returns {dw/object/CustomAttributes}
  */
 function getConfig() {
-    dw.system.Logger.error('getConfig', customObjectName);
-
     var com = require('dw/object/CustomObjectMgr'),
         instanceType = getInstanceType(),
         config = com.getCustomObject(customObjectName, instanceType);

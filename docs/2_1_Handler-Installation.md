@@ -29,7 +29,7 @@
 <a name="navlink"></a>
 ## 2.1 Handler Framework Installation
 
-The Handler Framework for the Marketing Cloud Connector cartridge introduces reusable integration points into the Commerce Cloud Reference Architecture (Storefront Reference Architecture (SFRA) or SiteGenesis). Managing integration points via B2C Commerce site configuration rather than applying custom code changes, lets you install more integrations without modifying numerous areas of the reference architecture. Instead of implementing these changes directly in the reference application, we moved the functionality to the utility cartridge to provide as much customization flexibility as possible while keeping both code bases seperate.  
+The Handler Framework for the Marketing Cloud Connector cartridge introduces reusable integration points into the Commerce Cloud Reference Architecture (Storefront Reference Architecture (SFRA) or SiteGenesis). Managing integration points via B2C Commerce site configuration rather than applying custom code changes, lets you install more integrations without modifying numerous areas of the reference architecture. Instead of implementing these changes directly in the reference application, we moved the functionality to the utility cartridge to provide as much customization flexibility as possible while keeping both code bases separate.  
 
 Currently supported through site configurations and preferences is the management of Communication Handlers.
 

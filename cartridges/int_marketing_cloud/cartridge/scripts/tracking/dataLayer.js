@@ -1,6 +1,10 @@
 'use strict';
 
 /**
+ * @type {dw.system.HookMgr}
+ */
+const HookMgr = require('dw/system/HookMgr');
+/**
  * @type {dw.system.Site}
  */
 const Site = require('dw/system/Site');
@@ -166,6 +170,52 @@ function buildCustomEvent(eventID, dataObject) {
 }
 
 /**
+ * Hook executed for SFRA-only
+ * Registers SFRA route listeners
+ * @param route
+ */
+function registerRoute(route) {
+    var onCompleteListeners = route.listeners('route:Complete');
+    // deregister existing Complete listeners
+    route.off('route:Complete');
+
+    // ensuring our listener executes first
+    route.on('route:Complete', function onRouteCompleteHandler(req, res) {
+        var hookID = 'app.tracking.trackNonCached';
+        if (HookMgr.hasHook(hookID)) {
+            var isJson = false;
+            if (res.renderings.length) {
+                for (var i = res.renderings.length - 1; i >= 0; i--) {
+                    if (res.renderings[i].type === 'render' && res.renderings[i].subType === 'json') {
+                        isJson = true;
+                        break;
+                    }
+                }
+            }
+
+            if (isJson) {
+                HookMgr.callHook(
+                    hookID,
+                    hookID.slice(hookID.lastIndexOf('.') + 1),
+                    function (id, output) {
+                        if (id === 'app.tracking.postEvents' && !empty(output)) {
+                            res.viewData.__mccEvents = output;
+                        }
+                    }
+                );
+            }
+        } else {
+            dw.system.Logger.debug('no hook registered for {0}', hookID);
+        }
+    });
+
+    // re-register Complete listeners
+    onCompleteListeners.forEach(function(listener){
+        route.on('route:Complete', listener);
+    });
+}
+
+/**
  * Registered hook for app.tracking.trackCached
  */
 function trackCached() {
@@ -174,6 +224,27 @@ function trackCached() {
         "try {\n" +
         "\t_etmc.push(['setOrgId', $dataLayer.setOrgId ]);\n" +
         "} catch (e) { console.error(e); }\n" +
+        /**
+         * the 'try' block below is hooking into ajax success responses globally
+         * it looks for an '__mccEvents' property in JSON responses, and passes as SFMC events
+         */
+        "function mccEventLoader() {\n" +
+            "\ttry {\n" +
+            "\t\t$( document ).ajaxSuccess(function(event, request, settings, data) {\n" +
+            "\t\t\tif (settings.dataTypes.indexOf('json') > -1) {\n" +
+            "\t\t\t\tif (data && '__mccEvents' in data && Array.isArray(data.__mccEvents)) {\n" +
+            "\t\t\t\t\tdata.__mccEvents.forEach(function mccEvent(mccEvent){_etmc.push(mccEvent);});\n" +
+            "\t\t\t\t}\n" +
+            "\t\t\t}\n" +
+            "\t\t});\n" +
+            "\t\tdocument.removeEventListener('DOMContentLoaded', mccEventLoader);\n" +
+            "\t} catch (e) { console.error(e); }\n" +
+        "};\n" +
+        "if (document.readyState === 'complete') {\n" +
+        "\tmccEventLoader();\n" +
+        "} else {\n" +
+        "\tdocument.addEventListener('DOMContentLoaded', mccEventLoader);\n" +
+        "}\n" +
         "</script>\n" +
         "<!-- End Marketing Cloud Analytics - cached -->\n";
 
@@ -190,8 +261,9 @@ function trackCached() {
 /**
  * Registered hook for app.tracking.preEvents
  * @param {Object} requestData
+ * @param {Function} cb Optional callback for the output (unused)
  */
-function eventsInit(requestData) {
+function eventsInit(requestData, cb) {
     dataLayer.setUserInfo = buildCustomer(requestData);
 }
 
@@ -200,8 +272,9 @@ function eventsInit(requestData) {
  * @param {string} eventName
  * @param {*} eventValue
  * @param {Object} requestData
+ * @param {Function} cb Optional callback for the output (unused)
  */
-function requestEvent(eventName, eventValue, requestData) {
+function requestEvent(eventName, eventValue, requestData, cb) {
     var customDetails;
     switch(eventName) {
         case 'search':
@@ -359,53 +432,57 @@ function requestEvent(eventName, eventValue, requestData) {
 /**
  * Registered hook for app.tracking.postEvents
  * @param {Object} requestData
+ * @param {Function} cb Optional callback for the output
  */
-function eventsOutput(requestData) {
+function eventsOutput(requestData, cb) {
+    var eventsArray = [];
+
+    if (!empty(dataLayer.setUserInfo)) {
+        eventsArray.push(['setUserInfo', dataLayer.setUserInfo ]);
+    }
+    if (!requestData.request.isAjaxRequest) {
+        if (!empty(dataLayer.updateItems)) {
+            eventsArray.push(['updateItem', dataLayer.updateItems ]);
+        }
+    }
+    if (!empty(dataLayer.trackConversion)) {
+        eventsArray.push(['trackConversion', dataLayer.trackConversion ]);
+    } else if (!empty(dataLayer.trackCart)) {
+        eventsArray.push(['trackCart', dataLayer.trackCart ]);
+    }
+    if (!empty(dataLayer.trackEvents)) {
+        for each(var event in dataLayer.trackEvents) {
+            eventsArray.push(['trackEvent', event]);
+        }
+    }
+    if (!requestData.request.isAjaxRequest) {
+        if (!empty(dataLayer.trackPageView)) {
+            eventsArray.push(['trackPageView', dataLayer.trackPageView]);
+        } else {
+            eventsArray.push(['trackPageView']);
+        }
+    }
+
+    if (cb) {
+        cb(eventsArray);
+        return;
+    }
+
     var mcInject = "<!-- Marketing Cloud Analytics - noncached -->\n" +
         "<script type=\"text/javascript\">\n" +
         "try {\n";
 
-    if (!requestData.request.isAjaxPartial) {
-        if (!empty(dataLayer.setUserInfo)) {
-            mcInject += "\t_etmc.push(['setUserInfo', $dataLayer.setUserInfo ]);\n";
-        }
-        if (!empty(dataLayer.updateItems)) {
-            mcInject += "\t_etmc.push(['updateItem', $dataLayer.updateItems ]);\n";
-        }
+    for (var i in eventsArray) {
+        eventsArray[i] = JSON.stringify(eventsArray[i]);
     }
-    if (!empty(dataLayer.trackConversion)) {
-        mcInject += "\t_etmc.push(['trackConversion', $dataLayer.trackConversion ]);\n";
-    } else if (!empty(dataLayer.trackCart)) {
-        mcInject += "\t_etmc.push(['trackCart', $dataLayer.trackCart ]);\n";
-    }
-    if (!empty(dataLayer.trackEvents)) {
-        mcInject += "#foreach($event in $dataLayer.trackEvents)\n\t_etmc.push(['trackEvent', $event ]);\n#end\n";
-    }
-    if (!requestData.request.isAjaxPartial) {
-        if (!empty(dataLayer.trackPageView)) {
-            mcInject += "\t_etmc.push(['trackPageView', $dataLayer.trackPageView ]);\n";
-        } else {
-            mcInject += "\t_etmc.push(['trackPageView']);\n";
-        }
-    }
+    mcInject += "#foreach($event in $eventsArray)\n\t_etmc.push($event);\n#end\n";
 
     mcInject += "} catch (e) { console.error(e); }\n" +
         //"console.log(_etmc);\n" +
         "</script>\n" +
         "<!-- End Marketing Cloud Analytics - noncached -->\n";
 
-    var jsonLayer = {};
-    for (var i in dataLayer) {
-        if (dataLayer.hasOwnProperty(i) && dataLayer[i]) {
-            if (i === 'trackEvents' && Array.isArray(dataLayer[i])) {
-                jsonLayer[i] = dataLayer[i].map(function(e){return JSON.stringify(e);});
-            } else {
-                jsonLayer[i] = JSON.stringify(dataLayer[i]);
-            }
-        }
-    }
-
-    velocity.render(mcInject, {dataLayer: jsonLayer});
+    velocity.render(mcInject, {eventsArray: eventsArray});
 }
 
 // Ensure MC Analytics hooks only fire if analytics are enabled
@@ -414,9 +491,11 @@ if (analyticsEnabled) {
     exports.preEvents = eventsInit;
     exports.event = requestEvent;
     exports.postEvents = eventsOutput;
+    exports.registerRoute = registerRoute;
 } else {
     exports.trackCached = function(){};
     exports.preEvents = function(){};
     exports.event = function(){};
     exports.postEvents = function(){};
+    exports.registerRoute = function(){};
 }
