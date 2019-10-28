@@ -215,6 +215,7 @@ function writeProduct(product, parameters, writeNextCB){
         writeChildProducts(product.getVariationModel().getVariants(), product, writeNextCB);
     }
 
+    // output variation group's direct variants
     if (product.isVariationGroup() && parameters.IncludeVariantProduct === true) {
         writeChildProducts(product.getVariationModel().getSelectedVariants(), product, writeNextCB);
     }
