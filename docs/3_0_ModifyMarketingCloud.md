@@ -1,3 +1,35 @@
+
+
+
+Skip to content
+Using Salesforce.com Mail with screen readers
+
+3 of 482
+files
+Inbox
+x
+
+Matthew Carey
+Attachments
+Mon, Nov 18, 1:51 PM (23 hours ago)
+to me
+
+
+
+--
+Matt Carey
+
+Staff Technical Writer | Salesforce Commerce Cloud
+
+224 S. 200 W., Salt Lake City, UT 84101
+
+
+
+
+
+
+3 Attachments
+
 <a name="Top"></a>
 # marketing-cloud-connector
 
@@ -37,9 +69,9 @@ You must install the Marketing Cloud app and API key for each Commerce Cloud Bus
 
 See [Salesforce Developers App Center](https://developer.salesforce.com/docs/atlas.en-us.mc-getting-started.meta/mc-getting-started/get-api-key.htm) for more information.
 
-1. Log in to [App Center](https://appcenter-auth.s1.marketingcloudapps.com/).
+1. Log in to App Center.
 
-    If you don't already have an App Center account, create one here: [App Center Create Account](https://appcenter-auth.s1.marketingcloudapps.com/create). 
+    Create an App Center account if you don't already have one.
 	
 	See the [Salesforce Developers App Center Overview](https://developer.salesforce.com/docs/atlas.en-us.mc-getting-started.meta/mc-getting-started/app-center.htm) for more information.
 
@@ -51,9 +83,13 @@ See [Salesforce Developers App Center](https://developer.salesforce.com/docs/atl
 4. Create an API Integration component.
 
 	See [Create an API Integration in Enhanced Package](https://developer.salesforce.com/docs/atlas.en-us.mc-app-development.meta/mc-app-development/create-integration-enhanced.htm) for more information.
-	 
-	- Channels - Email: Send
-	- Data - Data Extensions: Read and Write
+	
+	1. Select the Server-to-Server Integration type.
+	2. Set the following Scope properties:
+		 
+		- Channels - Email: Send
+		- Data - Data Extensions: Read and Write
+	3. Save the component.
 
 5. Save the Details page for your records.
 
@@ -115,3 +151,5 @@ Execute the scripts in the following order.
 - - -
 
 [Back to the top](#Top)
+3_0_ModifyMarketingCloud.md
+Displaying 3_0_ModifyMarketingCloud.md.
