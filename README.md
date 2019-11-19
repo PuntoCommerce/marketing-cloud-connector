@@ -115,6 +115,23 @@ The documents below, and their respective filenames, are numbered in sequence fo
 
 <a name="Changes"></a>
 ## Changelog ##
+#### 2.3.0 ####
+1.	Added new hook listener for app.server.registerRoute (SFRA-specific). Depends on SalesforceCommerceCloud/storefront-reference-architecture#648, but is safe to be merged without the SFRA PR being merged yet.
+When registerRoute is called (during registration of routes in SFRA), a route event listener is registered for route:Complete (was BeforeComplete, but found some logic in SFRA that then escaped detection). Before any route completes its response, the listener checks response to determine if JSON. If JSON, it injects the Marketing Cloud event info into the JSON response object.
+2.	Moved detectController to a helper file.
+3.	Added support for callback used to return any output on tracking hooks.
+4.	Updated onRequest hook logic to ensure that tracking session basket etag value is only updated during the onRequest hook execution.
+5.	Updated controller/method detection logic. SFRA methods (routes) are anonymous functions which makes the stack trace detection faulty.
+6.	Updated ajax detection logic to look for XMLHttpRequest, rather than depending solely on ajax partial templates (SG-specific).
+7.	Fixing various typos in documentation.
+8.	Added client-side hook to send events to SFMC upon successful JSON ajax calls.
+9.	Ensuring module overrides don't omit new exports.
+10.	Fixed order confirmation email.
+11.	Added an initial integration test, to get the cartridge moving in that direction so we can try to start tracking where changes are breaking other functionality.
+12.	Adjusted analytic tracking to now fire during checkout in SFRA. A custom analytic event must be registered to use this in the storefront, as the checkout event is exposed but not output to the page by default, since SFMC has no default checkout flow tracking that I'm aware of.
+
+
+
 #### 2.2.0 ####
 
 **DEPRECATED COMMERCE API’s - COMPATIBILITY MODE 19.10**
