@@ -1,35 +1,3 @@
-
-
-
-Skip to content
-Using Salesforce.com Mail with screen readers
-
-3 of 482
-files
-Inbox
-x
-
-Matthew Carey
-Attachments
-Mon, Nov 18, 1:51 PM (23 hours ago)
-to me
-
-
-
---
-Matt Carey
-
-Staff Technical Writer | Salesforce Commerce Cloud
-
-224 S. 200 W., Salt Lake City, UT 84101
-
-
-
-
-
-
-3 Attachments
-
 <a name="Top"></a>
 # marketing-cloud-connector
 
@@ -151,5 +119,3 @@ Execute the scripts in the following order.
 - - -
 
 [Back to the top](#Top)
-3_0_ModifyMarketingCloud.md
-Displaying 3_0_ModifyMarketingCloud.md.
