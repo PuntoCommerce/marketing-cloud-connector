@@ -453,7 +453,7 @@ server.post(
                 	}
                 	if (profile.getEmail() != formInfo.email) {
                 		emailType = emailHelpers.emailTypes.accountEmailChanged;
-                	}               	
+                	}
 
                     Transaction.wrap(function () {
                         profile.setFirstName(formInfo.firstName);
@@ -541,7 +541,7 @@ server.post(
 
         var Site = require('dw/system/Site');
         var emailHelpers = require('*/cartridge/scripts/helpers/emailHelpers');
-        
+
         var profileForm = server.forms.getForm('profile');
         var newPasswords = profileForm.login.newpasswords;
         // form validation
@@ -611,8 +611,8 @@ server.post(
                            type: emailHelpers.emailTypes.passwordChanged
                             };
 
-                    emailHelpers.sendEmail(emailObj, 'account/password/passwordChangedEmail', objectForEmail);                    
-                    
+                    emailHelpers.sendEmail(emailObj, 'account/password/passwordChangedEmail', objectForEmail);
+
                     res.json({
                         success: true,
                         redirectUrl: URLUtils.url('Account-Show').toString()
@@ -689,7 +689,7 @@ server.get('SetNewPassword', server.middleware.https, consentTracking.consent, f
 
     var passwordForm = server.forms.getForm('newPasswords');
     passwordForm.clear();
-    var token = req.querystring.token;
+    var token = req.querystring.Token;
     var resettingCustomer = CustomerMgr.getCustomerByToken(token);
     if (!resettingCustomer) {
         res.redirect(URLUtils.url('Account-PasswordReset'));
@@ -704,7 +704,7 @@ server.post('SaveNewPassword', server.middleware.https, function (req, res, next
     var Resource = require('dw/web/Resource');
 
     var passwordForm = server.forms.getForm('newPasswords');
-    var token = req.querystring.token;
+    var token = req.querystring.Token;
 
     if (passwordForm.newpassword.value !== passwordForm.newpasswordconfirm.value) {
         passwordForm.valid = false;
@@ -760,7 +760,7 @@ server.post('SaveNewPassword', server.middleware.https, function (req, res, next
                 var emailObj = {
                         to: email,
                         subject: Resource.msg('subject.profile.resetpassword.email', 'login', null),
-                        from: Site.current.getCustomPreferenceValue('customerServiceEmail') || 'no-reply@salesforce.com',         
+                        from: Site.current.getCustomPreferenceValue('customerServiceEmail') || 'no-reply@salesforce.com',
                         type: emailHelpers.emailTypes.passwordChanged
                     };
 
