@@ -35,13 +35,19 @@ function sendTrigger(hookID, promise, data, cb){
 
         Logger.debug('MC hook {0} executed', hookID);
         var trigger = require(module.cartridge).trigger(hookID);
-        trigger.newMessage(data);
+        var result;
 
-        if (cb && typeof(cb) === 'function') {
-            cb(trigger, data);
+        if (trigger.isEnabled()) {
+            trigger.newMessage(data);
+
+            if (cb && typeof(cb) === 'function') {
+                cb(trigger, data);
+            }
+
+            result = trigger.send();
+        } else {
+            result = { ok: true };
         }
-
-        var result = trigger.send();
 
         var obj = {
             status: result.ok ? 'OK' : 'ERROR'
