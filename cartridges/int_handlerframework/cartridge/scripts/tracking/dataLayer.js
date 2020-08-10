@@ -267,6 +267,16 @@ function buildEvents() {
             }
             break;
         // end checkout
+        case '__system__page-render':
+            if ('param_at' in paramPojo) {
+                var pdParams = JSON.parse(paramMap.params);
+
+                if (paramPojo.param_at === 'plp' && pdParams.aspect_attributes && pdParams.aspect_attributes.category) {
+                    events.push(['category', pdParams.aspect_attributes.category]);
+                } else if (paramPojo.param_at === 'pdp' && pdParams.aspect_attributes && pdParams.aspect_attributes.product) {
+                    events.push(['product', pdParams.aspect_attributes.product]);
+                }
+            }
         default:
             break;
     }
