@@ -17,7 +17,7 @@
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md#navlink)
 
-	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md#navlink)
+	3.1 [Triggered Send and Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md#navlink)
 	
 	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink)
 	
@@ -29,72 +29,65 @@
 <a name="navlink"></a>
 ## 1. Project and Architectural Overview  
 
-The Marketing Cloud Connector is a reusable code asset to support the enablement and acceleration of specific integration use cases between B2C Commerce and Marketing Cloud. B2C Commerce Reference Architechtures are used as a reference storefront for connector cartridge integration. 
+The Marketing Cloud Connector is a reusable code asset to support the enablement and acceleration of specific integration use cases between B2C Commerce and Marketing Cloud. B2C Commerce Reference Architectures are used as a reference storefront for connector cartridge integration. 
 
-## Features & Requirements
+## Features and Requirements
 
-The Marketing Cloud Connector cartridge will have new functionality added to it in an incremental manner. 
+New functionality will be added to the Marketing Cloud Connector cartridge incrementally. 
 
-### Implemented Requirements
+### Requirements
 
 **Transactional Emails**
 
-The following OOB Reference Architecture emails are replaced with Marketing Cloud email triggers: 
+The following Reference Architecture emails are replaced with Marketing Cloud email triggers: 
 
-1. Account - Created
-2. Account - Updated
-3. Account - Password Changed
-4. Account - Password Reset
-5. Account - Locked Out
-6. Customer Service - Contact Us
-7. Gift Certificate - Send Certificate
-8. Order - Confirmation 
+- Account - Created
+- Account - Updated
+- Account - Password Changed
+- Account - Password Reset
+- Account - Locked Out
+- Customer Service - Contact Us
+- Gift Certificate - Send Certificate
+- Order - Confirmation 
 
-Transactional emails are built using Salesforce B2C Commerce platform hooks leveraging the "triggered email" functionality in Marketing Cloud. Configurable trigger definitions, stored in Custom Objects, are used to support custom trigger keys and support mapping of data for each trigger, ranging from predefined attribute values to data extension attributes that you define. Configuration can be used to achieve a mix and match of Reference Architecture emails with Marketing Cloud emails.
+Transactional emails are built using Salesforce B2C Commerce platform hooks leveraging the triggered email functionality in Marketing Cloud. Configurable trigger definitions stored in custom objects support custom trigger keys and support data mapping for each trigger, ranging from predefined attribute values to data extension attributes that you define. You can use a mix and match of Reference Architecture emails with Marketing Cloud emails.
 
 **Data Sync**
 
-Catalog, content, customer, and order data sync to Marketing Cloud via jobs.
-
+Use jobs to sync catalog, content, customer, and order data to Marketing Cloud.
 
 ## Integration Architecture Diagram
 
 
-![Integration Architechture](images/integration-specification-1.jpg)
+![Integration Architecture](images/integration-specification-1.jpg)
 
 ## Implementation Details
 
 ### Implementation Approach
 
-* CommonJS modules are used
-    * one module for the triggers
-    * one (or more) modules for the actual REST/SOAP service communication
-    * no pipelines
-    * JSDoc is used to comment extensively
-* Hooks are used extensively for integration
+* CommonJS modules are used.
+    * One module for the triggers
+    * One or more modules for the REST or SOAP service communication
+    * No pipelines
+    * JSDoc is used for extensive comments
+* Hooks are used extensively for integration.
     * Email triggers
-    * Incorporating Analytics into the template
-    * Product/Content Recommendations
-    * Opt-in/Opt-out/Marketing preferences
-* Support mixing of Reference Architecture email with Marketing Cloud triggered email
-* Platform Service Framework is used to communicate to MC
-    * service ID: marketingcloud.rest.messaging.send
-    * service is used globally
-    * endpoint/credentials would be managed as part of the service credentials configuration
-    * support for site-specific credentials is handled with site ID as suffix to the credential ID
-        * ex: marketingcloud.rest.auth-SITEID 
+    * Incorporating analytics into the template
+    * Product and content recommendations
+    * Opt-in, opt-out, and marketing preferences
+* Mixing of Reference Architecture email with Marketing Cloud triggered email is supported.
+* Platform Service Framework is used to communicate with Marketing Cloud.
+    * Service ID: marketingcloud.rest.messaging.send
+    * Service used globally
+    * Endpoints and credentials managed as part of the service credentials configuration
+    * Support for site-specific credentials is handled with site ID as the suffix to the credential ID, for example, marketingcloud.rest.auth-SITEID.
 * Configuration
     * System preferences to manage:
-        * Analytics
-            * Enable/disable
-            * Business Unit ID
-        * Marketing Preferences
-            * Opt-in toggle
-            * Opt-out toggle
-            * User preferences enablement
-    * Custom Objects used for individual trigger configuration
-    * Custom Objects used for analytic configuration
-    * Custom Objects used for job configuration (field-mapping)
+        * Analytics system preferences: Enable/Disable and Business Unit ID
+        * System preferences: Opt-in and Opt-out toggles and user preference enablement
+    * Custom objects used for individual trigger configuration
+    * Custom objects used for analytic configuration
+    * Custom objects used for job configuration (field mapping)
 
 ### Integration Cartridge
 
@@ -215,9 +208,9 @@ Catalog, content, customer, and order data sync to Marketing Cloud via jobs.
 | | |__version.txt
 ```
 
-## Transactional Emails - Implementation Details
+## Transactional Emails : Implementation Details
 
-Transactional emails will make use of the triggered email functionality in Marketing Cloud.
+Transactional emails use the triggered email functionality in Marketing Cloud.
 
 ### REST APIs
 
@@ -227,7 +220,7 @@ For more information, see [Intro to Marketing Cloud APIs] (https://developer.sal
 
 ### Authentication
 
-Marketing Cloud uses oAuth, which returns a token upon successful authentication. To avoid authenticating excessively, the retrieved token is stored in a custom object for reuse.
+Marketing Cloud uses OAuth which returns a token upon successful authentication. To avoid authenticating excessively, the retrieved token is stored in a custom object for reuse.
 
 **Standard API Calls**
 
@@ -236,7 +229,7 @@ If a token is missing or expired, a new token is automatically requested in this
 
 ### Response Handling
 
-All standard API calls have their response parsed, and the response object wrapped.
+All standard API calls have their response parsed and the response object wrapped.
 The object wrapper contains checks indicating if there was a JSON parsing error, such as an auth error.
 
 **API Response Handling Example**
@@ -315,7 +308,7 @@ module.exports = require('dw/system/HookMgr').callHook(
 
 ### Simple Email Sending Implementation
 
-To support triggering Marketing Cloud emails, we replace the current email logic within various locations of the Reference Architecture with the Marketing Cloud alternative. This is only an alternative, so we still need to support standard email execution.
+To support triggering Marketing Cloud emails, we replaced the current email logic in various locations of the Reference Architecture with the Marketing Cloud alternative. We still support standard email execution.
 
 **Simple Email Hook Implementation**
 
@@ -376,17 +369,17 @@ module.exports = require('dw/system/HookMgr').callHook(
 ```
 
 
-## Data Sync - Implementation Details
+## Data Sync : Implementation Details
 
-Catalog, content, order, and customer data need to be exported to Marketing Cloud.
-Custom jobs are built to be executed within Business Manager.
-Flat-file batch exports are generated at minimum, daily.
-Each job can be enabled/disabled separately from the other available jobs.
+Catalog, content, order, and customer data are exported to Marketing Cloud.
+Custom jobs are built to execute in Business Manager.
+Flat-file batch exports are generated at minimum daily.
+Each job can be enabled or disabled separately from the other available jobs.
 
-Jobs have been defined using the native Job Scheduler, as script-based workflows, with a job existing for each type of data to be exported.
+Jobs are defined using the native Job Scheduler as script-based workflows. A job exists for each type of data to be exported.
 Custom chunk-oriented job steps are defined for each data extract. A task-oriented job step is defined for the file transfer handling.
 Jobs execute at the site level.
-The approach used for chunk and task-oriented custom job steps has followed the recommendations documented in the Commerce Cloud InfoCenter, at [Creating Custom Jobs](https://documentation.b2c.commercecloud.salesforce.com/DOC1/topic/com.demandware.dochelp/Jobs/CreateCustomJobStep.html).
+The approach used for chunk and task-oriented custom job steps follows the recommendations documented in the Commerce Cloud InfoCenter, at [Creating Custom Jobs](https://documentation.b2c.commercecloud.salesforce.com/DOC1/topic/com.demandware.dochelp/Jobs/CreateCustomJobStep.html).
 
 Feeds and import activities follow the documentation provided for Marketing Cloud:
 

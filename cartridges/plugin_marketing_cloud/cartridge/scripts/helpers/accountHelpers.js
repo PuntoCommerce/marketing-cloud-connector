@@ -33,6 +33,21 @@ function sendPasswordResetEmail(email, resettingCustomer) {
 }
 
 /**
+ * Gets the password reset token of a customer
+ * @param {Object} customer - the customer requesting password reset token
+ * @returns {string} password reset token string
+ */
+function getPasswordResetToken(customer) {
+    var Transaction = require('dw/system/Transaction');
+
+    var passwordResetToken;
+    Transaction.wrap(function () {
+        passwordResetToken = customer.profile.credentials.createResetPasswordToken();
+    });
+    return passwordResetToken;
+}
+
+/**
  * Send an email that would notify the user that account was edited
  * @param {obj} profile - object that contains user's profile information.
  */
@@ -61,8 +76,12 @@ function sendAccountEditedEmail(profile, type) {
 }
 
 module.exports = {
-    getLoginRedirectURL: base.getLoginRedirectURL,
-    sendCreateAccountEmail: base.sendCreateAccountEmail,
     sendPasswordResetEmail: sendPasswordResetEmail,
     sendAccountEditedEmail: sendAccountEditedEmail
 };
+Object.keys(base).forEach(function (prop) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (!module.exports.hasOwnProperty(prop)) {
+        module.exports[prop] = base[prop];
+    }
+});

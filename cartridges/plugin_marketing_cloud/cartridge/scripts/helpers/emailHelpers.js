@@ -2,8 +2,6 @@
 var base = module.superModule;
 
 module.exports = {
-    send: base.send,
-    sendEmail: base.sendEmail,
     emailTypes: {
         registration: 1,
         passwordReset: 2,
@@ -14,6 +12,13 @@ module.exports = {
         accountNameChanged: 7,
         accountAddressChanged: 8,
         accountPaymentChanged: 9,
-        accountEmailChanged: 10
+        accountEmailChanged: 10,
+        contactUs: 11
     }
 };
+Object.keys(base).forEach(function (prop) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (!module.exports.hasOwnProperty(prop)) {
+        module.exports[prop] = base[prop];
+    }
+});

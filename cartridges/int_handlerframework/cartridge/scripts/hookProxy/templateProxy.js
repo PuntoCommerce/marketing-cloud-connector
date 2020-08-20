@@ -14,31 +14,13 @@ const HookMgr = require('dw/system/HookMgr');
 const Logger = require('dw/system/Logger');
 
 /**
- * Detect controller/method. Returns empty object if nothing detected.
- * @returns {{controller: string, method: string}}
- */
-function detectController() {
-    var controllerMatch = {};
-    var stack;
-    // Can't simply access `new Error().stack`, only exists when thrown
-    try { throw new Error(); }catch(e) { stack = e.stack; }
-    // finds last (first) controller occurrence in the stack, to ensure a controller helper function isn't being detected
-    if (stack) {
-        var controllerMatches = stack.match(/\/controllers\/([^\s]+)\.[dj]s\:\d+\s\((\w+)\)(?!\s*.*\/controllers\/)/);
-        if (controllerMatches) {
-            controllerMatch.controller = controllerMatches[1];
-            controllerMatch.method = controllerMatches[2];
-        }
-    }
-    return controllerMatch;
-}
-
-/**
  * Executes app.tracking.trackNonCached hook via remote include
  * @param {boolean} isAjax
  * @param {object} ismlParams
  */
 function trackNonCached(isAjax, ismlParams) {
+    const helper = require('~/cartridge/scripts/util/helper');
+
     var hookID = 'app.tracking.trackNonCached';
     if (HookMgr.hasHook(hookID)) {
         Logger.debug('requesting {0}', hookID);
@@ -68,7 +50,7 @@ function trackNonCached(isAjax, ismlParams) {
             velocity: velocity,
             hookID: hookID,
             request: request,
-            currentController: detectController(),
+            currentController: helper.detectController(),
             isAjax: isAjax,
             pdict: pdict
         });

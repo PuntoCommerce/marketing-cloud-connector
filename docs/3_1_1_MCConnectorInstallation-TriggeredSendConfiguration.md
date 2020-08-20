@@ -17,7 +17,7 @@
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md#navlink)
 
-	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md#navlink)
+	3.1 [Triggered Send and Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md#navlink)
 	
 	3.1.1 [**Triggered Send Configuration**](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink)
 	
@@ -29,17 +29,18 @@
 <a name="navlink"></a>
 ## 3.1.1 Triggered Send Configuration
 
-Work with your Marketing Cloud representative to address any questions or concerns that may arise.
-Everything on this page merely exists as recommendations, intended to help you configure your account.
+Work with your Marketing Cloud representative to address any questions or concerns that arise.
+These recommendations are intended to help you configure your account.
 
-- Data extension data retention is wholly up to you.  
-- Data extensions should be marked as sendable at a minimum.  
-- It's recommended to create all data extension fields as nullable.  
+- Data extension data retention is entirely up to you.  
+- At minimum, mata extensions as sendable.  
+- Create all data extension fields as nullable.  
 
-For email creation, it's recommended to use Content Builder, which you may need to opt-in to before you can see it.
+For email creation, it's recommended to use Content Builder, which you might need to opt-in to before you can see it.
 
-When selecting an email for use with triggered send, be sure to select the Content Builder tab if you created your email as a Content Builder email.  
-For triggers that heavily overlap in the fields that are defined or used, it's feasible to create a single data extension to be shared across multiple triggers. This approach is recommended for account triggers, such as Created, Updated, Locked, or Password Changed. The Reset Password trigger may be best to be stored in its own data extension.
+If you created your email as a Content Builder email, select the email on the Content Builder tab.  
+
+For triggers that heavily overlap in the fields that are defined or used, you can create a single data extension to be shared across multiple triggers. This approach is recommended for account triggers, such as Created, Updated, Locked, or Password Changed. We recommend storing the Reset Password trigger in its own data extension.
 
 <a name="Created"></a>
 ## Account - Created
@@ -48,19 +49,15 @@ For triggers that heavily overlap in the fields that are defined or used, it's f
 
 Minimum fields recommended:
 
-* FirstName
-    * Text, 50
-* LastName
-    * Text, 50
-* AccountHomeLink
-    * Text, 250
-* SiteID
-    * Text, 50
+* FirstName — Text, 50
+* LastName — Text, 50
+* AccountHomeLink — Text, 250
+* SiteID — Text, 50
 
 ### Email Template
 
-Email name: Account Created  
-Subject: Your New Account  
+Email name — Account Created  
+Subject — Your New Account  
 Paste into a content block as HTML  
 
 ```
@@ -101,19 +98,19 @@ SET @acctlink = AttributeValue("AccountHomeLink")
 
 ### Triggered Send Definition
 
-Name: Account Created  
-External Key: account.created  
-Send Classification: Default Transactional  
-Email: Account Created  
-List: any list of your choice  
-Data Extension: Account or Account Created  
-Disable API Calls (on error): enabled  
+Name — Account Created  
+External Key — account.created  
+Send Classification — Default Transactional  
+Email — Account Created  
+List — Any list of your choice  
+Data Extension — Account or Account Created  
+Disable API Calls (on error) — Enabled  
 
 ### Custom Object Field Mapping (Business Manager)
 
-Hook ID: app.communication.account.created  
-Trigger External Key: account.created  
-Description: Account Created trigger  
+Hook ID — app.communication.account.created  
+Trigger External Key — account.created  
+Description — Account Created trigger  
 Subscriber Attributes:  
 
 ```
@@ -162,19 +159,15 @@ Subscriber Attributes:
 
 Minimum fields recommended:
 
-* FirstName
-    * Text, 50
-* LastName
-    * Text, 50
-* AccountHomeLink
-    * Text, 250
-* SiteID
-    * Text, 50
+* FirstName — Text, 50
+* LastName — Text, 50
+* AccountHomeLink — Text, 250
+* SiteID — Text, 50
 
 ### Email Template
 
-Email name: Account Updated  
-Subject: Your Account  
+Email name — Account Updated  
+Subject — Your Account  
 Paste into a content block as HTML  
 
 ```
@@ -215,19 +208,19 @@ SET @acctlink = AttributeValue("AccountHomeLink")
 
 ### Triggered Send Definition
 
-Name: Account Updated  
-External Key: account.updated  
-Send Classification: Default Transactional  
-Email: Account Updated  
-List: any list of your choice  
-Data Extension: Account or Account Updated  
-Disable API Calls (on error): enabled  
+Name — Account Updated  
+External Key — account.updated  
+Send Classification — Default Transactional  
+Email — Account Updated  
+List — Any list of your choice  
+Data Extension — Account or Account Updated  
+Disable API Calls (on error) — Enabled  
 
 ### Custom Object Field Mapping (Business Manager)
 
-Hook ID: app.communication.account.updated  
-Trigger External Key: account.updated  
-Description: Account Updated trigger  
+Hook ID — app.communication.account.updated  
+Trigger External Key — account.updated  
+Description — Account Updated trigger  
 Subscriber Attributes:  
 
 ```
@@ -277,17 +270,14 @@ Subscriber Attributes:
 
 Minimum fields recommended
 
-* FirstName
-    * Text, 50
-* LastName
-    * Text, 50
-* SiteID
-    * Text, 50
+* FirstName — Text, 50
+* LastName — Text, 50
+* SiteID — Text, 50
 
 ### Email Template
 
-Email name: Account Locked  
-Subject: Your Account  
+Email name — Account Locked  
+Subject — Your Account  
 Paste into a content block as HTML  
 
 ```
@@ -329,19 +319,19 @@ SET @ln = AttributeValue("LastName")
 
 ### Triggered Send Definition
 
-Name: Account Locked  
-External Key: account.locked  
-Send Classification: Default Transactional  
-Email: Account Locked  
-List: any list of your choice  
-Data Extension: Account or Account Locked  
-Disable API Calls (on error): enabled  
+Name — Account Locked  
+External Key — account.locked  
+Send Classification — Default Transactional  
+Email — Account Locked  
+List — Any list of your choice  
+Data Extension — Account or Account Locked  
+Disable API Calls (on error) — Enabled  
 
 ### Custom Object Field Mapping (Business Manager)
 
-Hook ID: app.communication.account.lockedOut  
-Trigger External Key: account.lockedOut  
-Description: Account Locked trigger  
+Hook ID — app.communication.account.lockedOut  
+Trigger External Key — account.lockedOut  
+Description — Account Locked trigger  
 Subscriber Attributes:  
 
 ```
@@ -389,21 +379,17 @@ Subscriber Attributes:
 
 ### Data Extension
 
-Minimum fields recommended):
+Minimum fields recommended:
 
-* FirstName
-    * Text, 50
-* LastName
-    * Text, 50
-* AccountHomeLink
-    * Text, 250
-* SiteID
-    * Text, 50
+* FirstName — Text, 50
+* LastName — Text, 50
+* AccountHomeLink — Text, 250
+* SiteID — Text, 50
 
 ### Email Template
 
-Email name: Password Changed  
-Subject: Your New Password  
+Email name — Password Changed  
+Subject — Your New Password  
 Paste into a content block as HTML  
 
 ```
@@ -444,19 +430,19 @@ SET @acctlink = AttributeValue("AccountHomeLink")
 
 ### Triggered Send Definition
 
-Name: Account Password Changed  
-External Key: account.passwordChanged  
-Send Classification: Default Transactional  
-Email: Account Password Changed  
-List: any list of your choice  
-Data Extension: Account or Account Password Changed  
-Disable API Calls (on error): enabled  
+Name — Account Password Changed  
+External Key — account.passwordChanged  
+Send Classification — Default Transactional  
+Email — Account Password Changed  
+List — Any list of your choice  
+Data Extension — Account or Account Password Changed  
+Disable API Calls (on error) — Enabled  
 
-### Custom Object Field MField Mappingapping (Business Manager)
+### Custom Object Field Mapping (Business Manager)
 
-Hook ID: app.communication.account.passwordChanged  
-Trigger External Key: account.passwordChanged  
-Description: Password Changed trigger  
+Hook ID — app.communication.account.passwordChanged  
+Trigger External Key — account.passwordChanged  
+Description — Password Changed trigger  
 Subscriber Attributes:  
 
 ```
@@ -506,19 +492,15 @@ Subscriber Attributes:
 
 Minimum fields recommended
 
-* FirstName
-    * Text, 50
-* LastName
-    * Text, 50
-* ResetPasswordLink
-    * Text, 250
-* SiteID
-    * Text, 50
+* FirstName — Text, 50
+* LastName — Text, 50
+* ResetPasswordLink — Text, 250
+* SiteID — Text, 50
 
 ### Email Template
 
-Email name: Account Password Reset  
-Subject: Your New Password  
+Email name — Account Password Reset  
+Subject — Your New Password  
 Paste into a content block as HTML  
 
 ```
@@ -567,19 +549,19 @@ SET @ln = AttributeValue("LastName")
 
 ### Triggered Send Definition
 
-Name: Account Password Reset  
-External Key: account.passwordReset  
-Send Classification: Default Transactional  
-Email: Account Password Reset  
-List: any list of your choice  
-Data Extension: Account Password Reset  
-Disable API Calls (on error): enabled  
+Name — Account Password Reset  
+External Key — account.passwordReset  
+Send Classification — Default Transactional  
+Email — Account Password Reset  
+List — Any list of your choice  
+Data Extension — Account Password Reset  
+Disable API Calls (on error) — Enabled  
 
 ### Custom Object Field Mapping (Business Manager)
 
-Hook ID: app.communication.account.passwordReset  
-Trigger External Key: account.passwordReset  
-Description: Password Reset trigger  
+Hook ID — app.communication.account.passwordReset  
+Trigger External Key — account.passwordReset  
+Description — Password Reset trigger  
 Subscriber Attributes:  
 
 ```
@@ -631,28 +613,20 @@ Subscriber Attributes:
 
 Minimum fields recommended
 
-* FirstName
-    * Text, 50
-* LastName
-    * Text, 50
-* Phone
-    * Phone
-* OrderNumber
-    * Text, 50
-* MyQuestion
-    * Text, 50
-* Comment
-    * Text, 50
-* CustomerEmailAddress
-    * Email
-* SiteID
-    * Text, 50
+* FirstName — Text, 50
+* LastName — Text, 50
+* Phone — Phone
+* OrderNumber — Text, 50
+* MyQuestion — Text, 50
+* Comment — Text, 50
+* CustomerEmailAddress — Email
+* SiteID — Text, 50
 
 ### Email Template
 
-Email name: Contact Us  
-Subject: `Contact Us: %%=AttributeValue("MyQuestion")=%%`  
-Paste into a content block as HTML):  
+Email name — Contact Us  
+Subject — `Contact Us: %%=AttributeValue("MyQuestion")=%%`  
+Paste into a content block as HTML:  
 
 ```
 %%[
@@ -713,19 +687,19 @@ SET @email = AttributeValue("CustomerEmailAddress")
 
 ### Triggered Send Definition
 
-Name: Contact Us  
-External Key: customerService.contactUs  
-Send Classification: Default Transactional  
-Email: Contact Us  
-List: any list of your choice  
-Data Extension: Contact Us  
-Disable API Calls (on error): enabled  
+Name — Contact Us  
+External Key — customerService.contactUs  
+Send Classification — Default Transactional  
+Email — Contact Us  
+List — Any list of your choice  
+Data Extension — Contact Us  
+Disable API Calls (on error) — Enabled  
 
 ### Custom Object Field Mapping (Business Manager)
 
-Hook ID: app.communication.customerService.contactUs  
-Trigger External Key: customerService.contactUs  
-Description: Contact Us trigger  
+Hook ID — app.communication.customerService.contactUs  
+Trigger External Key — customerService.contactUs  
+Description — Contact Us trigger  
 Subscriber Attributes:  
 
 ```
@@ -746,31 +720,22 @@ Subscriber Attributes:
 
 ### Data Extension
 
-Minimum fields recommended
+Minimum fields recommended:
 
-* Amount
-    * Text, 50
-* AmountCurrencyCode
-    * Text, 50
-* AmountDecimalValue
-    * Decimal, 18,0
-* GiftCertificateCode
-    * Text, 50
-* RecipientName
-    * Text, 50
-* SenderName
-    * Text, 50
-* Message
-    * Text, 50
-* StoreHomeLink
-    * Text, 250
-* SiteID
-    * Text, 50
+* Amount — Text, 50
+* AmountCurrencyCode — Text, 50
+* AmountDecimalValue — Decimal, 18,0
+* GiftCertificateCode — Text, 50
+* RecipientName — Text, 50
+* SenderName — Text, 50
+* Message — Text, 50
+* StoreHomeLink — Text, 250
+* SiteID — Text, 50
 
 ### Email Template
 
-Email name: Send Gift Certificate  
-Subject: `A gift certificate from %%=AttributeValue("SenderName")=%%`  
+Email name — Send Gift Certificate  
+Subject — `A gift certificate from %%=AttributeValue("SenderName")=%%`  
 Paste into a content block as HTML  
 
 ```
@@ -831,20 +796,20 @@ SET @storelink = AttributeValue("StoreHomeLink")
 
 ### Triggered Send Definition
 
-Name: Send Gift Certificate  
-External Key: giftCertificate.sendCertificate  
-Send Classification: Default Transactional  
-Email: Send Gift Certificate  
-List: any list of your choice  
-Data Extension: Send Gift Certificate  
-Disable API Calls (on error): enabled  
+Name — Send Gift Certificate  
+External Key — giftCertificate.sendCertificate  
+Send Classification — Default Transactional  
+Email — Send Gift Certificate  
+List — Any list of your choice  
+Data Extension — Send Gift Certificate  
+Disable API Calls (on error) — Enabled  
 
 ### Custom Object Field Mapping (Business Manager)
 
-Hook ID: app.communication.giftCertificate.sendCertificate  
-Trigger External Key: giftCertificate.sendCertificate  
-Description: Send Gift Certificate trigger, used for newly purchased gift certificates  
-Subscriber Attributes:  
+Hook ID — app.communication.giftCertificate.sendCertificate  
+Trigger External Key — giftCertificate.sendCertificate  
+Description — Send Gift Certificate trigger, used for newly purchased gift certificates  
+Subscriber Attributes  
 
 ```
 {
@@ -872,36 +837,29 @@ Subscriber Attributes:
 
 ### Data Extension
 
-Minimum fields recommended
+Minimum fields recommended:
 
-* SiteID
-    * Text, 50
-* OrderNumber
-    * Text, 50
-* OrderAsXML
-    * Text, delete the character limit
+* SiteID — Text, 50
+* OrderNumber — Text, 50
+* OrderAsXML — Text, delete the character limit
 
 ### Supplemental Data Extension
 
 The Order Confirmation email uses a Shipping Method data extension to look up the label and description for shipping methods.
-Each locale that is supported, should result in two *additional* columns being added for that locale: `Label_en_US`, `Description_en_US`  
+Each locale that is supported, results in adding two columns for that locale: `Label_en_US`, `Description_en_US`.
 Replace `en_US` with the locale that you're supporting.
 
-Data Extension name:  
-The data extension should be named `ShippingMethods`.  
-If you name it differently, you need to find the `Lookup("ShippingMethods"`
+Name the data extension `ShippingMethods`.  
+If you give it a different name, locate the `Lookup("ShippingMethods"`
 references in the template and adjust them to match.
 
-* Method_ID
-    * Text (length should be greater than your longest shipping ID)
-* Label_en_US
-    * Text (length should be greater than your longest shipping name / label)
-* Description_en_US
-    * Text (length should be greater than your longest description)
+* Method_ID — Text (make the length greater than your longest shipping ID)
+* Label_en_US — Text (make the length greater than your longest shipping name or label)
+* Description_en_US — Text (make the length greater than your longest description)
 
 ### Email Template
 
-Paste into a content block as HTML
+Paste into a content block as HTML.
 
 ```
 %%[
@@ -1184,18 +1142,18 @@ endif
 
 ### Triggered Send Definition
 
-Name: Order Confirmation  
-External Key: order.confirmation  
-Send Classification: Default Transactional  
-Email: Order Confirmation  
-List: any list of your choice  
-Data Extension: Order Confirmation  
-Disable API Calls (on error): enabled  
+Name — Order Confirmation  
+External Key — order.confirmation  
+Send Classification — Default Transactional  
+Email — Order Confirmation  
+List — Any list of your choice  
+Data Extension — Order Confirmation  
+Disable API Calls (on error) — Enabled  
 
 ### Custom Object Field Mapping (Business Manager)
 
-Hook ID: app.communication.order.confirmation  
-Trigger External Key: order.confirmation  
+Hook ID — app.communication.order.confirmation  
+Trigger External Key — order.confirmation  
 Description:  
 
 ```
@@ -1205,7 +1163,7 @@ To use XML approach, see Marketing Cloud docs:
 https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-apis.meta/mc-apis/using_triggered_sends_to_confirm_purchases.htm
 ```
 
-Subscriber Attributes: 
+Subscriber attributes: 
 
 ```
 {
@@ -1497,20 +1455,17 @@ Subscriber Attributes:
 <a name="OMSShipment"></a>
 ## OMS - Shipment
 
-This trigger is specific to the SFCC Order Management System (OMS) product, and may not apply to your storefront.  
-This is not an exhaustive example of a Shipment email. See [API doc for dw.om.shipments.ShipmentDetail](https://documentation.demandware.com/API1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPP-18.8-API-doc%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_om_shipments_ShipmentDetail.html) to determine available fields for mapping.  
+Th OMS Shipment trigger is specific to the SFCC Order Management System (OMS) product, and might not apply to your storefront.  
+This example of a Shipment email doesn't include all options. See [API doc for dw.om.shipments.ShipmentDetail](https://documentation.demandware.com/API1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPP-18.8-API-doc%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_om_shipments_ShipmentDetail.html) to determine which fields are available for mapping.  
 See [OMS Tasks repository](https://github.com/SalesforceCommerceCloud/order-management-tasks) for hook usage examples.  
 
 ### Data Extension
 
-Minimum fields recommended
+Minimum fields recommended:
 
-* SiteID
-    * Text, 50
-* OrderNumber
-    * Text, 50
-* ShipmentID
-    * Text, 50
+* SiteID — Text, 50
+* OrderNumber — Text, 50
+* ShipmentID — Text, 50
 
 ### Email Template
 
@@ -1518,18 +1473,18 @@ No template provided currently.
 
 ### Triggered Send Definition
 
-Name: OMS Shipment  
-External Key: oms.shipment  
-Send Classification: Default Transactional  
-Email: OMS Shipment  
-List: any list of your choice  
-Data Extension: OMS Shipment  
-Disable API Calls (on error): enabled  
+Name — OMS Shipment  
+External Key — oms.shipment  
+Send Classification — Default Transactional  
+Email — OMS Shipment  
+List — Any list of your choice  
+Data Extension — OMS Shipment  
+Disable API Calls (on error) — Enabled  
 
 ### Custom Object Field Mapping (Business Manager)
 
-Hook ID: app.communication.oms.shipment  
-Trigger External Key: oms.shipment  
+Hook ID — app.communication.oms.shipment  
+Trigger External Key — oms.shipment  
 Description:  
 
 ```
@@ -1537,7 +1492,7 @@ See API doc for dw.om.shipments.ShipmentDetail to determine available fields for
 https://documentation.demandware.com/API1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPP-18.8-API-doc%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_om_shipments_ShipmentDetail.html
 ```
 
-Subscriber Attributes: 
+Subscriber attributes: 
 
 ```
 {
@@ -1549,18 +1504,16 @@ Subscriber Attributes:
 <a name="OMSReturn"></a>
 ## OMS - Return Order Created
 
-This trigger is specific to the SFCC Order Management System (OMS) product, and may not apply to your storefront.  
-This is not an exhaustive example of an Return Order Created email. See [API doc for dw.om.returnorders.ReturnOrderDetail](https://documentation.demandware.com/API1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPP-18.8-API-doc%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_om_returnorders_ReturnOrderDetail.html) to determine available fields for mapping.  
+The OMS Return Order Created trigger is specific to the SFCC Order Management System (OMS) product, and might not apply to your storefront.  
+This example of an Return Order Created email doesn't include all options. See [API doc for dw.om.returnorders.ReturnOrderDetail](https://documentation.demandware.com/API1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPP-18.8-API-doc%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_om_returnorders_ReturnOrderDetail.html) to determine which fields are available for mapping.  
 See [OMS Tasks repository](https://github.com/SalesforceCommerceCloud/order-management-tasks) for hook usage examples.  
 
 ### Data Extension
 
-Minimum fields recommended
+Minimum fields recommended:
 
-* SiteID
-    * Text, 50
-* ReturnOrderID
-    * Text, 50
+* SiteID — Text, 50
+* ReturnOrderID — Text, 50
 
 ### Email Template
 
@@ -1568,18 +1521,18 @@ No template provided currently.
 
 ### Triggered Send Definition
 
-Name: OMS Return Order Created  
-External Key: oms.returnOrderCreated  
-Send Classification: Default Transactional  
-Email: OMS Return Order Created  
-List: any list of your choice  
-Data Extension: OMS Return Order Created  
-Disable API Calls (on error): enabled  
+Name — OMS Return Order Created  
+External Key — oms.returnOrderCreated  
+Send Classification — Default Transactional  
+Email — OMS Return Order Created  
+List — Any list of your choice  
+Data Extension — OMS Return Order Created  
+Disable API Calls (on error) — Enabled  
 
 ### Custom Object Field Mapping (Business Manager)
 
-Hook ID: app.communication.oms.returnOrderCreated  
-Trigger External Key: oms.returnOrderCreated  
+Hook ID — app.communication.oms.returnOrderCreated  
+Trigger External Key — oms.returnOrderCreated  
 Description:  
 
 ```
@@ -1587,7 +1540,7 @@ See API doc for dw.om.returnorders.ReturnOrderDetail to determine available fiel
 https://documentation.demandware.com/API1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPP-18.8-API-doc%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_om_returnorders_ReturnOrderDetail.html
 ```
 
-Subscriber Attributes: 
+Subscriber attributes: 
 
 ```
 {
@@ -1599,18 +1552,16 @@ Subscriber Attributes:
 <a name="OMSInvoice"></a>
 ## OMS - Invoice Processed
 
-This trigger is specific to the SFCC Order Management System (OMS) product, and may not apply to your storefront.  
-This is not an exhaustive example of an Invoice Processed email. See [API doc for dw.om.invoices.InvoiceDetail](https://documentation.demandware.com/API1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPP-18.8-API-doc%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_om_invoices_InvoiceDetail.html) to determine available fields for mapping.  
+The OMS Invoice Processed trigger is specific to the SFCC Order Management System (OMS) product, and might not apply to your storefront.  
+This example of an Invoice Processed email doesn't include all options. See [API doc for dw.om.invoices.InvoiceDetail](https://documentation.demandware.com/API1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPP-18.8-API-doc%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_om_invoices_InvoiceDetail.html) to determine which fields are available for mapping.  
 See [OMS Tasks repository](https://github.com/SalesforceCommerceCloud/order-management-tasks) for hook usage examples.  
 
 ### Data Extension
 
-Minimum fields recommended
+Minimum fields recommended:
 
-* SiteID
-    * Text, 50
-* InvoiceID
-    * Text, 50
+* SiteID — Text, 50
+* InvoiceID — Text, 50
 
 ### Email Template
 
@@ -1618,18 +1569,18 @@ No template provided currently.
 
 ### Triggered Send Definition
 
-Name: OMS Invoice Processed  
-External Key: oms.invoiceProcessed  
-Send Classification: Default Transactional  
-Email: OMS Invoice Processed  
-List: any list of your choice  
-Data Extension: OMS Invoice Processed  
-Disable API Calls (on error): enabled  
+Name — OMS Invoice Processed  
+External Key — oms.invoiceProcessed  
+Send Classification — Default Transactional  
+Email — OMS Invoice Processed  
+List — Any list of your choice  
+Data Extension — OMS Invoice Processed  
+Disable API Calls (on error) — Enabled  
 
 ### Custom Object Field Mapping (Business Manager)
 
-Hook ID: app.communication.oms.invoiceProcessed  
-Trigger External Key: oms.invoiceProcessed  
+Hook ID — app.communication.oms.invoiceProcessed  
+Trigger External Key — oms.invoiceProcessed  
 Description:  
 
 ```
@@ -1637,7 +1588,7 @@ See API doc for dw.om.invoices.InvoiceDetail to determine available fields for m
 https://documentation.demandware.com/API1/index.jsp?topic=%2Fcom.demandware.dochelp%2FDWAPP-18.8-API-doc%2Fscriptapi%2Fhtml%2Fapi%2Fclass_dw_om_invoices_InvoiceDetail.html&resultof=%22invoicedetail%22%20
 ```
 
-Subscriber Attributes: 
+Subscriber attributes: 
 
 ```
 {

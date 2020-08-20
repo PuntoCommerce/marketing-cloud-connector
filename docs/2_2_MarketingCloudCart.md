@@ -17,7 +17,7 @@
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md#navlink)
 
-	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md#navlink)
+	3.1 [Triggered Send and Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md#navlink)
 	
 	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink)
 	
@@ -40,11 +40,12 @@ See the [Handler Framework Cartridge Installation](https://github.com/Salesforce
 
 2. Add the `int_marketing_cloud` directory to your storefront cartridges, and upload the cartridge to your Commerce Cloud storefront instance.
 
-3. Import metadata, jobs, services, and custom objects, from the `/sites/site_template/` directory.
+3. Import metadata, jobs, services, and custom objects from the `/sites/site_template/` directory.
 
-	The custom object definitions for `MarketingCloudDataExport` and `MarketingCloudTriggers` are set to site-level by default. This is to support different configurations per site. If you are using the same configuration for your entire organization, you can change the site-level custom objects to organization-level custom objects. 
+	The custom object definitions for `MarketingCloudDataExport` and `MarketingCloudTriggers` are set to site-level by default to support different configurations per site. If you are using the same configuration for your entire organization, you can change the site-level custom objects to organization-level custom objects. 
 	
 	To do so:
+	
     1. Open `marketing-cloud-connector/sites/site_template/meta/custom-objecttype-definitions.xml`.
     2. Change `<storage-scope>site</storage-scope>` to `<storage-scope>organization</storage-scope>` for each object type that is intended to be global.
     3. Save, and import the definition file.
@@ -54,23 +55,29 @@ See the [Handler Framework Cartridge Installation](https://github.com/Salesforce
 
 
 <a name="ServiceConfig"></a>
-## Commerce Cloud - Service Configuration 
+## Commerce Cloud : Service Configuration 
 
 Within Commerce Cloud Business Manager, update the services that have been imported into Commerce Cloud using the provided XML files.
 
-If you have multiple Commerce Cloud sites, and follow the pattern of connecting a single site to a single business unit, you need to create a separate Service Credential for each site, repeating the steps described below. 
+If you have multiple Commerce Cloud sites and connect a single site to a single business unit, create a separate service credential for each site, repeating the steps described below. 
 
-1. In Business Manager, go to **Administration > Operations > Services**, and click the **Creditials** tab.
+1. In Business Manager, go to **Administration > Operations > Services**, and click the **Credentials** tab.
 
-	**NOTE**: If you intend to only use one Marketing Cloud business unit despite having multiple sites in Commerce Cloud, you can modify the service credential `marketingcloud.rest.auth` directly.
+	**Note**: If you have multiple sites in Commerce Cloud but intend to only use one Marketing Cloud business unit, you can modify the `marketingcloud.rest.auth` service credential directly.
+	
+	
 
-2.  Click **New**, and create a new Service Credential based on `marketingcloud.rest.auth`.
+2.  Click **New**, and create a new service credential based on `marketingcloud.rest.auth`.
+
+	
 
 	1. Append your own Business Manager Site ID to the Credential Name (for example, `marketingcloud.rest.auth-SiteGenesis`).
 	2. Enter the URL.
-	3. Populate the User ID field with your own API User ID from Marketing Cloud (aka "Client ID").
-	4. Populate the Password field with your own API password from Marketing Cloud (aka "Client Secret").
+	3. Populate the User ID field with your own API User ID, also called the Client ID, from Marketing Cloud.
+	4. Populate the Password field with your own API password, also called Client Secret, from Marketing Cloud.
 	5. Click **Apply**.
+	6. Please use ClientId and Client Secret from the **Enhanced package** which supports OAuth 2.0.
+
 
 	![Mapping](images/MCC_Mapping.png)
 	
@@ -78,14 +85,14 @@ If you have multiple Commerce Cloud sites, and follow the pattern of connecting 
 	
 	If you're modifying `marketingcloud.rest.auth` directly, click that.
 
-4. Update or verify the Credentials dropdown to match the credentials you saved. 
+4. Verify the Credentials dropdown to match the credentials you saved. 
 
-	In case you have multiple sites/credentials, the cartridge automatically attempts to switch to site-specific credentials if the assigned credentials aren't site-specific.  It will then revert to the default assigned credentials if site-specific credentials can't be found.
+	If you have multiple sites or credentials, the cartridge attempts to switch to site-specific credentials if the assigned credentials aren't site-specific.  It then reverts to the default assigned credentials if it can't find site-specific credentials.
 
 5. Click **Apply**.
 
 <a name="CustomObjectConfig"></a>
-## Commerce Cloud – Custom Object Configuration 
+## Commerce Cloud : Custom Object Configuration 
 
 
 1. In Business Manager, go to **Merchant Tools > Custom Objects > Custom Objects Editor**.
@@ -94,16 +101,17 @@ If you have multiple Commerce Cloud sites, and follow the pattern of connecting 
 	
 	A JSON object with top-level properties of `standard_email` and `int_marketing_cloud` displays.
 	
-	Each top-level property contains a list of hooks (each of which can be enabled or disabled), followed by an `enabled` property, to either turn the entire section on or off.
+	Each top-level property contains a list of hooks (each of which can be enabled or disabled), followed by an `enabled` property to turn the entire section either on or off.
+	
 	1. Update the JSON object's `enabled` properties as desired. 
 		
-		Keep in mind that if you allow two handlers to have the same hook enabled, the first executed hook that returns a value will succeed.
+		If you allow two handlers to have the same hook enabled, the first executed hook that returns a value succeeds.
 		
-		**NOTE**: The order of execution furthermore depends on cartridge path priority. Hence the lookup path will be: cartridge location in path, followed by hook definition, followed by the “enabled” property.
+		**Note**: The order of execution depends on cartridge path priority. The lookup path is cartridge location in path, followed by hook definition, followed by the enabled property.
 		
 	2. Click **Apply**.
 		
-4. Select **MarketingCloudTriggers** from the Object Type dropdown, and click **Find**.
+4. From the Object Type dropdown, select **MarketingCloudTriggers**, and click **Find**.
 
 	1. Edit each hook as necessary. 
 	
@@ -119,25 +127,25 @@ If you have multiple Commerce Cloud sites, and follow the pattern of connecting 
 **Name**|**What it does**|**Default Value**
 -----|-----|-----
 Marketing Cloud Enable Analytics|Select Yes to enable Marketing Cloud Analytics tracking. Requires Member ID to be set.|Yes
-Marketing Cloud Member ID|Marketing Cloud Business Unit Member ID aka MID| 
-Marketing Cloud Include Tracking Link|Select Yes to output Marketing Cloud Analytics tracking link into the storefront. Requires Member ID to be set.|Yes
-Marketing Cloud collect.js URL|Marketing Cloud collect.js URL. The string MCMID must exist in the URL for the marketing cloud MID to be inserted into the URL.|//MCMID.collect.igodigital.com/collect.js
+Marketing Cloud Member ID|Marketing Cloud Business Unit Member ID, also called MID.| 
+Marketing Cloud Include Tracking Link|Select Yes to output the Marketing Cloud Analytics tracking link to the storefront. Requires Member ID to be set.|Yes
+Marketing Cloud collect.js URL|Marketing Cloud collect.js URL. The string MCMID must exist in the URL to insert the Marketing Cloud MID into the URL.|//MCMID.collect.igodigital.com/collect.js
 Marketing Cloud Enable Mailing List Hooks|Select Yes to enable Marketing Cloud mailing list functionality.|Yes
-Marketing Cloud Default Mailing Lists|Default Marketing Cloud mailing lists to assign when customer subscribes. Please provide the numeric "List ID" value.| 
+Marketing Cloud Default Mailing Lists|Default Marketing Cloud mailing lists to assign when a customer subscribes. Provide the numeric List ID value.| 
 Marketing Cloud Mailing Lists Whitelist|Whitelist of Marketing Cloud mailing lists. If left empty, all lists are listed for customer. Please provide the numeric "List ID" value.| 
-Marketing Cloud Allow Unsubscribing from Lists over Deletion|This flag will allow the Marketing Cloud cartridge to Unsubscribe users from assigned mailing lists, thus updating the subscriber's status from "Active" to "Unsubscribed". This will be used in place of fully deleting the record from the list.|No
+Marketing Cloud Allow Unsubscribing from Lists over Deletion|This flag allows the Marketing Cloud cartridge to unsubscribe users from assigned mailing lists, thus updating the subscriber's status from Active to Unsubscribed. This process is used in place of fully deleting the record from the list.|No
 
 <a name="Modifications"></a>
 ## Apply Modifications to Storefront
 
-Depending on your choice of Reference Architecture, your Storefront modifications will vary. 
+Your storefront modifications will vary depending on the reference architecture that you're using. 
 
-If you're going to build against an SFRA-based storefront, see:
+If you're building for an SFRA-based storefront, see:
 
 [2.3 Modification Instructions for SFRA](2_3_Modification-Instructions-for-SFRA.md
 )
 
-If you're going to build against a SiteGenesis-based storefront, see:
+If you're building for a SiteGenesis-based storefront, see:
 
 [2.4 Modification Instructions for SiteGenesis](2_4_Modification-Instructions-for-SiteGenesis.md#navlink)
 

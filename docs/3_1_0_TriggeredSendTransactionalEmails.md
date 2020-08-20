@@ -27,24 +27,24 @@
 12. [Debugging](5_0_Debugging.md#navlink)
 
 <a name="navlink"></a>
-## 3.1 Triggered Send / Transactional Emails
+## 3.1 Triggered Send and Transactional Emails
 
 
-**Important:** Make sure that your Marketing Cloud representative is aware that you intend to use Triggered Send functionality, Triggered Send Data Extension templates, and that you are connecting to Triggered Send using REST API. Your representative should be able to ensure that the necessary permissions are turned on and enabled for your account. These permissions should be checked and enabled, or inherited, for every Business Unit that you want to utilize with Triggered Sends.  
+**Important:** Make sure that your Marketing Cloud representative is aware that you intend to use Triggered Send functionality and Triggered Send Data Extension templates, and that you are connecting to Triggered Send using REST API. Have your representative ensure that the necessary permissions are turned on and enabled for your account. Enable these permissions for every Business Unit that you want to utilize with triggered sends.  
 
 For each trigger: 
 
-- the corresponding hook definition must be enabled in `CommunicationHandlers`. 
-- the triggered send definition must be enabled in `MarketingCloudTriggers`.
-- a trigger key is defined. 
+- The corresponding hook definition must be enabled in `CommunicationHandlers`. 
+- The triggered send definition must be enabled in `MarketingCloudTriggers`.
+- The trigger key is defined. 
 
-For attributes to be sent to Marketing Cloud, a triggered email needs to be defined, typically with a data extension attached. Each data extension attribute is used for mapping subscriber attributes in the trigger definition. If a defined attribute does not exist on the Marketing Cloud side, it is ignored by Marketing Cloud.
+To send attributes to Marketing Cloud, you must define a triggered email, typically with a data extension attached. Each data extension attribute is used for mapping subscriber attributes in the trigger definition. If a defined attribute doesn't exist on the Marketing Cloud side, Marketing Cloud ignores it.
 
 In Marketing Cloud: 
 
 1. Create a data extension from a template. 
 
-	Each triggered send must connect to a **Data Extension**. A data extension can be shared,= when the data being stored overlaps between triggers.
+	Each triggered send must connect to a **data extension**. the data extension can be shared if the data being stored overlaps between triggers.
 	
 	**Note:** Data extensions that collect triggering subscriber information must be built using a triggered-send-source data extension template.
 	
@@ -58,11 +58,11 @@ In Marketing Cloud:
 
 3. Create a triggered email message interaction.
 	
-	Be sure to associate the email and data extension that you created. We recommended you enable the feature to Disable the Triggered Send when API errors are encountered. 
+	Associate the email and data extension that you created. We recommended enabling **Disable the Triggered Send when API errors are encountered**. 
 	
 	 See [Create a Triggered Email Message Interaction] (https://help.marketingcloud.com/en/documentation/exacttarget/interactions/triggered_emails/triggered_emails_guide/how_to_create_a_triggered_email_message_interaction/).
 	 
-4. Ensure your triggered send is in a running state, otherwise it cannot be used by B2C Commerce.  
+4. Ensure your triggered send is in a running state, otherwise B2C Commerce can't use it.  
 
 See [3.1.1 Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink) for additional information.  
 

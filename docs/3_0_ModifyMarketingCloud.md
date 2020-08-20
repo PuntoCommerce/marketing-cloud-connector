@@ -17,7 +17,7 @@
 
 7. [**Install Marketing Cloud Components**](3_0_ModifyMarketingCloud.md#navlink)
 
-	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md#navlink)
+	3.1 [Triggered Send and Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md#navlink)
 	
 	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink)
 	
@@ -29,71 +29,73 @@
 <a name="navlink"></a>
 ## 3. Install Marketing Cloud Components
 
-The next step in connecting Commerce Cloud to Marketing Cloud, is installing the Marketing Cloud Components. 
+The next step in connecting Commerce Cloud to Marketing Cloud is installing the Marketing Cloud components. 
  
 ## Marketing Cloud App and API Key
 
-This must be done for each Commerce Cloud Business Unit that you want to connect with.
+You must install the Marketing Cloud app and API key for each Commerce Cloud Business Unit that you want to connect with.
 
 See [Salesforce Developers App Center](https://developer.salesforce.com/docs/atlas.en-us.mc-getting-started.meta/mc-getting-started/get-api-key.htm) for more information.
 
-1. Log in to [App Center](https://appcenter-auth.s1.marketingcloudapps.com/).
+1. Log in to App Center.
 
-    If you don't already have an App Center account, create one here: [App Center Create Account](https://appcenter-auth.s1.marketingcloudapps.com/create). 
+    Create an App Center account if you don't already have one.
 	
 	See the [Salesforce Developers App Center Overview](https://developer.salesforce.com/docs/atlas.en-us.mc-getting-started.meta/mc-getting-started/app-center.htm) for more information.
 
 3. If necessary, create a package.
 
-	See [Create and Install Packages](https://developer.salesforce.com/docs/atlas.en-us.mc-app-development.meta/mc-app-development/install-packages.htm) for additional information.
+	See [Create and Install Enhanced Package](https://developer.salesforce.com/docs/atlas.en-us.mc-app-development.meta/mc-app-development/create-integration-enhanced.htm) for additional information.
 	
-	**Note:** You must deselect Create with enhanced functionality when creating your package.
 	
 4. Create an API Integration component.
 
-	See [Create an API Integration in Legacy Packages](https://developer.salesforce.com/docs/atlas.en-us.mc-app-development.meta/mc-app-development/create-integration-legacy.htm) for more information.
+	See [Create an API Integration in Enhanced Package](https://developer.salesforce.com/docs/atlas.en-us.mc-app-development.meta/mc-app-development/create-integration-enhanced.htm) for more information.
 	
-	Specify the following permissions: 
-	- Channels - Email: Send
-	- Data - Data Extensions: Read and Write
+	1. Select the Server-to-Server Integration type.
+	2. Set the following Scope properties:
+		 
+		- Channels - Email: Send
+		- Data - Data Extensions: Read and Write
+	3. Save the component.
 
 5. Save the Details page for your records.
 
 ## Postman Automation
 
-A Postman automation script is provided to expedite the setup of Marketing Cloud Data Extensions and Email Templates for the transactional use cases supported by the Commerce-to-Marketing Connector. 
+A Postman automation script is provided to expedite the setup of Marketing Cloud data extensions and email templates for the transactional use cases supported by the Commerce-to-Marketing Connector. 
 
-If you wish to manually set up the data extensions and email templates, see [3.1.1 Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink). 
+To manually set up the data extensions and email templates, see [3.1.1 Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink). 
 
 ### Prerequisites
 
 
 1. Install Postman and import the Postman scripts from the `/POSTMAN` directory.
-2. Install the Legacy Package to make API Calls.
-3. Verify that Send Management is configured correctly, and the From Email address is correct.
+2. Install the legacy package to make API calls.
+3. Verify that Send Management is configured correctly and that the From Email address is correct.
 4. Get the Auth, SOAP, Rest Endpoints, Client Id, and Client Secret information.
-5. Enable SOAP calls in the Marketing Cloud account for the user, as it is disabled by default.
-6. Make sure to add */service.asmx* to the end of the SOAP URL while populating the SoapEndPoint variable.
+5. Enable SOAP calls in the Marketing Cloud account for the user, which is disabled by default.
+6. Add */service.asmx* to the end of the SOAP URL while populating the SoapEndPoint variable.
 7. Enable username and password for web service calls.
 8. Use the legacy package client credentials to request an access token.
-9. Fill in the requisite values.
+9. Enter the requisite values.
 
 ### Variables
 
 | Variable Name | Notes |
 |---------------|-------|
-| soapEndPoint | This information can be found in the installed package. Be sure to add the suffix */Service.asmx* |
-| soapUserName | This is the username used to login to the Marketing Cloud Account. |
-| soapPassword | This is the password used to login to the Marketing Cloud Account. |
-| restEndPoint | This information can be found in the installed package. |
-| authEndPoint | This information can be found in the installed package. |
-| clientId | This information can be found in the installed package. |
-| clientSecret | This information can be found in the installed package. |
+| soapEndPoint | Information is located in the installed package. Be sure to add the suffix */service.asmx* |
+| soapUserName | You use this username to login to the Marketing Cloud Account. |
+| soapPassword | You use this password to login to the Marketing Cloud Account. |
+| restEndPoint | Information is located in the installed package. |
+| authEndPoint | Information is located in the installed package. |
+| clientId | Information is located in the installed package. |
+| clientSecret | Information is located in the installed package. |
 | sfmcClientId | MID |
 
 ### Scripts
 
-Execute the scripts in the following order:
+Execute the scripts in the following order.
 
 
 1. Auth : Request SFMC Token - This step saves the auth token.
@@ -112,7 +114,7 @@ Execute the scripts in the following order:
 
 1. Check the response.
 2. If the response is not clear, check if all variables have been filled.
-3. If steps 1 and 2 do not work, type the variables directly in the SOAP/REST body and try.
+3. If steps 1 and 2 do not work, type the variables directly in the SOAP or REST body and try again.
 
 - - -
 

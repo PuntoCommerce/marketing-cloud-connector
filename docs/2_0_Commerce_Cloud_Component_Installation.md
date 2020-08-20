@@ -18,7 +18,7 @@
 
 7. [Install Marketing Cloud Components](3_0_ModifyMarketingCloud.md#navlink)
 
-	3.1 [Triggered Send / Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md#navlink)
+	3.1 [Triggered Send and Transactional Emails](3_1_0_TriggeredSendTransactionalEmails.md#navlink)
 	
 	3.1.1 [Triggered Send Configuration](3_1_1_MCConnectorInstallation-TriggeredSendConfiguration.md#navlink)
 	
@@ -30,9 +30,7 @@
 <a name="navlink"></a>
 ## 2. Install B2C Commerce Components
 
-In order to connect Commerce Cloud to Marketing Cloud, you must first install the B2C Commerce Cloud components.
-
-To begin, start with the [Handler Framework Installation](2_1_Handler-Installation.md#navlink).
+To connect Commerce Cloud to Marketing Cloud, you must first install the B2C Commerce Cloud components, starting with the [Handler Framework Installation](2_1_Handler-Installation.md#navlink).
 
 
 - - -
