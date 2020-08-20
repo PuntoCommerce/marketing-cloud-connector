@@ -67,7 +67,7 @@ function onRequest() {
  * @param {boolean} isOnRequest
  */
 function init(isOnRequest) {
-    // Only run true init when executed by ONREQUEST thread (real start of request)
+    // Only run true init when executed by ONREQUEST thread (real start of request), ignoring server-side includes
     if (!initExecuted && !isBM() && !isSystemRequest()) {
         if (isOnRequest === true && !request.isIncludeRequest()) {
             // We need to track basket ID, so we can know if it has changed since request start
@@ -77,7 +77,10 @@ function init(isOnRequest) {
                 origBasketState = currentBasket.etag;
             }
             requestDataLayer.origBasketState = origBasketState;
-            session.custom.origBasketState = origBasketState;
+            if (session.custom.origBasketState !== origBasketState) {
+                // avoid setting unnecessarily to prevent custom group recalculation
+                session.custom.origBasketState = origBasketState;
+            }
         } else {
             requestDataLayer.origBasketState = session.custom.origBasketState;
         }
