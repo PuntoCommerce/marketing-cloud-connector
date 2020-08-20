@@ -34,7 +34,7 @@ var exportModel;
 var PSM;
 
 /**
- * Object hash to manage variation masters with sliced catalog 
+ * Object hash to manage variation masters with sliced catalog
  * @type {Object}
  */
 var masterList = new dw.util.HashMap();
@@ -66,7 +66,7 @@ function read(parameters, stepExecution) {
  */
 function imageLink(cfg, data) {
 	let method = !!cfg.transformable && !!cfg.dimensions ? 'transformable' : 'non-transformable';
-	
+
     if (cfg.hasOwnProperty('imageType')) {
         var img = data.Product.getImage(cfg.imageType);
         if (img) {
@@ -133,7 +133,7 @@ function standardPrice(cfg, data) {
  */
 function process(product, parameters, stepExecution) {
     var skip = false;
-    
+
     //if the product is a variant and we've seen it before
     //increment how many children we've seen
     if(product.isVariant()){
@@ -211,8 +211,13 @@ function writeProduct(product, parameters, writeNextCB){
     }
 
     // output child variants
-    if ((product.isMaster() || product.isVariationGroup()) && parameters.IncludeVariantProduct === true) {
+    if (product.isMaster() && parameters.IncludeVariantProduct === true) {
         writeChildProducts(product.getVariationModel().getVariants(), product, writeNextCB);
+    }
+
+    // output variation group's direct variants
+    if (product.isVariationGroup() && parameters.IncludeVariantProduct === true) {
+        writeChildProducts(product.getVariationModel().getSelectedVariants(), product, writeNextCB);
     }
 }
 
