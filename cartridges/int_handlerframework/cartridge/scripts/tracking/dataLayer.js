@@ -131,15 +131,15 @@ function buildEvents() {
         case 'search-show':
         case 'search-content':
             if (paramMap.isParameterSubmitted('q')) {
-                events.push(['search', paramMap.get('q').stringValue]);
+                events.push(['search', encodeURIComponent(paramMap.get('q').stringValue)]);
             }
             if (paramMap.isParameterSubmitted('cgid')) {
-                events.push(['category', paramMap.get('cgid').stringValue]);
+                events.push(['category', encodeURIComponent(paramMap.get('cgid').stringValue)]);
             }
             break;
         case 'page-show':
             if (paramMap.isParameterSubmitted('cid')) {
-                events.push(['content', paramMap.get('cid').stringValue]);
+                events.push(['content', encodeURIComponent(paramMap.get('cid').stringValue)]);
             }
             break;
         case 'product-show':
@@ -147,12 +147,12 @@ function buildEvents() {
         case 'product-variation':
         case 'product-showquickview':
             if (paramMap.isParameterSubmitted('pid')) {
-                events.push(['product', paramMap.get('pid').stringValue]);
+                events.push(['product', encodeURIComponent(paramMap.get('pid').stringValue)]);
             }
             break;
         case 'cart-addproduct':
             if (paramMap.isParameterSubmitted('pid')) {
-                events.push(['cartAddProduct', paramMap.get('pid').stringValue]);
+                events.push(['cartAddProduct', encodeURIComponent(paramMap.get('pid').stringValue)]);
             }
             break;
         case 'cart-show':
@@ -163,7 +163,7 @@ function buildEvents() {
             break;
         case 'cart-addcoupon':
             if (paramMap.isParameterSubmitted('couponCode')) {
-                events.push(['cartAddCoupon', paramMap.get('couponCode').stringValue]);
+                events.push(['cartAddCoupon', encodeURIComponent(paramMap.get('couponCode').stringValue)]);
             }
             break;
         case 'cart-submitform':
@@ -172,7 +172,7 @@ function buildEvents() {
                     try {
                         var coupon = session.forms.cart.couponCode.htmlValue;
                         if (coupon) {
-                            events.push(['cartAddCoupon', coupon]);
+                            events.push(['cartAddCoupon', encodeURIComponent(coupon)]);
                         }
                     }catch (e) {
                         // log error?
@@ -182,12 +182,12 @@ function buildEvents() {
             break;
         case 'wishlist-add':
             if (paramMap.isParameterSubmitted('pid')) {
-                events.push(['wishlistAddProduct', paramMap.get('pid').stringValue]);
+                events.push(['wishlistAddProduct', encodeURIComponent(paramMap.get('pid').stringValue)]);
             }
             break;
         case 'giftregistry-addproduct':
             if (paramMap.isParameterSubmitted('pid')) {
-                events.push(['registryAddProduct', paramMap.get('pid').stringValue]);
+                events.push(['registryAddProduct', encodeURIComponent(paramMap.get('pid').stringValue)]);
             }
             break;
         // SFRA checkout
@@ -224,7 +224,7 @@ function buildEvents() {
             events.push(['checkout', 'step3']);
             break;
         case 'order-confirm':
-            events.push(['orderConfirmation', paramMap.get('ID').stringValue]);
+            events.push(['orderConfirmation', encodeURIComponent(paramMap.get('ID').stringValue)]);
             break;
         // SG checkout
         case 'cocustomer-start':
@@ -266,7 +266,7 @@ function buildEvents() {
             events.push(['coSummary', 'submitted']);
             if (params.isParameterSubmitted('orderNo')) {
                 var orderID = params.get('orderNo').stringValue;
-                events.push(['orderConfirmation', orderID]);
+                events.push(['orderConfirmation', encodeURIComponent(orderID)]);
             }
             break;
         // end checkout
@@ -275,9 +275,9 @@ function buildEvents() {
                 var pdParams = JSON.parse(paramMap.params);
 
                 if (paramPojo.param_at === 'plp' && pdParams.aspect_attributes && pdParams.aspect_attributes.category) {
-                    events.push(['category', pdParams.aspect_attributes.category]);
+                    events.push(['category', encodeURIComponent(pdParams.aspect_attributes.category)]);
                 } else if (paramPojo.param_at === 'pdp' && pdParams.aspect_attributes && pdParams.aspect_attributes.product) {
-                    events.push(['product', pdParams.aspect_attributes.product]);
+                    events.push(['product', encodeURIComponent(pdParams.aspect_attributes.product)]);
                 }
             }
         default:
