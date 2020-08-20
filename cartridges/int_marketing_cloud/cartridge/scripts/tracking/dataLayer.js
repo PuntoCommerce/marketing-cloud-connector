@@ -13,6 +13,8 @@ const Site = require('dw/system/Site');
  */
 const velocity = require('dw/template/Velocity');
 
+const helpers = require('../util/helpers');
+
 var analyticsEnabled = false;
 
 var dataLayer = {
@@ -43,10 +45,8 @@ var dataLayer = {
  * @returns {{email: string}}
  */
 function buildCustomer(requestData) {
-    var customerInfo = {
-        email: customer.ID
-        //, details: {}
-    };
+    var customerInfo = {};
+
     if (!empty(customer.profile)) {
         customerInfo.email = customer.profile.email;
         var customDetails = buildCustomEvent('setUserInfo', {
@@ -437,7 +437,7 @@ function requestEvent(eventName, eventValue, requestData, cb) {
 function eventsOutput(requestData, cb) {
     var eventsArray = [];
 
-    if (!empty(dataLayer.setUserInfo)) {
+    if (!helpers.isEmptyObject(dataLayer.setUserInfo)) {
         eventsArray.push(['setUserInfo', dataLayer.setUserInfo ]);
     }
     if (!requestData.request.isAjaxRequest) {

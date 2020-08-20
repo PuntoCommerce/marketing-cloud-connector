@@ -347,6 +347,21 @@ function stripXmlNS(xmlStr) {
 }
 
 /**
+ * isEmptyObject method for checking if an object is empty
+ * @param {Object} obj - The target object
+ * @returns {boolean}
+ */
+function isEmptyObject(obj) {
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop)) {
+            return false;
+        }
+    }
+
+    return JSON.stringify(obj) === JSON.stringify({});
+}
+
+/**
  * Custom error, thrown when required attribute is missing.
  * @param {string} attribute Attribute that is missing
  * @param {string} [message] Optional custom message
@@ -378,3 +393,4 @@ exports.isNonEmptyString = isNonEmptyString;
 exports.stripXmlNS = stripXmlNS;
 exports.RequiredAttributeException = RequiredAttributeException;
 exports.initiateTransform = initiateTransform;
+exports.isEmptyObject = isEmptyObject;
