@@ -207,7 +207,7 @@ function buildEvents() {
                 default:
                     if (params.isParameterSubmitted('ID')) {
                         var orderID = params.get('ID').stringValue;
-                        events.push(['orderConfirmation', orderID]);
+                        events.push(['orderConfirmation', encodeURIComponent(orderID)]);
                     } else {
                         events.push(['checkout', 'step0']);
                     }
